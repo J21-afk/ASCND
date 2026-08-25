@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ASCND Admin Login</title>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #0b0b0b;
+
+            color: #ffffff;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+
+        .login-container {
+
+            width: 100%;
+
+            max-width: 420px;
+
+            padding: 30px;
+        }
+
+
+        .brand {
+
+            text-align: center;
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            letter-spacing: 7px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .login-card {
+
+            background: #111111;
+
+            border:
+                1px solid
+                #242424;
+
+            border-radius: 8px;
+
+            padding: 30px;
+        }
+
+
+        .login-title {
+
+            margin:
+                0 0
+                25px;
+
+            font-size: 18px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            color: #777;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            background: #181818;
+
+            border:
+                1px solid
+                #333;
+
+            border-radius: 4px;
+
+            color: #ffffff;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+
+        input:focus {
+
+            border-color: #666;
+        }
+
+
+        button {
+
+            width: 100%;
+
+            margin-top: 8px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 4px;
+
+            background: #ffffff;
+
+            color: #090909;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+
+            opacity: .85;
+        }
+
+
+        button:disabled {
+
+            opacity: .5;
+
+            cursor: not-allowed;
+        }
+
+
+        .error {
+
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 12px;
+
+            background: #211111;
+
+            border:
+                1px solid
+                #442222;
+
+            border-radius: 4px;
+
+            color: #ff9999;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="login-container">
+
+
+        <div class="brand">
+            ASCND
+        </div>
+
+
+        <div class="subtitle">
+            ADMIN ACCESS
+        </div>
+
+
+        <div class="login-card">
+
+
+            <h1 class="login-title">
+                Admin Login
+            </h1>
+
+
+            <form id="login-form">
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        EMAIL
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                        autocomplete="email"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        PASSWORD
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="login-button"
+                >
+                    SIGN IN
+                </button>
+
+
+                <div
+                    id="login-error"
+                    class="error"
+                ></div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://ocmevcjgxypqkqqjiuyt.supabase.co";
+
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_ttzLLIMwICPzXIPzwKnTmA_hyIkfbXf";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+
+                SUPABASE_URL,
+
+                SUPABASE_PUBLISHABLE_KEY
+
+            );
+
+
+        const loginForm =
+            document.getElementById(
+                "login-form"
+            );
+
+
+        const loginButton =
+            document.getElementById(
+                "login-button"
+            );
+
+
+        const loginError =
+            document.getElementById(
+                "login-error"
+            );
+
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                loginError.style.display =
+                    "none";
+
+
+                loginButton.disabled =
+                    true;
+
+
+                loginButton.textContent =
+                    "SIGNING IN";
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+                try {
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient.auth
+                            .signInWithPassword({
+
+                                email:
+                                    email,
+
+                                password:
+                                    password
+
+                            });
+
+
+                    if (error) {
+
+                        throw error;
+
+                    }
+
+
+                    if (!data.session) {
+
+                        throw new Error(
+                            "Login session could not be created."
+                        );
+
+                    }
+
+
+                    window.location.href =
+                        "/admin.html";
+
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "ASCND LOGIN ERROR:",
+                        error
+                    );
+
+
+                    loginError.textContent =
+                        error.message ||
+                        "Unable to sign in.";
+
+
+                    loginError.style.display =
+                        "block";
+
+
+                    loginButton.disabled =
+                        false;
+
+
+                    loginButton.textContent =
+                        "SIGN IN";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

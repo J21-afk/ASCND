@@ -1,0 +1,1881 @@
+.hidden {
+    display: none !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #0a0a0a;
+
+    color: #f5f5f5;
+
+}
+
+
+.landing-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding:
+        28px
+        6%;
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-bottom: 30px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+}
+
+
+.logo {
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    letter-spacing: 5px;
+
+}
+
+
+.nav-tag {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255, 255, 255, 0.55);
+
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    flex: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr
+        0.8fr;
+
+    align-items: center;
+
+    gap: 80px;
+
+    padding:
+        80px
+        0;
+
+}
+
+
+.hero-content {
+
+    max-width: 750px;
+
+}
+
+
+.eyebrow {
+
+    margin: 0 0 22px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color:
+        rgba(255, 255, 255, 0.5);
+
+}
+
+
+h1 {
+
+    margin: 0;
+
+    font-size: clamp(
+        52px,
+        8vw,
+        110px
+    );
+
+    line-height: 0.9;
+
+    letter-spacing: -4px;
+
+    font-weight: 900;
+
+}
+
+
+h1 span {
+
+    display: block;
+
+    margin-top: 10px;
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+}
+
+
+.hero-description {
+
+    max-width: 590px;
+
+    margin:
+        35px
+        0
+        32px;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color:
+        rgba(255, 255, 255, 0.68);
+
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.primary-button {
+
+    border: none;
+
+    padding:
+        18px
+        24px;
+
+    background: #f2f2f2;
+
+    color: #0a0a0a;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+.primary-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    opacity: 0.88;
+
+}
+
+
+.primary-button span {
+
+    margin-left: 18px;
+
+    font-size: 18px;
+
+}
+
+
+.time-estimate {
+
+    margin-top: 18px;
+
+    font-size: 12px;
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+}
+
+
+/* =========================
+   ASCND SYSTEM CARD
+========================= */
+
+.hero-side {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+}
+
+
+.system-card {
+
+    width: 100%;
+
+    max-width: 420px;
+
+    padding: 35px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+}
+
+
+.system-label {
+
+    margin: 0 0 30px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+}
+
+
+.principles {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.principle {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 16px 0;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+}
+
+
+.principle:last-child {
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+}
+
+
+.principle span {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 34px;
+
+    height: 34px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.22);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+
+.principle p {
+
+    margin: 0;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+}
+
+
+footer p {
+
+    margin: 0;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(255, 255, 255, 0.4);
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (
+    max-width: 850px
+) {
+
+    .landing-page {
+
+        padding:
+            22px
+            24px;
+
+    }
+
+
+    .hero {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 50px;
+
+        padding:
+            60px
+            0;
+
+    }
+
+
+    .hero-side {
+
+        justify-content: flex-start;
+
+    }
+
+
+    .system-card {
+
+        max-width: none;
+
+    }
+
+
+    h1 {
+
+        letter-spacing: -2px;
+
+    }
+
+}
+
+
+@media (
+    max-width: 500px
+) {
+
+    .navbar {
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+        flex-direction: column;
+
+    }
+
+
+    .nav-tag {
+
+        font-size: 9px;
+
+    }
+
+
+    .hero-description {
+
+        font-size: 16px;
+
+    }
+
+
+    .primary-button {
+
+        width: 100%;
+
+    }
+
+}
+
+/* =========================
+   ASSESSMENT OPTIONS
+========================= */
+
+.assessment-options {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.assessment-option {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    width: 100%;
+
+    padding: 18px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color:
+        rgba(255, 255, 255, 0.7);
+
+    text-align: left;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.assessment-option:hover {
+
+    border-color:
+        rgba(255, 255, 255, 0.35);
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    transform:
+        translateX(4px);
+
+}
+
+
+.assessment-option.selected {
+
+    background: #f2f2f2;
+
+    border-color: #f2f2f2;
+
+    color: #0a0a0a;
+
+}
+
+
+.option-number {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 32px;
+
+    height: 32px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.2);
+
+    font-size: 9px;
+
+}
+
+
+.assessment-option.selected
+.option-number {
+
+    border-color:
+        rgba(0, 0, 0, 0.2);
+
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-button {
+
+    margin-right: auto;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    padding:
+        18px
+        24px;
+
+    background:
+        transparent;
+
+    color:
+        rgba(255, 255, 255, 0.55);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+.back-button:hover {
+
+    border-color:
+        rgba(255, 255, 255, 0.4);
+
+    color: #ffffff;
+
+}
+
+
+/* =========================
+   MOBILE OPTIONS
+========================= */
+
+@media (
+    max-width: 700px
+) {
+
+    .assessment-option {
+
+        padding: 16px;
+
+    }
+
+
+    .option-number {
+
+        min-width: 30px;
+
+        height: 30px;
+
+    }
+
+}
+
+/* =========================
+   ASCND ASSESSMENT STEPS
+========================= */
+
+.assessment-step {
+    display: none;
+    width: 100%;
+}
+
+.assessment-step.active {
+    display: block;
+    animation: assessmentFadeIn 0.35s ease;
+}
+
+
+@keyframes assessmentFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* =========================
+   TEAM SIZE SELECTION
+========================= */
+
+.option-button {
+
+    position: relative;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.option-button:hover {
+
+    border-color:
+        rgba(255, 255, 255, 0.45);
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+}
+
+
+/* SELECTED STATE */
+
+.option-button.selected {
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    border-color:
+        #ffffff;
+
+    color:
+        #ffffff;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 0 0 1px
+        rgba(255, 255, 255, 0.15);
+
+}
+/* =========================
+   SYSTEM OPTIONS
+========================= */
+
+.system-option {
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.system-option:hover {
+
+    border-color:
+        rgba(255, 255, 255, 0.45);
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+}
+
+
+.system-option.selected {
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    border-color:
+        #ffffff;
+
+    color:
+        #ffffff;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 0 0 1px
+        rgba(255, 255, 255, 0.15);
+
+}
+
+/* =========================
+   ASSESSMENT SPACING
+========================= */
+
+.assessment-step .form-group {
+
+    margin-bottom: 42px;
+
+}
+
+
+.assessment-step .step-description {
+
+    margin-bottom: 42px;
+
+}
+
+
+.assessment-actions {
+
+    margin-top: 58px;
+
+    padding-top: 28px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+}
+
+
+.assessment-options {
+
+    gap: 12px;
+
+}
+
+
+.option-grid {
+
+    gap: 12px;
+
+}
+
+
+textarea {
+
+    min-height: 120px;
+
+}
+
+
+/* Give the final question more breathing room */
+
+.assessment-step .form-group:last-of-type {
+
+    margin-bottom: 0;
+
+}
+
+/* =========================
+   ASCND TEXT AREAS
+========================= */
+
+.assessment-step textarea {
+
+    width: 100%;
+
+    min-height: 110px;
+
+    padding: 18px 20px;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    color: #ffffff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    resize: vertical;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.assessment-step textarea::placeholder {
+
+    color:
+        rgba(255, 255, 255, 0.35);
+
+}
+
+
+.assessment-step textarea:focus {
+
+    border-color:
+        rgba(255, 255, 255, 0.45);
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+}
+
+/* =========================
+   STEP 3 SYSTEM TEST
+========================= */
+
+.assessment-step[data-step="3"] .assessment-options .assessment-option {
+    appearance: none;
+    -webkit-appearance: none;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 68px;
+
+    padding: 18px;
+
+    background: rgba(255, 255, 255, 0.025) !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+
+    color: rgba(255, 255, 255, 0.7) !important;
+
+    box-shadow: none !important;
+
+    border-radius: 0;
+
+    text-align: left;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+}
+
+
+.assessment-step[data-step="3"] .assessment-options .assessment-option:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+
+    border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+
+.assessment-step[data-step="3"] .assessment-options .assessment-option.selected {
+    background: #f2f2f2 !important;
+
+    border-color: #f2f2f2 !important;
+
+    color: #0a0a0a !important;
+}
+
+/* =========================
+   STEP 7 — RESULTS
+========================= */
+
+.assessment-step[data-step="7"] {
+
+    padding-bottom: 80px;
+
+}
+
+
+/* =========================
+   RESULTS INTRO
+========================= */
+
+.results-intro {
+
+    margin-bottom: 60px;
+
+}
+
+
+.results-intro h2 {
+
+    margin-bottom: 20px;
+
+}
+
+
+.results-intro .step-description {
+
+    max-width: 620px;
+
+}
+
+
+/* =========================
+   OPPORTUNITY INDEX
+========================= */
+
+.opportunity-index-card {
+
+    padding: 40px;
+
+    margin-bottom: 60px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.15);
+
+    background:
+        rgba(255, 255, 255, 0.03);
+
+}
+
+
+.result-label {
+
+    display: block;
+
+    margin-bottom: 25px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    opacity: 0.6;
+
+}
+
+
+.index-score {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.opportunity-score {
+
+    font-size: 72px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+}
+
+
+.score-total {
+
+    font-size: 20px;
+
+    opacity: 0.5;
+
+}
+
+
+.opportunity-level {
+
+    margin-bottom: 18px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+}
+
+
+.index-description {
+
+    max-width: 520px;
+
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    opacity: 0.65;
+
+}
+
+
+/* =========================
+   RESULTS SECTIONS
+========================= */
+
+.results-section {
+
+    margin-bottom: 60px;
+
+}
+
+
+.results-heading {
+
+    margin-bottom: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    opacity: 0.6;
+
+}
+
+
+/* =========================
+   PRIMARY OPPORTUNITY
+========================= */
+
+.primary-opportunity-card {
+
+    padding: 35px;
+
+    border-left: 2px solid
+        currentColor;
+
+    background:
+        rgba(255, 255, 255, 0.03);
+
+}
+
+
+.primary-opportunity-title {
+
+    margin-bottom: 18px;
+
+    font-size: 32px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+}
+
+
+.primary-explanation {
+
+    max-width: 650px;
+
+    margin: 0;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    opacity: 0.7;
+
+}
+
+
+/* =========================
+   WHAT WE HEARD
+========================= */
+
+.what-we-heard {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.heard-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 18px 20px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.08);
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+}
+
+
+.heard-number {
+
+    min-width: 28px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    opacity: 0.5;
+
+}
+
+
+.heard-text {
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+}
+
+
+/* =========================
+   WHERE WE'D START
+========================= */
+
+.top-opportunities {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.opportunity-item {
+
+    position: relative;
+
+    padding: 22px 24px 22px 70px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.08);
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+}
+
+
+.opportunity-item::before {
+
+    content: counter(
+        opportunity-counter,
+        decimal-leading-zero
+    );
+
+    position: absolute;
+
+    left: 24px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    opacity: 0.45;
+
+}
+
+
+.top-opportunities {
+
+    counter-reset:
+        opportunity-counter;
+
+}
+
+
+.opportunity-item {
+
+    counter-increment:
+        opportunity-counter;
+
+}
+
+
+/* =========================
+   NEXT STEP
+========================= */
+
+.next-step-card {
+
+    padding: 30px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.12);
+
+    background:
+        rgba(255, 255, 255, 0.03);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================
+   STEP 7 NAVIGATION
+========================= */
+
+.assessment-step[data-step="7"]
+.assessment-actions {
+
+    margin-top: 70px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (
+    max-width: 600px
+) {
+
+    .opportunity-index-card {
+
+        padding: 28px;
+
+    }
+
+
+    .opportunity-score {
+
+        font-size: 56px;
+
+    }
+
+
+    .primary-opportunity-card {
+
+        padding: 25px;
+
+    }
+
+
+    .primary-opportunity-title {
+
+        font-size: 26px;
+
+    }
+
+
+    .heard-item {
+
+        padding: 16px;
+
+        gap: 15px;
+
+    }
+
+
+    .opportunity-item {
+
+        padding:
+            20px
+            20px
+            20px
+            60px;
+
+    }
+
+}
+
+/* =========================
+   STEP 9 — EXPLORE OPTIONS
+========================= */
+
+.assessment-step[data-step="9"] {
+
+    padding-bottom: 80px;
+
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.assessment-step[data-step="9"]
+.plan-intro {
+
+    margin-bottom: 60px;
+
+}
+
+
+.assessment-step[data-step="9"]
+.plan-intro h2 {
+
+    margin-bottom: 20px;
+
+}
+
+
+.assessment-step[data-step="9"]
+.plan-intro .step-description {
+
+    max-width: 650px;
+
+}
+
+
+/* =========================
+   PRIMARY OPTION
+========================= */
+
+.options-primary-card {
+
+    padding: 40px;
+
+    margin-bottom: 60px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.12);
+
+    background:
+        rgba(255, 255, 255, 0.03);
+
+}
+
+
+.recommended-service {
+
+    margin: 0 0 18px 0;
+
+    font-size: 32px;
+
+    line-height: 1.2;
+
+}
+
+
+.recommended-service-description {
+
+    max-width: 650px;
+
+    margin: 0 0 30px 0;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    opacity: 0.7;
+
+}
+
+
+/* =========================
+   SERVICE OPTIONS
+========================= */
+
+.service-options {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.service-option {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 24px;
+
+    padding: 25px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.08);
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+}
+
+
+.service-number {
+
+    min-width: 30px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    opacity: 0.45;
+
+}
+
+
+.service-option h3 {
+
+    margin: 0 0 8px 0;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+}
+
+
+.service-option p {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    opacity: 0.6;
+
+}
+
+
+/* =========================
+   FINAL CTA
+========================= */
+
+.options-final {
+
+    margin-top: 70px;
+
+    padding: 45px;
+
+    text-align: center;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.12);
+
+    background:
+        rgba(255, 255, 255, 0.03);
+
+}
+
+
+.options-final h3 {
+
+    margin: 0 0 18px 0;
+
+    font-size: 30px;
+
+    line-height: 1.25;
+
+}
+
+
+.options-final p {
+
+    max-width: 600px;
+
+    margin: 0 auto 30px auto;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    opacity: 0.65;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (
+    max-width: 600px
+) {
+
+    .options-primary-card {
+
+        padding: 28px;
+
+    }
+
+
+    .recommended-service {
+
+        font-size: 26px;
+
+    }
+
+
+    .service-option {
+
+        padding: 20px;
+
+        gap: 16px;
+
+    }
+
+
+    .options-final {
+
+        padding: 30px 22px;
+
+    }
+
+
+    .options-final h3 {
+
+        font-size: 25px;
+
+    }
+
+}
+
+/* =========================================================
+   STEP 07 — WHAT WE FOUND
+========================================================= */
+
+.assessment-step[data-step="7"] .results-intro {
+    margin-bottom: 40px;
+}
+
+
+.assessment-step[data-step="7"] .results-summary-card {
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+
+.assessment-step[data-step="7"] .business-summary {
+    margin: 12px 0 0;
+    max-width: 850px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* =========================================================
+   KEY FINDINGS
+========================================================= */
+
+.assessment-step[data-step="7"] .key-findings {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+
+.assessment-step[data-step="7"] .finding-item {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 20px;
+    padding: 26px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.025);
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.assessment-step[data-step="7"] .finding-item:hover {
+    border-color: rgba(255, 255, 255, 0.20);
+    background: rgba(255, 255, 255, 0.045);
+    transform: translateY(-2px);
+}
+
+
+.assessment-step[data-step="7"] .finding-number {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.38);
+}
+
+
+.assessment-step[data-step="7"] .finding-content h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    line-height: 1.35;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+}
+
+
+.assessment-step[data-step="7"] .finding-content p {
+    margin: 0;
+    max-width: 760px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+
+/* =========================================================
+   WHAT THIS TELLS US
+========================================================= */
+
+.assessment-step[data-step="7"] .results-meaning {
+    margin-top: 20px;
+    padding: 26px 28px;
+    border-left: 2px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.025);
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.68);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .assessment-step[data-step="7"] .results-summary-card {
+        padding: 22px;
+    }
+
+
+    .assessment-step[data-step="7"] .finding-item {
+        grid-template-columns: 42px 1fr;
+        gap: 14px;
+        padding: 22px 18px;
+    }
+
+
+    .assessment-step[data-step="7"] .finding-content h3 {
+        font-size: 16px;
+    }
+
+
+    .assessment-step[data-step="7"] .finding-content p {
+        font-size: 14px;
+    }
+
+
+    .assessment-step[data-step="7"] .results-meaning {
+        padding: 22px 18px;
+    }
+
+}
+
+/* =====================================================
+   PRIMARY OPPORTUNITY SUMMARY
+   ===================================================== */
+
+.primary-opportunity-summary {
+
+    margin-top: 24px;
+
+}
+
+
+.opportunity-summary-item {
+
+    padding: 18px 0;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+}
+
+
+.opportunity-summary-item:first-child {
+
+    padding-top: 0;
+
+    border-top: none;
+
+}
+
+
+.opportunity-summary-item strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 0.72rem;
+
+    letter-spacing: 0.14em;
+
+    font-weight: 600;
+
+}
+
+
+.opportunity-summary-item p {
+
+    margin: 0;
+
+    max-width: 720px;
+
+    line-height: 1.7;
+
+    font-size: 0.95rem;
+
+}
+
+/* =====================================================
+   ADDITIONAL SYSTEM DESCRIPTIONS
+   ===================================================== */
+
+.additional-option-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+
+.additional-option-content strong {
+
+    font-size: 0.78rem;
+
+    letter-spacing: 0.08em;
+
+}
+
+
+.additional-option-content span {
+
+    font-size: 0.86rem;
+
+    line-height: 1.5;
+
+    opacity: 0.7;
+
+}
