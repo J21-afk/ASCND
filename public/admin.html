@@ -1691,14 +1691,11 @@ async function updateAssessmentStatus(
          * the new status immediately.
          */
 
-        setTimeout(
-            function () {
+button.disabled =
+    true;
 
-                loadAssessments();
 
-            },
-            500
-        );
+await loadAssessments();
 
     }
 
