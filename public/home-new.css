@@ -115,43 +115,49 @@ button {
 .brand {
 
     display: flex;
+
     align-items: center;
 
-    gap: 13px;
+    gap: 10px;
+
+    color: #f2efe7;
 
     font-size: 15px;
+
     font-weight: 800;
 
     letter-spacing: 0.24em;
 
-}
-
-
-.brand-symbol {
-
-    width: 31px;
-    height: 31px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid rgba(247,248,245,0.45);
-
-    font-size: 16px;
-
-    transition:
-        transform 0.4s ease,
-        background 0.4s ease;
+    text-decoration: none;
 
 }
 
 
-.brand:hover .brand-symbol {
+.brand img {
 
-    transform: rotate(45deg);
+    display: block;
 
-    background: rgba(247,248,245,0.08);
+    width: 38px;
+
+    height: 38px;
+
+    object-fit: contain;
+
+}
+
+
+.brand span {
+
+    display: block;
+
+    color: #f2efe7;
+
+}
+
+
+.brand:hover {
+
+    opacity: 0.85;
 
 }
 
@@ -597,6 +603,24 @@ button {
 
     margin-left: auto;
 
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(247,248,245,0.28);
+
+    border-radius: 14px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(15,91,116,0.25),
+            rgba(3,27,37,0.18)
+        );
+
+    overflow: hidden;
+
 }
 
 
@@ -657,78 +681,35 @@ button {
 
 .object-core {
 
-    position: absolute;
+     position: relative;
 
-    left: 50%;
-    top: 50%;
-
-    width: 190px;
-    height: 190px;
-
-    transform:
-        translate(-50%,-50%);
+    width: 78%;
+    height: 78%;
 
     display: flex;
-
-    flex-direction: column;
 
     align-items: center;
     justify-content: center;
 
-    border:
-        1px solid rgba(247,248,245,0.35);
+    background: transparent;
 
-    background:
-        rgba(247,248,245,0.025);
+    border: 0;
 
-    backdrop-filter: blur(10px);
+    backdrop-filter: none;
 
-}
-
-
-.object-core::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 16px;
-
-    border:
-        1px solid rgba(247,248,245,0.1);
-
-    transform: rotate(45deg);
+    z-index: 2;
 
 }
+.object-core img {
 
+    display: block;
 
-.object-core span {
+    width: 100%;
+    height: auto;
 
-    position: relative;
-
-    font-size: 31px;
-
-    font-weight: 800;
-
-    letter-spacing: -0.06em;
+    object-fit: contain;
 
 }
-
-
-.object-core small {
-
-    position: relative;
-
-    margin-top: 13px;
-
-    font-size: 6px;
-
-    letter-spacing: 0.22em;
-
-    opacity: 0.45;
-
-}
-
 
 .object-coordinate {
 
