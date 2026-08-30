@@ -1,10 +1,11 @@
 /* =========================================================
    ASCND — ASSESSMENT SYSTEM
-   Visual redesign
    Ocean / Cream / Editorial
+   Complete visual system
 ========================================================= */
 
 :root {
+
     --ocean: #0b3547;
     --ocean-deep: #062633;
     --ocean-dark: #041a23;
@@ -15,13 +16,14 @@
     --ink: #081014;
     --white: #ffffff;
 
-    --muted: rgba(243, 241, 232, 0.58);
-    --faint: rgba(243, 241, 232, 0.36);
+    --muted: rgba(243, 241, 232, 0.62);
+    --faint: rgba(243, 241, 232, 0.38);
 
-    --line: rgba(243, 241, 232, 0.13);
-    --line-strong: rgba(243, 241, 232, 0.24);
+    --line: rgba(243, 241, 232, 0.14);
+    --line-strong: rgba(243, 241, 232, 0.26);
 
-    --radius: 0px;
+    --cream-line: rgba(8, 16, 20, 0.14);
+
 }
 
 
@@ -33,9 +35,11 @@
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
+
 
 body {
     margin: 0;
@@ -43,9 +47,9 @@ body {
 
     background:
         radial-gradient(
-            circle at 78% 20%,
-            rgba(42, 112, 137, 0.22),
-            transparent 32%
+            circle at 75% 15%,
+            rgba(48, 119, 143, 0.24),
+            transparent 34%
         ),
         linear-gradient(
             135deg,
@@ -63,15 +67,18 @@ body {
     line-height: 1.5;
 }
 
+
 button,
 textarea,
 input {
     font: inherit;
 }
 
+
 button {
     border-radius: 0;
 }
+
 
 .hidden {
     display: none !important;
@@ -79,27 +86,31 @@ button {
 
 
 /* =========================================================
-   BACKGROUND ATMOSPHERE
+   ATMOSPHERIC GRID
 ========================================================= */
 
 body::before {
+
     content: "";
 
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
 
-    opacity: 0.28;
+    opacity: 0.24;
 
     background-image:
+
         linear-gradient(
-            rgba(255, 255, 255, 0.035) 1px,
+            rgba(255,255,255,0.035) 1px,
             transparent 1px
         ),
+
         linear-gradient(
             90deg,
-            rgba(255, 255, 255, 0.035) 1px,
+            rgba(255,255,255,0.035) 1px,
             transparent 1px
         );
 
@@ -109,7 +120,7 @@ body::before {
         linear-gradient(
             to bottom,
             black,
-            transparent 75%
+            transparent 78%
         );
 
     z-index: 0;
@@ -117,19 +128,24 @@ body::before {
 
 
 /* =========================================================
-   LANDING PAGE
+   MAIN PAGE
 ========================================================= */
 
 .landing-page {
+
     position: relative;
+
     z-index: 1;
 
     min-height: 100vh;
 
     display: flex;
+
     flex-direction: column;
 
-    padding: 28px 6vw;
+    padding:
+        28px
+        6vw;
 }
 
 
@@ -138,8 +154,11 @@ body::before {
 ========================================================= */
 
 .navbar {
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     padding-bottom: 24px;
@@ -149,20 +168,29 @@ body::before {
         var(--line);
 }
 
+
 .logo {
+
     font-size: 19px;
+
     font-weight: 800;
+
     letter-spacing: 0.24em;
 }
 
+
 .nav-tag {
+
     font-size: 9px;
+
     font-weight: 700;
+
     letter-spacing: 0.2em;
 
-    color: var(--faint);
-
     text-transform: uppercase;
+
+    color:
+        var(--faint);
 }
 
 
@@ -171,6 +199,7 @@ body::before {
 ========================================================= */
 
 .hero {
+
     flex: 1;
 
     display: grid;
@@ -183,26 +212,40 @@ body::before {
 
     gap: 8vw;
 
-    padding: 90px 0;
+    padding:
+        85px
+        0;
 }
 
+
 .hero-content {
+
     max-width: 820px;
 }
 
+
 .eyebrow {
-    margin: 0 0 25px;
+
+    margin:
+        0
+        0
+        24px;
 
     font-size: 9px;
+
     font-weight: 700;
+
     letter-spacing: 0.25em;
 
     text-transform: uppercase;
 
-    color: var(--faint);
+    color:
+        var(--faint);
 }
 
+
 h1 {
+
     margin: 0;
 
     font-size:
@@ -214,12 +257,15 @@ h1 {
 
     line-height: 0.84;
 
-    letter-spacing: -0.075em;
+    letter-spacing:
+        -0.075em;
 
     font-weight: 800;
 }
 
+
 h1 span {
+
     display: block;
 
     margin-top: 12px;
@@ -233,7 +279,9 @@ h1 span {
         );
 }
 
+
 .hero-description {
+
     max-width: 590px;
 
     margin:
@@ -242,70 +290,11 @@ h1 span {
         32px;
 
     font-size: 16px;
+
     line-height: 1.75;
 
-    color: var(--muted);
-}
-
-
-/* =========================================================
-   PRIMARY BUTTON
-========================================================= */
-
-.primary-button {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    min-height: 52px;
-
-    padding: 0 24px;
-
-    border:
-        1px solid
-        var(--cream);
-
-    background: var(--cream);
-
-    color: var(--ink);
-
-    font-size: 10px;
-    font-weight: 800;
-
-    letter-spacing: 0.16em;
-
-    text-transform: uppercase;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        color 0.25s ease;
-}
-
-.primary-button:hover {
-    transform: translateY(-3px);
-
-    background: transparent;
-
-    color: var(--cream);
-}
-
-.primary-button span {
-    margin-left: 18px;
-
-    font-size: 17px;
-}
-
-.time-estimate {
-    margin-top: 16px;
-
-    font-size: 10px;
-    letter-spacing: 0.08em;
-
-    color: var(--faint);
+    color:
+        var(--muted);
 }
 
 
@@ -314,15 +303,19 @@ h1 span {
 ========================================================= */
 
 .hero-side {
+
     display: flex;
 
     justify-content: flex-end;
 }
 
+
 .system-card {
+
     position: relative;
 
     width: 100%;
+
     max-width: 430px;
 
     padding: 34px;
@@ -336,23 +329,28 @@ h1 span {
             4,
             26,
             35,
-            0.38
+            0.42
         );
 
-    backdrop-filter: blur(14px);
+    backdrop-filter:
+        blur(14px);
 
     overflow: hidden;
 }
 
+
 .system-card::before {
+
     content: "";
 
     position: absolute;
 
     width: 230px;
+
     height: 230px;
 
     right: -100px;
+
     top: -100px;
 
     border:
@@ -367,51 +365,71 @@ h1 span {
     border-radius: 50%;
 }
 
+
 .system-label {
+
     position: relative;
 
-    margin: 0 0 30px;
+    margin:
+        0
+        0
+        30px;
 
     font-size: 9px;
+
     font-weight: 700;
 
     letter-spacing: 0.22em;
 
-    color: var(--faint);
+    color:
+        var(--faint);
 }
 
+
 .principles {
+
     display: flex;
+
     flex-direction: column;
 }
 
+
 .principle {
+
     display: flex;
 
     align-items: center;
 
     gap: 18px;
 
-    padding: 17px 0;
+    padding:
+        17px
+        0;
 
     border-top:
         1px solid
         var(--line);
 }
 
+
 .principle:last-child {
+
     border-bottom:
         1px solid
         var(--line);
 }
 
+
 .principle span {
+
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     width: 34px;
+
     height: 34px;
 
     flex: 0 0 34px;
@@ -421,18 +439,180 @@ h1 span {
         var(--line-strong);
 
     font-size: 9px;
+
     font-weight: 800;
 
-    color: var(--faint);
+    color:
+        var(--faint);
 }
 
+
 .principle p {
+
     margin: 0;
 
     font-size: 10px;
+
     font-weight: 700;
 
     letter-spacing: 0.18em;
+}
+
+
+/* =========================================================
+   ASSESSMENT PAGE
+========================================================= */
+
+.assessment-page {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   ASSESSMENT NAVIGATION
+========================================================= */
+
+.assessment-navbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding:
+        22px
+        6vw;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    background:
+        rgba(
+            4,
+            26,
+            35,
+            0.32
+        );
+
+    backdrop-filter:
+        blur(12px);
+}
+
+
+/* =========================================================
+   ASSESSMENT CONTAINER
+========================================================= */
+
+.assessment-container {
+
+    width: min(
+        100%,
+        980px
+    );
+
+    margin:
+        0
+        auto;
+
+    padding:
+        70px
+        6vw
+        100px;
+}
+
+
+/* =========================================================
+   PROGRESS SYSTEM
+========================================================= */
+
+.progress-section {
+
+    margin-bottom: 65px;
+}
+
+
+.progress-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+
+.step-label {
+
+    margin: 0;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.2em;
+
+    text-transform: uppercase;
+
+    color:
+        var(--faint);
+}
+
+
+.assessment-status {
+
+    font-size: 9px;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    color:
+        var(--faint);
+}
+
+
+.progress-bar {
+
+    width: 100%;
+
+    height: 2px;
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.10
+        );
+
+    overflow: hidden;
+}
+
+
+.progress-fill {
+
+    height: 100%;
+
+    width: 0%;
+
+    background:
+        var(--cream);
+
+    transition:
+        width
+        0.45s
+        ease;
 }
 
 
@@ -441,22 +621,28 @@ h1 span {
 ========================================================= */
 
 .assessment-step {
+
     display: none;
 
     width: 100%;
 }
 
+
 .assessment-step.active {
+
     display: block;
 
     animation:
         assessmentFadeIn
-        0.45s ease;
+        0.45s
+        ease;
 }
+
 
 @keyframes assessmentFadeIn {
 
     from {
+
         opacity: 0;
 
         transform:
@@ -464,6 +650,7 @@ h1 span {
     }
 
     to {
+
         opacity: 1;
 
         transform:
@@ -473,28 +660,85 @@ h1 span {
 
 
 /* =========================================================
-   FORM SPACING
+   STEP TYPOGRAPHY
 ========================================================= */
 
-.assessment-step .form-group {
+.assessment-step h2 {
+
+    margin:
+        0
+        0
+        18px;
+
+    font-size:
+        clamp(
+            32px,
+            5vw,
+            58px
+        );
+
+    line-height: 1;
+
+    letter-spacing:
+        -0.055em;
+
+    font-weight: 800;
+}
+
+
+.step-description {
+
+    max-width: 650px;
+
+    margin:
+        0
+        0
+        42px;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    color:
+        var(--muted);
+}
+
+
+/* =========================================================
+   FORM GROUPS
+========================================================= */
+
+.form-group {
+
     margin-bottom: 42px;
 }
 
-.assessment-step .step-description {
-    margin-bottom: 42px;
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 14px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    color:
+        var(--faint);
 }
 
-.assessment-actions {
-    margin-top: 58px;
 
-    padding-top: 28px;
-
-    border-top:
-        1px solid
-        var(--line);
-}
+/* =========================================================
+   OPTION STACK
+========================================================= */
 
 .assessment-options {
+
     display: flex;
 
     flex-direction: column;
@@ -502,16 +746,9 @@ h1 span {
     gap: 12px;
 }
 
-.option-grid {
-    gap: 12px;
-}
-
-
-/* =========================================================
-   ASSESSMENT OPTIONS
-========================================================= */
 
 .assessment-option {
+
     position: relative;
 
     display: flex;
@@ -559,13 +796,26 @@ h1 span {
     cursor: pointer;
 
     transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease,
-        color 0.25s ease;
+        transform
+        0.25s
+        ease,
+
+        border-color
+        0.25s
+        ease,
+
+        background
+        0.25s
+        ease,
+
+        color
+        0.25s
+        ease;
 }
 
+
 .assessment-option:hover {
+
     transform:
         translateX(5px);
 
@@ -580,27 +830,37 @@ h1 span {
             0.065
         );
 
-    color: var(--cream);
+    color:
+        var(--cream);
 }
 
+
 .assessment-option.selected {
-    background: var(--cream);
 
-    border-color: var(--cream);
+    background:
+        var(--cream);
 
-    color: var(--ink);
+    border-color:
+        var(--cream);
+
+    color:
+        var(--ink);
 
     transform:
         translateX(7px);
 }
 
+
 .option-number {
+
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     min-width: 32px;
+
     height: 32px;
 
     border:
@@ -612,7 +872,10 @@ h1 span {
     color: inherit;
 }
 
-.assessment-option.selected .option-number {
+
+.assessment-option.selected
+.option-number {
+
     border-color:
         rgba(
             8,
@@ -624,24 +887,59 @@ h1 span {
 
 
 /* =========================================================
-   GENERIC OPTION BUTTONS
+   OPTION GRID
+========================================================= */
+
+.option-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   GENERIC OPTIONS
 ========================================================= */
 
 .option-button,
 .system-option {
+
     position: relative;
 
     cursor: pointer;
 
     transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        border-color 0.25s ease,
-        color 0.25s ease;
+        transform
+        0.25s
+        ease,
+
+        background
+        0.25s
+        ease,
+
+        border-color
+        0.25s
+        ease,
+
+        color
+        0.25s
+        ease;
 }
+
 
 .option-button:hover,
 .system-option:hover {
+
     border-color:
         var(--line-strong);
 
@@ -654,8 +952,10 @@ h1 span {
         );
 }
 
+
 .option-button.selected,
 .system-option.selected {
+
     background:
         rgba(
             243,
@@ -674,7 +974,10 @@ h1 span {
         translateY(-2px);
 
     box-shadow:
-        0 0 0 1px
+        0
+        0
+        0
+        1px
         rgba(
             243,
             241,
@@ -685,11 +988,12 @@ h1 span {
 
 
 /* =========================================================
-   TEXT AREAS
+   TEXTAREAS
 ========================================================= */
 
-.assessment-step textarea,
-textarea {
+textarea,
+.assessment-step textarea {
+
     width: 100%;
 
     min-height: 120px;
@@ -712,7 +1016,8 @@ textarea {
             0.035
         );
 
-    color: var(--cream);
+    color:
+        var(--cream);
 
     font-family:
         Arial,
@@ -726,11 +1031,19 @@ textarea {
     resize: vertical;
 
     transition:
-        border-color 0.25s ease,
-        background 0.25s ease;
+        border-color
+        0.25s
+        ease,
+
+        background
+        0.25s
+        ease;
 }
 
+
+textarea::placeholder,
 .assessment-step textarea::placeholder {
+
     color:
         rgba(
             243,
@@ -740,7 +1053,10 @@ textarea {
         );
 }
 
+
+textarea:focus,
 .assessment-step textarea:focus {
+
     border-color:
         var(--line-strong);
 
@@ -755,89 +1071,100 @@ textarea {
 
 
 /* =========================================================
-   STEP 3 — SYSTEM TEST
+   ACTIONS
 ========================================================= */
 
-.assessment-step[data-step="3"]
-.assessment-options
-.assessment-option {
-    appearance: none;
-
-    -webkit-appearance: none;
+.assessment-actions {
 
     display: flex;
 
     align-items: center;
 
-    width: 100%;
+    gap: 14px;
 
-    min-height: 68px;
+    margin-top: 58px;
 
-    padding: 18px;
+    padding-top: 28px;
 
-    background:
-        rgba(
-            243,
-            241,
-            232,
-            0.025
-        );
+    border-top:
+        1px solid
+        var(--line);
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.primary-button,
+.continue-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 52px;
+
+    padding:
+        0
+        24px;
 
     border:
         1px solid
-        var(--line);
+        var(--cream);
+
+    background:
+        var(--cream);
 
     color:
-        rgba(
-            243,
-            241,
-            232,
-            0.68
-        );
-
-    box-shadow: none;
-
-    border-radius: 0;
-
-    text-align: left;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+        var(--ink);
 
     font-size: 10px;
 
-    font-weight: 700;
+    font-weight: 800;
 
-    letter-spacing: 0.12em;
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
 
     cursor: pointer;
+
+    transition:
+        transform
+        0.25s
+        ease,
+
+        background
+        0.25s
+        ease,
+
+        color
+        0.25s
+        ease;
 }
 
-.assessment-step[data-step="3"]
-.assessment-options
-.assessment-option:hover {
+
+.primary-button:hover,
+.continue-button:hover {
+
+    transform:
+        translateY(-3px);
+
     background:
-        rgba(
-            243,
-            241,
-            232,
-            0.06
-        );
+        transparent;
 
-    border-color:
-        var(--line-strong);
+    color:
+        var(--cream);
 }
 
-.assessment-step[data-step="3"]
-.assessment-options
-.assessment-option.selected {
-    background: var(--cream);
 
-    border-color: var(--cream);
+.primary-button span {
 
-    color: var(--ink);
+    margin-left: 18px;
+
+    font-size: 17px;
 }
 
 
@@ -846,7 +1173,6 @@ textarea {
 ========================================================= */
 
 .back-button {
-    margin-right: auto;
 
     min-height: 50px;
 
@@ -858,9 +1184,11 @@ textarea {
         1px solid
         var(--line);
 
-    background: transparent;
+    background:
+        transparent;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
     font-size: 10px;
 
@@ -873,12 +1201,22 @@ textarea {
     cursor: pointer;
 
     transition:
-        border-color 0.25s ease,
-        color 0.25s ease,
-        transform 0.25s ease;
+        border-color
+        0.25s
+        ease,
+
+        color
+        0.25s
+        ease,
+
+        transform
+        0.25s
+        ease;
 }
 
+
 .back-button:hover {
+
     border-color:
         var(--line-strong);
 
@@ -891,48 +1229,90 @@ textarea {
 
 
 /* =========================================================
-   FOOTER
+   TIME ESTIMATE
 ========================================================= */
 
-footer {
-    padding-top: 25px;
+.time-estimate {
 
-    border-top:
-        1px solid
-        var(--line);
-}
+    margin-top: 16px;
 
-footer p {
-    margin: 0;
+    font-size: 10px;
 
-    font-size: 9px;
+    letter-spacing: 0.08em;
 
-    letter-spacing: 0.16em;
-
-    color: var(--faint);
-
-    text-transform: uppercase;
+    color:
+        var(--faint);
 }
 
 
 /* =========================================================
-   RESULTS — STEP 7
+   STEP 7 — RESULTS
 ========================================================= */
 
 .assessment-step[data-step="7"] {
+
     padding-bottom: 80px;
 }
 
+
 .results-intro {
+
     margin-bottom: 55px;
 }
 
+
 .results-intro h2 {
+
     margin-bottom: 20px;
 }
 
-.results-intro .step-description {
+
+.results-intro
+.step-description {
+
     max-width: 620px;
+}
+
+
+/* =========================================================
+   SUMMARY CARD
+========================================================= */
+
+.results-summary-card {
+
+    padding: 30px;
+
+    margin-bottom: 40px;
+
+    border:
+        1px solid
+        var(--line);
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.025
+        );
+}
+
+
+.business-summary {
+
+    margin:
+        12px
+        0
+        0;
+
+    max-width: 850px;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color:
+        var(--muted);
 }
 
 
@@ -941,6 +1321,7 @@ footer p {
 ========================================================= */
 
 .opportunity-index-card {
+
     position: relative;
 
     padding: 42px;
@@ -971,15 +1352,19 @@ footer p {
     overflow: hidden;
 }
 
+
 .opportunity-index-card::after {
+
     content: "";
 
     position: absolute;
 
     width: 280px;
+
     height: 280px;
 
     right: -120px;
+
     bottom: -160px;
 
     border:
@@ -994,8 +1379,8 @@ footer p {
     border-radius: 50%;
 }
 
+
 .result-label {
-    position: relative;
 
     display: block;
 
@@ -1007,10 +1392,13 @@ footer p {
 
     letter-spacing: 0.2em;
 
-    color: var(--faint);
+    color:
+        var(--faint);
 }
 
+
 .index-score {
+
     display: flex;
 
     align-items: baseline;
@@ -1020,7 +1408,9 @@ footer p {
     margin-bottom: 12px;
 }
 
+
 .opportunity-score {
+
     font-size:
         clamp(
             58px,
@@ -1032,16 +1422,21 @@ footer p {
 
     line-height: 1;
 
-    letter-spacing: -0.06em;
+    letter-spacing:
+        -0.06em;
 }
 
+
 .score-total {
+
     font-size: 18px;
 
     opacity: 0.45;
 }
 
+
 .opportunity-level {
+
     margin-bottom: 18px;
 
     font-size: 15px;
@@ -1051,7 +1446,9 @@ footer p {
     letter-spacing: 0.04em;
 }
 
+
 .index-description {
+
     max-width: 520px;
 
     margin: 0;
@@ -1060,7 +1457,8 @@ footer p {
 
     line-height: 1.75;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
 
@@ -1069,10 +1467,13 @@ footer p {
 ========================================================= */
 
 .results-section {
+
     margin-bottom: 60px;
 }
 
+
 .results-heading {
+
     margin-bottom: 20px;
 
     font-size: 9px;
@@ -1081,7 +1482,10 @@ footer p {
 
     letter-spacing: 0.2em;
 
-    color: var(--faint);
+    color:
+        var(--faint);
+
+    text-transform: uppercase;
 }
 
 
@@ -1090,6 +1494,7 @@ footer p {
 ========================================================= */
 
 .primary-opportunity-card {
+
     padding: 35px;
 
     border-left:
@@ -1105,7 +1510,9 @@ footer p {
         );
 }
 
+
 .primary-opportunity-title {
+
     margin-bottom: 18px;
 
     font-size:
@@ -1119,10 +1526,13 @@ footer p {
 
     line-height: 1.15;
 
-    letter-spacing: -0.035em;
+    letter-spacing:
+        -0.035em;
 }
 
+
 .primary-explanation {
+
     max-width: 650px;
 
     margin: 0;
@@ -1131,7 +1541,8 @@ footer p {
 
     line-height: 1.8;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
 
@@ -1140,24 +1551,33 @@ footer p {
 ========================================================= */
 
 .primary-opportunity-summary {
+
     margin-top: 24px;
 }
 
+
 .opportunity-summary-item {
-    padding: 18px 0;
+
+    padding:
+        18px
+        0;
 
     border-top:
         1px solid
         var(--line);
 }
 
+
 .opportunity-summary-item:first-child {
+
     padding-top: 0;
 
     border-top: none;
 }
 
+
 .opportunity-summary-item strong {
+
     display: block;
 
     margin-bottom: 8px;
@@ -1169,7 +1589,9 @@ footer p {
     font-weight: 700;
 }
 
+
 .opportunity-summary-item p {
+
     margin: 0;
 
     max-width: 720px;
@@ -1178,7 +1600,167 @@ footer p {
 
     font-size: 14px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
+}
+
+
+/* =========================================================
+   KEY FINDINGS
+========================================================= */
+
+.key-findings {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    margin-top: 20px;
+}
+
+
+.finding-item {
+
+    display: grid;
+
+    grid-template-columns:
+        58px
+        1fr;
+
+    gap: 20px;
+
+    padding:
+        26px
+        28px;
+
+    border:
+        1px solid
+        var(--line);
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.025
+        );
+
+    transition:
+        border-color
+        0.25s
+        ease,
+
+        background
+        0.25s
+        ease,
+
+        transform
+        0.25s
+        ease;
+}
+
+
+.finding-item:hover {
+
+    border-color:
+        var(--line-strong);
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.05
+        );
+
+    transform:
+        translateY(-2px);
+}
+
+
+.finding-number {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    padding-top: 3px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+
+    color:
+        var(--faint);
+}
+
+
+.finding-content h3 {
+
+    margin:
+        0
+        0
+        10px;
+
+    font-size: 18px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+
+.finding-content p {
+
+    margin: 0;
+
+    max-width: 760px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color:
+        var(--muted);
+}
+
+
+/* =========================================================
+   WHAT THIS TELLS US
+========================================================= */
+
+.results-meaning {
+
+    margin-top: 20px;
+
+    padding:
+        26px
+        28px;
+
+    border-left:
+        2px solid
+        var(--cream);
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.025
+        );
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    color:
+        var(--muted);
 }
 
 
@@ -1187,6 +1769,7 @@ footer p {
 ========================================================= */
 
 .what-we-heard {
+
     display: flex;
 
     flex-direction: column;
@@ -1194,7 +1777,9 @@ footer p {
     gap: 10px;
 }
 
+
 .heard-item {
+
     display: flex;
 
     align-items: center;
@@ -1218,12 +1803,22 @@ footer p {
         );
 
     transition:
-        background 0.25s ease,
-        border-color 0.25s ease,
-        transform 0.25s ease;
+        background
+        0.25s
+        ease,
+
+        border-color
+        0.25s
+        ease,
+
+        transform
+        0.25s
+        ease;
 }
 
+
 .heard-item:hover {
+
     background:
         rgba(
             243,
@@ -1239,7 +1834,9 @@ footer p {
         translateX(4px);
 }
 
+
 .heard-number {
+
     min-width: 28px;
 
     font-size: 10px;
@@ -1251,7 +1848,9 @@ footer p {
     opacity: 0.45;
 }
 
+
 .heard-text {
+
     font-size: 14px;
 
     font-weight: 500;
@@ -1263,6 +1862,7 @@ footer p {
 ========================================================= */
 
 .top-opportunities {
+
     display: flex;
 
     flex-direction: column;
@@ -1273,7 +1873,9 @@ footer p {
         opportunity-counter;
 }
 
+
 .opportunity-item {
+
     position: relative;
 
     padding:
@@ -1299,15 +1901,25 @@ footer p {
     font-weight: 500;
 
     transition:
-        background 0.25s ease,
-        transform 0.25s ease,
-        border-color 0.25s ease;
+        background
+        0.25s
+        ease,
+
+        transform
+        0.25s
+        ease,
+
+        border-color
+        0.25s
+        ease;
 
     counter-increment:
         opportunity-counter;
 }
 
+
 .opportunity-item:hover {
+
     transform:
         translateX(5px);
 
@@ -1323,7 +1935,9 @@ footer p {
         var(--line-strong);
 }
 
+
 .opportunity-item::before {
+
     content:
         counter(
             opportunity-counter,
@@ -1333,6 +1947,7 @@ footer p {
     position: absolute;
 
     left: 24px;
+
     top: 50%;
 
     transform:
@@ -1353,6 +1968,7 @@ footer p {
 ========================================================= */
 
 .next-step-card {
+
     padding: 30px;
 
     border:
@@ -1371,7 +1987,8 @@ footer p {
 
     line-height: 1.8;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
 
@@ -1380,22 +1997,26 @@ footer p {
 ========================================================= */
 
 .assessment-step[data-step="9"] {
+
     padding-bottom: 80px;
 }
 
-.assessment-step[data-step="9"]
+
 .plan-intro {
+
     margin-bottom: 60px;
 }
 
-.assessment-step[data-step="9"]
+
 .plan-intro h2 {
+
     margin-bottom: 20px;
 }
 
-.assessment-step[data-step="9"]
+
 .plan-intro
 .step-description {
+
     max-width: 650px;
 }
 
@@ -1405,6 +2026,7 @@ footer p {
 ========================================================= */
 
 .options-primary-card {
+
     position: relative;
 
     padding: 42px;
@@ -1433,7 +2055,9 @@ footer p {
         );
 }
 
+
 .recommended-service {
+
     margin:
         0
         0
@@ -1448,10 +2072,13 @@ footer p {
 
     line-height: 1.1;
 
-    letter-spacing: -0.04em;
+    letter-spacing:
+        -0.04em;
 }
 
+
 .recommended-service-description {
+
     max-width: 650px;
 
     margin:
@@ -1463,7 +2090,8 @@ footer p {
 
     line-height: 1.8;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
 
@@ -1472,6 +2100,7 @@ footer p {
 ========================================================= */
 
 .service-options {
+
     display: flex;
 
     flex-direction: column;
@@ -1479,7 +2108,9 @@ footer p {
     gap: 12px;
 }
 
+
 .service-option {
+
     display: flex;
 
     align-items: flex-start;
@@ -1501,12 +2132,22 @@ footer p {
         );
 
     transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        border-color 0.25s ease;
+        transform
+        0.25s
+        ease,
+
+        background
+        0.25s
+        ease,
+
+        border-color
+        0.25s
+        ease;
 }
 
+
 .service-option:hover {
+
     transform:
         translateX(5px);
 
@@ -1522,7 +2163,9 @@ footer p {
         var(--line-strong);
 }
 
+
 .service-number {
+
     min-width: 30px;
 
     font-size: 9px;
@@ -1534,7 +2177,9 @@ footer p {
     opacity: 0.45;
 }
 
+
 .service-option h3 {
+
     margin:
         0
         0
@@ -1543,18 +2188,19 @@ footer p {
     font-size: 17px;
 
     font-weight: 700;
-
-    letter-spacing: -0.01em;
 }
 
+
 .service-option p {
+
     margin: 0;
 
     font-size: 14px;
 
     line-height: 1.6;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
 
@@ -1563,6 +2209,7 @@ footer p {
 ========================================================= */
 
 .additional-option-content {
+
     display: flex;
 
     flex-direction: column;
@@ -1570,18 +2217,23 @@ footer p {
     gap: 6px;
 }
 
+
 .additional-option-content strong {
+
     font-size: 10px;
 
     letter-spacing: 0.1em;
 }
 
+
 .additional-option-content span {
+
     font-size: 13px;
 
     line-height: 1.5;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
 
@@ -1590,6 +2242,7 @@ footer p {
 ========================================================= */
 
 .options-final {
+
     margin-top: 70px;
 
     padding:
@@ -1611,7 +2264,9 @@ footer p {
         );
 }
 
+
 .options-final h3 {
+
     margin:
         0
         0
@@ -1626,10 +2281,13 @@ footer p {
 
     line-height: 1.2;
 
-    letter-spacing: -0.04em;
+    letter-spacing:
+        -0.04em;
 }
 
+
 .options-final p {
+
     max-width: 600px;
 
     margin:
@@ -1641,208 +2299,56 @@ footer p {
 
     line-height: 1.8;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
 
 /* =========================================================
-   STEP 7 — WHAT WE FOUND
+   FOOTER
 ========================================================= */
 
-.assessment-step[data-step="7"]
-.results-summary-card {
-    padding: 30px;
+footer {
 
-    margin-bottom: 40px;
+    padding-top: 25px;
 
-    border:
+    border-top:
         1px solid
         var(--line);
-
-    background:
-        rgba(
-            243,
-            241,
-            232,
-            0.025
-        );
-}
-
-.assessment-step[data-step="7"]
-.business-summary {
-    margin:
-        12px
-        0
-        0;
-
-    max-width: 850px;
-
-    font-size: 16px;
-
-    line-height: 1.7;
-
-    color: var(--muted);
 }
 
 
-/* =========================================================
-   KEY FINDINGS
-========================================================= */
+footer p {
 
-.assessment-step[data-step="7"]
-.key-findings {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 16px;
-
-    margin-top: 20px;
-}
-
-.assessment-step[data-step="7"]
-.finding-item {
-    display: grid;
-
-    grid-template-columns:
-        58px
-        1fr;
-
-    gap: 20px;
-
-    padding:
-        26px
-        28px;
-
-    border:
-        1px solid
-        var(--line);
-
-    background:
-        rgba(
-            243,
-            241,
-            232,
-            0.025
-        );
-
-    transition:
-        border-color 0.25s ease,
-        background 0.25s ease,
-        transform 0.25s ease;
-}
-
-.assessment-step[data-step="7"]
-.finding-item:hover {
-    border-color:
-        var(--line-strong);
-
-    background:
-        rgba(
-            243,
-            241,
-            232,
-            0.05
-        );
-
-    transform:
-        translateY(-2px);
-}
-
-.assessment-step[data-step="7"]
-.finding-number {
-    display: flex;
-
-    align-items: flex-start;
-
-    justify-content: center;
-
-    padding-top: 3px;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-    letter-spacing: 0.12em;
-
-    color: var(--faint);
-}
-
-.assessment-step[data-step="7"]
-.finding-content h3 {
-    margin:
-        0
-        0
-        10px;
-
-    font-size: 18px;
-
-    line-height: 1.35;
-
-    font-weight: 700;
-
-    letter-spacing: -0.01em;
-}
-
-.assessment-step[data-step="7"]
-.finding-content p {
     margin: 0;
 
-    max-width: 760px;
+    font-size: 9px;
 
-    font-size: 14px;
+    letter-spacing: 0.16em;
 
-    line-height: 1.7;
+    color:
+        var(--faint);
 
-    color: var(--muted);
+    text-transform: uppercase;
 }
 
 
 /* =========================================================
-   WHAT THIS TELLS US
-========================================================= */
-
-.assessment-step[data-step="7"]
-.results-meaning {
-    margin-top: 20px;
-
-    padding:
-        26px
-        28px;
-
-    border-left:
-        2px solid
-        var(--cream);
-
-    background:
-        rgba(
-            243,
-            241,
-            232,
-            0.025
-        );
-
-    font-size: 15px;
-
-    line-height: 1.7;
-
-    color: var(--muted);
-}
-
-
-/* =========================================================
-   MOBILE — TABLET
+   MOBILE
 ========================================================= */
 
 @media (max-width: 850px) {
 
     .landing-page {
+
         padding:
             22px
             6vw;
     }
 
+
     .hero {
+
         grid-template-columns: 1fr;
 
         gap: 55px;
@@ -1852,37 +2358,95 @@ footer p {
             0;
     }
 
+
     .hero-side {
-        justify-content: flex-start;
+
+        justify-content:
+            flex-start;
     }
 
+
     .system-card {
+
         max-width: none;
     }
 
-    h1 {
-        letter-spacing: -0.06em;
+
+    .assessment-container {
+
+        padding:
+            55px
+            6vw
+            80px;
     }
+
+
+    .option-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    h1 {
+
+        letter-spacing:
+            -0.06em;
+    }
+
 }
 
 
-/* =========================================================
-   MOBILE — 700px
-========================================================= */
-
 @media (max-width: 700px) {
 
+    .assessment-navbar {
+
+        padding:
+            18px
+            24px;
+    }
+
+
+    .assessment-container {
+
+        padding:
+            45px
+            24px
+            70px;
+    }
+
+
     .assessment-option {
+
         padding: 16px;
     }
 
+
     .option-number {
+
         min-width: 30px;
+
         height: 30px;
     }
 
-    .assessment-step[data-step="7"]
+
+    .assessment-actions {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .primary-button,
+    .continue-button,
+    .back-button {
+
+        width: 100%;
+    }
+
+
     .finding-item {
+
         grid-template-columns:
             42px
             1fr;
@@ -1894,54 +2458,65 @@ footer p {
             18px;
     }
 
-    .assessment-step[data-step="7"]
+
     .finding-content h3 {
+
         font-size: 16px;
     }
 
-    .assessment-step[data-step="7"]
+
     .finding-content p {
+
         font-size: 14px;
     }
 
-    .assessment-step[data-step="7"]
+
     .results-meaning {
+
         padding:
             22px
             18px;
     }
+
 }
 
-
-/* =========================================================
-   MOBILE — 600px
-========================================================= */
 
 @media (max-width: 600px) {
 
     .opportunity-index-card {
+
         padding: 28px;
     }
 
+
     .opportunity-score {
+
         font-size: 56px;
     }
 
+
     .primary-opportunity-card {
+
         padding: 25px;
     }
 
+
     .primary-opportunity-title {
+
         font-size: 26px;
     }
 
+
     .heard-item {
+
         padding: 16px;
 
         gap: 15px;
     }
 
+
     .opportunity-item {
+
         padding:
             20px
             20px
@@ -1949,63 +2524,90 @@ footer p {
             60px;
     }
 
+
     .options-primary-card {
+
         padding: 28px;
     }
 
+
     .recommended-service {
+
         font-size: 26px;
     }
 
+
     .service-option {
+
         padding: 20px;
 
         gap: 16px;
     }
 
+
     .options-final {
+
         padding:
             30px
             22px;
     }
 
+
     .options-final h3 {
+
         font-size: 25px;
     }
+
 }
 
-
-/* =========================================================
-   MOBILE — 500px
-========================================================= */
 
 @media (max-width: 500px) {
 
     .navbar {
-        align-items: flex-start;
+
+        align-items:
+            flex-start;
 
         gap: 10px;
 
-        flex-direction: column;
+        flex-direction:
+            column;
     }
 
+
     .nav-tag {
+
         font-size: 8px;
     }
 
+
     .hero-description {
+
         font-size: 15px;
     }
 
+
     .primary-button {
+
         width: 100%;
     }
 
+
     .system-card {
+
         padding: 26px;
     }
 
+
     h1 {
+
         font-size: 58px;
     }
+
+
+    .assessment-step h2 {
+
+        font-size: 34px;
+    }
+
 }
