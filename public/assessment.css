@@ -1,508 +1,518 @@
-.hidden {
-    display: none !important;
+/* =========================================================
+   ASCND — ASSESSMENT SYSTEM
+   Visual redesign
+   Ocean / Cream / Editorial
+========================================================= */
+
+:root {
+    --ocean: #0b3547;
+    --ocean-deep: #062633;
+    --ocean-dark: #041a23;
+
+    --cream: #f3f1e8;
+    --cream-soft: #e8e6dc;
+
+    --ink: #081014;
+    --white: #ffffff;
+
+    --muted: rgba(243, 241, 232, 0.58);
+    --faint: rgba(243, 241, 232, 0.36);
+
+    --line: rgba(243, 241, 232, 0.13);
+    --line-strong: rgba(243, 241, 232, 0.24);
+
+    --radius: 0px;
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
 
-
 body {
-
     margin: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 78% 20%,
+            rgba(42, 112, 137, 0.22),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            var(--ocean),
+            var(--ocean-deep)
+        );
+
+    color: var(--cream);
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
-    background: #0a0a0a;
+    line-height: 1.5;
+}
 
-    color: #f5f5f5;
+button,
+textarea,
+input {
+    font: inherit;
+}
 
+button {
+    border-radius: 0;
+}
+
+.hidden {
+    display: none !important;
 }
 
 
+/* =========================================================
+   BACKGROUND ATMOSPHERE
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.28;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 90px 90px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 75%
+        );
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   LANDING PAGE
+========================================================= */
+
 .landing-page {
+    position: relative;
+    z-index: 1;
 
     min-height: 100vh;
 
     display: flex;
-
     flex-direction: column;
 
-    padding:
-        28px
-        6%;
-
+    padding: 28px 6vw;
 }
 
 
-/* =========================
+/* =========================================================
    NAVIGATION
-========================= */
+========================================================= */
 
 .navbar {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
-    padding-bottom: 30px;
+    padding-bottom: 24px;
 
     border-bottom:
         1px solid
-        rgba(255, 255, 255, 0.12);
-
+        var(--line);
 }
-
 
 .logo {
-
-    font-size: 24px;
-
+    font-size: 19px;
     font-weight: 800;
-
-    letter-spacing: 5px;
-
+    letter-spacing: 0.24em;
 }
-
 
 .nav-tag {
-
-    font-size: 11px;
-
+    font-size: 9px;
     font-weight: 700;
+    letter-spacing: 0.2em;
 
-    letter-spacing: 2px;
+    color: var(--faint);
 
-    color:
-        rgba(255, 255, 255, 0.55);
-
+    text-transform: uppercase;
 }
 
 
-/* =========================
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero {
-
     flex: 1;
 
     display: grid;
 
     grid-template-columns:
-        1.2fr
-        0.8fr;
+        1.15fr
+        0.85fr;
 
     align-items: center;
 
-    gap: 80px;
+    gap: 8vw;
 
-    padding:
-        80px
-        0;
-
+    padding: 90px 0;
 }
-
 
 .hero-content {
-
-    max-width: 750px;
-
+    max-width: 820px;
 }
-
 
 .eyebrow {
+    margin: 0 0 25px;
 
-    margin: 0 0 22px;
-
-    font-size: 11px;
-
+    font-size: 9px;
     font-weight: 700;
+    letter-spacing: 0.25em;
 
-    letter-spacing: 3px;
+    text-transform: uppercase;
 
-    color:
-        rgba(255, 255, 255, 0.5);
-
+    color: var(--faint);
 }
-
 
 h1 {
-
     margin: 0;
 
-    font-size: clamp(
-        52px,
-        8vw,
-        110px
-    );
+    font-size:
+        clamp(
+            58px,
+            8vw,
+            125px
+        );
 
-    line-height: 0.9;
+    line-height: 0.84;
 
-    letter-spacing: -4px;
+    letter-spacing: -0.075em;
 
-    font-weight: 900;
-
+    font-weight: 800;
 }
-
 
 h1 span {
-
     display: block;
 
-    margin-top: 10px;
+    margin-top: 12px;
 
     color:
-        rgba(255, 255, 255, 0.42);
-
+        rgba(
+            243,
+            241,
+            232,
+            0.42
+        );
 }
 
-
 .hero-description {
-
     max-width: 590px;
 
     margin:
-        35px
+        38px
         0
         32px;
 
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.75;
 
-    line-height: 1.7;
-
-    color:
-        rgba(255, 255, 255, 0.68);
-
+    color: var(--muted);
 }
 
 
-/* =========================
-   BUTTON
-========================= */
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
 
 .primary-button {
+    display: inline-flex;
 
-    border: none;
+    align-items: center;
+    justify-content: center;
 
-    padding:
-        18px
-        24px;
+    min-height: 52px;
 
-    background: #f2f2f2;
+    padding: 0 24px;
 
-    color: #0a0a0a;
+    border:
+        1px solid
+        var(--cream);
 
-    font-size: 12px;
+    background: var(--cream);
 
+    color: var(--ink);
+
+    font-size: 10px;
     font-weight: 800;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
 
     cursor: pointer;
 
     transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
-
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
 }
-
 
 .primary-button:hover {
+    transform: translateY(-3px);
 
-    transform:
-        translateY(-3px);
+    background: transparent;
 
-    opacity: 0.88;
-
+    color: var(--cream);
 }
-
 
 .primary-button span {
-
     margin-left: 18px;
 
-    font-size: 18px;
-
+    font-size: 17px;
 }
-
 
 .time-estimate {
+    margin-top: 16px;
 
-    margin-top: 18px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
 
-    font-size: 12px;
-
-    color:
-        rgba(255, 255, 255, 0.42);
-
+    color: var(--faint);
 }
 
 
-/* =========================
-   ASCND SYSTEM CARD
-========================= */
+/* =========================================================
+   SYSTEM CARD
+========================================================= */
 
 .hero-side {
-
     display: flex;
 
     justify-content: flex-end;
-
 }
 
-
 .system-card {
+    position: relative;
 
     width: 100%;
+    max-width: 430px;
 
-    max-width: 420px;
-
-    padding: 35px;
+    padding: 34px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.15);
+        var(--line-strong);
 
     background:
-        rgba(255, 255, 255, 0.025);
+        rgba(
+            4,
+            26,
+            35,
+            0.38
+        );
 
+    backdrop-filter: blur(14px);
+
+    overflow: hidden;
 }
 
+.system-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    right: -100px;
+    top: -100px;
+
+    border:
+        1px solid
+        rgba(
+            243,
+            241,
+            232,
+            0.12
+        );
+
+    border-radius: 50%;
+}
 
 .system-label {
+    position: relative;
 
     margin: 0 0 30px;
 
-    font-size: 10px;
-
+    font-size: 9px;
     font-weight: 700;
 
-    letter-spacing: 2px;
+    letter-spacing: 0.22em;
 
-    color:
-        rgba(255, 255, 255, 0.42);
-
+    color: var(--faint);
 }
-
 
 .principles {
-
     display: flex;
-
     flex-direction: column;
-
 }
 
-
 .principle {
-
     display: flex;
 
     align-items: center;
 
     gap: 18px;
 
-    padding: 16px 0;
+    padding: 17px 0;
 
     border-top:
         1px solid
-        rgba(255, 255, 255, 0.08);
-
+        var(--line);
 }
-
 
 .principle:last-child {
-
     border-bottom:
         1px solid
-        rgba(255, 255, 255, 0.08);
-
+        var(--line);
 }
 
-
 .principle span {
-
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     width: 34px;
-
     height: 34px;
+
+    flex: 0 0 34px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.22);
+        var(--line-strong);
 
-    font-size: 12px;
-
+    font-size: 9px;
     font-weight: 800;
 
+    color: var(--faint);
 }
-
 
 .principle p {
-
     margin: 0;
 
-    font-size: 12px;
-
+    font-size: 10px;
     font-weight: 700;
 
-    letter-spacing: 2px;
-
+    letter-spacing: 0.18em;
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* =========================================================
+   ASSESSMENT STEPS
+========================================================= */
 
-footer {
+.assessment-step {
+    display: none;
 
-    padding-top: 25px;
+    width: 100%;
+}
+
+.assessment-step.active {
+    display: block;
+
+    animation:
+        assessmentFadeIn
+        0.45s ease;
+}
+
+@keyframes assessmentFadeIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   FORM SPACING
+========================================================= */
+
+.assessment-step .form-group {
+    margin-bottom: 42px;
+}
+
+.assessment-step .step-description {
+    margin-bottom: 42px;
+}
+
+.assessment-actions {
+    margin-top: 58px;
+
+    padding-top: 28px;
 
     border-top:
         1px solid
-        rgba(255, 255, 255, 0.12);
-
+        var(--line);
 }
-
-
-footer p {
-
-    margin: 0;
-
-    font-size: 11px;
-
-    letter-spacing: 1px;
-
-    color:
-        rgba(255, 255, 255, 0.4);
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (
-    max-width: 850px
-) {
-
-    .landing-page {
-
-        padding:
-            22px
-            24px;
-
-    }
-
-
-    .hero {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 50px;
-
-        padding:
-            60px
-            0;
-
-    }
-
-
-    .hero-side {
-
-        justify-content: flex-start;
-
-    }
-
-
-    .system-card {
-
-        max-width: none;
-
-    }
-
-
-    h1 {
-
-        letter-spacing: -2px;
-
-    }
-
-}
-
-
-@media (
-    max-width: 500px
-) {
-
-    .navbar {
-
-        align-items: flex-start;
-
-        gap: 10px;
-
-        flex-direction: column;
-
-    }
-
-
-    .nav-tag {
-
-        font-size: 9px;
-
-    }
-
-
-    .hero-description {
-
-        font-size: 16px;
-
-    }
-
-
-    .primary-button {
-
-        width: 100%;
-
-    }
-
-}
-
-/* =========================
-   ASSESSMENT OPTIONS
-========================= */
 
 .assessment-options {
-
     display: flex;
 
     flex-direction: column;
 
-    gap: 10px;
+    gap: 12px;
+}
 
+.option-grid {
+    gap: 12px;
 }
 
 
+/* =========================================================
+   ASSESSMENT OPTIONS
+========================================================= */
+
 .assessment-option {
+    position: relative;
 
     display: flex;
 
@@ -512,371 +522,197 @@ footer p {
 
     width: 100%;
 
-    padding: 18px;
+    min-height: 62px;
+
+    padding:
+        17px
+        18px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.12);
+        var(--line);
 
     background:
-        rgba(255, 255, 255, 0.025);
+        rgba(
+            243,
+            241,
+            232,
+            0.025
+        );
 
     color:
-        rgba(255, 255, 255, 0.7);
+        rgba(
+            243,
+            241,
+            232,
+            0.68
+        );
 
     text-align: left;
 
-    font-size: 11px;
+    font-size: 10px;
 
     font-weight: 700;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 0.12em;
 
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
 }
-
 
 .assessment-option:hover {
+    transform:
+        translateX(5px);
 
     border-color:
-        rgba(255, 255, 255, 0.35);
+        var(--line-strong);
 
     background:
-        rgba(255, 255, 255, 0.05);
+        rgba(
+            243,
+            241,
+            232,
+            0.065
+        );
 
-    transform:
-        translateX(4px);
-
+    color: var(--cream);
 }
-
 
 .assessment-option.selected {
+    background: var(--cream);
 
-    background: #f2f2f2;
+    border-color: var(--cream);
 
-    border-color: #f2f2f2;
+    color: var(--ink);
 
-    color: #0a0a0a;
-
+    transform:
+        translateX(7px);
 }
 
-
 .option-number {
-
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     min-width: 32px;
-
     height: 32px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.2);
+        var(--line-strong);
 
     font-size: 9px;
 
+    color: inherit;
 }
 
-
-.assessment-option.selected
-.option-number {
-
+.assessment-option.selected .option-number {
     border-color:
-        rgba(0, 0, 0, 0.2);
-
+        rgba(
+            8,
+            16,
+            20,
+            0.25
+        );
 }
 
 
-/* =========================
-   BACK BUTTON
-========================= */
+/* =========================================================
+   GENERIC OPTION BUTTONS
+========================================================= */
 
-.back-button {
-
-    margin-right: auto;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.15);
-
-    padding:
-        18px
-        24px;
-
-    background:
-        transparent;
-
-    color:
-        rgba(255, 255, 255, 0.55);
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-
-    cursor: pointer;
-
-    transition:
-        border-color 0.2s ease,
-        color 0.2s ease;
-
-}
-
-
-.back-button:hover {
-
-    border-color:
-        rgba(255, 255, 255, 0.4);
-
-    color: #ffffff;
-
-}
-
-
-/* =========================
-   MOBILE OPTIONS
-========================= */
-
-@media (
-    max-width: 700px
-) {
-
-    .assessment-option {
-
-        padding: 16px;
-
-    }
-
-
-    .option-number {
-
-        min-width: 30px;
-
-        height: 30px;
-
-    }
-
-}
-
-/* =========================
-   ASCND ASSESSMENT STEPS
-========================= */
-
-.assessment-step {
-    display: none;
-    width: 100%;
-}
-
-.assessment-step.active {
-    display: block;
-    animation: assessmentFadeIn 0.35s ease;
-}
-
-
-@keyframes assessmentFadeIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
-/* =========================
-   TEAM SIZE SELECTION
-========================= */
-
-.option-button {
-
+.option-button,
+.system-option {
     position: relative;
 
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
 }
 
-
-.option-button:hover {
-
-    border-color:
-        rgba(255, 255, 255, 0.45);
-
-    background:
-        rgba(255, 255, 255, 0.06);
-
-}
-
-
-/* SELECTED STATE */
-
-.option-button.selected {
-
-    background:
-        rgba(255, 255, 255, 0.12);
-
-    border-color:
-        #ffffff;
-
-    color:
-        #ffffff;
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 0 0 1px
-        rgba(255, 255, 255, 0.15);
-
-}
-/* =========================
-   SYSTEM OPTIONS
-========================= */
-
-.system-option {
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-
-}
-
-
+.option-button:hover,
 .system-option:hover {
-
     border-color:
-        rgba(255, 255, 255, 0.45);
+        var(--line-strong);
 
     background:
-        rgba(255, 255, 255, 0.06);
-
+        rgba(
+            243,
+            241,
+            232,
+            0.06
+        );
 }
 
-
+.option-button.selected,
 .system-option.selected {
-
     background:
-        rgba(255, 255, 255, 0.12);
+        rgba(
+            243,
+            241,
+            232,
+            0.13
+        );
 
     border-color:
-        #ffffff;
+        var(--cream);
 
     color:
-        #ffffff;
+        var(--cream);
 
     transform:
         translateY(-2px);
 
     box-shadow:
         0 0 0 1px
-        rgba(255, 255, 255, 0.15);
-
-}
-
-/* =========================
-   ASSESSMENT SPACING
-========================= */
-
-.assessment-step .form-group {
-
-    margin-bottom: 42px;
-
+        rgba(
+            243,
+            241,
+            232,
+            0.08
+        );
 }
 
 
-.assessment-step .step-description {
+/* =========================================================
+   TEXT AREAS
+========================================================= */
 
-    margin-bottom: 42px;
-
-}
-
-
-.assessment-actions {
-
-    margin-top: 58px;
-
-    padding-top: 28px;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.08);
-
-}
-
-
-.assessment-options {
-
-    gap: 12px;
-
-}
-
-
-.option-grid {
-
-    gap: 12px;
-
-}
-
-
+.assessment-step textarea,
 textarea {
+    width: 100%;
 
     min-height: 120px;
 
-}
-
-
-/* Give the final question more breathing room */
-
-.assessment-step .form-group:last-of-type {
-
-    margin-bottom: 0;
-
-}
-
-/* =========================
-   ASCND TEXT AREAS
-========================= */
-
-.assessment-step textarea {
-
-    width: 100%;
-
-    min-height: 110px;
-
-    padding: 18px 20px;
-
-    background:
-        rgba(255, 255, 255, 0.035);
+    padding:
+        18px
+        20px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.14);
+        var(--line);
 
-    color: #ffffff;
+    outline: none;
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.035
+        );
+
+    color: var(--cream);
 
     font-family:
         Arial,
@@ -889,42 +725,48 @@ textarea {
 
     resize: vertical;
 
-    outline: none;
-
     transition:
-        border-color 0.2s ease,
-        background 0.2s ease;
-
+        border-color 0.25s ease,
+        background 0.25s ease;
 }
-
 
 .assessment-step textarea::placeholder {
-
     color:
-        rgba(255, 255, 255, 0.35);
-
+        rgba(
+            243,
+            241,
+            232,
+            0.28
+        );
 }
-
 
 .assessment-step textarea:focus {
-
     border-color:
-        rgba(255, 255, 255, 0.45);
+        var(--line-strong);
 
     background:
-        rgba(255, 255, 255, 0.055);
-
+        rgba(
+            243,
+            241,
+            232,
+            0.06
+        );
 }
 
-/* =========================
-   STEP 3 SYSTEM TEST
-========================= */
 
-.assessment-step[data-step="3"] .assessment-options .assessment-option {
+/* =========================================================
+   STEP 3 — SYSTEM TEST
+========================================================= */
+
+.assessment-step[data-step="3"]
+.assessment-options
+.assessment-option {
     appearance: none;
+
     -webkit-appearance: none;
 
     display: flex;
+
     align-items: center;
 
     width: 100%;
@@ -933,119 +775,242 @@ textarea {
 
     padding: 18px;
 
-    background: rgba(255, 255, 255, 0.025) !important;
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.025
+        );
 
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border:
+        1px solid
+        var(--line);
 
-    color: rgba(255, 255, 255, 0.7) !important;
+    color:
+        rgba(
+            243,
+            241,
+            232,
+            0.68
+        );
 
-    box-shadow: none !important;
+    box-shadow: none;
 
     border-radius: 0;
 
     text-align: left;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    font-size: 11px;
+    font-size: 10px;
 
     font-weight: 700;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 0.12em;
 
     cursor: pointer;
 }
 
+.assessment-step[data-step="3"]
+.assessment-options
+.assessment-option:hover {
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.06
+        );
 
-.assessment-step[data-step="3"] .assessment-options .assessment-option:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
+    border-color:
+        var(--line-strong);
+}
 
-    border-color: rgba(255, 255, 255, 0.35) !important;
+.assessment-step[data-step="3"]
+.assessment-options
+.assessment-option.selected {
+    background: var(--cream);
+
+    border-color: var(--cream);
+
+    color: var(--ink);
 }
 
 
-.assessment-step[data-step="3"] .assessment-options .assessment-option.selected {
-    background: #f2f2f2 !important;
+/* =========================================================
+   BACK BUTTON
+========================================================= */
 
-    border-color: #f2f2f2 !important;
+.back-button {
+    margin-right: auto;
 
-    color: #0a0a0a !important;
+    min-height: 50px;
+
+    padding:
+        0
+        22px;
+
+    border:
+        1px solid
+        var(--line);
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
 }
 
-/* =========================
-   STEP 7 — RESULTS
-========================= */
+.back-button:hover {
+    border-color:
+        var(--line-strong);
+
+    color:
+        var(--cream);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding-top: 25px;
+
+    border-top:
+        1px solid
+        var(--line);
+}
+
+footer p {
+    margin: 0;
+
+    font-size: 9px;
+
+    letter-spacing: 0.16em;
+
+    color: var(--faint);
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   RESULTS — STEP 7
+========================================================= */
 
 .assessment-step[data-step="7"] {
-
     padding-bottom: 80px;
-
 }
-
-
-/* =========================
-   RESULTS INTRO
-========================= */
 
 .results-intro {
-
-    margin-bottom: 60px;
-
+    margin-bottom: 55px;
 }
-
 
 .results-intro h2 {
-
     margin-bottom: 20px;
-
 }
-
 
 .results-intro .step-description {
-
     max-width: 620px;
-
 }
 
 
-/* =========================
+/* =========================================================
    OPPORTUNITY INDEX
-========================= */
+========================================================= */
 
 .opportunity-index-card {
+    position: relative;
 
-    padding: 40px;
+    padding: 42px;
 
     margin-bottom: 60px;
 
-    border: 1px solid
-        rgba(255, 255, 255, 0.15);
+    border:
+        1px solid
+        var(--line-strong);
 
     background:
-        rgba(255, 255, 255, 0.03);
+        linear-gradient(
+            135deg,
+            rgba(
+                243,
+                241,
+                232,
+                0.065
+            ),
+            rgba(
+                243,
+                241,
+                232,
+                0.02
+            )
+        );
 
+    overflow: hidden;
 }
 
+.opportunity-index-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    right: -120px;
+    bottom: -160px;
+
+    border:
+        1px solid
+        rgba(
+            243,
+            241,
+            232,
+            0.09
+        );
+
+    border-radius: 50%;
+}
 
 .result-label {
+    position: relative;
 
     display: block;
 
     margin-bottom: 25px;
 
-    font-size: 11px;
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: 2px;
+    letter-spacing: 0.2em;
 
-    opacity: 0.6;
-
+    color: var(--faint);
 }
 
-
 .index-score {
-
     display: flex;
 
     align-items: baseline;
@@ -1053,453 +1018,468 @@ textarea {
     gap: 8px;
 
     margin-bottom: 12px;
-
 }
 
-
 .opportunity-score {
+    font-size:
+        clamp(
+            58px,
+            8vw,
+            90px
+        );
 
-    font-size: 72px;
-
-    font-weight: 700;
+    font-weight: 800;
 
     line-height: 1;
 
+    letter-spacing: -0.06em;
 }
-
 
 .score-total {
+    font-size: 18px;
 
-    font-size: 20px;
-
-    opacity: 0.5;
-
+    opacity: 0.45;
 }
-
 
 .opportunity-level {
-
     margin-bottom: 18px;
 
-    font-size: 16px;
+    font-size: 15px;
 
-    font-weight: 600;
+    font-weight: 700;
 
+    letter-spacing: 0.04em;
 }
 
-
 .index-description {
-
     max-width: 520px;
 
     margin: 0;
 
     font-size: 14px;
 
-    line-height: 1.7;
+    line-height: 1.75;
 
-    opacity: 0.65;
-
+    color: var(--muted);
 }
 
 
-/* =========================
+/* =========================================================
    RESULTS SECTIONS
-========================= */
+========================================================= */
 
 .results-section {
-
     margin-bottom: 60px;
-
 }
 
-
 .results-heading {
-
     margin-bottom: 20px;
 
-    font-size: 11px;
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: 2px;
+    letter-spacing: 0.2em;
 
-    opacity: 0.6;
-
+    color: var(--faint);
 }
 
 
-/* =========================
+/* =========================================================
    PRIMARY OPPORTUNITY
-========================= */
+========================================================= */
 
 .primary-opportunity-card {
-
     padding: 35px;
 
-    border-left: 2px solid
-        currentColor;
+    border-left:
+        2px solid
+        var(--cream);
 
     background:
-        rgba(255, 255, 255, 0.03);
-
+        rgba(
+            243,
+            241,
+            232,
+            0.035
+        );
 }
-
 
 .primary-opportunity-title {
-
     margin-bottom: 18px;
 
-    font-size: 32px;
+    font-size:
+        clamp(
+            26px,
+            4vw,
+            38px
+        );
 
-    font-weight: 600;
+    font-weight: 700;
 
-    line-height: 1.2;
+    line-height: 1.15;
 
+    letter-spacing: -0.035em;
 }
 
-
 .primary-explanation {
-
     max-width: 650px;
 
     margin: 0;
 
-    font-size: 16px;
+    font-size: 15px;
 
     line-height: 1.8;
 
-    opacity: 0.7;
-
+    color: var(--muted);
 }
 
 
-/* =========================
+/* =========================================================
+   PRIMARY OPPORTUNITY SUMMARY
+========================================================= */
+
+.primary-opportunity-summary {
+    margin-top: 24px;
+}
+
+.opportunity-summary-item {
+    padding: 18px 0;
+
+    border-top:
+        1px solid
+        var(--line);
+}
+
+.opportunity-summary-item:first-child {
+    padding-top: 0;
+
+    border-top: none;
+}
+
+.opportunity-summary-item strong {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.15em;
+
+    font-weight: 700;
+}
+
+.opportunity-summary-item p {
+    margin: 0;
+
+    max-width: 720px;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+    color: var(--muted);
+}
+
+
+/* =========================================================
    WHAT WE HEARD
-========================= */
+========================================================= */
 
 .what-we-heard {
-
     display: flex;
 
     flex-direction: column;
 
     gap: 10px;
-
 }
 
-
 .heard-item {
-
     display: flex;
 
     align-items: center;
 
     gap: 20px;
 
-    padding: 18px 20px;
+    padding:
+        18px
+        20px;
 
-    border: 1px solid
-        rgba(255, 255, 255, 0.08);
+    border:
+        1px solid
+        var(--line);
 
     background:
-        rgba(255, 255, 255, 0.02);
+        rgba(
+            243,
+            241,
+            232,
+            0.025
+        );
 
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
 }
 
+.heard-item:hover {
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.055
+        );
+
+    border-color:
+        var(--line-strong);
+
+    transform:
+        translateX(4px);
+}
 
 .heard-number {
-
     min-width: 28px;
 
-    font-size: 11px;
+    font-size: 10px;
 
     font-weight: 700;
 
-    letter-spacing: 1px;
+    letter-spacing: 0.12em;
 
-    opacity: 0.5;
-
+    opacity: 0.45;
 }
-
 
 .heard-text {
-
-    font-size: 15px;
+    font-size: 14px;
 
     font-weight: 500;
-
 }
 
 
-/* =========================
+/* =========================================================
    WHERE WE'D START
-========================= */
+========================================================= */
 
 .top-opportunities {
-
     display: flex;
 
     flex-direction: column;
 
     gap: 12px;
 
+    counter-reset:
+        opportunity-counter;
 }
 
-
 .opportunity-item {
-
     position: relative;
 
-    padding: 22px 24px 22px 70px;
+    padding:
+        22px
+        24px
+        22px
+        70px;
 
-    border: 1px solid
-        rgba(255, 255, 255, 0.08);
+    border:
+        1px solid
+        var(--line);
 
     background:
-        rgba(255, 255, 255, 0.02);
+        rgba(
+            243,
+            241,
+            232,
+            0.02
+        );
 
-    font-size: 16px;
+    font-size: 15px;
 
     font-weight: 500;
 
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        border-color 0.25s ease;
+
+    counter-increment:
+        opportunity-counter;
 }
 
+.opportunity-item:hover {
+    transform:
+        translateX(5px);
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.05
+        );
+
+    border-color:
+        var(--line-strong);
+}
 
 .opportunity-item::before {
-
-    content: counter(
-        opportunity-counter,
-        decimal-leading-zero
-    );
+    content:
+        counter(
+            opportunity-counter,
+            decimal-leading-zero
+        );
 
     position: absolute;
 
     left: 24px;
-
     top: 50%;
 
     transform:
         translateY(-50%);
 
-    font-size: 11px;
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: 1px;
+    letter-spacing: 0.12em;
 
-    opacity: 0.45;
-
+    opacity: 0.4;
 }
 
 
-.top-opportunities {
-
-    counter-reset:
-        opportunity-counter;
-
-}
-
-
-.opportunity-item {
-
-    counter-increment:
-        opportunity-counter;
-
-}
-
-
-/* =========================
+/* =========================================================
    NEXT STEP
-========================= */
+========================================================= */
 
 .next-step-card {
-
     padding: 30px;
 
-    border: 1px solid
-        rgba(255, 255, 255, 0.12);
+    border:
+        1px solid
+        var(--line);
 
     background:
-        rgba(255, 255, 255, 0.03);
-
-    font-size: 16px;
-
-    line-height: 1.8;
-
-}
-
-
-/* =========================
-   STEP 7 NAVIGATION
-========================= */
-
-.assessment-step[data-step="7"]
-.assessment-actions {
-
-    margin-top: 70px;
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (
-    max-width: 600px
-) {
-
-    .opportunity-index-card {
-
-        padding: 28px;
-
-    }
-
-
-    .opportunity-score {
-
-        font-size: 56px;
-
-    }
-
-
-    .primary-opportunity-card {
-
-        padding: 25px;
-
-    }
-
-
-    .primary-opportunity-title {
-
-        font-size: 26px;
-
-    }
-
-
-    .heard-item {
-
-        padding: 16px;
-
-        gap: 15px;
-
-    }
-
-
-    .opportunity-item {
-
-        padding:
-            20px
-            20px
-            20px
-            60px;
-
-    }
-
-}
-
-/* =========================
-   STEP 9 — EXPLORE OPTIONS
-========================= */
-
-.assessment-step[data-step="9"] {
-
-    padding-bottom: 80px;
-
-}
-
-
-/* =========================
-   INTRO
-========================= */
-
-.assessment-step[data-step="9"]
-.plan-intro {
-
-    margin-bottom: 60px;
-
-}
-
-
-.assessment-step[data-step="9"]
-.plan-intro h2 {
-
-    margin-bottom: 20px;
-
-}
-
-
-.assessment-step[data-step="9"]
-.plan-intro .step-description {
-
-    max-width: 650px;
-
-}
-
-
-/* =========================
-   PRIMARY OPTION
-========================= */
-
-.options-primary-card {
-
-    padding: 40px;
-
-    margin-bottom: 60px;
-
-    border: 1px solid
-        rgba(255, 255, 255, 0.12);
-
-    background:
-        rgba(255, 255, 255, 0.03);
-
-}
-
-
-.recommended-service {
-
-    margin: 0 0 18px 0;
-
-    font-size: 32px;
-
-    line-height: 1.2;
-
-}
-
-
-.recommended-service-description {
-
-    max-width: 650px;
-
-    margin: 0 0 30px 0;
+        rgba(
+            243,
+            241,
+            232,
+            0.035
+        );
 
     font-size: 15px;
 
     line-height: 1.8;
 
-    opacity: 0.7;
-
+    color: var(--muted);
 }
 
 
-/* =========================
+/* =========================================================
+   STEP 9 — EXPLORE OPTIONS
+========================================================= */
+
+.assessment-step[data-step="9"] {
+    padding-bottom: 80px;
+}
+
+.assessment-step[data-step="9"]
+.plan-intro {
+    margin-bottom: 60px;
+}
+
+.assessment-step[data-step="9"]
+.plan-intro h2 {
+    margin-bottom: 20px;
+}
+
+.assessment-step[data-step="9"]
+.plan-intro
+.step-description {
+    max-width: 650px;
+}
+
+
+/* =========================================================
+   PRIMARY OPTION
+========================================================= */
+
+.options-primary-card {
+    position: relative;
+
+    padding: 42px;
+
+    margin-bottom: 60px;
+
+    border:
+        1px solid
+        var(--line-strong);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(
+                243,
+                241,
+                232,
+                0.06
+            ),
+            rgba(
+                243,
+                241,
+                232,
+                0.02
+            )
+        );
+}
+
+.recommended-service {
+    margin:
+        0
+        0
+        18px;
+
+    font-size:
+        clamp(
+            27px,
+            4vw,
+            40px
+        );
+
+    line-height: 1.1;
+
+    letter-spacing: -0.04em;
+}
+
+.recommended-service-description {
+    max-width: 650px;
+
+    margin:
+        0
+        0
+        30px;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    color: var(--muted);
+}
+
+
+/* =========================================================
    SERVICE OPTIONS
-========================= */
+========================================================= */
 
 .service-options {
-
     display: flex;
 
     flex-direction: column;
 
     gap: 12px;
-
 }
 
-
 .service-option {
-
     display: flex;
 
     align-items: flex-start;
@@ -1508,170 +1488,200 @@ textarea {
 
     padding: 25px;
 
-    border: 1px solid
-        rgba(255, 255, 255, 0.08);
+    border:
+        1px solid
+        var(--line);
 
     background:
-        rgba(255, 255, 255, 0.02);
+        rgba(
+            243,
+            241,
+            232,
+            0.02
+        );
 
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
 }
 
+.service-option:hover {
+    transform:
+        translateX(5px);
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.05
+        );
+
+    border-color:
+        var(--line-strong);
+}
 
 .service-number {
-
     min-width: 30px;
 
-    font-size: 11px;
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: 1px;
+    letter-spacing: 0.12em;
 
     opacity: 0.45;
-
 }
-
 
 .service-option h3 {
+    margin:
+        0
+        0
+        8px;
 
-    margin: 0 0 8px 0;
+    font-size: 17px;
 
-    font-size: 18px;
+    font-weight: 700;
 
-    font-weight: 600;
-
+    letter-spacing: -0.01em;
 }
 
-
 .service-option p {
-
     margin: 0;
 
     font-size: 14px;
 
     line-height: 1.6;
 
-    opacity: 0.6;
-
+    color: var(--muted);
 }
 
 
-/* =========================
+/* =========================================================
+   ADDITIONAL SYSTEM DESCRIPTIONS
+========================================================= */
+
+.additional-option-content {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.additional-option-content strong {
+    font-size: 10px;
+
+    letter-spacing: 0.1em;
+}
+
+.additional-option-content span {
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: var(--muted);
+}
+
+
+/* =========================================================
    FINAL CTA
-========================= */
+========================================================= */
 
 .options-final {
-
     margin-top: 70px;
 
-    padding: 45px;
+    padding:
+        50px
+        35px;
 
     text-align: center;
 
-    border: 1px solid
-        rgba(255, 255, 255, 0.12);
+    border:
+        1px solid
+        var(--line-strong);
 
     background:
-        rgba(255, 255, 255, 0.03);
-
+        rgba(
+            243,
+            241,
+            232,
+            0.035
+        );
 }
-
 
 .options-final h3 {
+    margin:
+        0
+        0
+        18px;
 
-    margin: 0 0 18px 0;
+    font-size:
+        clamp(
+            26px,
+            4vw,
+            38px
+        );
 
-    font-size: 30px;
+    line-height: 1.2;
 
-    line-height: 1.25;
-
+    letter-spacing: -0.04em;
 }
 
-
 .options-final p {
-
     max-width: 600px;
 
-    margin: 0 auto 30px auto;
+    margin:
+        0
+        auto
+        30px;
 
     font-size: 15px;
 
     line-height: 1.8;
 
-    opacity: 0.65;
-
+    color: var(--muted);
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (
-    max-width: 600px
-) {
-
-    .options-primary-card {
-
-        padding: 28px;
-
-    }
-
-
-    .recommended-service {
-
-        font-size: 26px;
-
-    }
-
-
-    .service-option {
-
-        padding: 20px;
-
-        gap: 16px;
-
-    }
-
-
-    .options-final {
-
-        padding: 30px 22px;
-
-    }
-
-
-    .options-final h3 {
-
-        font-size: 25px;
-
-    }
-
-}
 
 /* =========================================================
-   STEP 07 — WHAT WE FOUND
+   STEP 7 — WHAT WE FOUND
 ========================================================= */
 
-.assessment-step[data-step="7"] .results-intro {
-    margin-bottom: 40px;
-}
-
-
-.assessment-step[data-step="7"] .results-summary-card {
+.assessment-step[data-step="7"]
+.results-summary-card {
     padding: 30px;
+
     margin-bottom: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    background: rgba(255, 255, 255, 0.025);
+
+    border:
+        1px solid
+        var(--line);
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.025
+        );
 }
 
+.assessment-step[data-step="7"]
+.business-summary {
+    margin:
+        12px
+        0
+        0;
 
-.assessment-step[data-step="7"] .business-summary {
-    margin: 12px 0 0;
     max-width: 850px;
-    font-size: 17px;
+
+    font-size: 16px;
+
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.72);
+
+    color: var(--muted);
 }
 
 
@@ -1679,63 +1689,112 @@ textarea {
    KEY FINDINGS
 ========================================================= */
 
-.assessment-step[data-step="7"] .key-findings {
+.assessment-step[data-step="7"]
+.key-findings {
     display: flex;
+
     flex-direction: column;
+
     gap: 16px;
+
     margin-top: 20px;
 }
 
-
-.assessment-step[data-step="7"] .finding-item {
+.assessment-step[data-step="7"]
+.finding-item {
     display: grid;
-    grid-template-columns: 58px 1fr;
+
+    grid-template-columns:
+        58px
+        1fr;
+
     gap: 20px;
-    padding: 26px 28px;
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    background: rgba(255, 255, 255, 0.025);
+
+    padding:
+        26px
+        28px;
+
+    border:
+        1px solid
+        var(--line);
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.025
+        );
+
     transition:
         border-color 0.25s ease,
         background 0.25s ease,
         transform 0.25s ease;
 }
 
+.assessment-step[data-step="7"]
+.finding-item:hover {
+    border-color:
+        var(--line-strong);
 
-.assessment-step[data-step="7"] .finding-item:hover {
-    border-color: rgba(255, 255, 255, 0.20);
-    background: rgba(255, 255, 255, 0.045);
-    transform: translateY(-2px);
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.05
+        );
+
+    transform:
+        translateY(-2px);
 }
 
-
-.assessment-step[data-step="7"] .finding-number {
+.assessment-step[data-step="7"]
+.finding-number {
     display: flex;
+
     align-items: flex-start;
+
     justify-content: center;
+
     padding-top: 3px;
-    font-size: 13px;
+
+    font-size: 11px;
+
     font-weight: 600;
+
     letter-spacing: 0.12em;
-    color: rgba(255, 255, 255, 0.38);
+
+    color: var(--faint);
 }
 
+.assessment-step[data-step="7"]
+.finding-content h3 {
+    margin:
+        0
+        0
+        10px;
 
-.assessment-step[data-step="7"] .finding-content h3 {
-    margin: 0 0 10px;
     font-size: 18px;
+
     line-height: 1.35;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: #ffffff;
+
+    font-weight: 700;
+
+    letter-spacing: -0.01em;
 }
 
-
-.assessment-step[data-step="7"] .finding-content p {
+.assessment-step[data-step="7"]
+.finding-content p {
     margin: 0;
+
     max-width: 760px;
-    font-size: 15px;
+
+    font-size: 14px;
+
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.62);
+
+    color: var(--muted);
 }
 
 
@@ -1743,139 +1802,210 @@ textarea {
    WHAT THIS TELLS US
 ========================================================= */
 
-.assessment-step[data-step="7"] .results-meaning {
+.assessment-step[data-step="7"]
+.results-meaning {
     margin-top: 20px;
-    padding: 26px 28px;
-    border-left: 2px solid rgba(255, 255, 255, 0.35);
-    background: rgba(255, 255, 255, 0.025);
-    font-size: 16px;
+
+    padding:
+        26px
+        28px;
+
+    border-left:
+        2px solid
+        var(--cream);
+
+    background:
+        rgba(
+            243,
+            241,
+            232,
+            0.025
+        );
+
+    font-size: 15px;
+
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.68);
+
+    color: var(--muted);
 }
 
 
 /* =========================================================
-   MOBILE
+   MOBILE — TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .landing-page {
+        padding:
+            22px
+            6vw;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        gap: 55px;
+
+        padding:
+            65px
+            0;
+    }
+
+    .hero-side {
+        justify-content: flex-start;
+    }
+
+    .system-card {
+        max-width: none;
+    }
+
+    h1 {
+        letter-spacing: -0.06em;
+    }
+}
+
+
+/* =========================================================
+   MOBILE — 700px
 ========================================================= */
 
 @media (max-width: 700px) {
 
-    .assessment-step[data-step="7"] .results-summary-card {
-        padding: 22px;
+    .assessment-option {
+        padding: 16px;
     }
 
+    .option-number {
+        min-width: 30px;
+        height: 30px;
+    }
 
-    .assessment-step[data-step="7"] .finding-item {
-        grid-template-columns: 42px 1fr;
+    .assessment-step[data-step="7"]
+    .finding-item {
+        grid-template-columns:
+            42px
+            1fr;
+
         gap: 14px;
-        padding: 22px 18px;
+
+        padding:
+            22px
+            18px;
     }
 
-
-    .assessment-step[data-step="7"] .finding-content h3 {
+    .assessment-step[data-step="7"]
+    .finding-content h3 {
         font-size: 16px;
     }
 
-
-    .assessment-step[data-step="7"] .finding-content p {
+    .assessment-step[data-step="7"]
+    .finding-content p {
         font-size: 14px;
     }
 
+    .assessment-step[data-step="7"]
+    .results-meaning {
+        padding:
+            22px
+            18px;
+    }
+}
 
-    .assessment-step[data-step="7"] .results-meaning {
-        padding: 22px 18px;
+
+/* =========================================================
+   MOBILE — 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .opportunity-index-card {
+        padding: 28px;
     }
 
-}
+    .opportunity-score {
+        font-size: 56px;
+    }
 
-/* =====================================================
-   PRIMARY OPPORTUNITY SUMMARY
-   ===================================================== */
+    .primary-opportunity-card {
+        padding: 25px;
+    }
 
-.primary-opportunity-summary {
+    .primary-opportunity-title {
+        font-size: 26px;
+    }
 
-    margin-top: 24px;
+    .heard-item {
+        padding: 16px;
 
-}
+        gap: 15px;
+    }
 
+    .opportunity-item {
+        padding:
+            20px
+            20px
+            20px
+            60px;
+    }
 
-.opportunity-summary-item {
+    .options-primary-card {
+        padding: 28px;
+    }
 
-    padding: 18px 0;
+    .recommended-service {
+        font-size: 26px;
+    }
 
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.12);
+    .service-option {
+        padding: 20px;
 
-}
+        gap: 16px;
+    }
 
+    .options-final {
+        padding:
+            30px
+            22px;
+    }
 
-.opportunity-summary-item:first-child {
-
-    padding-top: 0;
-
-    border-top: none;
-
-}
-
-
-.opportunity-summary-item strong {
-
-    display: block;
-
-    margin-bottom: 8px;
-
-    font-size: 0.72rem;
-
-    letter-spacing: 0.14em;
-
-    font-weight: 600;
-
-}
-
-
-.opportunity-summary-item p {
-
-    margin: 0;
-
-    max-width: 720px;
-
-    line-height: 1.7;
-
-    font-size: 0.95rem;
-
-}
-
-/* =====================================================
-   ADDITIONAL SYSTEM DESCRIPTIONS
-   ===================================================== */
-
-.additional-option-content {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 6px;
-
+    .options-final h3 {
+        font-size: 25px;
+    }
 }
 
 
-.additional-option-content strong {
+/* =========================================================
+   MOBILE — 500px
+========================================================= */
 
-    font-size: 0.78rem;
+@media (max-width: 500px) {
 
-    letter-spacing: 0.08em;
+    .navbar {
+        align-items: flex-start;
 
-}
+        gap: 10px;
 
+        flex-direction: column;
+    }
 
-.additional-option-content span {
+    .nav-tag {
+        font-size: 8px;
+    }
 
-    font-size: 0.86rem;
+    .hero-description {
+        font-size: 15px;
+    }
 
-    line-height: 1.5;
+    .primary-button {
+        width: 100%;
+    }
 
-    opacity: 0.7;
+    .system-card {
+        padding: 26px;
+    }
 
+    h1 {
+        font-size: 58px;
+    }
 }
