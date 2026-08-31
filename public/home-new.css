@@ -2192,6 +2192,110 @@ button {
 
 }
 
+.mobile-nav {
+
+    display: none;
+
+}
+
+
+@media (max-width: 900px) {
+
+    .mobile-nav {
+
+        position: fixed;
+
+        top: 70px;
+
+        left: 0;
+
+        right: 0;
+
+        z-index: 100;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 0;
+
+        padding:
+            25px 6vw 30px;
+
+        background:
+            rgba(3,27,37,0.97);
+
+        border-top:
+            1px solid rgba(247,248,245,0.12);
+
+        border-bottom:
+            1px solid rgba(247,248,245,0.12);
+
+        backdrop-filter:
+            blur(18px);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transform:
+            translateY(-10px);
+
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0.25s ease;
+
+    }
+
+
+    .mobile-nav.open {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform:
+            translateY(0);
+
+    }
+
+
+    .mobile-nav a {
+
+        display: block;
+
+        padding:
+            18px 0;
+
+        color: #f2efe7;
+
+        font-size: 11px;
+
+        letter-spacing: 0.18em;
+
+        text-decoration: none;
+
+        border-bottom:
+            1px solid rgba(247,248,245,0.08);
+
+    }
+
+
+    .mobile-nav a:last-child {
+
+        border-bottom: 0;
+
+    }
+
+
+    .mobile-nav-cta {
+
+        margin-top: 8px;
+
+    }
+
+}
 
 /* =========================================================
    RESPONSIVE — MOBILE
@@ -2210,10 +2314,29 @@ button {
     }
 
 
-    .brand-symbol {
+    .brand {
 
-        width: 28px;
-        height: 28px;
+        gap: 8px;
+
+        font-size: 14px;
+
+        letter-spacing: 0.18em;
+
+    }
+
+
+    .brand img {
+
+        width: 30px;
+
+        height: 30px;
+
+    }
+
+
+    .desktop-nav {
+
+        display: none;
 
     }
 
@@ -2221,14 +2344,20 @@ button {
     .hero {
 
         padding:
-            120px 6vw 80px;
+            105px 6vw 70px;
 
     }
 
 
     .hero h1 {
 
-        font-size: 60px;
+        font-size: clamp(
+            46px,
+            13vw,
+            60px
+        );
+
+        line-height: 0.95;
 
     }
 
@@ -2242,14 +2371,14 @@ button {
 
     .hero-belief {
 
-        margin-top: 38px;
+        margin-top: 32px;
 
     }
 
 
     .belief-line strong {
 
-        font-size: 21px;
+        font-size: 19px;
 
     }
 
@@ -2257,6 +2386,8 @@ button {
     .hero-description {
 
         font-size: 14px;
+
+        line-height: 1.7;
 
     }
 
@@ -2267,6 +2398,8 @@ button {
         flex-direction: column;
 
         align-items: stretch;
+
+        gap: 10px;
 
     }
 
@@ -2282,22 +2415,25 @@ button {
 
         width: 100%;
 
-        margin-top: 30px;
+        margin-top: 35px;
 
     }
 
 
     .object-core {
 
-        width: 150px;
-        height: 150px;
+        width: 82%;
+
+        height: 82%;
 
     }
 
 
-    .object-core span {
+    .object-coordinate {
 
-        font-size: 25px;
+        right: 5%;
+
+        bottom: 10%;
 
     }
 
@@ -2309,14 +2445,20 @@ button {
     .cta-section {
 
         padding:
-            110px 6vw;
+            85px 6vw;
 
     }
 
 
     .idea-content h2 {
 
-        font-size: 53px;
+        font-size: clamp(
+            40px,
+            12vw,
+            53px
+        );
+
+        line-height: 0.98;
 
     }
 
@@ -2327,14 +2469,20 @@ button {
 
         gap: 30px;
 
-        margin-top: 55px;
+        margin-top: 45px;
 
     }
 
 
     .solutions-heading h2 {
 
-        font-size: 58px;
+        font-size: clamp(
+            43px,
+            13vw,
+            58px
+        );
+
+        line-height: 0.98;
 
     }
 
@@ -2342,16 +2490,22 @@ button {
     .strategy-feature {
 
         grid-template-columns:
-            35px 1fr;
+            30px 1fr;
 
-        gap: 15px;
+        gap: 12px;
 
     }
 
 
     .strategy-main h3 {
 
-        font-size: 54px;
+        font-size: clamp(
+            42px,
+            13vw,
+            54px
+        );
+
+        line-height: 0.98;
 
     }
 
@@ -2375,6 +2529,7 @@ button {
     .solution-item:nth-child(odd) {
 
         padding-left: 0;
+
         padding-right: 0;
 
         border-right: 0;
@@ -2393,7 +2548,7 @@ button {
 
     .solution-item {
 
-        min-height: 250px;
+        min-height: 220px;
 
     }
 
@@ -2407,28 +2562,40 @@ button {
 
     .work-heading h2 {
 
-        font-size: 58px;
+        font-size: clamp(
+            43px,
+            13vw,
+            58px
+        );
+
+        line-height: 0.98;
 
     }
 
 
     .about-layout {
 
-        margin-top: 45px;
+        margin-top: 40px;
 
     }
 
 
     .about-content h2 {
 
-        font-size: 58px;
+        font-size: clamp(
+            43px,
+            13vw,
+            58px
+        );
+
+        line-height: 0.98;
 
     }
 
 
     .philosophy {
 
-        padding: 24px;
+        padding: 22px;
 
     }
 
@@ -2444,7 +2611,13 @@ button {
 
     .cta-content h2 {
 
-        font-size: 68px;
+        font-size: clamp(
+            48px,
+            15vw,
+            68px
+        );
+
+        line-height: 0.95;
 
     }
 
@@ -2460,6 +2633,8 @@ button {
     .footer-center {
 
         flex-wrap: wrap;
+
+        gap: 15px;
 
     }
 

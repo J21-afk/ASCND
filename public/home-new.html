@@ -82,7 +82,39 @@
         type="button"
     >
         MENU
-    </button>
+</button>
+
+
+<div class="mobile-nav">
+
+    <a href="#idea">
+        THE IDEA
+    </a>
+
+
+    <a href="#services">
+        SOLUTIONS
+    </a>
+
+
+    <a href="#work">
+        WORK
+    </a>
+
+
+    <a href="#about">
+        ABOUT
+    </a>
+
+
+    <a
+        href="#advantage"
+        class="mobile-nav-cta"
+    >
+        GET STARTED ↗
+    </a>
+
+</div>
 
 </header>
 
@@ -255,11 +287,6 @@
 
 
     <div class="idea-content">
-
-
-        <p class="section-kicker">
-            THE PRINCIPLE:
-        </p>
 
 
         <h2>
@@ -1112,6 +1139,46 @@
 
 </footer>
 
+<script>
+
+const mobileMenu =
+        document.querySelector(".mobile-menu");
+
+    const mobileNav =
+        document.querySelector(".mobile-nav");
+
+
+    mobileMenu.addEventListener(
+        "click",
+        () => {
+
+            mobileNav.classList.toggle("open");
+
+        }
+    );
+
+
+    const mobileLinks =
+        mobileNav.querySelectorAll("a");
+
+
+    mobileLinks.forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    mobileNav.classList.remove("open");
+
+                }
+            );
+
+        }
+    );
+
+
+</script>
 
 
 </body>
