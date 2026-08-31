@@ -3,6 +3,17 @@
    Creative editorial × deep ocean × intelligent systems
 ========================================================= */
 
+html,
+body {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    overflow-x: hidden;
+
+}
+
 :root {
 
     --ocean: #062b3a;
@@ -36,6 +47,16 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    overflow-x: hidden;
+
+}
 
 html {
     scroll-behavior: smooth;
@@ -2302,16 +2323,21 @@ button {
 ========================================================= */
 
 @media (max-width: 600px) {
+    
 
+.site-header {
 
-    .site-header {
+    width: 100%;
 
-        height: 70px;
+    max-width: 100vw;
 
-        padding:
-            0 6vw;
+    height: 70px;
 
-    }
+    padding:
+        0 6vw;
+
+}
+
 
 
     .brand {
