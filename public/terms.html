@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Terms of Service — ASCND Systems
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background:
+                #031b25;
+
+            color:
+                #f2efe7;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            line-height:
+                1.7;
+
+        }
+
+
+        a {
+
+            color:
+                inherit;
+
+        }
+
+
+        .site-header {
+
+            height:
+                70px;
+
+            padding:
+                0 5vw;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    247,
+                    248,
+                    245,
+                    0.12
+                );
+
+        }
+
+
+        .brand {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            color:
+                #f2efe7;
+
+            text-decoration:
+                none;
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+
+            letter-spacing:
+                0.18em;
+
+        }
+
+
+        .brand img {
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            object-fit:
+                contain;
+
+        }
+
+
+        .back-link {
+
+            color:
+                #f2efe7;
+
+            text-decoration:
+                none;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                0.18em;
+
+            opacity:
+                0.5;
+
+            transition:
+                opacity
+                0.25s ease;
+
+        }
+
+
+        .back-link:hover {
+
+            opacity:
+                1;
+
+        }
+
+
+        main {
+
+            width:
+                min(
+                    900px,
+                    88vw
+                );
+
+            margin:
+                0 auto;
+
+            padding:
+                110px 0 120px;
+
+        }
+
+
+        .eyebrow {
+
+            margin-bottom:
+                25px;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                0.22em;
+
+            opacity:
+                0.4;
+
+        }
+
+
+        h1 {
+
+            margin:
+                0;
+
+            font-size:
+                clamp(
+                    48px,
+                    8vw,
+                    82px
+                );
+
+            line-height:
+                0.95;
+
+            letter-spacing:
+                -0.04em;
+
+        }
+
+
+        .updated {
+
+            margin-top:
+                25px;
+
+            font-size:
+                10px;
+
+            letter-spacing:
+                0.12em;
+
+            opacity:
+                0.4;
+
+        }
+
+        .legal-intro {
+
+    margin-top:
+        65px;
+
+    padding:
+        30px 0;
+
+    border-top:
+        1px solid
+        rgba(
+            247,
+            248,
+            245,
+            0.12
+        );
+
+    border-bottom:
+        1px solid
+        rgba(
+            247,
+            248,
+            245,
+            0.12
+        );
+
+}
+
+
+.legal-intro h2 {
+
+    margin:
+        0 0 18px;
+
+    font-size:
+        14px;
+
+    letter-spacing:
+        0.14em;
+
+}
+
+
+.legal-intro p {
+
+    max-width:
+        760px;
+
+    margin:
+        0 0 14px;
+
+    font-size:
+        14px;
+
+    color:
+        rgba(
+            242,
+            239,
+            231,
+            0.72
+        );
+
+}
+
+
+.legal-intro p:last-child {
+
+    margin-bottom:
+        0;
+
+}
+
+
+        .legal-content {
+
+            margin-top:
+                80px;
+
+        }
+
+
+        section {
+
+            margin-bottom:
+                55px;
+
+        }
+
+
+        h2 {
+
+            margin:
+                0 0 18px;
+
+            font-size:
+                19px;
+
+            letter-spacing:
+                0.04em;
+
+        }
+
+
+        p {
+
+            margin:
+                0 0 16px;
+
+            font-size:
+                14px;
+
+            color:
+                rgba(
+                    242,
+                    239,
+                    231,
+                    0.72
+                );
+
+        }
+
+
+        ul {
+
+            margin:
+                15px 0;
+
+            padding-left:
+                22px;
+
+        }
+
+
+        li {
+
+            margin-bottom:
+                8px;
+
+            font-size:
+                14px;
+
+            color:
+                rgba(
+                    242,
+                    239,
+                    231,
+                    0.72
+                );
+
+        }
+
+
+        .site-footer {
+
+            padding:
+                38px 5vw;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                25px;
+
+            border-top:
+                1px solid
+                rgba(
+                    247,
+                    248,
+                    245,
+                    0.12
+                );
+
+        }
+
+
+        .footer-copy {
+
+            font-size:
+                8px;
+
+            letter-spacing:
+                0.18em;
+
+            opacity:
+                0.38;
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .site-header {
+
+                padding:
+                    0 6vw;
+
+            }
+
+
+            main {
+
+                width:
+                    88vw;
+
+                padding:
+                    75px 0 90px;
+
+            }
+
+
+            h1 {
+
+                font-size:
+                    48px;
+
+            }
+
+
+            .legal-content {
+
+                margin-top:
+                    55px;
+
+            }
+
+
+            .legal-intro {
+
+                margin-top:
+                    45px;
+
+                padding:
+                    25px 0;
+
+            }
+
+
+            section {
+
+                margin-bottom:
+                    42px;
+
+            }
+
+
+            p,
+            li {
+
+                font-size:
+                    13px;
+
+            }
+
+
+            .site-footer {
+
+                padding:
+                    30px 6vw;
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+
+    <a
+        href="/"
+        class="brand"
+    >
+
+        <img
+            src="/ascnd-shark-transparent.png"
+            alt="ASCND"
+        >
+
+        <span>
+            ASCND
+        </span>
+
+    </a>
+
+
+    <a
+        href="/"
+        class="back-link"
+    >
+
+        BACK TO ASCND ↗
+
+    </a>
+
+
+</header>
+
+
+<main>
+
+
+    <div class="eyebrow">
+
+        Legal & Privacy
+
+    </div>
+
+
+    <h1>
+
+        Terms of Service
+
+    </h1>
+
+
+    <div class="updated">
+
+        LAST UPDATED:
+        AUGUST 31, 2026
+
+    </div>
+
+    <div class="legal-intro">
+
+    <h2>
+        Hello and welcome to ASCND's Terms of Sercive!
+    </h2>
+
+    <p>
+
+        ASCND exists to help businesses
+        build better, operate smarter, and
+        move forward with intention. These
+        Terms of Service outline the
+        relationship between you and ASCND
+        when you access our website or use
+        our services.
+
+    </p>
+
+
+    <p>
+
+        By accessing or using the ASCND
+        website, assessment tools, or
+        services, you acknowledge that you
+        have read, understood, and agree to
+        be bound by these Terms of Service.
+        If you do not agree with these terms,
+        please do not use our website or
+        services.
+
+    </p>
+
+</div>
+
+
+    <div class="legal-content">
+
+
+        <section>
+
+            <h2>
+
+                1. Acceptance 
+
+            </h2>
+
+
+            <p>
+
+                By accessing or using the ASCND Systems
+                website or services, you agree to be
+                bound by these Terms of Service.
+
+            </p>
+
+
+            <p>
+
+                If you do not agree with these terms,
+                please do not use the website or
+                services.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                2. Our Services
+
+            </h2>
+
+
+            <p>
+
+                ASCND Systems provides business-focused
+                digital, creative, operational, systems,
+                and automation services.
+
+            </p>
+
+
+            <p>
+
+                Services may include website development,
+                digital experiences, branding, business
+                systems, CRM infrastructure, workflow
+                development, process optimization, and
+                automation solutions.
+
+            </p>
+
+
+            <p>
+
+                The specific services, deliverables,
+                timelines, and fees for a client
+                engagement will be established separately
+                between ASCND and the client.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                3. Business Management
+
+            </h2>
+
+
+            <p>
+
+                ASCND may provide a business assessment
+                designed to help identify potential
+                opportunities for improvement.
+
+            </p>
+
+
+            <p>
+
+                Assessment results are provided for
+                informational and strategic purposes.
+                They do not constitute a guarantee of
+                business performance, revenue, savings,
+                or other specific outcomes.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                4. Client Responsibilities
+
+            </h2>
+
+
+            <p>
+
+                Clients are responsible for providing
+                accurate information, materials,
+                approvals, credentials, and other
+                resources reasonably necessary to
+                complete an agreed project.
+
+            </p>
+
+
+            <p>
+
+                Delays caused by missing information,
+                approvals, materials, or access may
+                affect project timelines.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                5. Payments
+
+            </h2>
+
+
+            <p>
+
+                Fees, payment schedules, deposits,
+                recurring charges, and other financial
+                terms will be established as part of
+                the applicable client agreement or
+                proposal.
+
+            </p>
+
+
+            <p>
+
+                Work may be paused or withheld when
+                required payments are overdue.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                6. Intellectual Property
+
+            </h2>
+
+
+            <p>
+
+                Ownership and licensing of project
+                materials, designs, code, content,
+                systems, and other deliverables will
+                be determined by the applicable client
+                agreement.
+
+            </p>
+
+
+            <p>
+
+                Unless otherwise agreed, ASCND retains
+                ownership of its pre-existing tools,
+                frameworks, processes, methodologies,
+                templates, and general know-how.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                7. Third-Party Services
+
+            </h2>
+
+
+            <p>
+
+                Certain projects may depend on
+                third-party platforms, software,
+                hosting providers, APIs, payment
+                processors, or other services.
+
+            </p>
+
+
+            <p>
+
+                ASCND is not responsible for outages,
+                changes, pricing, policies, security
+                incidents, or other actions controlled
+                by independent third-party providers.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                8. AI and Automation
+
+            </h2>
+
+
+            <p>
+
+                ASCND may use artificial intelligence,
+                automation technologies, and third-party
+                software as part of certain services.
+
+            </p>
+
+
+            <p>
+
+                Automated or AI-assisted outputs may
+                require human review and should not be
+                treated as guaranteed to be accurate,
+                complete, or appropriate for every
+                situation.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                9. No Guarantee Of Results
+
+            </h2>
+
+
+            <p>
+
+                ASCND works to create useful systems,
+                experiences, and strategies, but business
+                results depend on many factors outside
+                of ASCND's control.
+
+            </p>
+
+
+            <p>
+
+                ASCND does not guarantee specific
+                revenue, profit, growth, customer
+                acquisition, cost savings, or other
+                business outcomes unless expressly
+                stated in a written agreement.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                10. Limitation Of Liability
+
+            </h2>
+
+
+            <p>
+
+                To the extent permitted by applicable
+                law, ASCND will not be liable for
+                indirect, incidental, consequential,
+                special, or unforeseeable damages
+                arising from the use of its website
+                or services.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                11. Termination
+
+            </h2>
+
+
+            <p>
+
+                ASCND or a client may terminate a
+                service relationship according to the
+                terms established in the applicable
+                agreement.
+
+            </p>
+
+
+            <p>
+
+                Outstanding obligations incurred before
+                termination may remain due and payable.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                12. Changes To These Terms
+
+            </h2>
+
+
+            <p>
+
+                ASCND may update these Terms of Service
+                from time to time. Updated terms will
+                be posted on this page with a revised
+                effective date.
+
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+
+                13. Contact
+
+            </h2>
+
+
+            <p>
+
+                If you have questions regarding these
+                Terms of Service or ASCND's services,
+                please contact ASCND through the
+                contact information provided on the
+                website.
+
+            </p>
+
+        </section>
+
+
+    </div>
+
+
+</main>
+
+
+<footer class="site-footer">
+
+
+    <span class="footer-copy">
+
+        ASCND / 2026
+
+    </span>
+
+
+    <span class="footer-copy">
+
+        PRIVACY / TERMS
+
+    </span>
+
+
+</footer>
+
+
+</body>
+
+</html>

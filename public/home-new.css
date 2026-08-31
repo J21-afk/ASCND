@@ -2052,9 +2052,176 @@ button {
 
 }
 
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+
+    padding: 42px 5vw;
+
+    display: grid;
+
+    grid-template-columns: 1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 30px;
+
+    border-top: 1px solid var(--line-light);
+
+    background: var(--ocean-deep);
+
+}
+
+
+.site-footer strong {
+
+    font-size: 16px;
+
+    letter-spacing: 0.22em;
+
+}
+
+
+.site-footer p {
+
+    margin: 7px 0 0;
+
+    font-size: 9px;
+
+    opacity: 0.4;
+
+}
+
+
+.footer-center {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+}
+
+
+.footer-center a {
+
+    color: #f2efe7;
+
+    text-decoration: none;
+
+    font-size: 7px;
+
+    letter-spacing: 0.18em;
+
+    opacity: 0.38;
+
+    transition:
+        opacity 0.25s ease;
+
+}
+
+
+.footer-center a:hover {
+
+    opacity: 1;
+
+}
+
+
+.footer-center span {
+
+    font-size: 7px;
+
+    letter-spacing: 0.18em;
+
+    opacity: 0.25;
+
+}
+
+
+.footer-location {
+
+    display: block;
+
+    text-align: right;
+
+    font-size: 7px;
+
+    letter-spacing: 0.18em;
+
+    opacity: 0.38;
+
+}
+
 
 /* =========================================================
    ANIMATION
+========================================================= */
+
+@keyframes orbitFloat {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%,-50%)
+            rotate(-18deg)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-50%,-50%)
+            rotate(-12deg)
+            scale(1.035);
+    }
+
+}
+
+
+@keyframes orbitFloatReverse {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%,-50%)
+            rotate(12deg)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-50%,-50%)
+            rotate(20deg)
+            scale(0.96);
+    }
+
+}
+
+
+@keyframes orbitRotate {
+
+    from {
+        transform:
+            translate(-50%,-50%)
+            rotate(45deg);
+    }
+
+    to {
+        transform:
+            translate(-50%,-50%)
+            rotate(405deg);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
 ========================================================= */
 
 @keyframes orbitFloat {
@@ -2323,7 +2490,7 @@ button {
 ========================================================= */
 
 @media (max-width: 600px) {
-    
+
 
 .site-header {
 
