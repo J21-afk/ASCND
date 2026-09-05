@@ -18,6 +18,88 @@ const PORT =
     process.env.PORT ||
     3000;
 
+    /* =========================================================
+   ADMIN AUTHENTICATION
+   ========================================================= */
+
+async function requireAdminAuth(req, res, next) {
+
+    try {
+
+        const authHeader =
+            req.headers.authorization || "";
+
+        if (
+            !authHeader.startsWith("Bearer ")
+        ) {
+
+            return res.status(401).json({
+
+                success: false,
+
+                message:
+                    "Authentication required."
+
+            });
+
+        }
+
+        const token =
+            authHeader.replace(
+                "Bearer ",
+                ""
+            );
+
+        const {
+            data,
+            error
+        } = await supabase.auth.getUser(
+            token
+        );
+
+        if (
+            error ||
+            !data ||
+            !data.user
+        ) {
+
+            return res.status(401).json({
+
+                success: false,
+
+                message:
+                    "Invalid or expired session."
+
+            });
+
+        }
+
+        req.adminUser =
+            data.user;
+
+        next();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "ADMIN AUTH ERROR:",
+            error
+        );
+
+        return res.status(401).json({
+
+            success: false,
+
+            message:
+                "Authentication failed."
+
+        });
+
+    }
+
+}
 
 /* =========================================================
    MIDDLEWARE
@@ -440,8 +522,9 @@ function calculatePriority(
    ========================================================= */
 
 app.get(
-    "/api/assessments",
-    async function (req, res) {
+     "/api/assessments",
+     requireAdminAuth,
+     async function (req, res) {
 
         try {
 
@@ -696,8 +779,9 @@ app.get(
    ========================================================= */
 
 app.patch(
-    "/api/assessments/:id/status",
-    async function (req, res) {
+     "/api/assessments/:id/status",
+     requireAdminAuth,
+     async function (req, res) {
 
         try {
 

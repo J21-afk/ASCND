@@ -1200,10 +1200,38 @@ async function checkAdminAuthentication() {
 
             try {
 
-                const response =
-                    await fetch(
-                        "/api/assessments"
-                    );
+                const {
+    data: sessionData,
+    error: sessionError
+} =
+    await supabaseClient.auth.getSession();
+
+if (
+    sessionError ||
+    !sessionData.session
+) {
+
+    window.location.href =
+        "/admin-login.html";
+
+    return;
+
+}
+
+const response =
+    await fetch(
+        "/api/assessments",
+        {
+
+            headers: {
+
+                "Authorization":
+                    `Bearer ${sessionData.session.access_token}`
+
+            }
+
+        }
+    );
 
 
                 const result =
@@ -1627,99 +1655,115 @@ async function updateAssessmentStatus(
     button.textContent =
         "SAVING...";
 
+try {
 
-    try {
-
-        const response =
-            await fetch(
-                `/api/assessments/${assessmentId}/status`,
-                {
-
-                    method:
-                        "PATCH",
-
-                    headers:
-                        {
-
-                            "Content-Type":
-                                "application/json"
-
-                        },
-
-                    body:
-                        JSON.stringify({
-
-                            status:
-                                newStatus
-
-                        })
-
-                }
-            );
+    const {
+        data: sessionData,
+        error: sessionError
+    } =
+        await supabaseClient.auth.getSession();
 
 
-        const result =
-            await response.json();
+    if (
+        sessionError ||
+        !sessionData.session
+    ) {
+
+        window.location.href =
+            "/admin-login.html";
+
+        return;
+
+    }
 
 
-        if (
-            !response.ok ||
-            !result.success
-        ) {
+    const response =
+        await fetch(
+            `/api/assessments/${assessmentId}/status`,
+            {
 
-            throw new Error(
-                result.message ||
-                "Unable to update assessment status."
-            );
+                method:
+                    "PATCH",
 
-        }
+                headers: {
 
+                    "Content-Type":
+                        "application/json",
 
-        console.log(
-            "ASCND STATUS UPDATED:",
-            result
+                    "Authorization":
+                        `Bearer ${sessionData.session.access_token}`
+
+                },
+
+                body:
+                    JSON.stringify({
+
+                        status:
+                            newStatus
+
+                    })
+
+            }
         );
 
 
-        button.textContent =
-            "UPDATED";
+    const result =
+        await response.json();
 
 
-        /*
-         * Refresh the assessment list
-         * so the dashboard reflects
-         * the new status immediately.
-         */
+    if (
+        !response.ok ||
+        !result.success
+    ) {
+
+        throw new Error(
+            result.message ||
+            "Unable to update assessment status."
+        );
+
+    }
+
+
+    console.log(
+        "ASCND STATUS UPDATED:",
+        result
+    );
+
+
+    button.textContent =
+        "UPDATED";
+
+
+    /*
+     * Refresh the assessment list
+     * so the dashboard reflects
+     * the new status immediately.
+     */
 
 button.disabled =
-    true;
+        true;
 
+    await loadAssessments();
 
-await loadAssessments();
+}
+catch (error) {
 
-    }
+    console.error(
+        "ASCND STATUS UPDATE ERROR:",
+        error
+    );
 
-    catch (error) {
+    alert(
+        "Unable to update the assessment status."
+    );
 
-        console.error(
-            "ASCND STATUS UPDATE ERROR:",
-            error
-        );
+    button.disabled =
+        false;
 
+    button.textContent =
+        "UPDATE";
 
-        alert(
-            "Unable to update the assessment status."
-        );
-
-
-        button.disabled =
-            false;
-
-
-        button.textContent =
-            "UPDATE";
-
-    }
+}
 
 }
 
