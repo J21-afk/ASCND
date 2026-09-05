@@ -34,7 +34,7 @@
 
 <header class="site-header">
 
-    <a href="#top" class="brand">
+    <a href="#" class="brand">
 
         <img
         src="/ascnd-shark-transparent.png"
@@ -1180,6 +1180,29 @@ const mobileMenu =
         }
     );
 
+    const brandLink =
+        document.querySelector(".brand");
+
+    brandLink.addEventListener(
+        "click",
+        (event) => {
+
+            event.preventDefault();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+            history.replaceState(
+                null,
+                "",
+                window.location.pathname +
+                window.location.search
+            );
+
+        }
+    );
 
 </script>
 
