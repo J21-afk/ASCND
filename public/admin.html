@@ -1200,38 +1200,10 @@ async function checkAdminAuthentication() {
 
             try {
 
-                const {
-    data: sessionData,
-    error: sessionError
-} =
-    await supabaseClient.auth.getSession();
-
-if (
-    sessionError ||
-    !sessionData.session
-) {
-
-    window.location.href =
-        "/admin-login.html";
-
-    return;
-
-}
-
-const response =
-    await fetch(
-        "/api/assessments",
-        {
-
-            headers: {
-
-                "Authorization":
-                    `Bearer ${sessionData.session.access_token}`
-
-            }
-
-        }
-    );
+                const response =
+                    await fetch(
+                        "/api/assessments"
+                    );
 
 
                 const result =
@@ -1655,115 +1627,99 @@ async function updateAssessmentStatus(
     button.textContent =
         "SAVING...";
 
-try {
 
-    const {
-        data: sessionData,
-        error: sessionError
-    } =
-        await supabaseClient.auth.getSession();
+    try {
+
+        const response =
+            await fetch(
+                `/api/assessments/${assessmentId}/status`,
+                {
+
+                    method:
+                        "PATCH",
+
+                    headers:
+                        {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                    body:
+                        JSON.stringify({
+
+                            status:
+                                newStatus
+
+                        })
+
+                }
+            );
 
 
-    if (
-        sessionError ||
-        !sessionData.session
-    ) {
-
-        window.location.href =
-            "/admin-login.html";
-
-        return;
-
-    }
+        const result =
+            await response.json();
 
 
-    const response =
-        await fetch(
-            `/api/assessments/${assessmentId}/status`,
-            {
+        if (
+            !response.ok ||
+            !result.success
+        ) {
 
-                method:
-                    "PATCH",
+            throw new Error(
+                result.message ||
+                "Unable to update assessment status."
+            );
 
-                headers: {
+        }
 
-                    "Content-Type":
-                        "application/json",
 
-                    "Authorization":
-                        `Bearer ${sessionData.session.access_token}`
-
-                },
-
-                body:
-                    JSON.stringify({
-
-                        status:
-                            newStatus
-
-                    })
-
-            }
+        console.log(
+            "ASCND STATUS UPDATED:",
+            result
         );
 
 
-    const result =
-        await response.json();
+        button.textContent =
+            "UPDATED";
 
 
-    if (
-        !response.ok ||
-        !result.success
-    ) {
-
-        throw new Error(
-            result.message ||
-            "Unable to update assessment status."
-        );
-
-    }
-
-
-    console.log(
-        "ASCND STATUS UPDATED:",
-        result
-    );
-
-
-    button.textContent =
-        "UPDATED";
-
-
-    /*
-     * Refresh the assessment list
-     * so the dashboard reflects
-     * the new status immediately.
-     */
+        /*
+         * Refresh the assessment list
+         * so the dashboard reflects
+         * the new status immediately.
+         */
 
 button.disabled =
-        true;
+    true;
 
-    await loadAssessments();
 
-}
-catch (error) {
+await loadAssessments();
 
-    console.error(
-        "ASCND STATUS UPDATE ERROR:",
-        error
-    );
+    }
 
-    alert(
-        "Unable to update the assessment status."
-    );
+    catch (error) {
 
-    button.disabled =
-        false;
+        console.error(
+            "ASCND STATUS UPDATE ERROR:",
+            error
+        );
 
-    button.textContent =
-        "UPDATE";
 
-}
+        alert(
+            "Unable to update the assessment status."
+        );
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "UPDATE";
+
+    }
 
 }
 
