@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blue Star Bike Co. | San Antonio</title>
+
+    <link rel="stylesheet" href="css/core.css">
+
+    <script src="business.js"></script>
+    <script src="system.js"></script>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     ASCND CONCEPT LABEL
+     ===================================================== -->
+
+<div class="concept-label">
+    ASCND CONCEPT — CREATED FOR BLUE STAR BIKE SHOP
+</div>
+
+
+<!-- =====================================================
+     SITE HEADER
+     ===================================================== -->
+
+<header class="site-header">
+
+    <a href="#home" class="brand">
+        <span class="brand-mark">✦</span>
+        <span class="brand-name" id="business-name">
+            Blue Star
+        </span>
+    </a>
+
+    <nav class="main-nav">
+
+        <a href="#home">Home</a>
+        <a href="#rentals">Rentals</a>
+        <a href="#history">History</a>
+        <a href="#shop-repairs">Shop & Repairs</a>
+        <a href="#contact">Contact</a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+
+<!-- =====================================================
+     01 — HOME
+     ===================================================== -->
+
+<section id="home" class="home-section">
+
+    <div class="home-layout">
+
+        <!-- EDITORIAL RAIL -->
+
+        <aside class="editorial-rail">
+
+            <div class="rail-number">
+                01
+            </div>
+
+            <div class="rail-label">
+                HOME
+            </div>
+
+            <p>
+                Discover San Antonio from
+                a different perspective.
+            </p>
+
+        </aside>
+
+
+        <!-- HERO -->
+
+        <div class="home-main">
+
+            <div class="hero-image">
+
+                <div class="hero-overlay"></div>
+
+                <div class="hero-content">
+
+                    <p class="eyebrow">
+                        BLUE STAR BICYCLING COMPANY
+                        <span></span>
+                        SAN ANTONIO, TEXAS
+                    </p>
+
+                    <h1>
+                        SEE SAN ANTONIO.
+                        <br>
+                        <span>EXPLORE MORE!</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        From the river to the missions,
+                        neighborhoods and downtown,
+                        discover more of San Antonio
+                        on two wheels.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="#rentals" class="button button-light">
+                            BOOK A RENTAL
+                            <span>→</span>
+                        </a>
+
+                        <a href="#shop-repairs" class="button button-outline-light">
+                            SHOP & REPAIRS
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SMALL EXPERIENCE STRIP -->
+
+                <div class="hero-experience">
+
+                    <div>
+                        <strong>01</strong>
+                        <span>THE ADVENTURE</span>
+                    </div>
+
+                    <div>
+                        <strong>02</strong>
+                        <span>THE CULTURE</span>
+                    </div>
+
+                    <div>
+                        <strong>03</strong>
+                        <span>THE COMMUNITY</span>
+                    </div>
+
+                </div>
+
+            </div>
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     02 — RENTALS
+     ===================================================== -->
+
+<section id="rentals" class="content-section rentals-section">
+
+    <div class="section-layout">
+
+        <!-- RAIL -->
+
+        <aside class="editorial-rail dark-rail">
+
+            <div class="rail-number">
+                02
+            </div>
+
+            <div class="rail-label">
+                RENTALS
+            </div>
+
+            <p>
+                Choose how you want
+                to explore the city.
+            </p>
+
+        </aside>
+
+
+        <div class="section-main">
+
+            <div class="section-intro">
+
+                <div>
+
+                    <span class="small-label">
+                        RENTALS
+                    </span>
+
+                    <h2>
+                        CHOOSE YOUR
+                        <span>EXPERIENCE.</span>
+                    </h2>
+
+                </div>
+
+                <p>
+                    Whether you want to explore on your own, or follow a curated route,
+                    we'll get you set up with the perfect bike for your day.
+                </p>
+
+            </div>
+
+
+            <!-- RENTAL TABS -->
+
+            <div class="rental-tabs">
+
+                <button
+                    class="rental-tab active"
+                    data-tab="bikes"
+                    type="button"
+                >
+                    <span>01</span>
+                    CHOOSE YOUR RIDE
+                </button>
+
+                <button
+                    class="rental-tab"
+                    data-tab="routes"
+                    type="button"
+                >
+                    <span>02</span>
+                    FIND YOUR ROUTE
+                </button>
+
+            </div>
+
+
+            <!-- ==========================
+                 BIKE TAB
+                 ========================== -->
+
+            <div
+                id="bikes-tab"
+                class="rental-panel active"
+            >
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <span class="small-label">
+                            Choose the bike that
+                        fits your day.
+                        </span>
+
+                        <h3>
+                            FIND YOUR
+                            <span>BIKE.</span>
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="bike-list"
+                    class="bike-grid"
+                ></div>
+
+            </div>
+
+            <div class="inventory-actions">
+    <button
+        id="view-all-rentals"
+        class="button button-primary"
+        type="button"
+    >
+        VIEW ALL RENTALS
+        <span>→</span>
+    </button>
+</div>
+
+
+            <!-- ==========================
+                 ROUTE TAB
+                 ========================== -->
+
+            <div
+                id="routes-tab"
+                class="rental-panel"
+            >
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <span class="small-label">
+                            Your ride starts here. Explore some of San Antonio's most popular cycling routes.
+                        </span>
+
+                        <h3>
+                            WHERE WOULD YOU
+                            <span>LIKE TO GO?</span>
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="route-list"
+                    class="route-grid"
+                ></div>
+
+            <button
+    id="view-all-routes"
+    class="button button-secondary"
+    type="button"
+>
+    VIEW ALL ROUTES
+    <span>→</span>
+</button>
+
+ </div>
+            <!-- ==========================
+                 RENTAL REQUEST
+                 ========================== -->
+
+            <div class="booking-panel">
+
+                <div class="booking-heading">
+
+                    <span class="small-label">
+                        PLAN YOUR DAY
+                    </span>
+
+                    <h3>
+                        READY TO
+                        <span>EXPLORE?</span>
+                    </h3>
+
+                    <p>
+                        Planning a ride? Just choose your bike, pick your day, 
+                        and we'll help get you rolling.
+                    </p>
+
+                </div>
+
+
+                <form
+                    id="rental-form"
+                    class="rental-form"
+                >
+
+                    <div class="form-group">
+
+                        <label for="experience">
+                            EXPERIENCE:
+                        </label>
+
+                        <select
+                            id="experience"
+                            name="experience"
+                            required
+                        >
+
+                            <option value="">
+                                Select an experience
+                            </option>
+
+                            <option value="explore">
+                                Rent & Explore the City
+                            </option>
+
+                            <option value="route">
+                                Rent & Plan a Route
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="bike">
+                            BIKE:
+                        </label>
+
+                        <select
+                            id="bike"
+                            name="bike"
+                            required
+                        >
+
+                            <option value="">
+                                Select a bike
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="date">
+                                DATE:
+                            </label>
+
+                            <input
+                                type="date"
+                                id="date"
+                                name="date"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="duration">
+                                DURATION:
+                            </label>
+
+                            <select
+                                id="duration"
+                                name="duration"
+                                required
+                            >
+
+                                <option value="">
+                                    Select duration
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                NAME:
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                EMAIL:
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="button button-primary"
+                    >
+                        REQUEST MY RENTAL
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+
+                <!-- SUCCESS -->
+
+                <div
+                    id="request-success"
+                    class="request-success"
+                    hidden
+                >
+
+                    <span class="small-label">
+                        REQUEST RECEIVED
+                    </span>
+
+                    <h3>
+                        YOUR DAY
+                        <span>STARTS HERE.</span>
+                    </h3>
+
+                    <p>
+                        This demonstration shows how a future
+                        implementation could send rental requests
+                        directly into the business management system.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     03 — HISTORY
+     ===================================================== -->
+
+<section
+    id="history"
+    class="content-section history-section"
+>
+
+    <div class="story-layout">
+
+        <!-- PHOTO -->
+
+        <div class="story-photo">
+
+            <img
+                src="css/assets/blue-star/family-ride.png"
+                alt="Blue Star cycling community"
+            >
+
+        </div>
+
+
+        <!-- ABOUT / STORY -->
+
+        <div class="story-content">
+
+            <span class="small-label">
+                OUR STORY
+            </span>
+
+            <h2>
+                MORE THAN
+                <span>A BIKE SHOP.</span>
+            </h2>
+
+            <p class="story-lead">
+                Blue Star Bike Shop is part of the ride,
+                the city, and the community.
+            </p>
+
+            <div class="story-about">
+
+                <span class="story-about-label">
+                    ABOUT US
+                </span>
+
+                <p>
+                    Located in the Blue Star Arts Complex, next to the San Antonio River and the San Antonio Mission Trail, 
+                    you will find the Blue Star Bike Shop. (Less than two miles from both the Alamo and Mission Concepcion). 
+                    Here, you will find one of San Antonio’s biggest selections of Electra bicycles, BMX, single speeds, 
+                    fixed gears, Cruisers, Sports Cruisers, Road bikes, city bikes, kids bikes, brooks saddles and bags, 
+                    along with an extensive showing of accessories to ought your new bike. Whether you’re riding around 
+                    the neighboring communities (King William, SouthTown, downtown San Antonio or the Missions), 
+                    or just out for an afternoon ride along the San Antonio River, or even exercise, Blue Star Bike Shop
+                    can provide the best in rental gear.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- HISTORY -->
+
+    <div class="history-timeline">
+
+        <article class="history-card">
+
+            <span class="history-year">
+                2004
+            </span>
+
+            <div class="history-line"></div>
+
+            <h3>
+                THE BEGINNING.
+            </h3>
+
+            <p>
+                Owner Joey Villarreal and his wife Magdalena opened the Blue Star Bike Shop within the walls of the brewery.
+                Combining their passion for cycling with their love for the community. 
+                The local cycling business becomes part of the Blue Star family.
+            </p>
+
+        </article>
+
+
+        <article class="history-card">
+
+            <span class="history-year">
+                2009
+            </span>
+
+            <div class="history-line"></div>
+
+            <h3>
+                SERVING THE COMMUNITY.
+            </h3>
+
+            <p>
+                The bike shop made it's big debut right next door and became a full service bike shop.
+            </p>
+
+        </article>
+
+
+        <article class="history-card">
+
+            <span class="history-year">
+                TODAY
+            </span>
+
+            <div class="history-line"></div>
+
+            <h3>
+                STILL RIDING STRONG!
+            </h3>
+
+            <p>
+                A place to explore, repair, & shop,
+                while experiencing the great city of San Antonio.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     04 — SHOP & REPAIRS
+     ===================================================== -->
+
+<section
+    id="shop-repairs"
+    class="content-section shop-section"
+>
+
+    <div class="section-layout">
+
+        <aside class="editorial-rail dark-rail">
+
+            <div class="rail-number">
+                04
+            </div>
+
+            <div class="rail-label">
+                SHOP
+                <br>
+                & REPAIRS
+            </div>
+
+            <p>
+                Everything you need
+                before and after the ride.
+            </p>
+
+        </aside>
+
+
+        <div class="section-main">
+
+            <div class="section-intro">
+
+                <div>
+
+                    <span class="small-label">
+                        SHOP & REPAIRS
+                    </span>
+
+                    <h2>
+                        KEEP MOVING.
+                        <span>STAY READY.</span>
+                    </h2>
+
+                </div>
+
+                <p>
+                    Browse available bikes, find gear or get your
+                    bike serviced. We've got you covered before and after your ride.
+                </p>
+
+            </div>
+
+
+            <!-- SHOP / REPAIR SWITCH -->
+
+            <div class="shop-options">
+
+    <button
+        class="shop-option active"
+        data-shop-tab="inventory"
+        type="button"
+    >
+        <span class="option-number">01</span>
+
+        <strong>AVAILABLE BIKES</strong>
+
+        <span>VIEW BIKES →</span>
+    </button>
+
+
+    <button
+        class="shop-option"
+        data-shop-tab="gear"
+        type="button"
+    >
+        <span class="option-number">02</span>
+
+        <strong>GEAR & ACCESSORIES</strong>
+
+        <span>VIEW GEAR →</span>
+    </button>
+
+
+    <button
+        class="shop-option"
+        data-shop-tab="repairs"
+        type="button"
+    >
+        <span class="option-number">03</span>
+
+        <strong>REPAIRS</strong>
+
+        <span>SERVICE →</span>
+    </button>
+
+</div>
+
+
+            <!-- INVENTORY -->
+
+            <div
+                id="inventory-panel"
+                class="shop-panel active">
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <span class="small-label">
+                            OUR INVENTORY
+                        </span>
+
+                        <h3>
+                            SEE WHAT'S
+                            <span>AVAILABLE.</span>
+                        </h3>
+
+                    </div>
+
+                    <p>
+                        - A future inventory system could
+                        allow Blue Star to manage bikes
+                        available for sale directly!
+                    </p>
+
+                </div>
+
+
+                <div class="inventory-grid">
+
+                    <article class="inventory-card">
+
+                        <div class="inventory-image">
+                            <span>
+                                BIKE PHOTO
+                            </span>
+                        </div>
+
+                        <div class="inventory-info">
+
+                            <span class="card-type">
+                                HYBRID
+                            </span>
+
+                            <h4>
+                                AVAILABLE BIKE
+                            </h4>
+
+                            <p>
+                                Browse details,
+                                specifications and
+                                availability.
+                            </p>
+
+                            <a
+                                href="#contact"
+                                class="text-link"
+                            >
+                                VIEW DETAILS →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="inventory-card">
+
+                        <div class="inventory-image">
+                            <span>
+                                BIKE PHOTO
+                            </span>
+                        </div>
+
+                        <div class="inventory-info">
+
+                            <span class="card-type">
+                                ROAD
+                            </span>
+
+                            <h4>
+                                AVAILABLE BIKE
+                            </h4>
+
+                            <p>
+                                Browse details,
+                                specifications and
+                                availability.
+                            </p>
+
+                            <a
+                                href="#contact"
+                                class="text-link"
+                            >
+                                VIEW DETAILS →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="inventory-card">
+
+                        <div class="inventory-image">
+                            <span>
+                                BIKE PHOTO
+                            </span>
+                        </div>
+
+                        <div class="inventory-info">
+
+                            <span class="card-type">
+                                ELECTRIC
+                            </span>
+
+                            <h4>
+                                AVAILABLE BIKE
+                            </h4>
+
+                            <p>
+                                Browse details,
+                                specifications and
+                                availability.
+                            </p>
+
+                            <a
+                                href="#contact"
+                                class="text-link"
+                            >
+                                VIEW DETAILS →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+            <div class="inventory-actions">
+                    <button
+                        id="view-all-bikes"
+                        class="button button-primary"
+                        type="button"
+                    >
+                        VIEW ALL BIKES
+                        <span>→</span>
+                    </button>
+                </div>
+    <!-- ==========================
+     GEAR & ACCESSORIES
+     ========================== -->
+     <div
+    id="gear-panel"
+    class="shop-panel"
+>
+
+    <div class="panel-heading">
+
+        <div>
+
+            <span class="small-label">
+                GEAR & ACCESSORIES
+            </span>
+
+            <h3>
+                EQUIP YOUR
+                <span>RIDE.</span>
+            </h3>
+
+        </div>
+
+        <p>
+            Browse available gear and accessories
+            by category.
+        </p>
+
+    </div>
+
+
+    <!-- GEAR CATEGORIES -->
+
+    <div class="gear-categories">
+
+    <button
+        class="gear-category active"
+        data-gear-category="helmets"
+        type="button"
+    >
+        <strong>HELMETS</strong>
+        <span>→</span>
+    </button>
+
+    <button
+        class="gear-category"
+        data-gear-category="locks"
+        type="button"
+    >
+        <strong>LOCKS</strong>
+        <span>→</span>
+    </button>
+
+    <button
+        class="gear-category"
+        data-gear-category="baskets"
+        type="button"
+    >
+        <strong>BASKETS</strong>
+        <span>→</span>
+    </button>
+
+    <button
+        class="gear-category"
+        data-gear-category="lights"
+        type="button"
+    >
+        <strong>LIGHTS</strong>
+        <span>→</span>
+    </button>
+
+    <button
+        class="gear-category"
+        data-gear-category="bottles"
+        type="button"
+    >
+    
+        <strong>BOTTLES</strong>
+        <span>→</span>
+    </button>
+
+    <button
+        class="gear-category"
+        data-gear-category="accessories"
+        type="button"
+    >
+        
+        <strong>ACCESSORIES</strong>
+        <span>→</span>
+    </button>
+
+</div>
+
+<div class="gear-results">
+
+    <div class="gear-results-heading">
+
+        <span class="small-label">
+            AVAILABLE GEAR
+        </span>
+
+        <h4 id="gear-category-title">
+            HELMETS
+        </h4>
+
+    </div>
+
+    <div
+        id="gear-product-list"
+        class="inventory-grid"
+    ></div>
+</div>
+
+<div class="gear-actions">
+                    <button
+                        id="view-all-gear"
+                        class="button button-primary"
+                        type="button"
+                    >
+                        VIEW ALL GEAR & ACCESSORIES
+                        <span>→</span>
+                    </button>
+                </div>
+
+            </div>
+            <!-- REPAIRS -->
+
+            <div
+                id="repairs-panel"
+                class="shop-panel"
+            >
+
+                <div class="repair-panel">
+
+                    <div>
+
+                        <span class="small-label">
+                            SERVICE
+                        </span>
+
+                        <h3>
+                            KEEP YOUR
+                            <span>RIDE ROLLING.</span>
+                        </h3>
+
+                    </div>
+
+                    <div>
+
+                        <p>
+                            From routine maintenance to
+                            getting your bike back on the
+                            road, Blue Star can help.
+                        </p>
+
+                        <a
+                            href="#contact"
+                            class="button button-primary"
+                        >
+                            REQUEST A REPAIR
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     05 — CONTACT
+     ===================================================== -->
+
+<section
+    id="contact"
+    class="content-section contact-section"
+>
+
+    <div class="section-layout">
+
+        <aside class="editorial-rail">
+
+            <div class="rail-number">
+                05
+            </div>
+
+            <div class="rail-label">
+                CONTACT
+            </div>
+
+            <p>
+                Come find us in
+                San Antonio.
+            </p>
+
+        </aside>
+
+
+        <div class="section-main">
+
+            <div class="contact-grid">
+
+                <div>
+
+                    <span class="small-label">
+                        CONTACT
+                    </span>
+
+                    <h2>
+                        COME SAY
+                        <span>HELLO!</span>
+                    </h2>
+
+                    <p class="contact-intro">
+                        Planning your ride or have any questions? Reach out to the Blue Star Team
+                         — we’re happy to help.
+                    </p>
+
+                </div>
+
+
+                <div class="contact-details">
+
+                    <div class="contact-item">
+
+                        <span>
+                            LOCATION:
+                        </span>
+
+                        <strong>
+                            Blue Star Arts Complex<br>
+                            1414 S. Alamo St.<br>
+                            San Antonio, TX 78210<br>
+                            (210)858-0331
+                        </strong>
+
+                         <span>
+                            HOURS OF OPERATION:
+                        </span>
+
+                        <strong>
+                            Mon–Fri: 8a.m.–6p.m.<br>
+                            Sun: 8a.m.–5p.m.<br>
+                            Walk-ins welcome! 
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <span>
+                            SERVICES:
+                        </span>
+
+                        <strong>
+                            Rentals<br>
+                            Bike Sales / Parts<br>
+                            Repairs
+                        </strong>
+
+                    </div>
+
+                     </div>
+                <div class="contact-social">
+
+    <span>
+        CONNECT WITH US:
+    </span>
+
+    <div class="social-links">
+
+        <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14 8h3V5h-3c-2.8 0-5 2.2-5 5v2H6v3h3v6h3v-6h3l1-3h-4v-2c0-1.1.9-2 2-2z"/>
+            </svg>
+        </a>
+
+        <a href="#" aria-label="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.9 2H22l-6.8 7.8L23 22h-6.1l-4.8-6.3L6.6 22H3.5l7.3-8.4L1 2h6.2l4.3 5.7L18.9 2zm-1.1 17.8h1.7L6.3 4.1H4.5L17.8 19.8z"/>
+            </svg>
+        </a>
+
+        <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1"/>
+            </svg>
+        </a>
+
+    </div>
+
+</div>
+                    <a
+    href="#"
+    id="contact-button"
+    class="button button-primary"
+>
+    GET IN TOUCH
+    <span>→</span>
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SYSTEM TRANSITION
+     ===================================================== -->
+
+<section class="system-transition">
+
+    <span class="small-label">
+        BEHIND THE EXPERIENCE
+    </span>
+
+    <h2>
+        SIMPLE FOR
+        <span>THE CUSTOMER.</span>
+    </h2>
+
+    <h2>
+        CONNECTED FOR
+        <span>THE BUSINESS.</span>
+    </h2>
+
+    <p>
+        This is where the customer experience
+        connects to the systems behind the business.
+    </p>
+
+    <a
+        href="dashboard.html"
+        class="button button-light"
+    >
+        VIEW MANAGER DASHBOARD
+        <span>→</span>
+    </a>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="site-footer">
+
+    <div>
+
+        <strong id="footer-business-name">
+            Blue Star
+        </strong>
+
+        <p>
+            Ride San Antonio Differently.
+        </p>
+
+    </div>
+
+
+    <div class="footer-nav">
+
+        <a href="#home">Home</a>
+        <a href="#rentals">Rentals</a>
+        <a href="#history">History</a>
+        <a href="#shop-repairs">Shop & Repairs</a>
+        <a href="#contact">Contact</a>
+
+    </div>
+
+
+    <div class="footer-ascnd">
+
+        <span>
+            ASCND CONCEPT
+        </span>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     PAGE JAVASCRIPT
+     ===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   BUSINESS INFORMATION
+   ===================================================== */
+
+document.getElementById("business-name").textContent =
+    BUSINESS.shortName;
+
+document.getElementById("footer-business-name").textContent =
+    BUSINESS.name;
+
+
+
+/* =====================================================
+   BIKE CARDS
+   ===================================================== */
+
+const bikeList =
+    document.getElementById("bike-list");
+
+BUSINESS.bikes.forEach((bike) => {
+
+    const card =
+        document.createElement("article");
+
+    card.className =
+        "bike-card";
+
+    card.innerHTML = `
+
+        <div class="bike-image-placeholder">
+            <img src="${bike.image}" alt="${bike.name}">
+
+            <span>
+                ${bike.name}
+            </span>
+
+        </div>
+
+        <div class="bike-card-content">
+
+            <span class="card-type">
+                ${bike.type}
+            </span>
+
+            <h4>
+                ${bike.name}
+            </h4>
+
+            <p>
+                ${bike.description}
+            </p>
+
+            <a
+                href="#rental-form"
+                class="text-link"
+            >
+                SELECT BIKE →
+            </a>
+
+        </div>
+
+    `;
+
+    bikeList.appendChild(card);
+
+});
+
+
+
+/* =====================================================
+   ROUTE CARDS
+   ===================================================== */
+
+const routeList =
+    document.getElementById("route-list");
+
+const viewAllRoutes =
+    document.getElementById("view-all-routes");
+
+
+function renderRoutes(routes) {
+
+    routeList.innerHTML = "";
+
+    routes.forEach((route) => {
+
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "route-card";
+
+        card.innerHTML = `
+
+            <div class="route-image-placeholder">
+
+                <img
+                    src="${route.image}"
+                    alt="${route.name}"
+                >
+
+            </div>
+
+            <div class="route-card-content">
+
+                <span class="card-type">
+                    ${route.location}
+                </span>
+
+                <h4>
+                    ${route.name}
+                </h4>
+
+                <p>
+                    ${route.description}
+                </p>
+
+                <div class="route-meta">
+
+                    <span>
+                        ${route.distance}
+                    </span>
+
+                    <span>
+                        ${route.duration}
+                    </span>
+
+                    <span>
+                        ${route.difficulty}
+                    </span>
+
+                </div>
+
+                <a
+                    href="#rental-form"
+                    class="text-link"
+                >
+                    CHOOSE THIS ROUTE →
+                </a>
+
+            </div>
+
+        `;
+
+        routeList.appendChild(card);
+
+    });
+
+}
+
+
+/* SHOW FIRST 3 ROUTES */
+
+renderRoutes(
+    BUSINESS.routes.slice(0, 3)
+);
+
+
+/* SHOW ALL ROUTES */
+
+viewAllRoutes.addEventListener("click", () => {
+
+    const showingAll =
+        viewAllRoutes.dataset.expanded === "true";
+
+    if (showingAll) {
+
+        renderRoutes(
+            BUSINESS.routes.slice(0, 3)
+        );
+
+        viewAllRoutes.innerHTML = `
+            VIEW ALL ROUTES
+            <span>→</span>
+        `;
+
+        viewAllRoutes.dataset.expanded = "false";
+
+    } else {
+
+        renderRoutes(BUSINESS.routes);
+
+        viewAllRoutes.innerHTML = `
+            SHOW LESS
+            <span>↑</span>
+        `;
+
+        viewAllRoutes.dataset.expanded = "true";
+
+    }
+
+});
+
+/* =====================================================
+   GEAR PRODUCTS
+   ===================================================== */
+
+const gearCategories =
+    document.querySelectorAll(".gear-category");
+
+const gearProductList =
+    document.getElementById("gear-product-list");
+
+const gearCategoryTitle =
+    document.getElementById("gear-category-title");
+
+
+function renderGear(category) {
+
+    const products =
+        BUSINESS.gear[category] || [];
+
+    gearCategoryTitle.textContent =
+        category.toUpperCase();
+
+    gearProductList.innerHTML = "";
+
+
+    products.forEach((product) => {
+
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "inventory-card";
+
+
+        card.innerHTML = `
+
+            <div class="inventory-image">
+
+                ${
+                    product.image
+                        ? `
+                            <img
+                                src="${product.image}"
+                                alt="${product.name}"
+                            >
+                        `
+                        : `
+                            <span>
+                                PRODUCT PHOTO
+                            </span>
+                        `
+                }
+
+            </div>
+
+
+            <div class="inventory-info">
+
+                <span class="card-type">
+                    ${product.type}
+                </span>
+
+                <h4>
+                    ${product.name}
+                </h4>
+
+                <p>
+                    ${product.description}
+                </p>
+
+                <a
+                    href="#contact"
+                    class="text-link"
+                >
+                    VIEW DETAILS →
+                </a>
+
+            </div>
+
+        `;
+
+        gearProductList.appendChild(card);
+
+    });
+
+}
+
+
+/* SHOW HELMETS FIRST */
+
+renderGear("helmets");
+
+
+/* CHANGE GEAR CATEGORY */
+
+gearCategories.forEach((categoryButton) => {
+
+    categoryButton.addEventListener("click", () => {
+
+        gearCategories.forEach((button) => {
+
+            button.classList.remove("active");
+
+        });
+
+
+        categoryButton.classList.add("active");
+
+
+        renderGear(
+            categoryButton.dataset.gearCategory
+        );
+
+    });
+
+});
+
+/* =====================================================
+   BIKE SELECT
+   ===================================================== */
+
+const bikeSelect =
+    document.getElementById("bike");
+
+BUSINESS.bikes.forEach((bike) => {
+
+    const option =
+        document.createElement("option");
+
+    option.value =
+        bike.id;
+
+    option.textContent =
+        bike.name;
+
+    bikeSelect.appendChild(option);
+
+});
+
+
+
+/* =====================================================
+   DURATION SELECT
+   ===================================================== */
+
+const durationSelect =
+    document.getElementById("duration");
+
+BUSINESS.rentalDurations.forEach((duration) => {
+
+    const option =
+        document.createElement("option");
+
+    option.value =
+        duration.id;
+
+    option.textContent =
+        `${duration.name} — ${duration.duration}`;
+
+    durationSelect.appendChild(option);
+
+});
+
+
+
+/* =====================================================
+   RENTAL TABS
+   ===================================================== */
+
+const rentalTabs =
+    document.querySelectorAll(".rental-tab");
+
+const rentalPanels =
+    document.querySelectorAll(".rental-panel");
+
+const viewAllRentals =
+    document.getElementById("view-all-rentals");
+
+
+rentalTabs.forEach((tab) => {
+
+    tab.addEventListener("click", function() {
+
+        const target =
+            this.dataset.tab;
+
+        rentalTabs.forEach((item) => {
+
+            item.classList.remove("active");
+
+        });
+
+        rentalPanels.forEach((panel) => {
+
+            panel.classList.remove("active");
+
+        });
+
+        this.classList.add("active");
+
+        document
+            .getElementById(`${target}-tab`)
+            .classList.add("active");
+
+
+        /* SHOW VIEW ALL RENTALS ONLY ON BIKE TAB */
+
+        if (viewAllRentals) {
+
+            viewAllRentals.style.display =
+                target === "bikes"
+                    ? "inline-flex"
+                    : "none";
+
+        }
+
+    });
+
+});
+
+
+/* INITIAL STATE */
+
+if (viewAllRentals) {
+
+    viewAllRentals.style.display =
+        "inline-flex";
+
+}
+
+
+
+/* =====================================================
+   SHOP / REPAIR TABS
+   ===================================================== */
+
+const shopOptions = document.querySelectorAll(".shop-option");
+const shopPanels = document.querySelectorAll(".shop-panel");
+
+const viewAllBikes = document.getElementById("view-all-bikes");
+const viewAllGear = document.getElementById("view-all-gear");
+
+shopOptions.forEach((option) => {
+
+    option.addEventListener("click", function() {
+
+        const target = this.dataset.shopTab;
+
+        shopOptions.forEach((item) => {
+            item.classList.remove("active");
+        });
+
+        shopPanels.forEach((panel) => {
+            panel.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+        document
+            .getElementById(`${target}-panel`)
+            .classList.add("active");
+
+        /* SHOW ONLY THE CORRECT VIEW-ALL BUTTON */
+
+        if (viewAllBikes) {
+            viewAllBikes.style.display =
+                target === "inventory"
+                    ? "inline-flex"
+                    : "none";
+        }
+
+        if (viewAllGear) {
+            viewAllGear.style.display =
+                target === "gear"
+                    ? "inline-flex"
+                    : "none";
+        }
+
+    });
+
+});
+
+
+
+/* =====================================================
+   RENTAL REQUEST SYSTEM
+   ===================================================== */
+
+const rentalForm =
+    document.getElementById("rental-form");
+
+const successMessage =
+    document.getElementById("request-success");
+
+
+rentalForm.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const formData =
+            new FormData(rentalForm);
+
+
+        const request =
+            ASCND_SYSTEM.createRentalRequest({
+
+                name:
+                    formData.get("name"),
+
+                email:
+                    formData.get("email"),
+
+                experience:
+                    formData.get("experience"),
+
+                bike:
+                    formData.get("bike"),
+
+                date:
+                    formData.get("date"),
+
+                duration:
+                    formData.get("duration")
+
+            });
+
+
+        console.log(
+            "ASCND SYSTEM — NEW RENTAL REQUEST",
+            request
+        );
+
+
+        rentalForm.hidden =
+            true;
+
+        successMessage.hidden =
+            false;
+
+
+        successMessage.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+
+        });
+
+    }
+);
+
+
+</script>
+
+</body>
+</html>

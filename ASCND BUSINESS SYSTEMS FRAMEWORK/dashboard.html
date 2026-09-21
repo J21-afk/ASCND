@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Blue Star Operations | ASCND Systems</title>
+
+  <link rel="stylesheet" href="css/core.css">
+
+  <style>
+    /* =========================================================
+       DASHBOARD
+       ========================================================= */
+
+    .dashboard-page {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(20, 150, 220, 0.10), transparent 35%),
+        #07131d;
+      color: #f5f7f8;
+    }
+
+    .dashboard-shell {
+      width: min(1400px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 32px 0 60px;
+    }
+
+    /* TOP BAR */
+
+    .dashboard-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .dashboard-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .dashboard-brand-mark {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(67, 184, 255, 0.5);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #45baff;
+      background: rgba(20, 150, 220, 0.08);
+    }
+
+    .dashboard-brand h1 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .dashboard-brand p {
+      margin: 4px 0 0;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+    }
+
+    .dashboard-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dashboard-demo-label {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.60);
+    }
+
+    .dashboard-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      transition: 0.2s ease;
+    }
+
+    .dashboard-back:hover {
+      border-color: rgba(69,186,255,0.55);
+      transform: translateY(-1px);
+    }
+
+    /* INTRO */
+
+    .dashboard-intro {
+      padding: 54px 0 34px;
+    }
+
+    .dashboard-eyebrow {
+      margin-bottom: 12px;
+      color: #45baff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .dashboard-intro h2 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(38px, 5vw, 68px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .dashboard-intro p {
+      max-width: 650px;
+      margin: 20px 0 0;
+      color: rgba(255,255,255,0.62);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* METRICS */
+
+    .dashboard-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .metric-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 150px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.035);
+    }
+
+    .metric-card::after {
+      content: "";
+      position: absolute;
+      right: -35px;
+      bottom: -45px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(69,186,255,0.07);
+      filter: blur(8px);
+    }
+
+    .metric-label {
+      color: rgba(255,255,255,0.50);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .metric-number {
+      margin-top: 16px;
+      font-size: 48px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .metric-detail {
+      margin-top: 12px;
+      color: rgba(255,255,255,0.45);
+      font-size: 11px;
+    }
+
+    /* MAIN GRID */
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(300px, 0.75fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .dashboard-panel {
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.035);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .panel-header h3 {
+      margin: 0;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .panel-header span {
+      color: rgba(255,255,255,0.42);
+      font-size: 11px;
+    }
+
+    /* RENTAL TABLE */
+
+    .rental-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .rental-row {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr 0.8fr 0.8fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 19px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.2s ease;
+    }
+
+    .rental-row:last-child {
+      border-bottom: none;
+    }
+
+    .rental-row:hover {
+      background: rgba(255,255,255,0.025);
+    }
+
+    .customer-name {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .customer-meta {
+      margin-top: 5px;
+      color: rgba(255,255,255,0.38);
+      font-size: 10px;
+    }
+
+    .rental-info {
+      font-size: 12px;
+    }
+
+    .rental-info small {
+      display: block;
+      margin-top: 5px;
+      color: rgba(255,255,255,0.38);
+      font-size: 9px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      width: fit-content;
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.72);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .status.active {
+      color: #55c7ff;
+    }
+
+    .status.pending {
+      color: #f4c56b;
+    }
+
+    .status.returning {
+      color: #8fe29b;
+    }
+
+    .view-button {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      background: transparent;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .view-button:hover {
+      border-color: rgba(69,186,255,0.55);
+      background: rgba(69,186,255,0.07);
+    }
+
+    /* SIDE PANEL */
+
+    .side-section {
+      padding: 22px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .side-section:last-child {
+      border-bottom: none;
+    }
+
+    .side-label {
+      color: rgba(255,255,255,0.40);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .return-card {
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .return-time {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .return-customer {
+      margin-top: 5px;
+      font-size: 12px;
+    }
+
+    .return-route {
+      margin-top: 10px;
+      color: rgba(255,255,255,0.45);
+      font-size: 10px;
+    }
+
+    .followup-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .followup-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .followup-name {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .followup-detail {
+      margin-top: 4px;
+      color: rgba(255,255,255,0.40);
+      font-size: 10px;
+    }
+
+    .followup-action {
+      color: #45baff;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* DETAIL DRAWER */
+
+    .rental-detail {
+      display: none;
+      margin-top: 18px;
+      border: 1px solid rgba(69,186,255,0.22);
+      border-radius: 20px;
+      background: rgba(7, 20, 30, 0.96);
+      overflow: hidden;
+    }
+
+    .rental-detail.show {
+      display: block;
+    }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .detail-header h3 {
+      margin: 0;
+      font-size: 17px;
+      text-transform: uppercase;
+    }
+
+    .close-detail {
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,0.55);
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .detail-item {
+      padding: 20px;
+      background: #081621;
+    }
+
+    .detail-item span {
+      display: block;
+      margin-bottom: 8px;
+      color: rgba(255,255,255,0.38);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .detail-item strong {
+      font-size: 13px;
+    }
+
+    /* BOTTOM STATEMENT */
+
+    .dashboard-statement {
+      margin-top: 50px;
+      padding: 60px 0 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dashboard-statement p {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(30px, 4vw, 58px);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .dashboard-statement p span {
+      color: #45baff;
+    }
+
+    .dashboard-footer {
+      margin-top: 28px;
+      color: rgba(255,255,255,0.30);
+      font-size: 10px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 1050px) {
+      .dashboard-metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .dashboard-shell {
+        width: min(100% - 28px, 1400px);
+        padding-top: 20px;
+      }
+
+      .dashboard-topbar {
+        align-items: flex-start;
+      }
+
+      .dashboard-demo-label {
+        display: none;
+      }
+
+      .dashboard-intro {
+        padding-top: 38px;
+      }
+
+      .dashboard-metrics {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .rental-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .rental-row .view-button {
+        width: fit-content;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .dashboard-actions {
+        display: none;
+      }
+
+      .dashboard-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .rental-row {
+        grid-template-columns: 1fr;
+        gap: 9px;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-intro h2 {
+        font-size: 42px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="dashboard-page">
+
+    <div class="dashboard-shell">
+
+      <!-- TOP BAR -->
+      <header class="dashboard-topbar">
+
+        <div class="dashboard-brand">
+
+          <div class="dashboard-brand-mark">
+            BS
+          </div>
+
+          <div>
+            <h1 id="businessName">Blue Star</h1>
+            <p>Operations Dashboard</p>
+          </div>
+
+        </div>
+
+        <div class="dashboard-actions">
+
+          <div class="dashboard-demo-label">
+            ASCND Concept — Created for Blue Star
+          </div>
+
+          <a href="index.html" class="dashboard-back">
+            ← Customer Side
+          </a>
+
+        </div>
+
+      </header>
+
+
+      <!-- INTRO -->
+      <section class="dashboard-intro">
+
+        <div class="dashboard-eyebrow">
+          Business Operations
+        </div>
+
+        <h2>
+          The ride is only half the story.
+        </h2>
+
+        <p>
+          Every customer interaction becomes an organized record —
+          from the first rental request to the moment the bike returns.
+        </p>
+
+      </section>
+
+
+      <!-- METRICS -->
+      <section class="dashboard-metrics">
+
+  <div class="metric-card">
+
+    <div class="metric-label">
+      Active Rentals
+    </div>
+
+    <div class="metric-number" id="activeRentalsCount">
+      0
+    </div>
+
+    <div class="metric-detail">
+      Currently out
+    </div>
+
+  </div>
+
+
+  <div class="metric-card">
+
+    <div class="metric-label">
+      Returning Today
+    </div>
+
+    <div class="metric-number" id="returningTodayCount">
+      0
+    </div>
+
+    <div class="metric-detail">
+      Scheduled returns
+    </div>
+
+  </div>
+
+
+  <div class="metric-card">
+
+    <div class="metric-label">
+      New Requests
+    </div>
+
+    <div class="metric-number" id="newRequestsCount">
+      0
+    </div>
+
+    <div class="metric-detail">
+      Awaiting review
+    </div>
+
+  </div>
+
+
+  <div class="metric-card">
+
+    <div class="metric-label">
+      Follow-Ups
+    </div>
+
+    <div class="metric-number" id="followUpsCount">
+      0
+    </div>
+
+    <div class="metric-detail">
+      Need attention
+    </div>
+
+  </div>
+
+</section>
+
+
+      <!-- MAIN DASHBOARD -->
+      <section class="dashboard-grid">
+
+  <!-- RENTAL ACTIVITY -->
+  <div class="dashboard-panel">
+
+    <div class="panel-header">
+
+      <h3>Rental Activity</h3>
+
+      <span>
+        Live operational view
+      </span>
+
+    </div>
+
+    <div class="rental-list" id="rentalList">
+
+      <!-- Requests load here -->
+
+    </div>
+
+  </div>
+
+
+  <!-- SIDE PANEL -->
+  <aside class="dashboard-panel">
+
+    <div class="panel-header">
+
+      <h3>Today</h3>
+
+      <span>
+        Operations
+      </span>
+
+    </div>
+
+
+    <div class="side-section">
+
+      <div class="side-label">
+        Next Return
+      </div>
+
+      <div class="return-card">
+
+        <div class="return-time">
+          1:30 PM
+        </div>
+
+        <div class="return-customer">
+          Sarah Thompson
+        </div>
+
+        <div class="return-route">
+          River Ride · Hybrid #14
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="side-section">
+
+      <div class="side-label">
+        Follow-Up Queue
+      </div>
+
+
+      <div class="followup-item">
+
+        <div>
+
+          <div class="followup-name">
+            Jordan Martinez
+          </div>
+
+          <div class="followup-detail">
+            Post-ride review
+          </div>
+
+        </div>
+
+        <div class="followup-action">
+          Ready
+        </div>
+
+      </div>
+
+
+      <div class="followup-item">
+
+        <div>
+
+          <div class="followup-name">
+            Marcus Wilson
+          </div>
+
+          <div class="followup-detail">
+            Rental confirmation
+          </div>
+
+        </div>
+
+        <div class="followup-action">
+          Review
+        </div>
+
+      </div>
+
+
+      <div class="followup-item">
+
+        <div>
+
+          <div class="followup-name">
+            Emily Rodriguez
+          </div>
+
+          <div class="followup-detail">
+            Return reminder
+          </div>
+
+        </div>
+
+        <div class="followup-action">
+          Scheduled
+        </div>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+</section>
+
+
+      <div class="rental-detail" id="rentalDetail">
+
+  <div class="detail-header">
+
+    <div>
+      <h3 id="detailCustomer">
+        Rental Details
+      </h3>
+    </div>
+
+    <button class="close-detail" onclick="closeRental()">
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="detail-grid">
+
+    <div class="detail-item">
+      <span>Customer</span>
+      <strong id="detailCustomerValue">—</strong>
+    </div>
+
+
+    <div class="detail-item">
+      <span>Bike</span>
+      <strong id="detailBike">—</strong>
+    </div>
+
+
+    <div class="detail-item">
+      <span>Experience</span>
+      <strong id="detailRoute">—</strong>
+    </div>
+
+
+    <div class="detail-item">
+      <span>Status</span>
+      <strong id="detailStatus">—</strong>
+    </div>
+
+
+    <div class="detail-item">
+      <span>Start Time</span>
+      <strong id="detailStart">—</strong>
+    </div>
+
+
+    <div class="detail-item">
+      <span>Return Time</span>
+      <strong id="detailReturn">—</strong>
+    </div>
+
+
+    <div class="detail-item">
+      <span>Rental Record</span>
+      <strong id="detailRecord">—</strong>
+    </div>
+
+
+    <div class="detail-item">
+      <span>Next Action</span>
+      <strong id="detailNextAction">—</strong>
+    </div>
+
+  </div>
+
+
+  <!-- STATUS CONTROL -->
+  <div style="
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  ">
+
+    <div style="
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 10px;
+    ">
+      Update Rental Status
+    </div>
+
+
+    <select
+      id="statusSelect"
+      style="
+        width: 100%;
+        padding: 13px 14px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: #fff;
+        color: #111;
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+      "
+    >
+
+      <option value="Pending">
+        Pending
+      </option>
+
+      <option value="Confirmed">
+        Confirmed
+      </option>
+
+      <option value="Active">
+        Active
+      </option>
+
+      <option value="Returning">
+        Returning
+      </option>
+
+      <option value="Completed">
+        Completed
+      </option>
+
+    </select>
+
+
+    <button
+      type="button"
+      onclick="updateRentalStatus()"
+      style="
+        width: 100%;
+        margin-top: 10px;
+        padding: 13px 16px;
+        border: none;
+        border-radius: 8px;
+        background: white;
+        color: #111;
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+      "
+    >
+      Update Status
+    </button>
+
+  </div>
+
+</div>
+
+
+      <!-- STATEMENT -->
+      <section class="dashboard-statement">
+
+        <p>
+          The rider sees the <span>experience.</span>
+          The business sees the <span>operation.</span>
+        </p>
+
+        <div class="dashboard-footer">
+          ASCND Business Systems Framework · Concept V1
+        </div>
+
+      </section>
+
+    </div>
+
+  </div>
+
+
+  <script src="business.js"></script>
+  <script src="system.js"></script>
+
+  <script>
+
+    /*
+      Pull business information from business.js
+      so this dashboard can eventually be reused
+      for different businesses.
+    */
+
+    if (window.BUSINESS) {
+
+      const nameElement =
+        document.getElementById("businessName");
+
+      if (nameElement && BUSINESS.shortName) {
+        nameElement.textContent = BUSINESS.shortName;
+      }
+
+    }
+/* =========================================================
+   ASCND SYSTEM — LOAD RENTAL REQUESTS
+   ========================================================= */
+
+function loadRentalRequests() {
+
+  const rentalList =
+    document.getElementById("rentalList");
+
+  if (!rentalList) return;
+
+  const requests =
+    ASCND_SYSTEM.getRequests();
+
+  rentalList.innerHTML = "";
+
+  if (requests.length === 0) {
+
+    rentalList.innerHTML = `
+      <div style="
+        padding: 30px 24px;
+        color: rgba(255,255,255,0.45);
+        font-size: 12px;
+      ">
+        No rental requests yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  requests.forEach(function(request) {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "rental-row";
+
+    const customerName =
+      request.customer?.name || "Unknown Customer";
+
+    const customerEmail =
+      request.customer?.email || "No email";
+
+    const bike =
+      request.rental?.bike || "—";
+
+    const experience =
+      request.rental?.experience || "—";
+
+    const date =
+      request.rental?.date || "—";
+
+    const duration =
+      request.rental?.duration || "—";
+
+    const status =
+      request.status || "Pending";
+
+    const statusClass =
+      status.toLowerCase();
+
+    row.innerHTML = `
+
+      <div>
+
+        <div class="customer-name">
+          ${customerName}
+        </div>
+
+        <div class="customer-meta">
+          ${customerEmail}
+        </div>
+
+      </div>
+
+      <div class="rental-info">
+
+        ${bike}
+
+        <small>
+          Bike
+        </small>
+
+      </div>
+
+      <div class="rental-info">
+
+        ${experience}
+
+        <small>
+          Experience
+        </small>
+
+      </div>
+
+      <div class="rental-info">
+
+        ${date}
+
+        <small>
+          ${duration}
+        </small>
+
+      </div>
+
+      <div>
+
+        <span class="status ${statusClass}">
+          ${status}
+        </span>
+
+      </div>
+
+      <button
+        class="view-button"
+        onclick="viewSystemRental('${request.id}')"
+      >
+        View
+      </button>
+
+    `;
+
+    rentalList.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================================
+   VIEW SYSTEM RENTAL
+   ========================================================= */
+
+let currentRentalId = null;
+
+
+function viewSystemRental(requestId) {
+
+  const request =
+    ASCND_SYSTEM.getRequest(requestId);
+
+  if (!request) return;
+
+
+  /* -------------------------------------------------------
+     REMEMBER WHICH RENTAL THE MANAGER IS VIEWING
+     ------------------------------------------------------- */
+
+  currentRentalId = requestId;
+
+
+  /* -------------------------------------------------------
+     REQUEST DATA
+     ------------------------------------------------------- */
+
+  const customer =
+    request.customer?.name || "Unknown Customer";
+
+  const bike =
+    request.rental?.bike || "—";
+
+  const experience =
+    request.rental?.experience || "—";
+
+  const date =
+    request.rental?.date || "—";
+
+  const duration =
+    request.rental?.duration || "—";
+
+  const status =
+    request.status || "Pending";
+
+  const record =
+    request.id || "—";
+
+  const nextAction =
+    request.nextAction || "—";
+
+
+  /* -------------------------------------------------------
+     UPDATE DETAIL PANEL
+     ------------------------------------------------------- */
+
+  document.getElementById("detailCustomer").textContent =
+    customer;
+
+  document.getElementById("detailCustomerValue").textContent =
+    customer;
+
+  document.getElementById("detailBike").textContent =
+    bike;
+
+  document.getElementById("detailRoute").textContent =
+    experience;
+
+  document.getElementById("detailStart").textContent =
+    date;
+
+  document.getElementById("detailReturn").textContent =
+    duration;
+
+  document.getElementById("detailStatus").textContent =
+    status;
+
+  document.getElementById("detailRecord").textContent =
+    "#" + record.replace("R-", "");
+
+  document.getElementById("detailNextAction").textContent =
+    nextAction;
+
+
+  /* -------------------------------------------------------
+     SET STATUS DROPDOWN
+     ------------------------------------------------------- */
+
+  const statusSelect =
+    document.getElementById("statusSelect");
+
+  if (statusSelect) {
+
+    statusSelect.value =
+      status;
+
+  }
+
+
+  /* -------------------------------------------------------
+     SHOW DETAIL PANEL
+     ------------------------------------------------------- */
+
+  document
+    .getElementById("rentalDetail")
+    .classList
+    .add("show");
+
+
+  document
+    .getElementById("rentalDetail")
+    .scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+
+}
+
+/* =========================================================
+   UPDATE RENTAL STATUS
+   ========================================================= */
+
+function updateRentalStatus() {
+
+  if (!currentRentalId) {
+
+    console.warn(
+      "ASCND System: No rental selected."
+    );
+
+    return;
+
+  }
+
+
+  const statusSelect =
+    document.getElementById("statusSelect");
+
+  if (!statusSelect) return;
+
+
+  const newStatus =
+    statusSelect.value;
+
+
+  /* -------------------------------------------------------
+     UPDATE SYSTEM RECORD
+     ------------------------------------------------------- */
+
+  const updatedRequest =
+    ASCND_SYSTEM.updateStatus(
+      currentRentalId,
+      newStatus
+    );
+
+
+  if (!updatedRequest) {
+
+    console.error(
+      "ASCND System: Could not update rental."
+    );
+
+    return;
+
+  }
+
+
+  console.log(
+    "ASCND SYSTEM — RENTAL STATUS UPDATED",
+    updatedRequest
+  );
+
+
+  /* -------------------------------------------------------
+     REFRESH DASHBOARD
+     ------------------------------------------------------- */
+
+  loadRentalRequests();
+
+  updateDashboardMetrics();
+
+
+  /* -------------------------------------------------------
+     REFRESH DETAIL PANEL
+     ------------------------------------------------------- */
+
+  viewSystemRental(
+    currentRentalId
+  );
+
+}
+
+/* =========================================================
+   ASCND SYSTEM — LIVE DASHBOARD METRICS
+   ========================================================= */
+
+function updateDashboardMetrics() {
+
+  const requests =
+    ASCND_SYSTEM.getRequests();
+
+
+  /* -------------------------------------------------------
+     ACTIVE RENTALS
+     ------------------------------------------------------- */
+
+  const activeRentals =
+    requests.filter(function(request) {
+
+      return request.status === "Active";
+
+    }).length;
+
+
+  /* -------------------------------------------------------
+     RETURNING TODAY
+     ------------------------------------------------------- */
+
+  const returningToday =
+    requests.filter(function(request) {
+
+      return request.status === "Returning";
+
+    }).length;
+
+
+  /* -------------------------------------------------------
+     NEW REQUESTS
+     ------------------------------------------------------- */
+
+  const newRequests =
+    requests.filter(function(request) {
+
+      return request.status === "Pending";
+
+    }).length;
+
+
+  /* -------------------------------------------------------
+     FOLLOW-UPS
+     ------------------------------------------------------- */
+
+  const followUps =
+    requests.filter(function(request) {
+
+      return request.status === "Completed";
+
+    }).length;
+
+
+  /* -------------------------------------------------------
+     UPDATE DASHBOARD
+     ------------------------------------------------------- */
+
+  const activeElement =
+    document.getElementById("activeRentalsCount");
+
+  const returningElement =
+    document.getElementById("returningTodayCount");
+
+  const requestsElement =
+    document.getElementById("newRequestsCount");
+
+  const followUpsElement =
+    document.getElementById("followUpsCount");
+
+
+  if (activeElement) {
+    activeElement.textContent =
+      activeRentals;
+  }
+
+  if (returningElement) {
+    returningElement.textContent =
+      returningToday;
+  }
+
+  if (requestsElement) {
+    requestsElement.textContent =
+      newRequests;
+  }
+
+  if (followUpsElement) {
+    followUpsElement.textContent =
+      followUps;
+  }
+
+}
+
+
+/* =========================================================
+   INITIALIZE DASHBOARD METRICS
+   ========================================================= */
+
+updateDashboardMetrics();
+
+loadRentalRequests();
+
+    function showRental(
+      customer,
+      bike,
+      route,
+      start,
+      returnTime,
+      status
+    ) {
+
+      document.getElementById("detailCustomer").textContent =
+        customer;
+
+      document.getElementById("detailCustomerValue").textContent =
+        customer;
+
+      document.getElementById("detailBike").textContent =
+        bike;
+
+      document.getElementById("detailRoute").textContent =
+        route;
+
+      document.getElementById("detailStart").textContent =
+        start;
+
+      document.getElementById("detailReturn").textContent =
+        returnTime;
+
+      document.getElementById("detailStatus").textContent =
+        status;
+
+      document
+        .getElementById("rentalDetail")
+        .classList
+        .add("show");
+
+      document
+        .getElementById("rentalDetail")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "nearest"
+        });
+
+    }
+
+
+    function closeRental() {
+
+      document
+        .getElementById("rentalDetail")
+        .classList
+        .remove("show");
+
+    }
+
+  </script>
+
+</body>
+</html>
