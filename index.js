@@ -1,7 +1,15 @@
-require("dotenv").config();
+require("dotenv").config({
+    path: "C:\\ASCND\\.env"
+});
+
+console.log("SUPABASE URL LOADED:", !!process.env.SUPABASE_URL);
+console.log("SUPABASE KEY LOADED:", !!process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 const express = require("express");
+const cors = require("cors");
+
 const path = require("path");
+
 const {
     createClient
 } = require("@supabase/supabase-js");
@@ -13,6 +21,8 @@ const supabase =
     );
 
 const app = express();
+
+app.use(cors());
 
 const PORT =
     process.env.PORT ||
@@ -435,6 +445,435 @@ function calculatePriority(
 
 }
 
+// =========================
+// COMPANIES
+// =========================
+
+// Get all companies
+app.get("/api/companies", async (req, res) => {
+    try {
+        const { data, error } = await supabase
+            .from("companies")
+            .select("*")
+            .order("created_at", { ascending: false });
+
+        if (error) {
+            console.error("Companies fetch error:", error);
+            return res.status(500).json({
+                error: "Failed to load companies."
+            });
+        }
+
+        res.json(data);
+    } catch (error) {
+        console.error("Companies route error:", error);
+
+        res.status(500).json({
+            error: "Server error."
+        });
+    }
+});
+
+
+// Create a new company
+app.post("/api/companies", async (req, res) => {
+    try {
+        const {
+            name,
+            industry,
+            status,
+            phone,
+            email,
+            primary_contact,
+            notes
+        } = req.body;
+
+        if (!name || !name.trim()) {
+            return res.status(400).json({
+                error: "Company name is required."
+            });
+        }
+
+        const { data, error } = await supabase
+            .from("companies")
+            .insert([
+                {
+                    name: name.trim(),
+                    industry: industry || null,
+                    status: status || "PROSPECT",
+                    phone: phone || null,
+                    email: email || null,
+                    primary_contact: primary_contact || null,
+                    notes: notes || null
+                }
+            ])
+            .select()
+            .single();
+
+        if (error) {
+            console.error("Company creation error:", error);
+
+            return res.status(500).json({
+                error: "Failed to create company."
+            });
+        }
+
+        res.status(201).json(data);
+
+    } catch (error) {
+        console.error("Company route error:", error);
+
+        res.status(500).json({
+            error: "Server error."
+        });
+    }
+});
+
+// ===============================
+// CONTACTS API
+// ===============================
+
+// Get all contacts
+app.get("/api/contacts", async (req, res) => {
+    try {
+        const { data, error } = await supabase
+            .from("contacts")
+            .select(`
+                *,
+                companies (
+                    id,
+                    name
+                )
+            `)
+            .order("created_at", { ascending: false });
+
+        if (error) {
+            console.error("Contacts fetch error:", error);
+
+            return res.status(500).json({
+                error: "Failed to load contacts."
+            });
+        }
+
+        res.json(data);
+
+    } catch (error) {
+        console.error("Contacts route error:", error);
+
+        res.status(500).json({
+            error: "Server error."
+        });
+    }
+});
+
+
+// Create a new contact
+app.post("/api/contacts", async (req, res) => {
+    try {
+        const {
+            first_name,
+            last_name,
+            email,
+            phone,
+            company_id,
+            notes
+        } = req.body;
+
+        if (!first_name || !first_name.trim()) {
+            return res.status(400).json({
+                error: "First name is required."
+            });
+        }
+
+        const { data, error } = await supabase
+            .from("contacts")
+            .insert([
+                {
+                    first_name: first_name.trim(),
+                    last_name: last_name?.trim() || null,
+                    email: email?.trim() || null,
+                    phone: phone?.trim() || null,
+                    company_id: company_id || null,
+                    notes: notes?.trim() || null
+                }
+            ])
+            .select(`
+                *,
+                companies (
+                    id,
+                    name
+                )
+            `)
+            .single();
+
+        if (error) {
+
+    console.error(
+        "CONTACT CREATION ERROR:",
+        error
+    );
+
+    return res.status(500).json({
+        error:
+            error.message ||
+            "Failed to create contact."
+    });
+}
+
+        res.status(201).json(data);
+
+    } catch (error) {
+        console.error("Contact route error:", error);
+
+        res.status(500).json({
+            error: "Server error."
+        });
+    }
+});
+
+// ===============================
+// OPPORTUNITIES API
+// ===============================
+
+// Get all opportunities
+app.get("/api/opportunities", async (req, res) => {
+    try {
+
+        const { data, error } = await supabase
+            .from("opportunities")
+            .select("*")
+            .order("created_at", { ascending: false });
+
+        if (error) {
+
+            console.error(
+                "Opportunities fetch error:",
+                error
+            );
+
+            return res.status(500).json({
+                error:
+                    error.message ||
+                    "Failed to load opportunities."
+            });
+        }
+
+        res.json(data);
+
+    } catch (error) {
+
+        console.error(
+            "Opportunities route error:",
+            error
+        );
+
+        res.status(500).json({
+            error: "Server error."
+        });
+    }
+});
+
+
+// Create a new opportunity
+app.post("/api/opportunities", async (req, res) => {
+    try {
+
+        const {
+    business_name,
+    phone,
+    email,
+    website,
+    value,
+    solutions,
+    opportunity,
+    notes
+} = req.body;
+
+        if (!business_name || !business_name.trim()) {
+
+            return res.status(400).json({
+                error: "Business name is required."
+            });
+        }
+
+        if (!opportunity || !opportunity.trim()) {
+
+            return res.status(400).json({
+                error: "Opportunity is required."
+            });
+        }
+
+        const { data, error } = await supabase
+            .from("opportunities")
+            .insert([
+                {
+                    business_name:
+                        business_name.trim(),
+
+                    phone:
+                        phone?.trim() || null,
+
+                    email:
+                        email?.trim() || null,
+
+                    website:
+                        website?.trim() || null,
+
+                    value: 
+                     Number(value) || 0,
+
+                     solutions,
+
+                    opportunity:
+                        opportunity.trim(),
+
+                    notes:
+                        notes?.trim() || null,
+
+                    stage: "NEW"
+                }
+            ])
+            .select("*")
+            .single();
+
+        if (error) {
+
+            console.error(
+                "Opportunity creation error:",
+                error
+            );
+
+            return res.status(500).json({
+                error:
+                    error.message ||
+                    "Failed to create opportunity."
+            });
+        }
+
+        res.status(201).json(data);
+
+    } catch (error) {
+
+        console.error(
+            "Opportunity route error:",
+            error
+        );
+
+        res.status(500).json({
+            error: "Server error."
+        });
+    }
+});
+
+/* =========================================================
+   LINK ASSESSMENT TO OPPORTUNITY
+   ========================================================= */
+
+app.patch(
+    "/api/assessments/:id/opportunity",
+    async function (req, res) {
+
+        try {
+
+            const id =
+                req.params.id;
+
+            const opportunityId =
+                req.body.opportunity_id;
+
+
+            if (!opportunityId) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Opportunity ID is required."
+
+                });
+
+            }
+
+
+            const {
+                data,
+                error
+            } = await supabase
+                .from("assessments")
+                .update({
+
+                    opportunity_id:
+                        opportunityId
+
+                })
+                .eq(
+                    "id",
+                    id
+                )
+                .select()
+                .single();
+
+
+            if (error) {
+
+                console.error(
+                    "ASSESSMENT OPPORTUNITY LINK ERROR:",
+                    error
+                );
+
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Assessment could not be linked to opportunity.",
+
+                    error:
+                        error.message
+
+                });
+
+            }
+
+
+            res.status(200).json({
+
+                success: true,
+
+                message:
+                    "Assessment linked to opportunity successfully.",
+
+                assessment:
+                    data
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "ASSESSMENT OPPORTUNITY LINK ROUTE ERROR:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Server error."
+
+            });
+
+        }
+
+    }
+);
+
 /* =========================================================
    ADMIN — LOAD ASSESSMENTS
    ========================================================= */
@@ -593,6 +1032,8 @@ app.get(
                                 created_at:
                                     assessment.created_at,
 
+                                opportunity_id: 
+                                    assessment.opportunity_id,
 
                                 contact_name:
                                     assessment.contact_name,

@@ -1,0 +1,3790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCND CONTROL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <!-- MOBILE HEADER -->
+
+<div class="mobile-header">
+
+    <button
+        type="button"
+        class="mobile-menu-button"
+        id="mobileMenuButton"
+        aria-label="Open navigation"
+    >
+        ☰
+    </button>
+
+    <div class="mobile-brand">
+
+        <img
+            src="ascnd-shark-transparent.png"
+            alt="ASCND"
+        >
+
+        <div>
+            <strong>ASCND</strong>
+            <span>SYSTEMS</span>
+        </div>
+
+    </div>
+
+</div>
+
+    <div class="brand">
+        <img
+            src="ascnd-shark-transparent.png"
+            alt="ASCND"
+            class="sidebar-logo"
+        >
+
+        <div class="brand-text">
+            <div class="brand-name">ASCND</div>
+            <div class="brand-subtitle">SYSTEMS</div>
+        </div>
+    </div>
+
+
+    <nav class="nav">
+
+        <button class="nav-item active" data-view="overview">
+            <span>⌂</span>
+            Overview
+        </button>
+
+        <button class="nav-item" data-view="inbox">
+    <span>✉</span>
+    Inbox
+    <b class="nav-count" id="inboxNavCount">0</b>
+</button>
+
+        <button class="nav-item" data-view="radar">
+            <span>◈</span>
+            Radar
+        </button>
+
+        <button class="nav-item" data-view="opportunities">
+            <span>↗</span>
+            Opportunities
+        </button>
+
+        <button class="nav-item" data-view="assessments">
+            <span>◇</span>
+            Assessments
+        </button>
+
+        <button class="nav-item" data-view="companies">
+            <span>▣</span>
+            Companies
+        </button>
+
+        <button class="nav-item" data-view="contacts">
+            <span>◎</span>
+            Contacts
+        </button>
+
+        <button class="nav-item" data-view="business-pipeline">
+            <span>$</span>
+            Business Pipeline
+        </button>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            SYSTEM ONLINE
+        </div>
+
+        <div class="user">
+
+            <div class="user-avatar">
+                RJ
+            </div>
+
+            <div>
+                <strong>Julian Laguna</strong>
+                <small>Administrator</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <header class="topbar">
+
+                <div>
+                    <div class="eyebrow">ASCND'S OPERATING SYSTEM</div>
+                    <h1 id="greeting">Good evening, Mr. Laguna</h1>
+                    <p>"My unmatched perspicacity, coupled with sheer indefigability, makes
+                    me a feared opponent in any relm of human endeavor."</p>
+                    <p>Matthew 6:33</p>
+                </div>
+
+                <div class="topbar-actions">
+
+    <button
+        class="icon-button"
+        id="globalSearchToggle"
+        type="button"
+        aria-label="Search ASCND"
+        aria-expanded="false"
+    >
+        ⌕
+    </button>
+
+    <button class="avatar-button">J</button>
+
+</div>
+
+<!-- GLOBAL SEARCH PANEL -->
+
+<div
+    id="globalSearchPanel"
+    style="
+        display: none;
+        position: absolute;
+        top: 78px;
+        right: 24px;
+        width: 420px;
+        max-width: calc(100vw - 32px);
+        background: #0f1c26;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+        z-index: 1000;
+        overflow: hidden;
+    "
+>
+
+    <div
+        style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        "
+    >
+
+        <input
+            type="text"
+            id="globalSearchInput"
+            class="search-input"
+            placeholder="Search companies, contacts, opportunities..."
+            autocomplete="off"
+            style="
+                flex: 1;
+                margin: 0;
+            "
+        >
+
+        <button
+            type="button"
+            id="globalSearchClear"
+            class="icon-button"
+            aria-label="Clear search"
+            style="
+                display: none;
+                flex-shrink: 0;
+            "
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        id="globalSearchResults"
+        style="
+            max-height: 420px;
+            overflow-y: auto;
+        "
+    >
+
+        <div
+            style="
+                padding: 24px;
+                text-align: center;
+                color: rgba(255,255,255,0.5);
+                font-size: 13px;
+            "
+        >
+            Start typing to search ASCND.
+        </div>
+
+    </div>
+
+</div>
+
+            </header>
+
+
+            <!-- OVERVIEW -->
+
+<section class="view active" id="overview">
+
+    <!-- HEADER -->
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow"> THE CONTROL ROOM</span>
+            <h2>Business Overview:</h2>
+            <p>See how your business operates, where it stands, and where it can ASCND.</p>
+
+        </div>
+
+        <button
+            class="primary-button"
+            id="newOpportunity"
+        >
+            + New Opportunity
+        </button>
+
+    </div>
+
+
+   <!-- ASCND BRIEFING -->
+
+<div class="panel briefing-panel">
+
+    <div class="panel-header">
+
+        <div>
+            <span class="eyebrow">ASCND INTELLIGENCE:</span>
+
+            <h3>Today's Briefing</h3>
+        </div>
+
+        <span class="briefing-status">
+            LIVE
+        </span>
+
+    </div>
+
+
+    <div class="briefing-content">
+
+        <p id="briefingOverview">
+            Loading current business activity...
+        </p>
+
+        <p id="briefingPipeline">
+            Loading pipeline status...
+        </p>
+
+        <p id="briefingAttention">
+            Analyzing current areas of attention...
+        </p>
+
+    </div>
+
+
+    <div class="briefing-focus">
+
+        <span class="eyebrow">
+            CURRENT FOCUS:
+        </span>
+
+        <strong id="briefingFocus">
+            Analyzing current priorities...
+        </strong>
+
+    </div>
+
+</div>
+
+    <!-- WHAT'S HAPPENING -->
+
+<div class="dashboard-section">
+
+    <div class="section-label">
+        <span class="eyebrow">CURRENTLY</span>
+        <h3>What's Happening:</h3>
+    </div>
+
+    <div class="metrics">
+
+        <div class="metric">
+
+            <span>
+                ACTIVE OPPORTUNITIES:
+            </span>
+
+            <strong id="overviewActiveOpportunities">
+                0
+            </strong>
+
+            <small>
+                Currently Moving
+            </small>
+
+        </div>
+
+
+        <div class="metric">
+
+            <span>
+                FOLLOW-UPS:
+            </span>
+
+            <strong id="overviewFollowUps">
+                0
+            </strong>
+
+            <small>
+                Needs Attention
+            </small>
+
+        </div>
+
+
+        <div class="metric">
+
+            <span>
+                PROPOSALS:
+            </span>
+
+            <strong id="overviewProposals">
+                0
+            </strong>
+
+            <small>
+                Awaiting Response
+            </small>
+
+        </div>
+
+
+        <div class="metric">
+
+            <span>
+                PIPELINE VALUE:
+            </span>
+
+            <strong id="overviewPipelineValue">
+                $0
+            </strong>
+
+            <small>
+                Potential Revenue
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    <!-- MAIN INTELLIGENCE GRID -->
+
+    <div class="dashboard-grid">
+
+
+        <!-- NEEDS ATTENTION -->
+
+        <div class="panel">
+
+    <div class="panel-header">
+
+        <div>
+            <span class="eyebrow">
+                PRIORITY:
+            </span>
+
+            <h3>
+                Attention Required
+            </h3>
+        </div>
+
+        <button
+            class="text-button"
+            data-view-target="inbox"
+        >
+            View Inbox →
+        </button>
+
+    </div>
+
+    <div
+        class="inbox-list"
+        id="overviewAttentionList"
+    >
+        <!-- Dynamic attention items render here -->
+    </div>
+
+</div>
+
+
+        <!-- BUSINESS SNAPSHOT -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <span class="eyebrow">
+                        SNAPSHOT:
+                    </span>
+
+                    <h3>
+                        Business Summary
+                    </h3>
+                </div>
+
+                <button
+                    class="text-button"
+                    data-view-target="business-pipeline"
+                >
+                    View Pipeline →
+                </button>
+
+            </div>
+
+
+            <div class="snapshot-list">
+
+
+                <div class="snapshot-row">
+
+                    <span>
+                        Open opportunities -
+                    </span>
+
+                    <strong>
+                        3
+                    </strong>
+
+                </div>
+
+
+                <div class="snapshot-row">
+
+                    <span>
+                        Pipeline value -
+                    </span>
+
+                    <strong>
+                        $3,000
+                    </strong>
+
+                </div>
+
+
+                <div class="snapshot-row">
+
+                    <span>
+                        Active prospects -
+                    </span>
+
+                    <strong>
+                        2
+                    </strong>
+
+                </div>
+
+
+                <div class="snapshot-row">
+
+                    <span>
+                        Active clients -
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+
+                <div class="snapshot-row">
+
+                    <span>
+                        Proposals awaiting response -
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECENT ACTIVITY -->
+
+<div class="panel activity-panel">
+
+    <div class="panel-header">
+
+        <div>
+            <span class="eyebrow">
+                ACTIVITY:
+            </span>
+
+            <h3>
+                Recent Activity
+            </h3>
+        </div>
+
+    </div>
+
+
+    <div
+        class="activity"
+        id="overviewRecentActivity"
+    >
+        <!-- Dynamic activity renders here -->
+    </div>
+
+</div>
+
+</section>
+
+
+            <!-- INBOX -->
+
+<section class="view" id="inbox">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">INBOX</span>
+            <h2>Your Attention File</h2>
+            <p>Review and prioritize the items requiring attention.</p>
+        </div>
+
+    </div>
+
+
+    <!-- INBOX SUMMARY -->
+
+<div class="metrics">
+
+    <div class="metric">
+        <span>NEEDS ATTENTION:</span>
+        <strong id="inboxNeedsAttention">0</strong>
+        <small>Current Items</small>
+    </div>
+
+    <div class="metric">
+        <span>FOLLOW-UPS:</span>
+        <strong id="inboxFollowUps">0</strong>
+        <small>Due Now</small>
+    </div>
+
+    <div class="metric">
+        <span>REVIEWS:</span>
+        <strong id="inboxReviews">0</strong>
+        <small>Waiting for You</small>
+    </div>
+
+    <div class="metric">
+        <span>HIGH PRIORITY:</span>
+        <strong id="inboxHighPriority">0</strong>
+        <small>Requires Attention</small>
+    </div>
+
+</div>
+
+
+    <!-- ATTENTION QUEUE -->
+
+    <div class="panel">
+
+    <div class="panel-header">
+
+        <div>
+            <span class="eyebrow">ATTENTION QUEUE:</span>
+            <h3>What Needs Your Attention</h3>
+        </div>
+
+        <span
+            class="company-count"
+            id="attentionQueueCount"
+        >
+            0 items
+        </span>
+
+    </div>
+
+
+    <div
+        class="inbox-list"
+        id="attentionQueueList"
+    >
+
+        <!-- Dynamic attention items render here -->
+
+    </div>
+
+</div>
+
+
+
+    <!-- RECENT ACTIVITY -->
+
+    <div class="panel activity-panel">
+
+    <div class="panel-header">
+
+        <div>
+            <span class="eyebrow">ACTIVITY:</span>
+            <h3>Recent Activity</h3>
+        </div>
+
+    </div>
+
+    <div
+        class="activity"
+        id="inboxRecentActivity"
+    >
+        <!-- Dynamic activity renders here -->
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- OPPORTUNITIES / RADAR -->
+
+<section class="view" id="opportunities">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">OPPORTUNITIES</span>
+            <h2>ASCND's Opportunities</h2>
+            <p>Current and Potential business opportunities to be evaluated.</p>
+        </div>
+
+        <button class="primary-button" id="newRadarOpportunity">
+            + New Opportunity
+        </button>
+
+    </div>
+
+
+    <!-- RADAR SUMMARY -->
+
+<div class="metrics">
+
+    <div class="metric">
+        <span>OPPORTUNITIES:</span>
+        <strong id="opportunityTotal">0</strong>
+        <small>Currently Identified</small>
+    </div>
+
+    <div class="metric">
+        <span>NEW:</span>
+        <strong id="opportunityNew">0</strong>
+        <small>Recently Discovered</small>
+    </div>
+
+    <div class="metric">
+        <span>REVIEW:</span>
+        <strong id="opportunityReview">0</strong>
+        <small>Waiting for You</small>
+    </div>
+
+    <div class="metric">
+        <span>PIPELINE VALUE:</span>
+        <strong id="opportunityPipelineValue">$0</strong>
+        <small>Worth of Current Opportunities</small>
+    </div>
+
+</div>
+
+
+    <!-- OPPORTUNITY DATABASE -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+                <span class="eyebrow">OPPORTUNITY DATABASE:</span>
+                <h3>Business We've Captured</h3>
+            </div>
+
+            <span class="company-count">
+                0 opportunities
+            </span>
+
+        </div>
+
+
+        <div
+        class="company-list"
+        id="opportunityList"
+    >
+
+        <!-- Opportunities will load from Supabase -->
+
+    </div>
+
+</div>
+
+
+    <!-- RADAR STATUS -->
+
+    <div class="panel activity-panel">
+
+        <div class="panel-header">
+
+            <div>
+                <span class="eyebrow">RADAR STATUS:</span>
+                <h3>Discovery System</h3>
+            </div>
+
+        </div>
+
+
+        <div class="activity">
+
+            <div class="activity-row">
+
+                <span class="activity-time">
+                    NOW
+                </span>
+
+                <div>
+
+                    <strong>
+                        Manual discovery
+                    </strong>
+
+                    <p>
+                        Opportunities are currently being added manually.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="activity-row">
+
+                <span class="activity-time">
+                    NEXT
+                </span>
+
+                <div>
+
+                    <strong>
+                        ASCND RADAR
+                    </strong>
+
+                    <p>
+                        Future system will discover and analyze businesses automatically.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ASSESSMENTS -->
+
+<section class="view" id="assessments">
+
+    <!-- PAGE HEADER -->
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">ASSESSMENTS</span>
+            <h2>Inbound Business Intelligence</h2>
+            <p class="assessment-page-description">
+                Review incoming assessments, identify opportunities,
+                and move qualified businesses forward.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- ASSESSMENT OVERVIEW -->
+    <div class="assessment-overview">
+
+        <div class="assessment-overview-header">
+            <div>
+                <span class="eyebrow">ASSESSMENT OVERVIEW:</span>
+                <h3>Current Intake</h3>
+            </div>
+
+            <span class="assessment-overview-status">
+                LIVE
+            </span>
+        </div>
+
+
+        <div class="assessment-metrics">
+
+            <div class="assessment-metric">
+                <span class="eyebrow">TOTAL:</span>
+                <strong id="assessmentTotal">0</strong>
+                <small>All Assessments Received.</small>
+            </div>
+
+            <div class="assessment-metric">
+                <span class="eyebrow">NEW:</span>
+                <strong id="assessmentNew">0</strong>
+                <small>Awaiting Review.</small>
+            </div>
+
+            <div class="assessment-metric">
+                <span class="eyebrow">HIGH PRIORITY:</span>
+                <strong id="assessmentHigh">0</strong>
+                <small>Requires Attention.</small>
+            </div>
+
+            <div class="assessment-metric">
+                <span class="eyebrow">THIS WEEK:</span>
+                <strong id="assessmentWeek">0</strong>
+                <small>Recent Submissions.</small>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ASSESSMENT INBOX -->
+    <div class="assessment-inbox-section">
+
+        <div class="assessment-inbox-header">
+
+            <div>
+                <span class="eyebrow">ASSESSMENT INBOX</span>
+                <h3>Recent Business Assessments</h3>
+                <p>
+                    Open an assessment to review the full business analysis.
+                </p>
+            </div>
+
+            <div class="assessment-inbox-count">
+                <span id="assessmentTotalLabel">0</span>
+                <small>SUBMISSIONS</small>
+            </div>
+
+        </div>
+
+
+        <div class="assessment-table-wrap">
+
+            <table class="assessment-table">
+
+                <thead>
+                    <tr>
+                        <th>BUSINESS</th>
+                        <th>OPPORTUNITY</th>
+                        <th>TIMELINE</th>
+                        <th>PRIORITY</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+
+                <tbody id="assessmentTableBody">
+
+                    <tr>
+                        <td colspan="5">
+                            <div class="assessment-empty">
+                                Loading assessments...
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ASSESSMENT DETAIL -->
+
+<section class="view" id="assessmentDetail">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">ASSESSMENT DETAILS</span>
+
+            <h2 id="assessmentDetailTitle">
+                Assessment
+            </h2>
+
+            <p id="assessmentDetailSubtitle">
+                Business assessment results.
+            </p>
+        </div>
+
+        <button
+            class="text-button"
+            id="backToAssessments"
+            type="button"
+        >
+            ← Back to Assessments
+        </button>
+
+    </div>
+
+
+    <!-- STATUS / PRIORITY -->
+
+    <div class="assessment-detail-status">
+
+        <div>
+            <span class="eyebrow">STATUS:</span>
+
+            <select
+                id="assessmentDetailStatus"
+                class="assessment-status-select"
+            >
+                <option value="NEW">NEW</option>
+                <option value="CONTACTED">CONTACTED</option>
+                <option value="DISCOVERY">DISCOVERY</option>
+                <option value="PROPOSAL">PROPOSAL</option>
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="COMPLETED">COMPLETED</option>
+            </select>
+        </div>
+
+
+        <div>
+            <span class="eyebrow">PRIORITY:</span>
+
+            <span
+                class="assessment-priority"
+                id="assessmentDetailPriority"
+            >
+                —
+            </span>
+        </div>
+
+
+        <div>
+            <span class="eyebrow">SUBMITTED ON:</span>
+
+            <strong id="assessmentDetailDate">
+                —
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- BUSINESS PROFILE -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+            <span class="eyebrow">BUSINESS PROFILE</span>
+            <h3>Who Submitted the Assessment:</h3>
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="eyebrow">CONTACT:</span>
+                        <h3>Business Information</h3>
+                    </div>
+
+                </div>
+
+
+                <div class="snapshot-list">
+
+                    <div class="snapshot-row">
+                        <span>Business -</span>
+                        <strong id="assessmentBusinessName">—</strong>
+                    </div>
+
+                    <div class="snapshot-row">
+                        <span>Contact -</span>
+                        <strong id="assessmentContactName">—</strong>
+                    </div>
+
+                    <div class="snapshot-row">
+                        <span>Email -</span>
+                        <strong id="assessmentContactEmail">—</strong>
+                    </div>
+
+                    <div class="snapshot-row">
+                        <span>Phone -</span>
+                        <strong id="assessmentContactPhone">—</strong>
+                    </div>
+
+                    <div class="snapshot-row">
+                        <span>Team size -</span>
+                        <strong id="assessmentTeamSize">—</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="eyebrow">BUSINESS DESCRIPTION:</span>
+                        <h3>About Their Business</h3>
+                    </div>
+
+                </div>
+
+
+                <div class="briefing-content">
+
+                    <p id="assessmentBusinessDescription">
+                        —
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRIMARY OPPORTUNITY -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+            <span class="eyebrow">PRIMARY OPPORTUNITY</span>
+            <h3>What the Assessment Identified:</h3>
+        </div>
+
+
+        <div class="panel assessment-primary-opportunity">
+
+            <span
+                class="eyebrow"
+                id="assessmentPrimaryOpportunity"
+            >
+                —
+            </span>
+
+            <h3 id="assessmentPrimaryDescription">
+                —
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <!-- KEY FINDINGS -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+            <span class="eyebrow">KEY FINDINGS</span>
+            <h3>What ASCND Identified:</h3>
+        </div>
+
+
+        <div
+            class="assessment-findings"
+            id="assessmentFindings"
+        >
+            <div class="assessment-detail-empty">
+                No findings available.
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- RECOMMENDED SYSTEMS -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+            <span class="eyebrow">RECOMMENDED SYSTEMS</span>
+            <h3>Potential ASCND Solutions:</h3>
+        </div>
+
+
+        <div
+            class="assessment-system-grid"
+            id="assessmentRecommendedSystems"
+        >
+            <div class="assessment-detail-empty">
+                No recommendations available.
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ADDITIONAL SYSTEMS -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+            <span class="eyebrow">ADDITIONAL INTERESTS</span>
+            <h3>Systems Selected for Exploration:</h3>
+        </div>
+
+
+        <div
+            class="assessment-system-grid"
+            id="assessmentAdditionalSystems"
+        >
+            <div class="assessment-detail-empty">
+                None selected.
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ASSESSMENT SIGNALS -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+            <span class="eyebrow">ASSESSMENT SIGNALS</span>
+            <h3>Business Readiness:</h3>
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <div class="panel">
+
+                <div class="snapshot-list">
+
+                    <div class="snapshot-row">
+                        <span>Timeline -</span>
+                        <strong id="assessmentTimeline">—</strong>
+                    </div>
+
+                    <div class="snapshot-row">
+                        <span>Investment readiness -</span>
+                        <strong id="assessmentInvestmentReadiness">—</strong>
+                    </div>
+
+                    <div class="snapshot-row">
+                        <span>Primary opportunity -</span>
+                        <strong id="assessmentSignalOpportunity">—</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="eyebrow">NEXT ACTION:</span>
+                        <h3>What happens next</h3>
+                    </div>
+
+                </div>
+
+                <div class="briefing-content">
+
+                    <p id="assessmentNextAction">
+                        Review assessment and determine opportunity.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONVERSION -->
+
+    <div class="dashboard-section">
+
+        <div class="panel assessment-conversion-panel">
+
+            <div>
+
+                <span class="eyebrow">
+                    OPPORTUNITY CONVERSION:
+                </span>
+
+                <h3>
+                    Turn this assessment into an opportunity!
+                </h3>
+
+                <p>
+                    Once reviewed, this business can move into
+                    ASCND's opportunity workflow.
+                </p>
+
+            </div>
+
+
+            <button
+                class="primary-button"
+                id="convertAssessmentOpportunity"
+                type="button"
+            >
+                Create Opportunity
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- OPPORTUNITY DETAIL -->
+
+<section class="view" id="opportunityDetail">
+
+    <!-- HEADER -->
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">OPPORTUNITY DETAILS</span>
+
+            <h2 id="opportunityDetailTitle">
+                Opportunity
+            </h2>
+
+            <p id="opportunityDetailType">
+                Potential Business
+            </p>
+        </div>
+
+        <button
+            class="text-button"
+            id="backToOpportunities"
+            type="button"
+        >
+            ← Back to Opportunities
+        </button>
+
+    </div>
+
+
+    <!-- STATUS / VALUE / NEXT ACTION -->
+
+    <div class="assessment-detail-status">
+
+        <div>
+            <span class="eyebrow">STATUS:</span>
+
+            <strong id="opportunityDetailStatus">
+                NEW
+            </strong>
+        </div>
+
+
+        <div>
+            <span class="eyebrow">ESTIMATED VALUE:</span>
+
+            <strong id="opportunityDetailValue">
+                $0
+            </strong>
+        </div>
+
+
+        <div>
+            <span class="eyebrow">NEXT ACTION:</span>
+
+            <strong id="opportunityDetailNextAction">
+                Follow Up
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- BUSINESS PROFILE -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">
+                BUSINESS PROFILE
+            </span>
+
+            <h3>
+                Business Information:
+            </h3>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <!-- BUSINESS INFORMATION -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            CONTACT:
+                        </span>
+
+                        <h3>
+                            Business Information
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="snapshot-list">
+
+                    <div class="snapshot-row">
+                        <span>Business -</span>
+
+                        <strong id="opportunityDetailBusiness">
+                            —
+                        </strong>
+                    </div>
+
+
+                    <div class="snapshot-row">
+                        <span>Phone -</span>
+
+                        <strong id="opportunityDetailPhone">
+                            —
+                        </strong>
+                    </div>
+
+
+                    <div class="snapshot-row">
+                        <span>Email -</span>
+
+                        <strong id="opportunityDetailEmail">
+                            —
+                        </strong>
+                    </div>
+
+
+                    <div class="snapshot-row">
+                        <span>Website -</span>
+
+                        <strong id="opportunityDetailWebsite">
+                            —
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUSINESS OPPORTUNITY -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            BUSINESS OPPORTUNITY:
+                        </span>
+
+                        <h3>
+                            Why This Business Matters
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="briefing-content">
+
+                    <p id="opportunityWhy">
+                        No opportunity analysis has been added yet.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRIMARY OPPORTUNITY -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">
+                PRIMARY OPPORTUNITY
+            </span>
+
+            <h3>
+                What ASCND Identified:
+            </h3>
+
+        </div>
+
+
+        <div class="panel assessment-primary-opportunity">
+
+            <span class="eyebrow">
+                OPPORTUNITY
+            </span>
+
+            <h3 id="opportunityDetailPrimary">
+                —
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <!-- KEY FINDINGS -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">
+                KEY FINDINGS
+            </span>
+
+            <h3>
+                What Could Benefit Their Business:
+            </h3>
+
+        </div>
+
+
+        <div class="assessment-findings">
+
+            <div class="panel">
+
+                <div class="snapshot-list">
+
+                    <div class="snapshot-row">
+
+                        <span>Need -</span>
+
+                        <strong id="opportunityNeed1">
+                            No specific need identified.
+                        </strong>
+
+                    </div>
+
+
+                    <div class="snapshot-row">
+
+                        <span>Need -</span>
+
+                        <strong id="opportunityNeed2">
+                        </strong>
+
+                    </div>
+
+
+                    <div class="snapshot-row">
+
+                        <span>Need -</span>
+
+                        <strong id="opportunityNeed3">
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECOMMENDED SYSTEMS -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">
+                RECOMMENDED SYSTEMS
+            </span>
+
+            <h3>
+                Potential ASCND Solutions:
+            </h3>
+
+        </div>
+
+
+        <div class="assessment-system-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ASCND SOLUTION:
+                        </span>
+
+                        <h3>
+                            Recommended Systems
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="briefing-content">
+
+                    <p id="opportunitySolution">
+                        No ASCND solution selected.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTES -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">
+                NOTES
+            </span>
+
+            <h3>
+                Opportunity Notes:
+            </h3>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="briefing-content">
+
+                <p id="opportunityDetailNotes">
+                    No notes have been added yet.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+            <!-- =========================================
+     BUSINESS PIPELINE
+========================================= -->
+
+<section class="view" id="business-pipeline">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">BUSINESS PIPELINE</span>
+            <h2>Revenue + Growth:</h2>
+            <p>Track where ASCND stands and where it's on pace to meet it's goals.</p>
+        </div>
+
+    </div>
+
+
+    <!-- REVENUE SNAPSHOT -->
+
+    <div class="metrics">
+
+        <div class="metric">
+            <span>REVENUE THIS MONTH:</span>
+            <strong>$0</strong>
+            <small>Collected</small>
+        </div>
+
+        <div class="metric">
+            <span>MONTHLY GOAL:</span>
+            <strong>$15,000</strong>
+            <small>Target</small>
+        </div>
+
+        <div class="metric">
+            <span>PIPELINE VALUE:</span>
+            <strong>$3,000</strong>
+            <small>Active opportunities</small>
+        </div>
+
+        <div class="metric">
+            <span>REMAINING:</span>
+            <strong>$12,000</strong>
+            <small>To monthly goal</small>
+        </div>
+
+    </div>
+
+
+    <!-- REVENUE GOAL -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">REVENUE GOAL</span>
+            <h3>Monthly Progress:</h3>
+
+        </div>
+
+
+        <div class="revenue-goal-panel">
+
+            <div class="revenue-goal-header">
+
+                <div>
+                    <span class="eyebrow">
+                        CURRENT PROGRESS:
+                    </span>
+
+                    <strong>
+                        $0
+                    </strong>
+
+                    <small>
+                        of $15,000 monthly goal
+                    </small>
+                </div>
+
+
+                <div class="revenue-goal-percent">
+                    0%
+                </div>
+
+            </div>
+
+
+            <div class="revenue-progress">
+
+                <div
+                    class="revenue-progress-fill"
+                    style="width: 0%;"
+                ></div>
+
+            </div>
+
+
+            <div class="revenue-goal-footer">
+
+                <span>
+                    $12,000 remaining
+                </span>
+
+                <span>
+                    MONTHLY TARGET
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- REVENUE TRAJECTORY -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">TRAJECTORY</span>
+            <h3>Revenue Movement:</h3>
+
+        </div>
+
+
+        <div class="revenue-chart">
+
+            <div class="chart-y-axis">
+
+                <span>$15K</span>
+                <span>$12k</span>
+                <span>$9K</span>
+                <span>$6K</span>
+                <span>$3K</span>
+                <span>$0</span>
+
+            </div>
+
+
+            <div class="chart-area">
+
+                <div class="chart-grid-lines">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <div class="revenue-bars">
+
+                    <div class="revenue-bar-wrap">
+                        <div
+                            class="revenue-bar"
+                            style="height: 0%;"
+                        ></div>
+                        <span>JAN</span>
+                    </div>
+
+                    <div class="revenue-bar-wrap">
+                        <div
+                            class="revenue-bar"
+                            style="height: 0%;"
+                        ></div>
+                        <span>FEB</span>
+                    </div>
+
+                    <div class="revenue-bar-wrap">
+                        <div
+                            class="revenue-bar"
+                            style="height: 0%;"
+                        ></div>
+                        <span>MAR</span>
+                    </div>
+
+                    <div class="revenue-bar-wrap">
+                        <div
+                            class="revenue-bar"
+                            style="height: 0%;"
+                        ></div>
+                        <span>APR</span>
+                    </div>
+
+                    <div class="revenue-bar-wrap">
+                        <div
+                            class="revenue-bar"
+                            style="height: 0%;"
+                        ></div>
+                        <span>MAY</span>
+                    </div>
+
+                    <div class="revenue-bar-wrap">
+                        <div
+                            class="revenue-bar"
+                            style="height: 0%;"
+                        ></div>
+                        <span>JUN</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PIPELINE OUTLOOK -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">PIPELINE OUTLOOK</span>
+            <h3>Potential Revenue:</h3>
+
+        </div>
+
+
+        <div class="metrics">
+
+            <div class="metric">
+
+                <span>ACTIVE PIPELINE:</span>
+
+                <strong>
+                    $3,000
+                </strong>
+
+                <small>
+                    Potential Revenue
+                </small>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>PROPOSALS:</span>
+
+                <strong>
+                    $1,500
+                </strong>
+
+                <small>
+                    Awaiting Response
+                </small>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>MEETINGS:</span>
+
+                <strong>
+                    $1,500
+                </strong>
+
+                <small>
+                    Potential Revenue
+                </small>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>WON REVENUE:</span>
+
+                <strong>
+                    $0
+                </strong>
+
+                <small>
+                    This period
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PERFORMANCE -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">PERFORMANCE</span>
+            <h3>Business Health:</h3>
+
+        </div>
+
+
+        <div class="performance-grid">
+
+
+            <div class="performance-card">
+
+                <span class="eyebrow">
+                    CURRENT PACE:
+                </span>
+
+                <strong>
+                    $0
+                </strong>
+
+                <p>
+                    Revenue currently collected this month.
+                </p>
+
+            </div>
+
+
+            <div class="performance-card">
+
+                <span class="eyebrow">
+                    REQUIRED PACE:
+                </span>
+
+                <strong>
+                    $15,000
+                </strong>
+
+                <p>
+                    Revenue required to reach the monthly goal.
+                </p>
+
+            </div>
+
+
+            <div class="performance-card">
+
+                <span class="eyebrow">
+                    GAP TO GOAL:
+                </span>
+
+                <strong>
+                    $15,000
+                </strong>
+
+                <p>
+                    Remaining revenue needed this month.
+                </p>
+
+            </div>
+
+
+            <div class="performance-card">
+
+                <span class="eyebrow">
+                    STATUS:
+                </span>
+
+                <strong>
+                    BUILDING
+                </strong>
+
+                <p>
+                    Revenue engine is still being established.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+<!-- FOCUS AREAS -->
+
+<div class="dashboard-section">
+
+    <div class="section-label">
+
+        <span class="eyebrow">
+            FOCUS AREAS
+        </span>
+
+        <h3>
+            Where We Can Improve & Progress ASCND Forward:
+        </h3>
+
+    </div>
+
+
+    <div class="focus-panel">
+
+        <div class="focus-intro">
+
+            <p>
+                These are the areas currently capable of moving ASCND
+                closer to the $15,000 monthly revenue goal.
+            </p>
+
+        </div>
+
+
+        <div class="focus-list">
+
+
+            <!-- CLOSE ACTIVE OPPORTUNITIES -->
+
+            <div class="focus-row">
+
+                <div class="focus-number">
+                    01
+                </div>
+
+                <div class="focus-content">
+
+                    <div class="focus-title-row">
+
+                        <strong>
+                            Close Active Opportunities
+                        </strong>
+
+                        <span class="focus-status active">
+                            HIGH IMPACT
+                        </span>
+
+                    </div>
+
+                    <p>
+                        $3,000 currently sits in active opportunity value.
+                        Move existing prospects toward meetings, proposals,
+                        and closed business.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- INCREASE LEAD VOLUME -->
+
+            <div class="focus-row">
+
+                <div class="focus-number">
+                    02
+                </div>
+
+                <div class="focus-content">
+
+                    <div class="focus-title-row">
+
+                        <strong>
+                            Increase Lead Volume
+                        </strong>
+
+                        <span class="focus-status">
+                            GROWTH
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Continue adding qualified businesses through ASCND
+                        RADAR, assessments, referrals, and direct outreach.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- IMPROVE CONVERSION -->
+
+            <div class="focus-row">
+
+                <div class="focus-number">
+                    03
+                </div>
+
+                <div class="focus-content">
+
+                    <div class="focus-title-row">
+
+                        <strong>
+                            Improve Conversion
+                        </strong>
+
+                        <span class="focus-status">
+                            PROCESS
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Strengthen the path from opportunity to contact,
+                        meeting, proposal, and signed client.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- INCREASE DEAL VALUE -->
+
+            <div class="focus-row">
+
+                <div class="focus-number">
+                    04
+                </div>
+
+                <div class="focus-content">
+
+                    <div class="focus-title-row">
+
+                        <strong>
+                            Increase Deal Value
+                        </strong>
+
+                        <span class="focus-status">
+                            SCALE
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Develop larger Grow and Custom Business Optimization
+                        opportunities as ASCND's capabilities expand.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECURRING REVENUE -->
+
+            <div class="focus-row">
+
+                <div class="focus-number">
+                    05
+                </div>
+
+                <div class="focus-content">
+
+                    <div class="focus-title-row">
+
+                        <strong>
+                            Build Recurring Revenue
+                        </strong>
+
+                        <span class="focus-status">
+                            LONG TERM
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Build a recurring revenue base through maintenance,
+                        support, monitoring, and ongoing system optimization.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- CURRENT PRIORITY -->
+
+<div class="dashboard-section">
+
+    <div class="section-label">
+
+        <span class="eyebrow">
+            CURRENT PRIORITY
+        </span>
+
+        <h3>
+            What Deserves Attention Now:
+        </h3>
+
+    </div>
+
+
+    <div class="priority-command-panel">
+
+        <div>
+
+            <span class="eyebrow">
+                Important:
+            </span>
+
+            <h3>
+                Focus on the most impactful actions first.
+            </h3>
+
+            <p>
+                ASCND currently has active opportunities but no recorded
+                revenue this month. The immediate focus should be moving
+                existing opportunities toward revenue before simply adding
+                more volume.
+            </p>
+
+        </div>
+
+
+        <div class="priority-actions">
+
+            <div class="priority-action">
+
+                <span>
+                    NXT LEVEL EPOXY
+                </span>
+
+                <strong>
+                    Follow Up
+                </strong>
+
+            </div>
+
+
+            <div class="priority-action">
+
+                <span>
+                    BLUE STAR BIKE SHOP
+                </span>
+
+                <strong>
+                    Move Toward Proposal
+                </strong>
+
+            </div>
+
+
+            <div class="priority-action">
+
+                <span>
+                    ASCND RADAR
+                </span>
+
+                <strong>
+                    Continue Building Opportunity Flow
+                </strong>
+
+            </div>
+
+         </div>
+
+    </div>
+
+</section>
+
+           <section class="view" id="companies">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">COMPANIES</span>
+            <h2>Businesses & Companies</h2>
+            <p>Manage companies, contacts, and relationships across your business network.</p>
+
+        </div>
+
+        <button class="primary-button" id="newCompany">
+            + New Company
+        </button>
+
+        <!-- NEW COMPANY MODAL -->
+
+<div class="modal-overlay" id="newCompanyModal">
+
+    <div class="modal-panel">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    COMPANIES
+                </span>
+
+                <h2>
+                    New Company
+                </h2>
+
+                <p>
+                    Add a new business to the ASCND system.
+                </p>
+
+            </div>
+
+            <button
+                class="modal-close"
+                id="closeNewCompany"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="newCompanyForm">
+
+            <div class="dashboard-grid">
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newCompanyName"
+                    >
+                        COMPANY NAME:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newCompanyName"
+                        class="search-input"
+                        placeholder="Business name"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newCompanyIndustry"
+                    >
+                        INDUSTRY:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newCompanyIndustry"
+                        class="search-input"
+                        placeholder="Industry"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newCompanyStatus"
+                    >
+                        STATUS:
+                    </label>
+
+                    <select
+                        id="newCompanyStatus"
+                        class="search-input"
+                    >
+                        <option value="PROSPECT">
+                            PROSPECT
+                        </option>
+
+                        <option value="LEAD">
+                            LEAD
+                        </option>
+
+                        <option value="CLIENT">
+                            CLIENT
+                        </option>
+
+                        <option value="INACTIVE">
+                            INACTIVE
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newCompanyPhone"
+                    >
+                        PHONE:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newCompanyPhone"
+                        class="search-input"
+                        placeholder="Phone number"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newCompanyEmail"
+                    >
+                        EMAIL:
+                    </label>
+
+                    <input
+                        type="email"
+                        id="newCompanyEmail"
+                        class="search-input"
+                        placeholder="Email address"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newCompanyContact"
+                    >
+                        PRIMARY CONTACT:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newCompanyContact"
+                        class="search-input"
+                        placeholder="Contact name"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div style="margin-top:20px;">
+
+                <label
+                    class="eyebrow"
+                    for="newCompanyNotes"
+                >
+                    NOTES:
+                </label>
+
+                <textarea
+                    id="newCompanyNotes"
+                    class="search-input"
+                    placeholder="Add notes..."
+                    rows="5"
+                    style="width:100%; resize:vertical;"
+                ></textarea>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="text-button"
+                    id="cancelNewCompany"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Create Company
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+    </div>
+
+
+    <!-- COMPANY SEARCH -->
+
+<div class="company-toolbar" style="
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 20px;
+">
+        <input
+            type="text"
+            id="companySearch"
+            class="search-input"
+            placeholder="Search companies..."
+        >
+
+        <select
+    id="companyFilter"
+    style="
+        display: block !important;
+        width: 220px !important;
+        min-width: 220px !important;
+        height: 46px !important;
+        background: #0f1c26 !important;
+        color: #f4f7f9 !important;
+        border: 2px solid #35a9ff !important;
+        border-radius: 10px !important;
+        padding: 0 14px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        appearance: auto !important;
+    "
+>
+    <option value="all">FILTER: ALL</option>
+    <option value="prospect">FILTER: PROSPECTS</option>
+    <option value="client">FILTER: CLIENTS</option>
+    <option value="inactive">FILTER: INACTIVE</option>
+</select>
+
+    </div>
+
+
+    <!-- COMPANY LIST -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+                <span class="eyebrow">DATABASE:</span>
+                <h3>Companies</h3>
+            </div>
+
+            <span class="company-count" id="companyCount">
+                3 companies
+            </span>
+
+        </div>
+
+
+        <div class="company-list" id="companyList">
+
+
+            <!-- COMPANY 1 -->
+
+            <div
+                class="company-row"
+                data-status="prospect"
+                data-company="NXT LEVEL EPOXY"
+            >
+
+                <div class="company-avatar">
+                    NE
+                </div>
+
+                <div class="company-info">
+
+                    <strong>NXT LEVEL EPOXY</strong>
+
+                    <span>
+                        Epoxy Flooring
+                    </span>
+
+                </div>
+
+                <div class="company-status prospect">
+                    PROSPECT
+                </div>
+
+                <div class="company-action">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- COMPANY 2 -->
+
+            <div
+                class="company-row"
+                data-status="prospect"
+                data-company="BLUE STAR BIKE SHOP"
+            >
+
+                <div class="company-avatar">
+                    BS
+                </div>
+
+                <div class="company-info">
+
+                    <strong>BLUE STAR BIKE SHOP</strong>
+
+                    <span>
+                        Bike Shop
+                    </span>
+
+                </div>
+
+                <div class="company-status prospect">
+                    PROSPECT
+                </div>
+
+                <div class="company-action">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- COMPANY 3 -->
+
+            <div
+                class="company-row"
+                data-status="client"
+                data-company="ASCND"
+            >
+
+                <div class="company-avatar">
+                    AS
+                </div>
+
+                <div class="company-info">
+
+                    <strong>ASCND</strong>
+
+                    <span>
+                        Digital Systems
+                    </span>
+
+                </div>
+
+                <div class="company-status client">
+                    CLIENT
+                </div>
+
+                <div class="company-action">
+                    →
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- COMPANY RECORD -->
+
+<section class="view" id="companyRecord">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">COMPANY RECORD</span>
+            <h2 id="companyRecordTitle">
+                NXT LEVEL EPOXY
+            </h2>
+            <p id="companyRecordType">
+                Epoxy Flooring
+            </p>
+        </div>
+
+        <button
+            class="text-button"
+            id="backToCompanies"
+        >
+            ← Back to Companies
+        </button>
+
+    </div>
+
+
+    <!-- COMPANY OVERVIEW -->
+
+    <div class="dashboard-grid">
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <span class="eyebrow">COMPANY:</span>
+                    <h3>Business Information</h3>
+                </div>
+
+                <span
+                    class="company-status prospect"
+                    id="companyRecordStatus"
+                >
+                    PROSPECT
+                </span>
+
+            </div>
+
+
+            <div class="snapshot-list">
+
+                <div class="snapshot-row">
+                    <span>Company -</span>
+                    <strong id="companyRecordName">
+                        NXT LEVEL EPOXY
+                    </strong>
+                </div>
+
+                <div class="snapshot-row">
+                    <span>Industry -</span>
+                    <strong id="companyRecordIndustry">
+                        Epoxy Flooring
+                    </strong>
+                </div>
+
+                <div class="snapshot-row">
+    <span>Contact -</span>
+    <strong id="companyRecordContact">
+        Primary Contact
+    </strong>
+</div>
+
+<div class="snapshot-row">
+    <span>Phone -</span>
+    <strong id="companyRecordPhone">
+        —
+    </strong>
+</div>
+
+<div class="snapshot-row">
+    <span>Email -</span>
+    <strong id="companyRecordEmail">
+        —
+    </strong>
+</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- NEXT ACTION -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <span class="eyebrow">NEXT ACTION:</span>
+                    <h3>Attention Required</h3>
+                </div>
+
+            </div>
+
+            <div class="briefing-content">
+
+                <p id="companyRecordNextAction">
+                    Follow up with prospect.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTACTS -->
+
+<div class="dashboard-section">
+
+    <div class="section-label">
+        <span class="eyebrow">CONTACTS</span>
+        <h3>Individuals at this company:</h3>
+    </div>
+
+    <div class="panel">
+
+        <div class="activity">
+
+            <div class="activity-row">
+
+    
+
+                <div>
+
+                    <strong id="companyRecordContactName">
+                        Primary Contact
+                    </strong>
+
+                    <p id="companyRecordContactRole">
+                        Owner / Manager
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- OPPORTUNITIES -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+            <span class="eyebrow">OPPORTUNITIES</span>
+            <h3>Active Opportunities</h3>
+        </div>
+
+        <div class="panel">
+
+            <div 
+             class="pipeline-card"
+    id="companyRecordOpportunityCard"
+>
+
+                <div class="pipeline-card-top">
+                    <span id="companyRecordOpportunityStage">
+                        PROPOSAL
+                    </span>
+
+                    <span id="companyRecordOpportunityValue">
+                        Potentially: $3,000
+                    </span>
+                </div>
+
+                <strong id="companyRecordOpportunity">
+                    Website + Business Systems
+                </strong>
+
+                <p id="companyRecordOpportunityDescription">
+                    Proposal sent 4 days ago.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+            <span class="eyebrow">ACTIVITY</span>
+            <h3>Recent Activity</h3>
+        </div>
+
+        <div class="panel">
+
+            <div class="activity">
+
+                <div class="activity-row">
+
+                    <span class="activity-time">
+                        —
+                    </span>
+
+                    <div>
+
+                        <strong id="companyRecordActivity">
+                            Proposal sent
+                        </strong>
+
+                        <p>
+                            Latest recorded activity for this company.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACTS -->
+
+<section class="view" id="contacts">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">CONTACTS</span>
+            <h2>Business Relationships</h2>
+            <p>Keep track of the people, connections, and relationships that drive your business.</p>
+        </div>
+
+        <button class="primary-button" id="newContact">
+            + New Contact
+        </button>
+
+    </div>
+
+    <!-- NEW CONTACT MODAL -->
+
+<div class="modal-overlay" id="newContactModal">
+
+    <div class="modal-panel">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    CONTACTS
+                </span>
+
+                <h2>
+                    New Contact
+                </h2>
+
+                <p>
+                    Add a new business contact to ASCND.
+                </p>
+
+            </div>
+
+            <button
+                class="modal-close"
+                id="closeNewContact"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="newContactForm">
+
+            <div class="dashboard-grid">
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newContactFirstName"
+                    >
+                        FIRST NAME:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newContactFirstName"
+                        class="search-input"
+                        placeholder="First name"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newContactLastName"
+                    >
+                        LAST NAME:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newContactLastName"
+                        class="search-input"
+                        placeholder="Last name"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newContactEmail"
+                    >
+                        EMAIL:
+                    </label>
+
+                    <input
+                        type="email"
+                        id="newContactEmail"
+                        class="search-input"
+                        placeholder="Email address"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        class="eyebrow"
+                        for="newContactPhone"
+                    >
+                        PHONE:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newContactPhone"
+                        class="search-input"
+                        placeholder="Phone number"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div style="margin-top:20px;">
+
+                <label
+                    class="eyebrow"
+                    for="newContactNotes"
+                >
+                    NOTES:
+                </label>
+
+                <textarea
+                    id="newContactNotes"
+                    class="search-input"
+                    placeholder="Add notes..."
+                    rows="5"
+                    style="width:100%; resize:vertical;"
+                ></textarea>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="text-button"
+                    id="cancelNewContact"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Create Contact
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+    <!-- CONTACT SEARCH -->
+
+    <div
+        class="company-toolbar"
+        style="
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+        "
+    >
+
+        <input
+            type="text"
+            id="contactSearch"
+            class="search-input"
+            placeholder="Search contacts..."
+        >
+
+    </div>
+
+
+    <!-- CONTACT DATABASE -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+                <span class="eyebrow">DATABASE:</span>
+                <h3>Contacts</h3>
+            </div>
+
+            <span class="company-count" id="contactCount">
+                3 contacts
+            </span>
+
+        </div>
+
+
+        <div class="company-list" id="contactList">
+
+
+            <!-- CONTACT 1 -->
+
+            <div
+                class="company-row contact-row"
+                data-contact="Julian Laguna"
+                data-company="ASCND"
+            >
+
+                <div class="company-avatar">
+                    JL
+                </div>
+
+                <div class="company-info">
+
+                    <strong>Julian Laguna</strong>
+
+                    <span>
+                        ASCND
+                    </span>
+
+                </div>
+
+                <div class="company-status client">
+                    ADMINISTRATOR
+                </div>
+
+                <div class="company-action">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT 2 -->
+
+            <div
+                class="company-row contact-row"
+                data-contact="Primary Contact"
+                data-company="NXT LEVEL EPOXY"
+            >
+
+                <div class="company-avatar">
+                    NE
+                </div>
+
+                <div class="company-info">
+
+                    <strong>Primary Contact</strong>
+
+                    <span>
+                        NXT LEVEL EPOXY
+                    </span>
+
+                </div>
+
+                <div class="company-status prospect">
+                    OWNER / MANAGER
+                </div>
+
+                <div class="company-action">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT 3 -->
+
+            <div
+                class="company-row contact-row"
+                data-contact="Primary Contact"
+                data-company="BLUE STAR BIKE SHOP"
+            >
+
+                <div class="company-avatar">
+                    BS
+                </div>
+
+                <div class="company-info">
+
+                    <strong>Primary Contact</strong>
+
+                    <span>
+                        BLUE STAR BIKE SHOP
+                    </span>
+
+                </div>
+
+                <div class="company-status prospect">
+                    MANAGER
+                </div>
+
+                <div class="company-action">
+                    →
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT DETAIL -->
+
+<section class="view" id="contactDetail">
+
+    <!-- HEADER -->
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="eyebrow">
+                CONTACT DETAILS
+            </span>
+
+            <h2 id="contactDetailTitle">
+                Contact
+            </h2>
+
+            <p id="contactDetailSubtitle">
+                Business relationship
+            </p>
+
+        </div>
+
+
+        <button
+            class="text-button"
+            id="backToContacts"
+            type="button"
+        >
+            ← Back to Contacts
+        </button>
+
+    </div>
+
+
+    <!-- CONTACT INFORMATION -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">
+                CONTACT PROFILE
+            </span>
+
+            <h3>
+                Contact Information:
+            </h3>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <!-- CONTACT -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            CONTACT:
+                        </span>
+
+                        <h3>
+                            Personal Information
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="snapshot-list">
+
+                    <div class="snapshot-row">
+
+                        <span>
+                            First Name -
+                        </span>
+
+                        <strong id="contactDetailFirstName">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="snapshot-row">
+
+                        <span>
+                            Last Name -
+                        </span>
+
+                        <strong id="contactDetailLastName">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="snapshot-row">
+
+                        <span>
+                            Email -
+                        </span>
+
+                        <strong id="contactDetailEmail">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="snapshot-row">
+
+                        <span>
+                            Phone -
+                        </span>
+
+                        <strong id="contactDetailPhone">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT OVERVIEW -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            RELATIONSHIP:
+                        </span>
+
+                        <h3>
+                            Contact Notes
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="briefing-content">
+
+                    <p id="contactDetailNotes">
+                        No notes have been added yet.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY / NEXT STEP -->
+
+    <div class="dashboard-section">
+
+        <div class="section-label">
+
+            <span class="eyebrow">
+                NEXT ACTION
+            </span>
+
+            <h3>
+                Relationship Follow-Up:
+            </h3>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="briefing-content">
+
+                <p id="contactDetailNextAction">
+                    No next action has been assigned.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- NEW OPPORTUNITY MODAL -->
+
+<div class="modal-overlay" id="newOpportunityModal">
+
+    <div class="modal-panel">
+
+        <div class="modal-header">
+
+            <div>
+                <span class="eyebrow">OPPORTUNITIES</span>
+
+                <h2>New Opportunity </h2>
+
+                <p>
+                    Add your next business opportunity. Shark em' down.
+                </p>
+            </div>
+
+            <button
+                class="modal-close"
+                id="closeNewOpportunity"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="newOpportunityForm">
+
+    <!-- BUSINESS INFORMATION -->
+    <div class="dashboard-grid">
+
+        <div>
+            <label
+                class="eyebrow"
+                for="newOpportunityBusiness"
+            >
+                BUSINESS NAME:
+            </label>
+
+            <input
+                type="text"
+                id="newOpportunityBusiness"
+                class="search-input"
+                placeholder="Business name"
+                required
+            >
+        </div>
+
+
+        <div>
+            <label
+                class="eyebrow"
+                for="newOpportunityPhone"
+            >
+                PHONE:
+            </label>
+
+            <input
+                type="tel"
+                id="newOpportunityPhone"
+                class="search-input"
+                placeholder="(210) 555-0000"
+            >
+        </div>
+
+
+        <div>
+            <label
+                class="eyebrow"
+                for="newOpportunityEmail"
+            >
+                EMAIL:
+            </label>
+
+            <input
+                type="email"
+                id="newOpportunityEmail"
+                class="search-input"
+                placeholder="business@email.com"
+            >
+        </div>
+
+
+        <div>
+            <label
+                class="eyebrow"
+                for="newOpportunityWebsite"
+            >
+                WEBSITE:
+            </label>
+
+            <input
+                type="text"
+                id="newOpportunityWebsite"
+                class="search-input"
+                placeholder="www.business.com"
+            >
+        </div>
+
+    </div>
+
+
+    <!-- WHAT DOES THIS BUSINESS NEED? -->
+    <div style="margin-top: 24px;">
+
+        <label class="eyebrow">
+            WHAT COULD HELP THIS BUSINESS?
+        </label>
+
+        <div class="solution-options">
+
+            <label class="solution-option">
+
+                 <input
+        type="checkbox"
+        name="opportunitySolution"
+        value="start"
+        data-value="1500"
+    >
+
+                <div>
+                    <strong>ASCND Start - </strong>
+                    <span>Website / Digital Foundation</span>
+                </div>
+
+                <b>$1,500</b>
+
+            </label>
+
+
+            <label class="solution-option">
+
+                <input
+                    type="checkbox"
+                    name="opportunitySolution"
+                    value="grow"
+                    data-value="1500"
+                >
+
+                <div>
+                    <strong>ASCND Grow - </strong>
+                    <span>Lead & Customer System</span>
+                </div>
+
+                <b>$1,500</b>
+
+            </label>
+
+
+            <label class="solution-option">
+
+                <input
+                    type="checkbox"
+                    name="opportunitySolution"
+                    value="brand"
+                    data-value="500"
+                >
+
+                <div>
+                    <strong>Brand Identity - </strong>
+                    <span>Logo / Visual Identity</span>
+                </div>
+
+                <b>$500</b>
+
+            </label>
+
+
+            <label class="solution-option">
+
+                <input
+                    type="checkbox"
+                    name="opportunitySolution"
+                    value="estimate"
+                    data-value="750"
+                >
+
+                <div>
+                    <strong>Estimate / Quote System - </strong>
+                    <span>Automated estimating</span>
+                </div>
+
+                <b>$750</b>
+
+            </label>
+
+
+            <label class="solution-option">
+
+                <input
+                    type="checkbox"
+                    name="opportunitySolution"
+                    value="other"
+                    data-value="0"
+                >
+
+                <div>
+                    <strong>Other / Custom - </strong>
+                    <span>Additional or specialized solution</span>
+                </div>
+
+                <b>CUSTOM</b>
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- AUTOMATIC VALUE -->
+    <div
+        class="opportunity-value-box"
+        style="margin-top: 24px;"
+    >
+
+        <span class="eyebrow">
+            ESTIMATED OPPORTUNITY VALUE:
+        </span>
+
+        <strong id="newOpportunityCalculatedValue">
+            $0
+        </strong>
+
+        <small>
+            Automatically calculated from selected solutions.
+        </small>
+
+    </div>
+
+
+    <!-- OPPORTUNITY -->
+    <div style="margin-top: 24px;">
+
+    <label
+        class="eyebrow"
+        for="newOpportunityWhat"
+    >
+        OPPORTUNITY:
+    </label>
+
+    <input
+        type="text"
+        id="newOpportunityWhat"
+        class="search-input"
+        placeholder="What opportunity do you see?"
+        required
+    >
+
+</div>
+
+
+    <!-- NOTES -->
+    <div style="margin-top: 24px;">
+
+        <label
+            class="eyebrow"
+            for="newOpportunityNotes"
+        >
+            NOTES:
+        </label>
+
+        <textarea
+            id="newOpportunityNotes"
+            class="search-input"
+            rows="5"
+            placeholder="Why is this business an opportunity?"
+            style="width: 100%; resize: vertical; padding-top: 14px;"
+        ></textarea>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+    <div class="modal-actions">
+
+        <button
+            type="button"
+            class="text-button"
+            id="cancelNewOpportunity"
+        >
+            Cancel
+        </button>
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            Create Opportunity
+        </button>
+
+    </div>
+
+</form>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
