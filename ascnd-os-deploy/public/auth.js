@@ -66,7 +66,12 @@
             await client.auth.signOut();
             window.location.reload();
         });
-        document.body.appendChild(signOut);
+        const sidebarBottom = document.querySelector(".sidebar-bottom");
+        if (sidebarBottom) {
+            sidebarBottom.appendChild(signOut);
+        } else {
+            document.body.appendChild(signOut);
+        }
 
         appLoaded = true;
         const script = document.createElement("script");
