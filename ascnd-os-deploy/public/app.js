@@ -1,4 +1,4 @@
-﻿const navItems = document.querySelectorAll(".nav-item");
+const navItems = document.querySelectorAll(".nav-item");
 const views = document.querySelectorAll(".view");
 
 function showView(viewName) {
@@ -1752,7 +1752,7 @@ function renderOpportunities() {
 
                 <div class="company-action">
 
-                    â†’
+                    →
 
                 </div>
 
@@ -2191,7 +2191,7 @@ function renderCompanies() {
                 </div>
 
                 <div class="company-action">
-                    â†’
+                    →
                 </div>
 
             `;
@@ -2615,7 +2615,7 @@ function openCompany(companyId) {
     document.getElementById(
         "companyRecordTitle"
     ).textContent =
-        company.name || "â€”";
+        company.name || "—";
 
 
     document.getElementById(
@@ -2627,37 +2627,37 @@ function openCompany(companyId) {
     document.getElementById(
         "companyRecordName"
     ).textContent =
-        company.name || "â€”";
+        company.name || "—";
 
 
     document.getElementById(
         "companyRecordIndustry"
     ).textContent =
-        company.industry || "â€”";
+        company.industry || "—";
 
 
     document.getElementById(
         "companyRecordStatus"
     ).textContent =
-        company.status || "â€”";
+        company.status || "—";
 
 
     document.getElementById(
         "companyRecordContact"
     ).textContent =
-        company.primary_contact || "â€”";
+        company.primary_contact || "—";
 
 
     document.getElementById(
         "companyRecordPhone"
     ).textContent =
-        company.phone || "â€”";
+        company.phone || "—";
 
 
     document.getElementById(
         "companyRecordEmail"
     ).textContent =
-        company.email || "â€”";
+        company.email || "—";
 
 
     const nextAction =
@@ -2714,7 +2714,7 @@ function openCompany(companyId) {
             opportunity.textContent =
                 latestOpportunity.business_name ||
                 company.name ||
-                "â€”";
+                "—";
 
         }
 
@@ -2722,7 +2722,7 @@ function openCompany(companyId) {
 
             stage.textContent =
                 latestOpportunity.stage ||
-                "â€”";
+                "—";
 
         }
 
@@ -2734,7 +2734,7 @@ function openCompany(companyId) {
                     ? `$${Number(
                         latestOpportunity.value
                     ).toLocaleString()}`
-                    : "â€”";
+                    : "—";
 
         }
 
@@ -2762,7 +2762,7 @@ function openCompany(companyId) {
         if (stage) {
 
             stage.textContent =
-                "â€”";
+                "—";
 
         }
 
@@ -2770,7 +2770,7 @@ function openCompany(companyId) {
         if (value) {
 
             value.textContent =
-                "â€”";
+                "—";
 
         }
 
@@ -3028,7 +3028,7 @@ function renderContacts() {
             </div>
 
             <div class="company-action">
-                â†’
+                →
             </div>
 
         `;
@@ -3131,7 +3131,7 @@ function openContactDetail(contact) {
 
         firstName.textContent =
             contact.first_name ||
-            "â€”";
+            "—";
 
     }
 
@@ -3147,7 +3147,7 @@ function openContactDetail(contact) {
 
         lastName.textContent =
             contact.last_name ||
-            "â€”";
+            "—";
 
     }
 
@@ -3163,7 +3163,7 @@ function openContactDetail(contact) {
 
         email.textContent =
             contact.email ||
-            "â€”";
+            "—";
 
     }
 
@@ -3179,7 +3179,7 @@ function openContactDetail(contact) {
 
         phone.textContent =
             contact.phone ||
-            "â€”";
+            "—";
 
     }
 
@@ -3236,13 +3236,13 @@ if (contactOpportunities.length > 0) {
     if (opportunity) {
         opportunity.textContent =
             latestOpportunity.business_name ||
-            "â€”";
+            "—";
     }
 
     if (stage) {
         stage.textContent =
             latestOpportunity.stage ||
-            "â€”";
+            "—";
     }
 
     if (value) {
@@ -3251,7 +3251,7 @@ if (contactOpportunities.length > 0) {
                 ? `$${Number(
                     latestOpportunity.value
                 ).toLocaleString()}`
-                : "â€”";
+                : "—";
     }
 
     if (description) {
@@ -3270,12 +3270,12 @@ if (contactOpportunities.length > 0) {
 
     if (stage) {
         stage.textContent =
-            "â€”";
+            "—";
     }
 
     if (value) {
         value.textContent =
-            "â€”";
+            "—";
     }
 
     if (description) {
@@ -3748,7 +3748,7 @@ function openOpportunityDetail(opportunity) {
 
         phone.textContent =
             opportunity.phone ||
-            "â€”";
+            "—";
 
     }
 
@@ -3756,7 +3756,7 @@ function openOpportunityDetail(opportunity) {
 
         email.textContent =
             opportunity.email ||
-            "â€”";
+            "—";
 
     }
 
@@ -3764,7 +3764,7 @@ function openOpportunityDetail(opportunity) {
 
         website.textContent =
             opportunity.website ||
-            "â€”";
+            "—";
 
     }
 
@@ -3840,16 +3840,16 @@ function openOpportunityDetail(opportunity) {
     const solutionNames = {
 
         start:
-            "ASCND Start â€” Website / Digital Foundation",
+            "ASCND Start — Website / Digital Foundation",
 
         grow:
-            "ASCND Grow â€” Lead & Customer System",
+            "ASCND Grow — Lead & Customer System",
 
         brand:
-            "Brand Identity â€” Logo / Visual Identity",
+            "Brand Identity — Logo / Visual Identity",
 
         estimate:
-            "Estimate / Quote System â€” Automated estimating",
+            "Estimate / Quote System — Automated estimating",
 
         other:
             "Other / Custom Solution"
@@ -4666,35 +4666,35 @@ function populateAssessmentDetail(
     setAssessmentText(
         "assessmentBusinessName",
         assessment.business_name ||
-        "â€”"
+        "—"
     );
 
 
     setAssessmentText(
         "assessmentContactName",
         assessment.contact_name ||
-        "â€”"
+        "—"
     );
 
 
     setAssessmentText(
         "assessmentContactEmail",
         assessment.contact_email ||
-        "â€”"
+        "—"
     );
 
 
     setAssessmentText(
         "assessmentContactPhone",
         assessment.contact_phone ||
-        "â€”"
+        "—"
     );
 
 
     setAssessmentText(
         "assessmentTeamSize",
         assessment.team_size ||
-        "â€”"
+        "—"
     );
 
 
@@ -5559,7 +5559,7 @@ function setAssessmentText(
         value === undefined ||
         value === null ||
         value === ""
-            ? "â€”"
+            ? "—"
             : String(value);
 
 }
@@ -5570,7 +5570,7 @@ function formatAssessmentDate(
 ) {
 
     if (!value) {
-        return "â€”";
+        return "—";
     }
 
 
@@ -5582,7 +5582,7 @@ function formatAssessmentDate(
         date.getTime()
     )) {
 
-        return "â€”";
+        return "—";
 
     }
 
@@ -5634,7 +5634,7 @@ loadAssessments();
 renderInboxRecentActivity();
 
 /* =====================================================
-   INBOX â€” RECENT ACTIVITY
+   INBOX — RECENT ACTIVITY
 ===================================================== */
 
 function renderInboxRecentActivity() {
@@ -5795,7 +5795,7 @@ function renderInboxRecentActivity() {
                                     ${escapeAssessmentText(
                                         item.name
                                     )}
-                                    â€”
+                                    —
                                     ${escapeAssessmentText(
                                         item.description
                                     )}
@@ -5920,7 +5920,7 @@ function renderOverviewRecentActivity() {
                                 ${escapeAssessmentText(
                                     item.name
                                 )}
-                                â€”
+                                —
                                 ${escapeAssessmentText(
                                     item.description
                                 )}
@@ -5944,7 +5944,7 @@ function formatActivityTime(date) {
         )
     ) {
 
-        return "â€”";
+        return "—";
 
     }
 
@@ -6014,7 +6014,7 @@ function formatActivityTime(date) {
 }
 
 /* =====================================================
-   OVERVIEW â€” ATTENTION REQUIRED
+   OVERVIEW — ATTENTION REQUIRED
 ===================================================== */
 
 function renderOverviewAttention() {

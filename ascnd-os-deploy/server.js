@@ -7,6 +7,15 @@ if (!process.env.SUPABASE_URL && process.env.NODE_ENV !== "production") {
 console.log("SUPABASE URL LOADED:", !!process.env.SUPABASE_URL);
 console.log("SUPABASE KEY LOADED:", !!process.env.SUPABASE_SERVICE_ROLE_KEY);
 
+console.log(
+  "PUBLIC KEY LOADED:",
+  Boolean(process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY)
+);
+console.log(
+  "ALLOWED EMAIL LOADED:",
+  Boolean((process.env.OS_ALLOWED_EMAIL || "").trim())
+);
+
 const express = require("express");
 const cors = require("cors");
 
@@ -51,6 +60,12 @@ app.use(
    ========================================================= */
 
 app.get("/config.js", function (req, res) {
+     console.log(
+        "CONFIG REQUEST:",
+        process.pid,
+        Boolean(process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY)
+    );
+    res.set("Cache-Control", "no-store");
     res.type("application/javascript").send(
         "window.ASCND_CONFIG = " + JSON.stringify({
             supabaseUrl: process.env.SUPABASE_URL || "",
@@ -88,6 +103,15 @@ app.use("/api", async function (req, res, next) {
             (allowedId && user.id === allowedId) ||
             (allowedEmail && user.email &&
                 user.email.toLowerCase() === allowedEmail);
+
+console.log("OS ACCESS CHECK:", {
+  emailMatches: Boolean(
+    allowedEmail &&
+    user.email &&
+    user.email.toLowerCase() === allowedEmail
+  ),
+  userIdMatches: Boolean(allowedId && user.id === allowedId)
+});
 
         if (!isAllowed) {
             return res.status(403).json({
@@ -4953,6 +4977,8 @@ app.get(
 /* =========================================================
    START SERVER
    ========================================================= */
+
+require("./company-demos-api").installCompanyDemoRoutes(app, supabase);
 
 app.listen(
     PORT,
