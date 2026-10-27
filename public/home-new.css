@@ -23,3 +23,20 @@
   @keyframes ambient-drift { from { transform: translate(-8%, 3%); } to { transform: translate(8%, -3%); } }
 }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* About: business story alongside the shark philosophy */
+.about { grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: start; gap: 7%; }
+.about-story { display: grid; gap: 48px; }
+.about-photo img { height: 500px; object-position: center 58%; }
+.philosophy { grid-column: auto; display: block; padding: 36px; border: 1px solid #7399a33d; background: linear-gradient(145deg,#123544,#092330); }
+.philosophy-intro { padding-bottom: 25px; }
+.philosophy-intro .eyebrow { display: flex; justify-content: space-between; gap: 15px; }
+.philosophy-name { color: #a7c5cc; letter-spacing: .22em; }
+.philosophy h2 { margin: 36px 0 18px; }
+.principles { display: grid; grid-template-columns: 1fr; gap: 0; }
+.principles > div { display: grid; grid-template-columns: 42px 1fr; column-gap: 14px; padding: 19px 0; }
+.principles > div span { grid-row: 1 / 3; padding-top: 3px; }
+.principles h3 { margin: 0 0 6px; }
+.principles p { margin: 0; }
+.philosophy-footer { border-top: 1px solid #385461; padding-top: 24px; margin: 0; }
+@media(max-width:800px) { .about { grid-template-columns: 1fr; gap: 40px; } .about-story { gap: 32px; } .about-photo img { height: 350px; } .philosophy { padding: 26px; } }
