@@ -29,9 +29,15 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
 </script>
 <script>
 const explorer = document.getElementById('systems-demo');
-document.querySelectorAll('.system-learn').forEach(link => link.addEventListener('click', () => { const target = document.querySelector(link.getAttribute('href')); if (target) target.open = true; }));
-function openExplorerHash(){ if (['#systems-demo'].includes(location.hash)) document.querySelector(location.hash).open = true; }
-openExplorerHash();window.addEventListener('hashchange',openExplorerHash);
+explorer.open = false;
+window.addEventListener('pageshow', () => { explorer.open = false; });
+document.querySelectorAll('.system-learn').forEach(link => link.addEventListener('click', event => {
+ const target = document.querySelector(link.getAttribute('href'));
+ if (!target) return;
+ event.preventDefault();
+ target.open = true;
+ target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+}));
 window.addEventListener('message', event => {
  const frame = document.getElementById('systems-explorer-frame');
  if (event.origin !== location.origin || event.source !== frame.contentWindow || event.data?.type !== 'ascnd-explorer-height') return;
