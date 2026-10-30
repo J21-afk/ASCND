@@ -62,12 +62,12 @@
 
 /* Occasional distant shark passes, behind dark-section content */
 .ocean-depth{position:relative;isolation:isolate;overflow:clip}
-.ocean-swimmer{position:absolute;left:-400px;top:32%;width:clamp(180px,28vw,360px);pointer-events:none;user-select:none;z-index:-1;opacity:0;filter:blur(.7px);animation:distant-shark-pass 72s linear infinite;animation-delay:2s}
+.ocean-swimmer{position:absolute;left:-400px;top:32%;width:clamp(180px,28vw,360px);pointer-events:none;user-select:none;z-index:-1;opacity:0;filter:brightness(.65) saturate(.5) blur(.4px);animation:distant-shark-pass 72s linear infinite;animation-delay:2s}
 .ocean-swimmer img{display:block;width:100%;height:auto;animation:shark-depth-glide 5s ease-in-out infinite alternate}
 .workflow>.ocean-swimmer{top:18%;width:clamp(160px,23vw,300px);animation-delay:19s}
 .about>.ocean-swimmer{top:65%;animation-delay:37s}
 .final-cta>.ocean-swimmer{top:24%;animation-delay:53s}
-@keyframes distant-shark-pass{0%{transform:translateX(0);opacity:0}2%{opacity:.12}27%{opacity:.12}32%{transform:translateX(calc(100vw + 800px));opacity:0}100%{transform:translateX(calc(100vw + 800px));opacity:0}}
+@keyframes distant-shark-pass{0%{transform:translateX(0);opacity:0}2%{opacity:.26}27%{opacity:.26}32%{transform:translateX(calc(100vw + 800px));opacity:0}100%{transform:translateX(calc(100vw + 800px));opacity:0}}
 @keyframes shark-depth-glide{from{transform:translateY(-8px) rotate(-1deg)}to{transform:translateY(8px) rotate(1deg)}}
 @media(max-width:600px){.ocean-swimmer{width:210px}.workflow>.ocean-swimmer{width:180px}}
 @media(prefers-reduced-motion:reduce){.ocean-swimmer{display:none!important}}
