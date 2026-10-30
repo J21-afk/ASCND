@@ -57,3 +57,5 @@
 .auto-screen:before{content:'ASCND   /   CLIENT WORKSPACE';position:absolute;top:0;left:0;right:0;padding:15px 18px;background:#082332;color:#b9d9e1;font-size:10px;letter-spacing:.1em}
 .auto-screen:after{content:'WORKSPACE\\A\\A Overview\\A\\A Activity\\A\\A Tasks\\A\\A Settings';white-space:pre;position:absolute;top:64px;left:12px;color:#b0cdd7;font-size:10px;line-height:1.5}
 @media(max-width:500px){.auto-screen{padding-left:89px;background:linear-gradient(90deg,#0d2c3b 74px,#eef3f4 74px)}.auto-screen:after{font-size:8px;left:8px}.auto-screen:before{font-size:8px}}
+
+.approach-industries{border-top:1px solid #385461;padding-top:22px}.approach-industries strong{color:#b6e3e1;font-weight:500}
