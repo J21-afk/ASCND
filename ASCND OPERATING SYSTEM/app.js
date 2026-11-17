@@ -145,7 +145,20 @@ const opportunityCalculatedValue =
         "newOpportunityCalculatedValue"
     );
 
+function syncIntelligenceOptions() {
+    const parent = document.querySelector('input[name="opportunitySolution"][value="intelligence"]');
+    const group = document.getElementById("opportunityIntelligenceOptions");
+    if (!parent || !group) return;
+    group.hidden = !parent.checked;
+    group.disabled = !parent.checked;
+    group.querySelectorAll("input").forEach(input => {
+        input.disabled = !parent.checked;
+        if (!parent.checked) input.checked = false;
+    });
+}
+
 function calculateOpportunityValue() {
+    syncIntelligenceOptions();
 
     let total = 0;
 
@@ -166,8 +179,8 @@ function calculateOpportunityValue() {
 
     if (opportunityCalculatedValue) {
 
-        opportunityCalculatedValue.textContent =
-            `$${total.toLocaleString()}`;
+        const custom = Array.from(opportunitySolutionInputs).some(input => input.checked && !input.disabled && ["coordinate", "custom", "ai-analysis", "ai-automation", "ai-receptionist"].includes(input.value));
+        opportunityCalculatedValue.textContent = custom ? `$${total.toLocaleString()} + custom quote` : `$${total.toLocaleString()}`;
 
     }
 
@@ -238,7 +251,7 @@ if (newOpportunityForm) {
         opportunitySolutionInputs
     )
         .filter(
-            input => input.checked
+            input => input.checked && !input.disabled
         )
         .map(
             input => input.value
@@ -3009,22 +3022,20 @@ function openOpportunityDetail(opportunity) {
 
 
     const solutionNames = {
-
-        start:
-            "ASCND Start — Website / Digital Foundation",
-
-        grow:
-            "ASCND Grow — Lead & Customer System",
-
-        brand:
-            "Brand Identity — Logo / Visual Identity",
-
-        estimate:
-            "Estimate / Quote System — Automated estimating",
-
-        other:
-            "Other / Custom Solution"
-
+        "start-brand": "ASCND Start — Brand Identity",
+        "connect-digital": "ASCND Connect — Website & Digital Foundation",
+        intelligence: "ASCND Intelligence — Lead & Customer Management",
+        coordinate: "ASCND Coordinate — Estimates, Quotes & Scheduling",
+        custom: "Custom Solution",
+        "ai-analysis": "ASCND Intelligence: AI Analysis",
+        "ai-automation": "ASCND Intelligence: AI Automation",
+        "ai-receptionist": "ASCND Intelligence: AI Receptionist",
+        start: "ASCND Connect — Website & Digital Foundation",
+        brand: "ASCND Start — Brand Identity",
+        connect: "ASCND Intelligence — Lead & Customer Management",
+        grow: "ASCND Intelligence — Lead & Customer Management",
+        estimate: "ASCND Coordinate — Estimates, Quotes & Scheduling",
+        other: "Custom Solution"
     };
 
 

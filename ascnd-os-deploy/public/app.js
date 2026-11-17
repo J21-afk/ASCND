@@ -72,10 +72,16 @@ const cancelNewOpportunity =
     document.getElementById("cancelNewOpportunity");
 
 
+let pendingOpportunityAssessmentId = null;
+let creatingOpportunity = false;
+
 function openNewOpportunityModal() {
 
     if (!newOpportunityModal) return;
 
+    pendingOpportunityAssessmentId = null;
+    newOpportunityForm.reset();
+    calculateOpportunityValue();
     newOpportunityModal.classList.add("active");
 
 }
@@ -85,6 +91,7 @@ function closeNewOpportunityModal() {
 
     if (!newOpportunityModal) return;
 
+    pendingOpportunityAssessmentId = null;
     newOpportunityModal.classList.remove("active");
 
 }
@@ -718,7 +725,20 @@ const opportunityCalculatedValue =
         "newOpportunityCalculatedValue"
     );
 
+function syncIntelligenceOptions() {
+    const parent = document.querySelector('input[name="opportunitySolution"][value="intelligence"]');
+    const group = document.getElementById("opportunityIntelligenceOptions");
+    if (!parent || !group) return;
+    group.hidden = !parent.checked;
+    group.disabled = !parent.checked;
+    group.querySelectorAll("input").forEach(input => {
+        input.disabled = !parent.checked;
+        if (!parent.checked) input.checked = false;
+    });
+}
+
 function calculateOpportunityValue() {
+    syncIntelligenceOptions();
 
     let total = 0;
 
@@ -739,8 +759,9 @@ function calculateOpportunityValue() {
 
     if (opportunityCalculatedValue) {
 
+        const custom = Array.from(opportunitySolutionInputs).some(input => input.checked && !input.disabled && ["coordinate", "custom", "ai-analysis", "ai-automation", "ai-receptionist"].includes(input.value));
         opportunityCalculatedValue.textContent =
-            `$${total.toLocaleString()}`;
+            custom ? `$${total.toLocaleString()} + custom quote` : `$${total.toLocaleString()}`;
 
     }
 
@@ -860,231 +881,48 @@ if (addOpportunityPhoneButton) {
 }
 
 if (newOpportunityForm) {
-
-    newOpportunityForm.addEventListener(
-        "submit",
-        async event => {
-
-            event.preventDefault();
-
-
-            const phoneInputs =
-    Array.from(
-        document.querySelectorAll(
-            ".opportunity-phone"
-        )
-    );
-
-const phoneNumbers =
-    phoneInputs
-        .map(input => input.value.trim())
-        .filter(Boolean);
-
-
-const opportunity = {
-
-    contact_name:
-        document
-            .getElementById(
-                "newOpportunityContact"
-            )
-            .value
-            .trim(),
-
-    business_name:
-        document
-            .getElementById(
-                "newOpportunityBusiness"
-            )
-            .value
-            .trim(),
-
-    location:
-        document
-            .getElementById(
-                "newOpportunityLocation"
-            )
-            .value
-            .trim(),
-
-    phone:
-        phoneNumbers.join(" | "),
-
-    email:
-        document
-            .getElementById(
-                "newOpportunityEmail"
-            )
-            .value
-            .trim(),
-
-    website:
-        document
-            .getElementById(
-                "newOpportunityWebsite"
-            )
-            .value
-            .trim(),
-
-    value:
-        calculateOpportunityValue(),
-
-    solutions:
-        Array.from(
-            opportunitySolutionInputs
-        )
-            .filter(
-                input => input.checked
-            )
-            .map(
-                input => input.value
-            )
-            .join(", "),
-
-    notes:
-        document
-            .getElementById(
-                "newOpportunityNotes"
-            )
-            .value
-            .trim()
-
-};
-
-
-if (!opportunity.business_name) {
-
-    alert(
-        "Business name is required."
-    );
-
-    return;
-
-}
-
-
-if (!opportunity.solutions) {
-
-    alert(
-        "Please select at least one solution."
-    );
-
-    return;
-
-}
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        "/api/opportunities",
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    opportunity
-                                )
-                        }
-                    );
-
-
-                const result =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        result.error ||
-                        "Failed to create opportunity."
-                    );
-
-                }
-
-                if (
-    activeAssessmentId &&
-    result &&
-    result.id
-) {
-
-    const linkResponse =
-        await fetch(
-            `/api/assessments/${activeAssessmentId}/opportunity`,
-            {
-                method: "PATCH",
-
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
-
-                body: JSON.stringify({
-                    opportunity_id:
-                        result.id
-                })
+    newOpportunityForm.addEventListener("submit", async event => {
+        event.preventDefault();
+        if (creatingOpportunity) return;
+        const read = id => document.getElementById(id).value.trim();
+        const opportunity = {
+            contact_name: read("newOpportunityContact"), business_name: read("newOpportunityBusiness"),
+            location: read("newOpportunityLocation"), email: read("newOpportunityEmail"), website: read("newOpportunityWebsite"),
+            phone: Array.from(document.querySelectorAll(".opportunity-phone")).map(input => input.value.trim()).filter(Boolean).join(" | "),
+            value: calculateOpportunityValue(),
+            solutions: Array.from(opportunitySolutionInputs).filter(input => input.checked && !input.disabled).map(input => input.value).join(", "),
+            notes: read("newOpportunityNotes")
+        };
+        if (!opportunity.business_name) { alert("Business name is required."); return; }
+        if (!opportunity.solutions) { alert("Please select at least one solution."); return; }
+        const assessmentId = pendingOpportunityAssessmentId;
+        const submit = newOpportunityForm.querySelector('[type="submit"]');
+        creatingOpportunity = true;
+        if (submit) submit.disabled = true;
+        try {
+            const response = await fetch("/api/opportunities", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(opportunity) });
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || "Failed to create opportunity.");
+            // Once creation succeeds, close the form to prevent a duplicate on retry.
+            newOpportunityForm.reset();
+            calculateOpportunityValue();
+            closeNewOpportunityModal();
+            let linkWarning = "";
+            if (assessmentId && result.opportunity?.id) {
+                try {
+                    const link = await fetch(`/api/assessments/${assessmentId}/opportunity`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ opportunity_id: result.opportunity.id }) });
+                    if (!link.ok) throw new Error("Link failed");
+                } catch { linkWarning = " The opportunity was saved, but its assessment link could not be saved. Do not create it again."; }
             }
-        );
-
-
-    const linkResult =
-        await linkResponse.json();
-
-
-    if (!linkResponse.ok) {
-
-        console.error(
-            "Assessment opportunity link failed:",
-            linkResult
-        );
-
-        alert(
-            "Opportunity was created, but it could not be linked to the assessment."
-        );
-
-        return;
-
-    }
-
-}
-
-
-                newOpportunityForm.reset();
-
-                calculateOpportunityValue();
-
-                closeNewOpportunityModal();
-
-
-                alert(
-                    "Opportunity created successfully."
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    "Opportunity creation error:",
-                    error
-                );
-
-
-                alert(
-                    error.message ||
-                    "Failed to create opportunity."
-                );
-
-            }
-
-        }
-    );
-
+            await loadOpportunities();
+            await loadCompanies();
+            await loadContacts();
+            if (assessmentId) await loadAssessments();
+            if (result.opportunity) openOpportunityDetail(result.opportunity);
+            if (linkWarning) alert(linkWarning.trim());
+        } catch (error) { alert(error.message || "Failed to create opportunity."); }
+        finally { creatingOpportunity = false; if (submit) submit.disabled = false; }
+    });
 }
 
 /* =========================================
@@ -1092,6 +930,7 @@ if (!opportunity.solutions) {
 ========================================= */
 
 let opportunities = [];
+let opportunityLoadState = "loading";
 
 const opportunityList =
     document.getElementById("opportunityList");
@@ -1161,306 +1000,14 @@ function escapeOpportunityHtml(value) {
 ========================================= */
 
 function renderOverviewBriefing() {
-
-    const overviewElement =
-        document.getElementById("briefingOverview");
-
-    const pipelineElement =
-        document.getElementById("briefingPipeline");
-
-    const attentionElement =
-        document.getElementById("briefingAttention");
-
-    const focusElement =
-        document.getElementById("briefingFocus");
-
-    if (
-        !overviewElement ||
-        !pipelineElement ||
-        !attentionElement ||
-        !focusElement
-    ) {
-        return;
-    }
-
-    const opportunityList =
-        Array.isArray(opportunities)
-            ? opportunities
-            : [];
-
-    const assessmentList =
-        Array.isArray(assessmentRecords)
-            ? assessmentRecords
-            : [];
-
-
-    /* =========================================
-       CURRENT DATA
-    ========================================= */
-
-    const activeOpportunities =
-        opportunityList.filter(
-            function (opportunity) {
-
-                return String(
-                    opportunity.stage || ""
-                ).toUpperCase() !== "CLOSED";
-
-            }
-        );
-
-
-    const newAssessments =
-        assessmentList.filter(
-            function (assessment) {
-
-                const status =
-                    String(
-                        assessment.status || "NEW"
-                    ).toUpperCase();
-
-                return (
-                    status === "NEW" &&
-                    !assessment.opportunity_id
-                );
-
-            }
-        );
-
-
-    const reviewOpportunities =
-        opportunityList.filter(
-            function (opportunity) {
-
-                return String(
-                    opportunity.stage || ""
-                ).toUpperCase() === "REVIEW";
-
-            }
-        );
-
-
-    const highPriorityItems = [
-
-        ...newAssessments.filter(
-            function (assessment) {
-
-                return String(
-                    assessment.priority || ""
-                ).toLowerCase() === "high";
-
-            }
-        ),
-
-        ...opportunityList.filter(
-            function (opportunity) {
-
-                return (
-                    String(
-                        opportunity.priority || ""
-                    ).toLowerCase() === "high"
-                    &&
-                    ["NEW", "REVIEW"].includes(
-                        String(
-                            opportunity.stage || ""
-                        ).toUpperCase()
-                    )
-                );
-
-            }
-        )
-
-    ];
-
-
-    const pipelineValue =
-        opportunityList.reduce(
-            function (total, opportunity) {
-
-                return (
-                    total +
-                    (Number(opportunity.value) || 0)
-                );
-
-            },
-            0
-        );
-
-
-    /* =========================================
-       BUSINESS NAMES
-    ========================================= */
-
-    const assessmentNames =
-        newAssessments
-            .map(function (assessment) {
-
-                return (
-                    assessment.business_name ||
-                    assessment.business ||
-                    assessment.company_name ||
-                    "an incoming business"
-                );
-
-            })
-            .slice(0, 2);
-
-
-    const reviewNames =
-        reviewOpportunities
-            .map(function (opportunity) {
-
-                return (
-                    opportunity.business_name ||
-                    "an active opportunity"
-                );
-
-            })
-            .slice(0, 2);
-
-
-    /* =========================================
-       OVERVIEW DESCRIPTION
-    ========================================= */
-
-    if (newAssessments.length > 0) {
-
-        let assessmentDescription =
-            newAssessments.length === 1
-                ? "A new assessment is currently waiting for review"
-                : `${newAssessments.length} new assessments are currently waiting for review`;
-
-        if (assessmentNames.length > 0) {
-
-            assessmentDescription +=
-                `, including ${assessmentNames.join(" and ")}`;
-
-        }
-
-        overviewElement.textContent =
-            `${assessmentDescription}. This is currently expanding the opportunity pool while existing opportunities continue moving through the pipeline.`;
-
-    } else if (activeOpportunities.length > 0) {
-
-        overviewElement.textContent =
-            `ASCND currently has ${activeOpportunities.length} active opportunit${
-                activeOpportunities.length === 1
-                    ? "y"
-                    : "ies"
-            } moving through the pipeline. No new assessments are currently waiting for review, so attention can remain focused on progressing the opportunities already in the system.`;
-
-    } else {
-
-        overviewElement.textContent =
-            "The current pipeline is clear of active opportunities and unreviewed assessments. The next priority is generating new business activity and adding qualified opportunities to the system.";
-
-    }
-
-
-    /* =========================================
-       PIPELINE DESCRIPTION
-    ========================================= */
-
-    if (pipelineValue > 0) {
-
-        pipelineElement.textContent =
-            `The current opportunity pipeline represents $${pipelineValue.toLocaleString()} in potential revenue across the businesses currently in the system.`;
-
-    } else {
-
-        pipelineElement.textContent =
-            "There is currently no potential revenue attached to the active opportunity pipeline.";
-
-    }
-
-
-    /* =========================================
-       ATTENTION DESCRIPTION
-    ========================================= */
-
-    if (
-        highPriorityItems.length > 0 &&
-        reviewOpportunities.length > 0
-    ) {
-
-        attentionElement.textContent =
-            `${highPriorityItems.length} high-priority item${
-                highPriorityItems.length === 1
-                    ? ""
-                    : "s"
-            } require attention, while ${
-                reviewOpportunities.length
-            } ${
-                reviewOpportunities.length === 1
-                    ? "opportunity is"
-                    : "opportunities are"
-            } currently in review${
-                reviewNames.length > 0
-                    ? `, including ${reviewNames.join(" and ")}`
-                    : ""
-            }.`;
-
-    } else if (highPriorityItems.length > 0) {
-
-        attentionElement.textContent =
-            `${highPriorityItems.length} high-priority item${
-                highPriorityItems.length === 1
-                    ? ""
-                    : "s"
-            } currently require attention.`;
-
-    } else if (reviewOpportunities.length > 0) {
-
-        attentionElement.textContent =
-            `${reviewOpportunities.length} ${
-                reviewOpportunities.length === 1
-                    ? "opportunity is"
-                    : "opportunities are"
-            } currently in review${
-                reviewNames.length > 0
-                    ? `, including ${reviewNames.join(" and ")}`
-                    : ""
-            }.`;
-
-    } else {
-
-        attentionElement.textContent =
-            "There are currently no high-priority or review-stage opportunities requiring immediate attention.";
-
-    }
-
-
-    /* =========================================
-       CURRENT FOCUS
-    ========================================= */
-
-    if (newAssessments.length > 0) {
-
-        focusElement.textContent =
-            "Review incoming assessments, identify qualified opportunities, and move the strongest prospects into the active pipeline.";
-
-    } else if (highPriorityItems.length > 0) {
-
-        focusElement.textContent =
-            "Address the highest-priority opportunities first and move them toward the next stage.";
-
-    } else if (reviewOpportunities.length > 0) {
-
-        focusElement.textContent =
-            "Follow up on opportunities in review and keep active prospects moving forward.";
-
-    } else if (activeOpportunities.length > 0) {
-
-        focusElement.textContent =
-            "Continue progressing active opportunities while creating new opportunities for the pipeline.";
-
-    } else {
-
-        focusElement.textContent =
-            "Generate new business activity and continue building the ASCND opportunity pipeline.";
-
-    }
-
+    const overview = document.getElementById("briefingOverview");
+    const focus = document.getElementById("briefingFocus");
+    if (!overview || !focus) return;
+    const newAssessments = assessmentRecords.filter(item => String(item.status || "NEW").toUpperCase() === "NEW" && !item.opportunity_id);
+    const active = opportunities.filter(item => !["WON", "LOST", "CLOSED"].includes(item.stage));
+    const due = active.filter(item => window.ASCNDOpportunityWorkflow && window.ASCNDOpportunityWorkflow.isDue(item));
+    focus.textContent = due.length ? "Complete the follow-ups that are due." : newAssessments.length ? "Review incoming assessments." : active.length ? "Set the next move for each active opportunity." : "Add your next business opportunity.";
+    overview.textContent = `${newAssessments.length} unreviewed assessment${newAssessments.length === 1 ? "" : "s"}. ${active.length} active opportunit${active.length === 1 ? "y" : "ies"}.`;
 }
 
 async function loadOpportunities() {
@@ -1480,8 +1027,10 @@ async function loadOpportunities() {
 
         }
 
-        opportunities =
-    await response.json();
+        const loaded = await response.json();
+        if (!Array.isArray(loaded)) throw new Error("Invalid opportunity response.");
+        opportunities = loaded;
+        opportunityLoadState = "ready";
 
 renderOpportunities();
 
@@ -1506,6 +1055,8 @@ renderOverviewBriefing();
             "Opportunities load error:",
             error
         );
+        opportunityLoadState = "error";
+        if (window.ASCNDOpportunityWorkflow) window.ASCNDOpportunityWorkflow.renderList();
 
     }
 
@@ -1541,14 +1092,14 @@ function renderOverviewMetrics() {
     const activeOpportunities =
         opportunities.filter(
             opportunity =>
-                opportunity.stage !== "CLOSED"
+                !["WON", "LOST", "CLOSED"].includes(opportunity.stage)
         ).length;
 
 
     const followUps =
         opportunities.filter(
             opportunity =>
-                opportunity.stage === "FOLLOW-UP"
+                (window.ASCNDOpportunityWorkflow ? window.ASCNDOpportunityWorkflow.isDue(opportunity) : opportunity.stage === "FOLLOW-UP")
         ).length;
 
 
@@ -1563,7 +1114,7 @@ function renderOverviewMetrics() {
         opportunities.reduce(
             (total, opportunity) =>
                 total +
-                (Number(opportunity.value) || 0),
+                (["WON", "LOST", "CLOSED"].includes(opportunity.stage) ? 0 : (Number(opportunity.value) || 0)),
             0
         );
 
@@ -1605,7 +1156,6 @@ let opportunityDatabaseExpanded = false;
 
 
 function renderOpportunities() {
-
     if (!opportunityList) return;
 
 
@@ -1657,7 +1207,7 @@ function renderOpportunities() {
         opportunities.reduce(
             (total, opportunity) =>
                 total +
-                (Number(opportunity.value) || 0),
+                (["WON", "LOST", "CLOSED"].includes(opportunity.stage) ? 0 : (Number(opportunity.value) || 0)),
             0
         );
 
@@ -1864,7 +1414,7 @@ function renderOpportunities() {
     const activeOpportunities =
         opportunities.filter(
             opportunity =>
-                opportunity.stage !== "CLOSED"
+                !["WON", "LOST", "CLOSED"].includes(opportunity.stage)
         ).length;
 
 
@@ -1875,7 +1425,7 @@ function renderOpportunities() {
     const followUps =
         opportunities.filter(
             opportunity =>
-                opportunity.stage === "FOLLOW-UP"
+                (window.ASCNDOpportunityWorkflow ? window.ASCNDOpportunityWorkflow.isDue(opportunity) : opportunity.stage === "FOLLOW-UP")
         ).length;
 
 
@@ -1898,7 +1448,7 @@ function renderOpportunities() {
         opportunities.reduce(
             (total, opportunity) =>
                 total +
-                (Number(opportunity.value) || 0),
+                (["WON", "LOST", "CLOSED"].includes(opportunity.stage) ? 0 : (Number(opportunity.value) || 0)),
             0
         );
 
@@ -1939,6 +1489,8 @@ function renderOpportunities() {
     }
 
 }
+
+    if (window.ASCNDOpportunityWorkflow) window.ASCNDOpportunityWorkflow.renderList();
 
     /* =========================================
        OPPORTUNITY COUNT
@@ -2799,6 +2351,7 @@ function openCompany(companyId) {
     }
 
 
+    if (window.ASCNDOpportunityWorkflow) window.ASCNDOpportunityWorkflow.renderRelated("companyRecord", company.id, "company_id");
     showView("companyRecord");
 
 }
@@ -3311,7 +2864,8 @@ if (contactOpportunities.length > 0) {
         });
 
 
-    contactDetail.classList.add("active");
+    if (window.ASCNDOpportunityWorkflow) window.ASCNDOpportunityWorkflow.renderRelated("contactDetail", contact.id, "contact_id");
+    showView("contactDetail");
 
 }
 
@@ -3674,6 +3228,11 @@ const backToOpportunities =
 
 
 function openOpportunityDetail(opportunity) {
+    if (window.ASCNDOpportunityWorkflow) {
+        showView("opportunityDetail");
+        window.ASCNDOpportunityWorkflow.renderDetail(opportunity);
+        return;
+    }
 
     if (!opportunity || !opportunityDetail) {
         return;
@@ -3838,22 +3397,20 @@ function openOpportunityDetail(opportunity) {
 
 
     const solutionNames = {
-
-        start:
-            "ASCND Start — Website / Digital Foundation",
-
-        grow:
-            "ASCND Grow — Lead & Customer System",
-
-        brand:
-            "Brand Identity — Logo / Visual Identity",
-
-        estimate:
-            "Estimate / Quote System — Automated estimating",
-
-        other:
-            "Other / Custom Solution"
-
+        "start-brand": "ASCND Start — Brand Identity",
+        "connect-digital": "ASCND Connect — Website & Digital Foundation",
+        intelligence: "ASCND Intelligence — Lead & Customer Management",
+        coordinate: "ASCND Coordinate — Estimates, Quotes & Scheduling",
+        custom: "Custom Solution",
+        "ai-analysis": "ASCND Intelligence: AI Analysis",
+        "ai-automation": "ASCND Intelligence: AI Automation",
+        "ai-receptionist": "ASCND Intelligence: AI Receptionist",
+        start: "ASCND Connect — Website & Digital Foundation",
+        brand: "ASCND Start — Brand Identity",
+        connect: "ASCND Intelligence — Lead & Customer Management",
+        grow: "ASCND Intelligence — Lead & Customer Management",
+        estimate: "ASCND Coordinate — Estimates, Quotes & Scheduling",
+        other: "Custom Solution"
     };
 
 
@@ -4239,6 +3796,7 @@ async function loadAssessments() {
 
         assessmentRecords =
             data.assessments || [];
+        renderOverviewBriefing();
 
 
         updateAssessmentMetrics(
@@ -5350,156 +4908,23 @@ const convertAssessmentOpportunity =
     );
 
 if (convertAssessmentOpportunity) {
-
-    convertAssessmentOpportunity.addEventListener(
-        "click",
-        function () {
-
-            const assessment =
-                assessmentRecords.find(
-                    function (item) {
-
-                        return String(item.id) ===
-                            String(activeAssessmentId);
-
-                    }
-                );
-
-
-            if (!assessment) {
-
-                console.error(
-                    "Active assessment ID:",
-                    activeAssessmentId
-                );
-
-                console.error(
-                    "Assessment records:",
-                    assessmentRecords
-                );
-
-                alert(
-                    "Unable to find the active assessment."
-                );
-
-                return;
-
-            }
-
-
-            showView(
-                "opportunities"
-            );
-
-
-            const newOpportunityButton =
-                document.getElementById(
-                    "newOpportunity"
-                );
-
-
-            if (newOpportunityButton) {
-
-                newOpportunityButton.click();
-
-            }
-
-            setTimeout(
-    function () {
-
-        const business =
-            document.getElementById(
-                "newOpportunityBusiness"
-            );
-
-        const phone =
-            document.getElementById(
-                "newOpportunityPhone"
-            );
-
-        const email =
-            document.getElementById(
-                "newOpportunityEmail"
-            );
-
-        const website =
-            document.getElementById(
-                "newOpportunityWebsite"
-            );
-
-        const opportunity =
-            document.getElementById(
-                "newOpportunityWhat"
-            );
-
-        const notes =
-            document.getElementById(
-                "newOpportunityNotes"
-            );
-
-
-        if (business) {
-
-            business.value =
-                assessment.business_name ||
-                "";
-
+    convertAssessmentOpportunity.addEventListener("click", function () {
+        const assessment = assessmentRecords.find(item => String(item.id) === String(activeAssessmentId));
+        if (!assessment) { alert("Open an assessment first."); return; }
+        if (assessment.opportunity_id) {
+            const existing = opportunities.find(item => String(item.id) === String(assessment.opportunity_id));
+            if (existing) openOpportunityDetail(existing);
+            else alert("This assessment is already linked to an opportunity. Refresh the opportunity list.");
+            return;
         }
-
-
-        if (phone) {
-
-            phone.value =
-                assessment.contact_phone ||
-                "";
-
-        }
-
-
-        if (email) {
-
-            email.value =
-                assessment.contact_email ||
-                "";
-
-        }
-
-
-        if (website) {
-
-            website.value =
-                assessment.website ||
-                "";
-
-        }
-
-
-        if (opportunity) {
-
-            opportunity.value =
-                assessment.primary_opportunity ||
-                "";
-
-        }
-
-
-        if (notes) {
-
-            notes.value =
-                assessment.business_description ||
-                "";
-
-        }
-
-    },
-    300
-);
-
-        }
-    );
-
+        openNewOpportunityModal();
+        pendingOpportunityAssessmentId = assessment.id;
+        const fields = { newOpportunityBusiness: assessment.business_name || assessment.business || "", newOpportunityContact: assessment.contact_name || "", newOpportunityEmail: assessment.contact_email || assessment.email || "", newOpportunityWebsite: assessment.website || "", newOpportunityLocation: assessment.location || "", newOpportunityNotes: assessment.business_description || assessment.primary_opportunity || "" };
+        Object.entries(fields).forEach(([id, value]) => { const input = document.getElementById(id); if (input) input.value = value; });
+        const phone = newOpportunityForm.querySelector(".opportunity-phone");
+        if (phone) phone.value = assessment.contact_phone || assessment.phone || "";
+    });
 }
-
 
 /* =========================================================
    HELPERS
@@ -7040,7 +6465,7 @@ function getGlobalSearchRecords(query) {
 {
     type: "section",
     title: "Business Pipeline",
-    subtitle: "Revenue + Growth",
+    subtitle: "Opportunity Progress",
     keywords: "business pipeline revenue growth money goals sales",
     action: () => {
         showView("business-pipeline");
