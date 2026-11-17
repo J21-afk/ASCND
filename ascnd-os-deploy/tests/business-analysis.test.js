@@ -16,7 +16,7 @@ test('goal tracking separates open potential from monthly wins and uses current 
 test('empty and fully covered pipelines stay finite and do not claim collected revenue',()=>{
  const empty=compute([],[],{now:'2026-11-30T12:00:00'});
  assert.equal(empty.dailyRequired,10000);assert.equal(empty.projection,0);assert.equal(empty.coveragePercent,0);
- const full=compute([{stage:'NEW',solutions:'start-brand, connect-digital, intelligence, coordinate, custom, ai-receptionist'},{stage:'NEW',solutions:'ai-receptionist, intelligence'}]);
+ const full=compute([{stage:'NEW',solutions:'start-brand, connect-digital, intelligence, coordinate, custom, ai-receptionist'},{stage:'NEW',solutions:'ai-receptionist, intelligence, coordinate'}]);
  assert.equal(full.coveragePercent,100);assert.equal(full.coverageGap,0);assert.equal(full.wonValue,0);
 });
 test('guidance requires authentication and returns an explicitly labeled live-data fallback without an AI key',async t=>{

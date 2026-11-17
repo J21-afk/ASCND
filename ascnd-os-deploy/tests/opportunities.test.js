@@ -59,8 +59,10 @@ test('legacy selections preserve their original service under the new offer name
     assert.equal(catalog.normalize('Help the business grow'), 'Help the business grow');
     assert.equal(catalog.normalize('ai-receptionist'), 'ai-receptionist');
     assert.equal(catalog.price('ai-receptionist'),2250);
-    assert.equal(catalog.price('start, grow, brand, estimate, other'),4299);
+    assert.equal(catalog.price('start, grow, brand, estimate, other'),3549);
     assert.equal(catalog.price('connect-digital, connect-digital'),799);
     assert.equal(validateUpdate({solutions:'connect-digital, ai-receptionist',value:1}).value,3049);
     for (const item of catalog.entries) assert.ok(catalog.selection(`${item.name} — ${item.description}`).includes(item.id));
 });
+
+ test("custom scope has no fixed price and remains pending a quote",()=>{ const c=require("../public/solutions-catalog"); assert.equal(c.price("custom"),0); assert.equal(c.price("connect-digital, custom"),799); assert.equal(c.hasCustomPricing("custom"),true); });

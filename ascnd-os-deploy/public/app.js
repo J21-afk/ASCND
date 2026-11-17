@@ -718,7 +718,7 @@ const newOpportunityForm =
 const solutionOptionsNode = document.getElementById("opportunitySolutionOptions");
 if (solutionOptionsNode) {
     const catalog = window.ASCNDSolutions;
-    const option = item => `<label class="solution-option"><input type="checkbox" name="opportunitySolution" value="${item.id}" data-value="${item.value}"><div><strong>${escapeOpportunityHtml(item.name)}</strong><span>${escapeOpportunityHtml(item.description)}</span></div><b>${item.value ? '$'+item.value.toLocaleString() : 'CUSTOM'}</b></label>`;
+    const option = item => `<label class="solution-option"><input type="checkbox" name="opportunitySolution" value="${item.id}" data-value="${item.value}"><div><strong>${escapeOpportunityHtml(item.name)}</strong><span>${escapeOpportunityHtml(item.description)}</span></div><b>${item.value ? '$'+item.value.toLocaleString() : 'Quoted by scope'}</b></label>`;
     const addons = `<fieldset class="intelligence-options" id="opportunityIntelligenceOptions" hidden disabled><legend>Optional AI capabilities for Intelligence</legend><p>Add only the capabilities this business needs.</p>${catalog.addons.map(option).join('')}</fieldset>`;
     solutionOptionsNode.innerHTML = catalog.offers.map(item => option(item)+(item.id==='intelligence' ? addons : '')).join('');
 }
@@ -749,7 +749,7 @@ function calculateOpportunityValue() {
     syncIntelligenceOptions();
     const selected = Array.from(opportunitySolutionInputs).filter(input => input.checked && !input.disabled).map(input => input.value).join(', ');
     const total = window.ASCNDSolutions.price(selected);
-    if (opportunityCalculatedValue) opportunityCalculatedValue.textContent = `$${total.toLocaleString()}` + (window.ASCNDSolutions.hasCustomPricing(selected) ? ' + quoted AI options' : '');
+    if (opportunityCalculatedValue) opportunityCalculatedValue.textContent = (window.ASCNDSolutions.hasCustomPricing(selected) ? (total ? `$${total.toLocaleString()} + quoted by scope` : 'Quoted by scope') : `$${total.toLocaleString()}`);
     return total;
 }
 
