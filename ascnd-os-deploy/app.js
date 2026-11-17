@@ -1,4 +1,4 @@
-﻿const navItems = document.querySelectorAll(".nav-item");
+const navItems = document.querySelectorAll(".nav-item");
 const views = document.querySelectorAll(".view");
 
 function showView(viewName) {
@@ -3842,8 +3842,14 @@ function openOpportunityDetail(opportunity) {
         start:
             "ASCND Start â€” Website / Digital Foundation",
 
+        connect:
+            "ASCND Connect — Lead & Customer System",
+
+        "ai-receptionist":
+            "AI Receptionist — Call Answering & Inquiry Capture",
+
         grow:
-            "ASCND Grow â€” Lead & Customer System",
+            "ASCND Connect â€” Lead & Customer System",
 
         brand:
             "Brand Identity â€” Logo / Visual Identity",

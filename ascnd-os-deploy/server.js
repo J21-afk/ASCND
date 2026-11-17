@@ -1,4 +1,4 @@
-﻿require("dotenv").config();
+require("dotenv").config();
 
 if (!process.env.SUPABASE_URL && process.env.NODE_ENV !== "production") {
     require("dotenv").config({ path: "C:\\ASCND\\.env" });
@@ -3738,7 +3738,8 @@ app.get("/api/opportunities", async (req, res) => {
             });
         }
 
-        res.json(data);
+        const { normalizeSolutionText } = require("./opportunities-api");
+        res.json((data || []).map(item => ({ ...item, solutions: normalizeSolutionText(item.solutions), opportunity: normalizeSolutionText(item.opportunity) })));
 
     } catch (error) {
 
@@ -3754,9 +3755,12 @@ app.get("/api/opportunities", async (req, res) => {
 });
 
 
+require("./opportunities-api").registerOpportunityRoutes(app, supabase);
+
 // Create a new opportunity
 app.post("/api/opportunities", async (req, res) => {
     try {
+        req.body.solutions = require("./opportunities-api").normalizeSolutionText(req.body.solutions);
 
         const {
             contact_name,

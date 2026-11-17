@@ -6,6 +6,8 @@
     <title>ASCND CONTROL</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="/company-demos.css?v=1">
+    <link rel="stylesheet" href="/opportunity-workflow.css">
+    <link rel="stylesheet" href="/glass.css">
 </head>
 
 <body>
@@ -266,55 +268,7 @@
     </div>
 
 
-   <!-- ASCND BRIEFING -->
-
-<div class="panel briefing-panel">
-
-    <div class="panel-header">
-
-        <div>
-            <span class="eyebrow">ASCND INTELLIGENCE:</span>
-
-            <h3>Today's Briefing</h3>
-        </div>
-
-        <span class="briefing-status">
-            LIVE
-        </span>
-
-    </div>
-
-
-    <div class="briefing-content">
-
-        <p id="briefingOverview">
-            Loading current business activity...
-        </p>
-
-        <p id="briefingPipeline">
-            Loading pipeline status...
-        </p>
-
-        <p id="briefingAttention">
-            Analyzing current areas of attention...
-        </p>
-
-    </div>
-
-
-    <div class="briefing-focus">
-
-        <span class="eyebrow">
-            CURRENT FOCUS:
-        </span>
-
-        <strong id="briefingFocus">
-            Analyzing current priorities...
-        </strong>
-
-    </div>
-
-</div>
+<div class="panel briefing-panel"><span class="eyebrow">CURRENT FOCUS</span><h3 id="briefingFocus">Loading your priorities…</h3><p id="briefingOverview">Loading saved business activity…</p></div>
 
     <!-- WHAT'S HAPPENING -->
 
@@ -439,105 +393,7 @@
 </div>
 
 
-        <!-- BUSINESS SNAPSHOT -->
-
-        <div class="panel">
-
-            <div class="panel-header">
-
-                <div>
-                    <span class="eyebrow">
-                        SNAPSHOT:
-                    </span>
-
-                    <h3>
-                        Business Summary
-                    </h3>
-                </div>
-
-                <button
-                    class="text-button"
-                    data-view-target="business-pipeline"
-                >
-                    View Pipeline →
-                </button>
-
-            </div>
-
-
-            <div class="snapshot-list">
-
-
-                <div class="snapshot-row">
-
-                    <span>
-                        Open opportunities -
-                    </span>
-
-                    <strong>
-                        3
-                    </strong>
-
-                </div>
-
-
-                <div class="snapshot-row">
-
-                    <span>
-                        Pipeline value -
-                    </span>
-
-                    <strong>
-                        $3,000
-                    </strong>
-
-                </div>
-
-
-                <div class="snapshot-row">
-
-                    <span>
-                        Active prospects -
-                    </span>
-
-                    <strong>
-                        2
-                    </strong>
-
-                </div>
-
-
-                <div class="snapshot-row">
-
-                    <span>
-                        Active clients -
-                    </span>
-
-                    <strong>
-                        1
-                    </strong>
-
-                </div>
-
-
-                <div class="snapshot-row">
-
-                    <span>
-                        Proposals awaiting response -
-                    </span>
-
-                    <strong>
-                        1
-                    </strong>
-
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
-
 
     <!-- RECENT ACTIVITY -->
 
@@ -1038,7 +894,7 @@
                 <h3>Business We've Captured</h3>
             </div>
 
-            <span class="company-count">
+            <span class="company-count" id="opportunityCount">
                 0 opportunities
             </span>
 
@@ -1056,67 +912,6 @@
 
 </div>
 
-
-    <!-- RADAR STATUS -->
-
-    <div class="panel activity-panel">
-
-        <div class="panel-header">
-
-            <div>
-                <span class="eyebrow">RADAR STATUS:</span>
-                <h3>Discovery System</h3>
-            </div>
-
-        </div>
-
-
-        <div class="activity">
-
-            <div class="activity-row">
-
-                <span class="activity-time">
-                    NOW
-                </span>
-
-                <div>
-
-                    <strong>
-                        Manual discovery
-                    </strong>
-
-                    <p>
-                        Opportunities are currently being added manually.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="activity-row">
-
-                <span class="activity-time">
-                    NEXT
-                </span>
-
-                <div>
-
-                    <strong>
-                        ASCND RADAR
-                    </strong>
-
-                    <p>
-                        Future system will discover and analyze businesses automatically.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
 
 </section>
 
@@ -1855,661 +1650,14 @@
 ========================================= -->
 
 <section class="view" id="business-pipeline">
-
-    <div class="section-heading">
-
-        <div>
-            <span class="eyebrow">BUSINESS PIPELINE</span>
-            <h2>Revenue & Growth</h2>
-            <p>Track where ASCND stands and where it's on pace to meet it's goals.</p>
-        </div>
-
-    </div>
-
-
-    <!-- REVENUE SNAPSHOT -->
-
+    <div class="section-heading"><div><span class="eyebrow">BUSINESS PIPELINE</span><h2>Opportunity Progress</h2><p>Saved opportunity values by stage. These are estimates, not collected revenue.</p></div></div>
     <div class="metrics">
-
-        <div class="metric">
-            <span>REVENUE THIS MONTH:</span>
-            <strong>$0</strong>
-            <small>Collected</small>
-        </div>
-
-        <div class="metric">
-            <span>MONTHLY GOAL:</span>
-            <strong>$15,000</strong>
-            <small>Target</small>
-        </div>
-
-        <div class="metric">
-            <span>PIPELINE VALUE:</span>
-            <strong>$3,000</strong>
-            <small>Active opportunities</small>
-        </div>
-
-        <div class="metric">
-            <span>REMAINING:</span>
-            <strong>$12,000</strong>
-            <small>To monthly goal</small>
-        </div>
-
+        <div class="metric"><span>OPEN VALUE</span><strong data-ow-stat="open-value">—</strong><small>Active opportunities</small></div>
+        <div class="metric"><span>IN PROPOSAL</span><strong data-ow-stat="proposal-value">—</strong><small>Awaiting a decision</small></div>
+        <div class="metric"><span>WON VALUE</span><strong data-ow-stat="won-value">—</strong><small>All recorded won opportunities</small></div>
+        <div class="metric"><span>FOLLOW-UPS DUE</span><strong data-ow-stat="due">—</strong><small>Today and overdue</small></div>
     </div>
-
-
-    <!-- REVENUE GOAL -->
-
-    <div class="dashboard-section">
-
-        <div class="section-label">
-
-            <span class="eyebrow">REVENUE GOAL</span>
-            <h3>Monthly Progress</h3>
-
-        </div>
-
-
-        <div class="revenue-goal-panel">
-
-            <div class="revenue-goal-header">
-
-                <div>
-                    <span class="eyebrow">
-                        CURRENT PROGRESS:
-                    </span>
-
-                    <strong>
-                        $0
-                    </strong>
-
-                    <small>
-                        of $15,000 monthly goal
-                    </small>
-                </div>
-
-
-                <div class="revenue-goal-percent">
-                    0%
-                </div>
-
-            </div>
-
-
-            <div class="revenue-progress">
-
-                <div
-                    class="revenue-progress-fill"
-                    style="width: 0%;"
-                ></div>
-
-            </div>
-
-
-            <div class="revenue-goal-footer">
-
-                <span>
-                    $12,000 remaining
-                </span>
-
-                <span>
-                    MONTHLY TARGET
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- REVENUE TRAJECTORY -->
-
-    <div class="dashboard-section">
-
-        <div class="section-label">
-
-            <span class="eyebrow">TRAJECTORY</span>
-            <h3>Revenue Movement</h3>
-
-        </div>
-
-
-        <div class="revenue-chart">
-
-            <div class="chart-y-axis">
-
-                <span>$15K</span>
-                <span>$12k</span>
-                <span>$9K</span>
-                <span>$6K</span>
-                <span>$3K</span>
-                <span>$0</span>
-
-            </div>
-
-
-            <div class="chart-area">
-
-                <div class="chart-grid-lines">
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
-                </div>
-
-
-                <div class="revenue-bars">
-
-                    <div class="revenue-bar-wrap">
-                        <div
-                            class="revenue-bar"
-                            style="height: 0%;"
-                        ></div>
-                        <span>JAN</span>
-                    </div>
-
-                    <div class="revenue-bar-wrap">
-                        <div
-                            class="revenue-bar"
-                            style="height: 0%;"
-                        ></div>
-                        <span>FEB</span>
-                    </div>
-
-                    <div class="revenue-bar-wrap">
-                        <div
-                            class="revenue-bar"
-                            style="height: 0%;"
-                        ></div>
-                        <span>MAR</span>
-                    </div>
-
-                    <div class="revenue-bar-wrap">
-                        <div
-                            class="revenue-bar"
-                            style="height: 0%;"
-                        ></div>
-                        <span>APR</span>
-                    </div>
-
-                    <div class="revenue-bar-wrap">
-                        <div
-                            class="revenue-bar"
-                            style="height: 0%;"
-                        ></div>
-                        <span>MAY</span>
-                    </div>
-
-                    <div class="revenue-bar-wrap">
-                        <div
-                            class="revenue-bar"
-                            style="height: 0%;"
-                        ></div>
-                        <span>JUN</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- PIPELINE OUTLOOK -->
-
-    <div class="dashboard-section">
-
-        <div class="section-label">
-
-            <span class="eyebrow">PIPELINE OUTLOOK</span>
-            <h3>Potential Revenue:</h3>
-
-        </div>
-
-
-        <div class="metrics">
-
-            <div class="metric">
-
-                <span>ACTIVE PIPELINE:</span>
-
-                <strong>
-                    $3,000
-                </strong>
-
-                <small>
-                    Potential Revenue
-                </small>
-
-            </div>
-
-
-            <div class="metric">
-
-                <span>PROPOSALS:</span>
-
-                <strong>
-                    $1,500
-                </strong>
-
-                <small>
-                    Awaiting Response
-                </small>
-
-            </div>
-
-
-            <div class="metric">
-
-                <span>MEETINGS:</span>
-
-                <strong>
-                    $1,500
-                </strong>
-
-                <small>
-                    Potential Revenue
-                </small>
-
-            </div>
-
-
-            <div class="metric">
-
-                <span>WON REVENUE:</span>
-
-                <strong>
-                    $0
-                </strong>
-
-                <small>
-                    This period
-                </small>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- PERFORMANCE -->
-
-    <div class="dashboard-section">
-
-        <div class="section-label">
-
-            <span class="eyebrow">PERFORMANCE</span>
-            <h3>Business Health:</h3>
-
-        </div>
-
-
-        <div class="performance-grid">
-
-
-            <div class="performance-card">
-
-                <span class="eyebrow">
-                    CURRENT PACE:
-                </span>
-
-                <strong>
-                    $0
-                </strong>
-
-                <p>
-                    Revenue currently collected this month.
-                </p>
-
-            </div>
-
-
-            <div class="performance-card">
-
-                <span class="eyebrow">
-                    REQUIRED PACE:
-                </span>
-
-                <strong>
-                    $15,000
-                </strong>
-
-                <p>
-                    Revenue required to reach the monthly goal.
-                </p>
-
-            </div>
-
-
-            <div class="performance-card">
-
-                <span class="eyebrow">
-                    GAP TO GOAL:
-                </span>
-
-                <strong>
-                    $15,000
-                </strong>
-
-                <p>
-                    Remaining revenue needed this month.
-                </p>
-
-            </div>
-
-
-            <div class="performance-card">
-
-                <span class="eyebrow">
-                    STATUS:
-                </span>
-
-                <strong>
-                    BUILDING
-                </strong>
-
-                <p>
-                    Revenue engine is still being established.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-<!-- FOCUS AREAS -->
-
-<div class="dashboard-section">
-
-    <div class="section-label">
-
-        <span class="eyebrow">
-            FOCUS AREAS
-        </span>
-
-        <h3>
-            Where We Can Improve & Progress ASCND Forward
-        </h3>
-
-    </div>
-
-
-    <div class="focus-panel">
-
-        <div class="focus-intro">
-
-            <p>
-                These are the areas currently capable of moving ASCND
-                closer to the $15,000 monthly revenue goal.
-            </p>
-
-        </div>
-
-
-        <div class="focus-list">
-
-
-            <!-- CLOSE ACTIVE OPPORTUNITIES -->
-
-            <div class="focus-row">
-
-                <div class="focus-number">
-                    01
-                </div>
-
-                <div class="focus-content">
-
-                    <div class="focus-title-row">
-
-                        <strong>
-                            Close Active Opportunities
-                        </strong>
-
-                        <span class="focus-status active">
-                            HIGH IMPACT
-                        </span>
-
-                    </div>
-
-                    <p>
-                        $3,000 currently sits in active opportunity value.
-                        Move existing prospects toward meetings, proposals,
-                        and closed business.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- INCREASE LEAD VOLUME -->
-
-            <div class="focus-row">
-
-                <div class="focus-number">
-                    02
-                </div>
-
-                <div class="focus-content">
-
-                    <div class="focus-title-row">
-
-                        <strong>
-                            Increase Lead Volume
-                        </strong>
-
-                        <span class="focus-status">
-                            GROWTH
-                        </span>
-
-                    </div>
-
-                    <p>
-                        Continue adding qualified businesses through ASCND
-                        RADAR, assessments, referrals, and direct outreach.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- IMPROVE CONVERSION -->
-
-            <div class="focus-row">
-
-                <div class="focus-number">
-                    03
-                </div>
-
-                <div class="focus-content">
-
-                    <div class="focus-title-row">
-
-                        <strong>
-                            Improve Conversion
-                        </strong>
-
-                        <span class="focus-status">
-                            PROCESS
-                        </span>
-
-                    </div>
-
-                    <p>
-                        Strengthen the path from opportunity to contact,
-                        meeting, proposal, and signed client.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- INCREASE DEAL VALUE -->
-
-            <div class="focus-row">
-
-                <div class="focus-number">
-                    04
-                </div>
-
-                <div class="focus-content">
-
-                    <div class="focus-title-row">
-
-                        <strong>
-                            Increase Deal Value
-                        </strong>
-
-                        <span class="focus-status">
-                            SCALE
-                        </span>
-
-                    </div>
-
-                    <p>
-                        Develop larger Grow and Custom Business Optimization
-                        opportunities as ASCND's capabilities expand.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- RECURRING REVENUE -->
-
-            <div class="focus-row">
-
-                <div class="focus-number">
-                    05
-                </div>
-
-                <div class="focus-content">
-
-                    <div class="focus-title-row">
-
-                        <strong>
-                            Build Recurring Revenue
-                        </strong>
-
-                        <span class="focus-status">
-                            LONG TERM
-                        </span>
-
-                    </div>
-
-                    <p>
-                        Build a recurring revenue base through maintenance,
-                        support, monitoring, and ongoing system optimization.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- CURRENT PRIORITY -->
-
-<div class="dashboard-section">
-
-    <div class="section-label">
-
-        <span class="eyebrow">
-            CURRENT PRIORITY
-        </span>
-
-        <h3>
-            What Deserves Attention Now
-        </h3>
-
-    </div>
-
-
-    <div class="priority-command-panel">
-
-        <div>
-
-            <span class="eyebrow">
-                Important:
-            </span>
-
-            <h3>
-                Focus on the most impactful actions first.
-            </h3>
-
-            <p>
-                ASCND currently has active opportunities but no recorded
-                revenue this month. The immediate focus should be moving
-                existing opportunities toward revenue before simply adding
-                more volume.
-            </p>
-
-        </div>
-
-
-        <div class="priority-actions">
-
-            <div class="priority-action">
-
-                <span>
-                    NXT LEVEL EPOXY
-                </span>
-
-                <strong>
-                    Follow Up
-                </strong>
-
-            </div>
-
-
-            <div class="priority-action">
-
-                <span>
-                    BLUE STAR BIKE SHOP
-                </span>
-
-                <strong>
-                    Move Toward Proposal
-                </strong>
-
-            </div>
-
-
-            <div class="priority-action">
-
-                <span>
-                    ASCND RADAR
-                </span>
-
-                <strong>
-                    Continue Building Opportunity Flow
-                </strong>
-
-            </div>
-
-         </div>
-
-    </div>
-
+    <div class="panel"><h3>Move a business forward</h3><p>Open a stage to review its opportunities, update the conversation, and set the next action.</p><div id="ow-stage-summary" class="ow-stage-summary"></div></div>
 </section>
 
            <section class="view" id="companies">
@@ -2800,115 +1948,15 @@
             </div>
 
             <span class="company-count" id="companyCount">
-                3 companies
+                Loading…
             </span>
 
         </div>
 
 
         <div class="company-list" id="companyList">
-
-
-            <!-- COMPANY 1 -->
-
-            <div
-                class="company-row"
-                data-status="prospect"
-                data-company="NXT LEVEL EPOXY"
-            >
-
-                <div class="company-avatar">
-                    NE
-                </div>
-
-                <div class="company-info">
-
-                    <strong>NXT LEVEL EPOXY</strong>
-
-                    <span>
-                        Epoxy Flooring
-                    </span>
-
-                </div>
-
-                <div class="company-status prospect">
-                    PROSPECT
-                </div>
-
-                <div class="company-action">
-                    →
-                </div>
-
-            </div>
-
-
-            <!-- COMPANY 2 -->
-
-            <div
-                class="company-row"
-                data-status="prospect"
-                data-company="BLUE STAR BIKE SHOP"
-            >
-
-                <div class="company-avatar">
-                    BS
-                </div>
-
-                <div class="company-info">
-
-                    <strong>BLUE STAR BIKE SHOP</strong>
-
-                    <span>
-                        Bike Shop
-                    </span>
-
-                </div>
-
-                <div class="company-status prospect">
-                    PROSPECT
-                </div>
-
-                <div class="company-action">
-                    →
-                </div>
-
-            </div>
-
-
-            <!-- COMPANY 3 -->
-
-            <div
-                class="company-row"
-                data-status="client"
-                data-company="ASCND"
-            >
-
-                <div class="company-avatar">
-                    AS
-                </div>
-
-                <div class="company-info">
-
-                    <strong>ASCND</strong>
-
-                    <span>
-                        Digital Systems
-                    </span>
-
-                </div>
-
-                <div class="company-status client">
-                    CLIENT
-                </div>
-
-                <div class="company-action">
-                    →
-                </div>
-
-            </div>
-
-
-        </div>
+<p class="ow-empty">Loading saved records…</p>
+</div>
 
     </div>
 
@@ -2922,12 +1970,8 @@
 
         <div>
             <span class="eyebrow">COMPANY RECORD</span>
-            <h2 id="companyRecordTitle">
-                NXT LEVEL EPOXY
-            </h2>
-            <p id="companyRecordType">
-                Epoxy Flooring
-            </p>
+            <h2 id="companyRecordTitle">—</h2>
+            <p id="companyRecordType">—</p>
         </div>
 
         <button
@@ -2967,23 +2011,17 @@
 
                 <div class="snapshot-row">
                     <span>Company -</span>
-                    <strong id="companyRecordName">
-                        NXT LEVEL EPOXY
-                    </strong>
+                    <strong id="companyRecordName">—</strong>
                 </div>
 
                 <div class="snapshot-row">
                     <span>Industry -</span>
-                    <strong id="companyRecordIndustry">
-                        Epoxy Flooring
-                    </strong>
+                    <strong id="companyRecordIndustry">—</strong>
                 </div>
 
                 <div class="snapshot-row">
     <span>Contact -</span>
-    <strong id="companyRecordContact">
-        Primary Contact
-    </strong>
+    <strong id="companyRecordContact">—</strong>
 </div>
 
 <div class="snapshot-row">
@@ -3020,9 +2058,7 @@
 
             <div class="briefing-content">
 
-                <p id="companyRecordNextAction">
-                    Follow up with prospect.
-                </p>
+                <p id="companyRecordNextAction">—</p>
 
             </div>
 
@@ -3050,13 +2086,9 @@
 
                 <div>
 
-                    <strong id="companyRecordContactName">
-                        Primary Contact
-                    </strong>
+                    <strong id="companyRecordContactName">—</strong>
 
-                    <p id="companyRecordContactRole">
-                        Owner / Manager
-                    </p>
+                    <p id="companyRecordContactRole">—</p>
 
                 </div>
 
@@ -3085,22 +2117,14 @@
 >
 
                 <div class="pipeline-card-top">
-                    <span id="companyRecordOpportunityStage">
-                        PROPOSAL
-                    </span>
+                    <span id="companyRecordOpportunityStage">—</span>
 
-                    <span id="companyRecordOpportunityValue">
-                        Potentially: $3,000
-                    </span>
+                    <span id="companyRecordOpportunityValue">—</span>
                 </div>
 
-                <strong id="companyRecordOpportunity">
-                    Website + Business Systems
-                </strong>
+                <strong id="companyRecordOpportunity">—</strong>
 
-                <p id="companyRecordOpportunityDescription">
-                    Proposal sent 4 days ago.
-                </p>
+                <p id="companyRecordOpportunityDescription">—</p>
 
             </div>
 
@@ -3130,9 +2154,7 @@
 
                     <div>
 
-                        <strong id="companyRecordActivity">
-                            Proposal sent
-                        </strong>
+                        <strong id="companyRecordActivity">—</strong>
 
                         <p>
                             Latest recorded activity for this company.
@@ -3367,115 +2389,15 @@
             </div>
 
             <span class="company-count" id="contactCount">
-                3 contacts
+                Loading…
             </span>
 
         </div>
 
 
         <div class="company-list" id="contactList">
-
-
-            <!-- CONTACT 1 -->
-
-            <div
-                class="company-row contact-row"
-                data-contact="Julian Laguna"
-                data-company="ASCND"
-            >
-
-                <div class="company-avatar">
-                    JL
-                </div>
-
-                <div class="company-info">
-
-                    <strong>Julian Laguna</strong>
-
-                    <span>
-                        ASCND
-                    </span>
-
-                </div>
-
-                <div class="company-status client">
-                    ADMINISTRATOR
-                </div>
-
-                <div class="company-action">
-                    →
-                </div>
-
-            </div>
-
-
-            <!-- CONTACT 2 -->
-
-            <div
-                class="company-row contact-row"
-                data-contact="Primary Contact"
-                data-company="NXT LEVEL EPOXY"
-            >
-
-                <div class="company-avatar">
-                    NE
-                </div>
-
-                <div class="company-info">
-
-                    <strong>Primary Contact</strong>
-
-                    <span>
-                        NXT LEVEL EPOXY
-                    </span>
-
-                </div>
-
-                <div class="company-status prospect">
-                    OWNER / MANAGER
-                </div>
-
-                <div class="company-action">
-                    →
-                </div>
-
-            </div>
-
-
-            <!-- CONTACT 3 -->
-
-            <div
-                class="company-row contact-row"
-                data-contact="Primary Contact"
-                data-company="BLUE STAR BIKE SHOP"
-            >
-
-                <div class="company-avatar">
-                    BS
-                </div>
-
-                <div class="company-info">
-
-                    <strong>Primary Contact</strong>
-
-                    <span>
-                        BLUE STAR BIKE SHOP
-                    </span>
-
-                </div>
-
-                <div class="company-status prospect">
-                    MANAGER
-                </div>
-
-                <div class="company-action">
-                    →
-                </div>
-
-            </div>
-
-
-        </div>
+<p class="ow-empty">Loading saved records…</p>
+</div>
 
     </div>
 
@@ -3999,12 +2921,12 @@
                             <input
                                 type="checkbox"
                                 name="opportunitySolution"
-                                value="grow"
+                                value="connect"
                                 data-value="1500"
                             >
 
                             <div>
-                                <strong>ASCND Grow - </strong>
+                                <strong>ASCND Connect - </strong>
                                 <span>
                                     Lead & Customer System
                                 </span>
@@ -4056,6 +2978,12 @@
 
                         </label>
 
+
+                        <label class="solution-option">
+                            <input type="checkbox" name="opportunitySolution" value="ai-receptionist" data-value="0">
+                            <div><strong>AI Receptionist - </strong><span>Answer calls and capture customer inquiries</span></div>
+                            <b>CUSTOM</b>
+                        </label>
 
                         <label class="solution-option">
 

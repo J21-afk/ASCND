@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     "use strict";
 
     document.body.classList.add("os-auth-locked");
@@ -76,6 +76,11 @@
         appLoaded = true;
         const script = document.createElement("script");
         script.src = "/app.js";
+        script.onload = () => {
+            const workflowScript = document.createElement("script");
+            workflowScript.src = "/opportunity-workflow.js";
+            document.body.appendChild(workflowScript);
+        };
         script.onerror = () => {
             document.body.classList.add("os-auth-locked");
             say("The dashboard failed to load. Refresh and try again.");

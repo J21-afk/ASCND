@@ -3013,8 +3013,14 @@ function openOpportunityDetail(opportunity) {
         start:
             "ASCND Start — Website / Digital Foundation",
 
+        connect:
+            "ASCND Connect — Lead & Customer System",
+
+        "ai-receptionist":
+            "AI Receptionist — Call Answering & Inquiry Capture",
+
         grow:
-            "ASCND Grow — Lead & Customer System",
+            "ASCND Connect — Lead & Customer System",
 
         brand:
             "Brand Identity — Logo / Visual Identity",
