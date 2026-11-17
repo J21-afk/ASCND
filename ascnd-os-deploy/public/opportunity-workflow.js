@@ -4,9 +4,9 @@
     const stages = ["NEW", "REVIEW", "CONTACTED", "DISCOVERY", "FOLLOW-UP", "PROPOSAL", "WON", "LOST", "CLOSED"];
     const esc = escapeOpportunityHtml;
     function solutionLabel(value) {
-        const names = { start: "ASCND Start", connect: "ASCND Connect", grow: "ASCND Connect", "ai-receptionist": "AI Receptionist", brand: "Brand Identity", estimate: "Estimate / Quote System", other: "Other / Custom" };
-        return String(value || "").split(",").map(part => names[part.trim()] || part.trim().replace(/ASCND\s+Grow/gi, "ASCND Connect")).join(" + ");
+        return window.ASCNDSolutions.labels(value).join(" + ");
     }
+
     const closed = item => ["WON", "LOST", "CLOSED"].includes(String(item.stage).toUpperCase());
     const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
     const workflow = item => item.workflow || {};
@@ -110,6 +110,22 @@
     function field(name, label, value, type = "text", attributes = "") {
         return `<label>${label}<input name="${name}" type="${type}" value="${esc(value ?? "")}" ${attributes}></label>`;
     }
+    function solutionPicker(value) {
+        const catalog = window.ASCNDSolutions;
+        const selected = catalog.selection(value);
+        const option = item => `<label class="solution-option"><input type="checkbox" name="owSolution" value="${item.id}"${selected.includes(item.id) ? " checked" : ""}><div><strong>${esc(item.name)}</strong><span>${esc(item.description)}</span></div></label>`;
+        const addons = `<fieldset class="intelligence-options" id="ow-intelligence-options"><legend>Optional AI capabilities</legend><p>Intelligence works without AI. Add only what this business needs.</p>${catalog.addons.map(option).join("")}</fieldset>`;
+        const choices = catalog.offers.map(item => option(item) + (item.id === "intelligence" ? addons : "")).join("");
+        const extra = selected.filter(id => !catalog.byId[id]).join(", ");
+        return `<fieldset class="ow-solution-picker"><legend>Services / solutions</legend><div class="solution-options">${choices}</div></fieldset>${field("additional_solutions", "Additional scope (optional)", extra, "text", 'maxlength="2000"')}`;
+    }
+    function syncEditorIntelligence(form) {
+        const parent = form.querySelector('[name="owSolution"][value="intelligence"]');
+        const group = form.querySelector("#ow-intelligence-options");
+        group.hidden = !parent.checked;
+        group.disabled = !parent.checked;
+        group.querySelectorAll("input").forEach(input => { input.disabled = !parent.checked; if (!parent.checked) input.checked = false; });
+    }
     function renderDetail(item) {
         state.selected = item.id;
         state.dirty = false;
@@ -118,19 +134,24 @@
         <form id="ow-form" class="ow-form">
           <div class="panel"><h3>Next move</h3><div class="ow-grid"><label>Stage<select name="stage">${stages.map(s => `<option${s === (item.stage || "NEW") ? " selected" : ""}>${s}</option>`).join("")}</select></label><label>Priority<select name="priority"><option value="normal">Normal</option><option value="high"${w.priority === "high" ? " selected" : ""}>High</option></select></label>${field("next_action", "Next action", w.next_action, "text", 'maxlength="1000" placeholder="e.g. Call David to review the demo"')}${field("follow_up_date", "Follow-up date", w.follow_up_date, "date")}</div><p>Closing an opportunity removes it from active follow-ups. Its details stay available under All opportunities.</p></div>
           <div class="panel"><h3>Business & contact</h3><p>These details belong to this opportunity. Manage the shared company and contact records in their sections.</p><div class="ow-grid">${field("business_name", "Business name", item.business_name, "text", 'required maxlength="300"')}${field("contact_name", "Contact name", item.contact_name, "text", 'maxlength="200"')}${field("phone", "Phone(s)", item.phone, "text", 'maxlength="500"')}${field("email", "Email", item.email, "text", 'maxlength="320"')}${field("website", "Website", item.website, "text", 'maxlength="2000"')}${field("location", "Location", item.location, "text", 'maxlength="500"')}</div></div>
-          <div class="panel"><h3>Scope & notes</h3><div class="ow-grid">${field("solutions", "Services / solutions", solutionLabel(item.solutions || item.opportunity).replaceAll(" + ", ", "), "text", 'required maxlength="2000"')}${field("value", "Estimated value ($)", item.value || 0, "number", 'min="0" step="0.01" required')}</div><label>Conversation notes<textarea name="notes" rows="6" maxlength="20000" placeholder="What did you discuss? What is the business waiting on?">${esc(item.notes || "")}</textarea></label></div>
+          <div class="panel"><h3>Scope & notes</h3><div class="ow-grid">${solutionPicker(item.solutions || item.opportunity)}${field("value", "Estimated value ($)", item.value || 0, "number", 'min="0" step="0.01" required')}</div><label>Conversation notes<textarea name="notes" rows="6" maxlength="20000" placeholder="What did you discuss? What is the business waiting on?">${esc(item.notes || "")}</textarea></label></div>
           <div class="ow-actions"><button type="submit" class="primary-button" id="ow-save">Save changes</button><button type="button" class="text-button" id="ow-cancel">Cancel changes</button><button type="button" class="ow-delete" id="ow-delete">Delete opportunity</button><p id="ow-message" role="status" aria-live="polite"></p></div>
         </form>`;
         const form = detail.querySelector("form"); let dirty = false;
+        syncEditorIntelligence(form);
         form.addEventListener("input", () => { dirty = true; state.dirty = true; });
-        form.addEventListener("change", () => { dirty = true; state.dirty = true; });
+        form.addEventListener("change", () => { syncEditorIntelligence(form); dirty = true; state.dirty = true; });
         detail.querySelector("#ow-back").onclick = () => { if (!state.busy && (!dirty || window.confirm("Leave without saving these changes?"))) { state.dirty = false; showView("opportunities"); } };
         detail.querySelector("#ow-cancel").onclick = () => { if (!state.busy && (!dirty || window.confirm("Discard your unsaved changes?"))) renderDetail(item); };
         form.onsubmit = async e => {
             e.preventDefault(); if (state.busy) return;
             const data = Object.fromEntries(new FormData(form));
-            const payload = { ...data, value: Number(data.value), workflow: { next_action: data.next_action, follow_up_date: data.follow_up_date || null, priority: data.priority } };
+            const selectedSolutions = Array.from(form.querySelectorAll('[name="owSolution"]:checked')).filter(input => !input.disabled).map(input => input.value);
+            if (data.additional_solutions.trim()) selectedSolutions.push(data.additional_solutions.trim());
+            if (!selectedSolutions.length) { detail.querySelector("#ow-message").textContent = "Select at least one service or describe the additional scope."; return; }
+            const payload = { ...data, solutions: selectedSolutions.join(", "), value: Number(data.value), workflow: { next_action: data.next_action, follow_up_date: data.follow_up_date || null, priority: data.priority } };
             if (item.workflow === undefined && !data.next_action && !data.follow_up_date && data.priority === "normal") delete payload.workflow;
+            delete payload.owSolution; delete payload.additional_solutions;
             delete payload.next_action; delete payload.follow_up_date; delete payload.priority;
             setBusy(true);
             try {

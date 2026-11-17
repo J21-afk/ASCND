@@ -2,10 +2,8 @@
 
 const STAGES = ["NEW", "REVIEW", "CONTACTED", "DISCOVERY", "FOLLOW-UP", "PROPOSAL", "WON", "LOST", "CLOSED"];
 const TEXT_FIELDS = { contact_name: 200, business_name: 300, location: 500, phone: 500, email: 320, website: 2000, solutions: 2000, notes: 20000 };
-function normalizeSolutionText(value) {
-    if (typeof value !== "string") return value;
-    return value.replace(/ASCND\s+Grow/gi, "ASCND Connect").split(",").map(part => part.trim().toLowerCase() === "grow" ? "connect" : part.trim()).join(", ");
-}
+const normalizeSolutionText = require("./public/solutions-catalog").normalize;
+
 const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
 function validateUpdate(body) {
     if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("Supply opportunity details.");

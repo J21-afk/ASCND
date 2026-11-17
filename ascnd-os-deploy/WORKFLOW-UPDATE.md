@@ -35,3 +35,13 @@ Eight automated tests pass. They cover validation, authorization, record scoping
 JavaScript syntax checks and `git diff --check` pass. A Chromium launch was blocked by the execution environment, so no rendered-browser or mobile visual verification is claimed. Live Supabase integration also remains unverified without its connection configuration.
 
 After deployment, verify desktop and phone layouts, login, each navigation category, reduced-motion behavior, a disposable opportunity's full create/edit/follow-up/close/delete cycle, and assessment conversion. Check the database's stage definition accepts CONTACTED, DISCOVERY, FOLLOW-UP, PROPOSAL, WON, and LOST; no existing enum or stage constraints are rewritten by the migration.
+
+## Service structure revision
+
+- ASCND Start: Brand Identity (existing brand base estimate: $500).
+- ASCND Connect: Website & Digital Foundation (existing website base estimate: $1,500).
+- ASCND Intelligence: Lead & Customer Management (existing management base estimate: $1,500). AI analysis, automation, and receptionist are optional, custom-quoted capabilities within Intelligence. Both creation and editing enforce the parent/option relationship.
+- ASCND Coordinate: Estimates, Quotes & Scheduling. Custom quoted because scheduling expands the former estimate-only scope.
+- Custom Solution: additional or specialized scope.
+
+Existing opportunity values are not recalculated. New identifiers distinguish the revised offerings from older records: legacy start/website maps to Connect, legacy brand to Start, legacy connect/grow/management to Intelligence, and estimate to Coordinate. The shared catalog normalizes labels without rewriting database records. No extra database migration is required for the service revision.

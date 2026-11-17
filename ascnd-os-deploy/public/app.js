@@ -725,7 +725,20 @@ const opportunityCalculatedValue =
         "newOpportunityCalculatedValue"
     );
 
+function syncIntelligenceOptions() {
+    const parent = document.querySelector('input[name="opportunitySolution"][value="intelligence"]');
+    const group = document.getElementById("opportunityIntelligenceOptions");
+    if (!parent || !group) return;
+    group.hidden = !parent.checked;
+    group.disabled = !parent.checked;
+    group.querySelectorAll("input").forEach(input => {
+        input.disabled = !parent.checked;
+        if (!parent.checked) input.checked = false;
+    });
+}
+
 function calculateOpportunityValue() {
+    syncIntelligenceOptions();
 
     let total = 0;
 
@@ -746,7 +759,7 @@ function calculateOpportunityValue() {
 
     if (opportunityCalculatedValue) {
 
-        const custom = Array.from(opportunitySolutionInputs).some(input => input.checked && ["ai-receptionist", "other"].includes(input.value));
+        const custom = Array.from(opportunitySolutionInputs).some(input => input.checked && !input.disabled && ["coordinate", "custom", "ai-analysis", "ai-automation", "ai-receptionist"].includes(input.value));
         opportunityCalculatedValue.textContent =
             custom ? `$${total.toLocaleString()} + custom quote` : `$${total.toLocaleString()}`;
 
@@ -877,7 +890,7 @@ if (newOpportunityForm) {
             location: read("newOpportunityLocation"), email: read("newOpportunityEmail"), website: read("newOpportunityWebsite"),
             phone: Array.from(document.querySelectorAll(".opportunity-phone")).map(input => input.value.trim()).filter(Boolean).join(" | "),
             value: calculateOpportunityValue(),
-            solutions: Array.from(opportunitySolutionInputs).filter(input => input.checked).map(input => input.value).join(", "),
+            solutions: Array.from(opportunitySolutionInputs).filter(input => input.checked && !input.disabled).map(input => input.value).join(", "),
             notes: read("newOpportunityNotes")
         };
         if (!opportunity.business_name) { alert("Business name is required."); return; }
@@ -3384,28 +3397,20 @@ function openOpportunityDetail(opportunity) {
 
 
     const solutionNames = {
-
-        start:
-            "ASCND Start — Website / Digital Foundation",
-
-        connect:
-            "ASCND Connect — Lead & Customer System",
-
-        "ai-receptionist":
-            "AI Receptionist — Call Answering & Inquiry Capture",
-
-        grow:
-            "ASCND Connect — Lead & Customer System",
-
-        brand:
-            "Brand Identity — Logo / Visual Identity",
-
-        estimate:
-            "Estimate / Quote System — Automated estimating",
-
-        other:
-            "Other / Custom Solution"
-
+        "start-brand": "ASCND Start — Brand Identity",
+        "connect-digital": "ASCND Connect — Website & Digital Foundation",
+        intelligence: "ASCND Intelligence — Lead & Customer Management",
+        coordinate: "ASCND Coordinate — Estimates, Quotes & Scheduling",
+        custom: "Custom Solution",
+        "ai-analysis": "ASCND Intelligence: AI Analysis",
+        "ai-automation": "ASCND Intelligence: AI Automation",
+        "ai-receptionist": "ASCND Intelligence: AI Receptionist",
+        start: "ASCND Connect — Website & Digital Foundation",
+        brand: "ASCND Start — Brand Identity",
+        connect: "ASCND Intelligence — Lead & Customer Management",
+        grow: "ASCND Intelligence — Lead & Customer Management",
+        estimate: "ASCND Coordinate — Estimates, Quotes & Scheduling",
+        other: "Custom Solution"
     };
 
 

@@ -50,9 +50,13 @@ test('linked records prevent deletion; schema setup failure stays actionable', a
     assert.equal(response.status,500); assert.match((await response.json()).error,/001-opportunity-workflow.sql/);
 });
 
-test('legacy Grow names normalize to Connect while preserving ordinary prose', () => {
-    const { normalizeSolutionText } = require('../opportunities-api');
-    assert.equal(normalizeSolutionText('start, grow, ai-receptionist'), 'start, connect, ai-receptionist');
-    assert.equal(normalizeSolutionText('ASCND Grow — Lead & Customer System'), 'ASCND Connect — Lead & Customer System');
-    assert.equal(normalizeSolutionText('Help the business grow'), 'Help the business grow');
+test('legacy selections preserve their original service under the new offer names', () => {
+    const catalog = require('../public/solutions-catalog');
+    assert.equal(catalog.normalize('start, grow, ai-receptionist'), 'connect-digital, intelligence, ai-receptionist');
+    assert.equal(catalog.normalize('brand, connect, estimate, other'), 'start-brand, intelligence, coordinate, custom');
+    assert.equal(catalog.normalize('ASCND Grow — Lead & Customer System'), 'intelligence');
+    assert.equal(catalog.normalize('ASCND Start — Website / Digital Foundation'), 'connect-digital');
+    assert.equal(catalog.normalize('Help the business grow'), 'Help the business grow');
+    assert.equal(catalog.normalize('ai-receptionist'), 'intelligence, ai-receptionist');
+    for (const item of catalog.entries) assert.ok(catalog.selection(`${item.name} — ${item.description}`).includes(item.id));
 });

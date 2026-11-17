@@ -134,3 +134,13 @@ button:disabled { opacity: .55; cursor: wait; }
     .modal-panel { padding: 20px; max-height: 92dvh; }
     .ow-form input, .ow-form select, .ow-form textarea, .ow-toolbar input, .ow-toolbar select { font-size: 16px; }
 }
+.intelligence-options { grid-column: 1 / -1; border: 1px solid rgba(137,205,255,.22); border-radius: 14px; padding: 18px; background: rgba(40,85,124,.12); min-width: 0; }
+.intelligence-options[hidden] { display: none !important; }
+.intelligence-options legend { padding: 0 8px; font-size: 13px; color: #b6dfff; }
+.intelligence-options > p { color: var(--muted); font-size: 12px; line-height: 1.7; margin-bottom: 14px; }
+.intelligence-options .solution-option + .solution-option { margin-top: 10px; }
+.ow-solution-picker { border: 0; min-width: 0; margin-bottom: 18px; }
+.ow-solution-picker > legend { color: #b9cbd9; font-size: 13px; margin-bottom: 12px; }
+.ow-solution-picker .solution-options { display: grid; grid-template-columns: 1fr; }
+.ow-solution-picker .solution-option { display: flex; flex-direction: row; align-items: flex-start; }
+.ow-solution-picker input[type=checkbox] { min-height: 0; width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; }
