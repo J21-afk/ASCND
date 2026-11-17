@@ -196,6 +196,8 @@
         hub.innerHTML = `<div class="panel-header"><div><span class="eyebrow">CLIENT DEMO OPERATIONS</span><h3 id="cd-hub-title">Demo pipeline</h3></div><button type="button" class="cd-secondary" id="cd-refresh">Refresh demos</button></div><p class="cd-intro">Every company. Its demo. The next move.</p><div class="cd-filters" role="group" aria-label="Demo pipeline filters">${Object.entries({ all: "All companies", ready: "Ready to send", due: "Follow-ups due", updates: "Needs updates", missing: "Missing info", building: "To build" }).map(([key, label]) => `<button type="button" data-cd-filter="${key}" aria-pressed="${key === "all"}">${label}<b>0</b></button>`).join("")}</div><div class="cd-search-row"><label for="cd-search" class="cd-sr-only">Search demo companies</label><input id="cd-search" type="search" placeholder="Find a company’s demo…"><span id="cd-result-count"></span></div><div id="cd-list"></div><p id="cd-hub-message" class="cd-hub-message" role="status" aria-live="polite"></p>`;
         const toolbar = companyView.querySelector(".company-toolbar");
         if (toolbar) toolbar.before(hub); else companyView.append(hub);
+        window.ASCNDCompanyDemos.refresh = loadHub;
+        window.addEventListener('ascnd-records-changed', loadHub);
         recordPanel = document.createElement("section"); recordPanel.id = "companyDemoRecord"; recordPanel.className = "cd-workspace panel";
         const firstSection = companyRecord.querySelector(".dashboard-section");
         if (firstSection) firstSection.before(recordPanel); else companyRecord.append(recordPanel);

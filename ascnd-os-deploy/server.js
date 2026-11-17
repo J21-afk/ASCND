@@ -3739,7 +3739,7 @@ app.get("/api/opportunities", async (req, res) => {
         }
 
         const { normalizeSolutionText } = require("./opportunities-api");
-        res.json((data || []).map(item => ({ ...item, solutions: normalizeSolutionText(item.solutions), opportunity: normalizeSolutionText(item.opportunity) })));
+        res.json((data || []).map(item => ({ ...item, solutions: normalizeSolutionText(item.solutions), opportunity: normalizeSolutionText(item.opportunity), value: require("./public/solutions-catalog").price(item.solutions || item.opportunity) })));
 
     } catch (error) {
 
@@ -3756,6 +3756,7 @@ app.get("/api/opportunities", async (req, res) => {
 
 
 require("./opportunities-api").registerOpportunityRoutes(app, supabase);
+require("./business-guidance-api").registerBusinessGuidance(app, supabase);
 
 // Create a new opportunity
 app.post("/api/opportunities", async (req, res) => {
@@ -4010,7 +4011,7 @@ app.post("/api/opportunities", async (req, res) => {
                         website?.trim() || null,
 
                     value:
-                        Number(value) || 0,
+                        require("./public/solutions-catalog").price(solutions),
 
                     solutions:
                         solutions,

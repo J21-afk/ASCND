@@ -15,6 +15,7 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.16",
     "jsdom": "^31.0.1"
   }
 }

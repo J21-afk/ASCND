@@ -6,13 +6,13 @@ const { registerOpportunityRoutes, validateUpdate } = require('../opportunities-
 test('reject invalid values, stages, dates, and unsupported update bodies', () => {
     for (const input of [null, [], {}, {value:-1}, {value:null}, {value:'oops'}, {business_name:''}, {notes:[]}, {stage:'invented'}, {workflow:{next_action:'Call',priority:'normal',follow_up_date:'2026-02-30'}}, {workflow:{next_action:'Call',priority:'normal',follow_up_date:'2026-11-01T12:00:00Z'}}]) assert.throws(() => validateUpdate(input));
     const result = validateUpdate({ business_name:' Test ', solutions:'AI intake', company_id:'overwrite', workflow:{next_action:' Call ',priority:'high',follow_up_date:'2028-02-29'} });
-    assert.deepEqual(result, {business_name:'Test', solutions:'AI intake', opportunity:'AI intake', workflow:{next_action:'Call',priority:'high',follow_up_date:'2028-02-29'}});
+    assert.deepEqual(result, {business_name:'Test', solutions:'AI intake', opportunity:'AI intake', value:0, workflow:{next_action:'Call',priority:'high',follow_up_date:'2028-02-29'}});
     assert.equal(validateUpdate({value:0}).value, 0);
 });
 
 async function harness(t, result) {
     const calls = [];
-    const db = { from(table) { calls.push(['from',table]); return { update(value) { calls.push(['update',value]); return this; }, delete() { calls.push(['delete']); return this; }, eq(...args) { calls.push(['eq',...args]); return this; }, select() { return this; }, async maybeSingle() { return result; } }; } };
+    const db = { async rpc(name,args) { calls.push(['rpc',name,args]); return {data:result.data ? {...result.data,success:true} : null,error:result.error}; }, from(table) { calls.push(['from',table]); return { update(value) { calls.push(['update',value]); return this; }, delete() { calls.push(['delete']); return this; }, eq(...args) { calls.push(['eq',...args]); return this; }, select() { return this; }, async maybeSingle() { return result; } }; } };
     const app = express(); app.use(express.json());
     app.use('/api', (req,res,next) => req.headers.authorization === 'Bearer owner' ? (req.authUser = {id:'owner'}, next()) : res.status(401).json({error:'Unauthorized'}));
     registerOpportunityRoutes(app, db);
@@ -32,10 +32,10 @@ test('unauthorized edits and deletes never reach storage', async t => {
     assert.equal((await request('PATCH',{notes:'changed'},'wrong')).status,401);
     assert.equal((await request('DELETE',undefined,'wrong')).status,401); assert.equal(calls.length,0);
 });
-test('deletion targets only the opportunity, never companies or contacts', async t => {
+test('deletion runs atomic related-record cleanup', async t => {
     const {calls,request}=await harness(t,{data:{id:'123'},error:null});
     assert.equal((await request('DELETE')).status,200);
-    assert.deepEqual(calls,[['from','opportunities'],['delete'],['eq','id','123']]);
+    assert.deepEqual(calls,[['rpc','ascnd_delete_opportunity',{p_id:'123'}]]);
 });
 test('missing opportunities return 404 for edits and deletes', async t => {
     const {request}=await harness(t,{data:null,error:null});
@@ -57,6 +57,10 @@ test('legacy selections preserve their original service under the new offer name
     assert.equal(catalog.normalize('ASCND Grow — Lead & Customer System'), 'intelligence');
     assert.equal(catalog.normalize('ASCND Start — Website / Digital Foundation'), 'connect-digital');
     assert.equal(catalog.normalize('Help the business grow'), 'Help the business grow');
-    assert.equal(catalog.normalize('ai-receptionist'), 'intelligence, ai-receptionist');
+    assert.equal(catalog.normalize('ai-receptionist'), 'ai-receptionist');
+    assert.equal(catalog.price('ai-receptionist'),2250);
+    assert.equal(catalog.price('start, grow, brand, estimate, other'),4299);
+    assert.equal(catalog.price('connect-digital, connect-digital'),799);
+    assert.equal(validateUpdate({solutions:'connect-digital, ai-receptionist',value:1}).value,3049);
     for (const item of catalog.entries) assert.ok(catalog.selection(`${item.name} — ${item.description}`).includes(item.id));
 });

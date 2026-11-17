@@ -715,6 +715,14 @@ const newOpportunityForm =
    AUTOMATIC OPPORTUNITY VALUE
 ========================================= */
 
+const solutionOptionsNode = document.getElementById("opportunitySolutionOptions");
+if (solutionOptionsNode) {
+    const catalog = window.ASCNDSolutions;
+    const option = item => `<label class="solution-option"><input type="checkbox" name="opportunitySolution" value="${item.id}" data-value="${item.value}"><div><strong>${escapeOpportunityHtml(item.name)}</strong><span>${escapeOpportunityHtml(item.description)}</span></div><b>${item.value ? '$'+item.value.toLocaleString() : 'CUSTOM'}</b></label>`;
+    const addons = `<fieldset class="intelligence-options" id="opportunityIntelligenceOptions" hidden disabled><legend>Optional AI capabilities for Intelligence</legend><p>Add only the capabilities this business needs.</p>${catalog.addons.map(option).join('')}</fieldset>`;
+    solutionOptionsNode.innerHTML = catalog.offers.map(item => option(item)+(item.id==='intelligence' ? addons : '')).join('');
+}
+
 const opportunitySolutionInputs =
     document.querySelectorAll(
         'input[name="opportunitySolution"]'
@@ -739,32 +747,9 @@ function syncIntelligenceOptions() {
 
 function calculateOpportunityValue() {
     syncIntelligenceOptions();
-
-    let total = 0;
-
-    opportunitySolutionInputs.forEach(
-        input => {
-
-            if (input.checked) {
-
-                total +=
-                    Number(
-                        input.dataset.value
-                    ) || 0;
-
-            }
-
-        }
-    );
-
-    if (opportunityCalculatedValue) {
-
-        const custom = Array.from(opportunitySolutionInputs).some(input => input.checked && !input.disabled && ["coordinate", "custom", "ai-analysis", "ai-automation", "ai-receptionist"].includes(input.value));
-        opportunityCalculatedValue.textContent =
-            custom ? `$${total.toLocaleString()} + custom quote` : `$${total.toLocaleString()}`;
-
-    }
-
+    const selected = Array.from(opportunitySolutionInputs).filter(input => input.checked && !input.disabled).map(input => input.value).join(', ');
+    const total = window.ASCNDSolutions.price(selected);
+    if (opportunityCalculatedValue) opportunityCalculatedValue.textContent = `$${total.toLocaleString()}` + (window.ASCNDSolutions.hasCustomPricing(selected) ? ' + quoted AI options' : '');
     return total;
 }
 
@@ -1000,14 +985,13 @@ function escapeOpportunityHtml(value) {
 ========================================= */
 
 function renderOverviewBriefing() {
-    const overview = document.getElementById("briefingOverview");
-    const focus = document.getElementById("briefingFocus");
-    if (!overview || !focus) return;
-    const newAssessments = assessmentRecords.filter(item => String(item.status || "NEW").toUpperCase() === "NEW" && !item.opportunity_id);
-    const active = opportunities.filter(item => !["WON", "LOST", "CLOSED"].includes(item.stage));
-    const due = active.filter(item => window.ASCNDOpportunityWorkflow && window.ASCNDOpportunityWorkflow.isDue(item));
-    focus.textContent = due.length ? "Complete the follow-ups that are due." : newAssessments.length ? "Review incoming assessments." : active.length ? "Set the next move for each active opportunity." : "Add your next business opportunity.";
-    overview.textContent = `${newAssessments.length} unreviewed assessment${newAssessments.length === 1 ? "" : "s"}. ${active.length} active opportunit${active.length === 1 ? "y" : "ies"}.`;
+    if (!window.ASCNDBusinessAnalysis) return;
+    const data = window.ASCNDBusinessAnalysis.compute(opportunities, assessmentRecords);
+    const set = (id,text) => { const node=document.getElementById(id); if(node) node.textContent=text; };
+    set('briefingOverview', `${data.activeCount} active opportunities are in the workspace, with ${data.unreviewedCount} assessments waiting for review.`);
+    set('briefingPipeline', `The open pipeline holds $${data.openValue.toLocaleString()} in potential work toward the $10,000 monthly goal. $${data.wonValue.toLocaleString()} is recorded as won this month; neither figure is collected revenue.`);
+    set('briefingAttention', `${data.dueCount} follow-ups are due. ${data.uncontactedCount} opportunities are still New or Review.`);
+    set('briefingFocus', data.suggestions[0]?.detail || 'Keep each active business moving toward a clear decision.');
 }
 
 async function loadOpportunities() {
@@ -1114,7 +1098,7 @@ function renderOverviewMetrics() {
         opportunities.reduce(
             (total, opportunity) =>
                 total +
-                (["WON", "LOST", "CLOSED"].includes(opportunity.stage) ? 0 : (Number(opportunity.value) || 0)),
+                (["WON", "LOST", "CLOSED"].includes(opportunity.stage) ? 0 : window.ASCNDSolutions.price(opportunity.solutions || opportunity.opportunity)),
             0
         );
 
@@ -1207,7 +1191,7 @@ function renderOpportunities() {
         opportunities.reduce(
             (total, opportunity) =>
                 total +
-                (["WON", "LOST", "CLOSED"].includes(opportunity.stage) ? 0 : (Number(opportunity.value) || 0)),
+                (["WON", "LOST", "CLOSED"].includes(opportunity.stage) ? 0 : window.ASCNDSolutions.price(opportunity.solutions || opportunity.opportunity)),
             0
         );
 
@@ -1448,7 +1432,7 @@ function renderOpportunities() {
         opportunities.reduce(
             (total, opportunity) =>
                 total +
-                (["WON", "LOST", "CLOSED"].includes(opportunity.stage) ? 0 : (Number(opportunity.value) || 0)),
+                (["WON", "LOST", "CLOSED"].includes(opportunity.stage) ? 0 : window.ASCNDSolutions.price(opportunity.solutions || opportunity.opportunity)),
             0
         );
 
@@ -1567,8 +1551,6 @@ let companies = [];
 
 async function loadCompanies() {
 
-    if (!companyList) return;
-
     try {
 
         const response = await fetch(
@@ -1600,11 +1582,7 @@ async function loadCompanies() {
             error
         );
 
-        companyList.innerHTML = `
-            <div class="empty-state">
-                Unable to load companies.
-            </div>
-        `;
+        if (companyList) companyList.innerHTML = '<div class="empty-state">Unable to load companies.</div>';
 
     }
 
@@ -2081,6 +2059,7 @@ if (newCompanyForm) {
                 );
 
 
+                window.dispatchEvent(new Event('ascnd-records-changed'));
                 newCompanyForm.reset();
 
 
@@ -3797,7 +3776,7 @@ async function loadAssessments() {
         assessmentRecords =
             data.assessments || [];
         renderOverviewBriefing();
-
+        if (window.ASCNDOpportunityWorkflow) window.ASCNDOpportunityWorkflow.renderList();
 
         updateAssessmentMetrics(
             assessmentRecords
@@ -5442,624 +5421,42 @@ function formatActivityTime(date) {
    OVERVIEW — ATTENTION REQUIRED
 ===================================================== */
 
-function renderOverviewAttention() {
-
-    const list =
-        document.getElementById(
-            "overviewAttentionList"
-        );
-
-    if (!list) return;
-
-    const attentionItems = [];
-
-    /* ASSESSMENTS */
-
-    assessmentRecords.forEach(
-        function (assessment) {
-
-            if (
-                assessment.opportunity_id
-            ) {
-                return;
-            }
-
-            if (
-                String(
-                    assessment.status || ""
-                ).toUpperCase() !== "NEW"
-            ) {
-                return;
-            }
-
-            attentionItems.push({
-
-                priority: "medium",
-
-                business:
-                    assessment.business_name ||
-                    "Unknown Business",
-
-                description:
-                    "Business assessment is ready for review.",
-
-                action: "REVIEW"
-
-            });
-
-        }
-    );
-
-
-    /* OPPORTUNITIES */
-
-    opportunities.forEach(
-        function (opportunity) {
-
-            const stage =
-                String(
-                    opportunity.stage || ""
-                ).toUpperCase();
-
-            if (
-                stage !== "NEW" &&
-                stage !== "REVIEW"
-            ) {
-                return;
-            }
-
-            attentionItems.push({
-
-                priority:
-                    stage === "NEW"
-                        ? "high"
-                        : "medium",
-
-                business:
-                    opportunity.business_name ||
-                    "Unknown Business",
-
-                description:
-                    stage === "NEW"
-                        ? "New opportunity requires follow-up."
-                        : "Active opportunity requiring review.",
-
-                action:
-                    stage === "NEW"
-                        ? "FOLLOW UP"
-                        : "REVIEW"
-
-            });
-
-        }
-    );
-
-
-    /* EMPTY STATE */
-
-    if (!attentionItems.length) {
-
-        list.innerHTML = `
-
-            <div class="assessment-empty">
-
-                Nothing currently requires attention.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /* RENDER */
-
-    list.innerHTML =
-        attentionItems
-            .slice(0, 3)
-            .map(
-                function (item) {
-
-                    return `
-
-                        <div class="inbox-item">
-
-                            <div
-                                class="priority ${item.priority}"
-                            ></div>
-
-                            <div class="inbox-content">
-
-                                <strong>
-                                    ${escapeAssessmentText(
-                                        item.business
-                                    )}
-                                </strong>
-
-                                <p>
-                                    ${escapeAssessmentText(
-                                        item.description
-                                    )}
-                                </p>
-
-                            </div>
-
-                            <span class="item-action">
-
-                                ${escapeAssessmentText(
-                                    item.action
-                                )}
-
-                            </span>
-
-                        </div>
-
-                    `;
-
-                }
-            )
-            .join("");
-
+let inboxFilter = 'all';
+function getAttentionItems() {
+    const closed = item => ['WON','LOST','CLOSED'].includes(item.stage);
+    const localDate=new Date();
+    const today=`${localDate.getFullYear()}-${String(localDate.getMonth()+1).padStart(2,'0')}-${String(localDate.getDate()).padStart(2,'0')}`;
+    const items=assessmentRecords.filter(a=>!a.opportunity_id && String(a.status||'NEW').toUpperCase()==='NEW').map(a=>({type:'assessment',id:a.id,name:a.business_name||'Business assessment',description:'New assessment ready for review.',high:String(a.priority).toLowerCase()==='high',due:false,date:a.created_at||'',open:()=>openAssessmentDetail(a.id)}));
+    opportunities.filter(o=>!closed(o)).forEach(o=>{
+        const due=Boolean(o.workflow?.follow_up_date && o.workflow.follow_up_date<=today);
+        const high=(o.workflow?.priority||o.priority)==='high';
+        const review=['NEW','REVIEW'].includes(o.stage||'NEW');
+        const missing=!o.workflow?.next_action || !o.workflow?.follow_up_date;
+        if(!due && !high && !review && !missing)return;
+        items.push({type:'opportunity',id:o.id,name:o.business_name||'Opportunity',description:due ? (o.workflow.next_action||'Follow-up due') : review ? 'Start or review this business conversation.' : o.workflow?.next_action || 'Choose the next action and follow-up date.',high,due,date:o.workflow?.follow_up_date||o.created_at||'',open:()=>openOpportunityDetail(o)});
+    });
+    return items.sort((a,b)=>Number(b.due)-Number(a.due)||Number(b.high)-Number(a.high)||String(a.date).localeCompare(String(b.date)));
 }
-
-/* =========================================================
-   ATTENTION QUEUE
-========================================================= */
-let attentionQueueExpanded = false;
-
-function renderAttentionQueue(
-    opportunitiesData,
-    assessmentsData
-) {
-
-    const queue =
-        document.getElementById(
-            "attentionQueueList"
-        );
-
-    const count =
-        document.getElementById(
-            "attentionQueueCount"
-        );
-
-    if (!queue) return;
-
-
-    const opportunitiesList =
-        Array.isArray(opportunitiesData)
-            ? opportunitiesData
-            : [];
-
-    const assessmentsList =
-        Array.isArray(assessmentsData)
-            ? assessmentsData
-            : [];
-
-
-    const attentionItems = [];
-
-
-    /* =====================================================
-       ASSESSMENTS
-    ===================================================== */
-
-    assessmentsList.forEach(
-        function (assessment) {
-
-            const status =
-                String(
-                    assessment.status || "NEW"
-                ).toUpperCase();
-
-
-            if (
-                assessment.opportunity_id ||
-                status !== "NEW"
-            ) {
-                return;
-            }
-
-
-            const priority =
-                String(
-                    assessment.priority || "MEDIUM"
-                ).toLowerCase();
-
-
-            attentionItems.push({
-
-                type: "assessment",
-
-                id: assessment.id,
-
-                name:
-                    assessment.business_name ||
-                    "Unknown Business",
-
-                description:
-                    "New assessment ready for review.",
-
-                action: "REVIEW",
-
-                priority: priority,
-
-                created_at:
-                    assessment.created_at
-
-            });
-
-        }
-    );
-
-
-    /* =====================================================
-       OPPORTUNITIES
-    ===================================================== */
-
-    opportunitiesList.forEach(
-        function (opportunity) {
-
-            const stage =
-                String(
-                    opportunity.stage || "NEW"
-                ).toUpperCase();
-
-
-            if (
-                stage !== "NEW" &&
-                stage !== "REVIEW"
-            ) {
-                return;
-            }
-
-
-            attentionItems.push({
-
-                type: "opportunity",
-
-                id: opportunity.id,
-
-                name:
-                    opportunity.business_name ||
-                    "Unknown Business",
-
-                description:
-                    opportunity.opportunity ||
-                    "Opportunity requires review.",
-
-                action:
-                    stage === "REVIEW"
-                        ? "FOLLOW UP"
-                        : "REVIEW",
-
-                priority:
-                    String(
-                        opportunity.priority ||
-                        "MEDIUM"
-                    ).toLowerCase(),
-
-                created_at:
-                    opportunity.created_at
-
-            });
-
-        }
-    );
-
-    /* =====================================================
-   INBOX SUMMARY COUNTS
-===================================================== */
-
-const needsAttentionCount =
-    attentionItems.length;
-
- const inboxNavCount =
-    document.getElementById(
-        "inboxNavCount"
-    );
-
-if (inboxNavCount) {
-    inboxNavCount.textContent =
-        needsAttentionCount;
+function renderAttentionItems(node,items) {
+    if(!node)return;
+    node.replaceChildren();
+    if(!items.length){ const p=document.createElement('p');p.className='assessment-empty';p.textContent='Nothing in this view needs attention.';node.append(p);return; }
+    items.forEach(item=>{
+        const button=document.createElement('button');button.type='button';button.className='attention-record';
+        button.innerHTML=`<span><strong>${escapeOpportunityHtml(item.name)}</strong><span>${escapeOpportunityHtml(item.description)}</span></span><span class="attention-record-meta">${item.due?'FOLLOW UP':item.type==='assessment'?'ASSESSMENT':item.high?'HIGH PRIORITY':'REVIEW'} →</span>`;
+        button.addEventListener('click',item.open);node.append(button);
+    });
 }
-
-const followUpsCount =
-    attentionItems.filter(
-        function (item) {
-            return item.action === "FOLLOW UP";
-        }
-    ).length;
-
-
-const reviewsCount =
-    attentionItems.filter(
-        function (item) {
-            return item.action === "REVIEW";
-        }
-    ).length;
-
-
-const highPriorityCount =
-    attentionItems.filter(
-        function (item) {
-            return item.priority === "high";
-        }
-    ).length;
-
-
-/* =====================================================
-   UPDATE INBOX SUMMARY
-===================================================== */
-
-const inboxNeedsAttention =
-    document.getElementById(
-        "inboxNeedsAttention"
-    );
-
-const inboxFollowUps =
-    document.getElementById(
-        "inboxFollowUps"
-    );
-
-const inboxReviews =
-    document.getElementById(
-        "inboxReviews"
-    );
-
-const inboxHighPriority =
-    document.getElementById(
-        "inboxHighPriority"
-    );
-
-
-if (inboxNeedsAttention) {
-
-    inboxNeedsAttention.textContent =
-        needsAttentionCount;
-
+function renderOverviewAttention() { renderAttentionItems(document.getElementById('overviewAttentionList'),getAttentionItems().slice(0,3)); }
+function renderAttentionQueue() {
+    const items=getAttentionItems();
+    const counts={inboxNeedsAttention:items.length,inboxNavCount:items.length,inboxFollowUps:items.filter(i=>i.due).length,inboxReviews:items.filter(i=>i.type==='assessment'||!i.due).length,inboxHighPriority:items.filter(i=>i.high).length};
+    Object.entries(counts).forEach(([id,n])=>{const el=document.getElementById(id);if(el)el.textContent=n;});
+    const filtered=items.filter(i=>inboxFilter==='all'||inboxFilter==='due'&&i.due||inboxFilter==='assessment'&&i.type==='assessment'||inboxFilter==='high'&&i.high);
+    const count=document.getElementById('attentionQueueCount');if(count)count.textContent=`${filtered.length} open items`;
+    renderAttentionItems(document.getElementById('attentionQueueList'),filtered);
+    document.querySelectorAll('[data-inbox-filter]').forEach(button=>{button.setAttribute('aria-pressed',String(button.dataset.inboxFilter===inboxFilter));if(!button.dataset.bound){button.dataset.bound='true';button.addEventListener('click',()=>{inboxFilter=button.dataset.inboxFilter;renderAttentionQueue();});}});
 }
-
-
-if (inboxFollowUps) {
-
-    inboxFollowUps.textContent =
-        followUpsCount;
-
-}
-
-
-if (inboxReviews) {
-
-    inboxReviews.textContent =
-        reviewsCount;
-
-}
-
-
-if (inboxHighPriority) {
-
-    inboxHighPriority.textContent =
-        highPriorityCount;
-
-}
-
-    /* =====================================================
-       SORT
-    ===================================================== */
-
-    const priorityRank = {
-
-        high: 1,
-        medium: 2,
-        low: 3
-
-    };
-
-
-    attentionItems.sort(
-        function (a, b) {
-
-            const priorityDifference =
-                (priorityRank[a.priority] || 2) -
-                (priorityRank[b.priority] || 2);
-
-
-            if (priorityDifference !== 0) {
-
-                return priorityDifference;
-
-            }
-
-
-            return (
-                new Date(b.created_at || 0) -
-                new Date(a.created_at || 0)
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       EMPTY STATE
-    ===================================================== */
-
-    if (!attentionItems.length) {
-
-        queue.innerHTML = `
-
-            <div class="assessment-empty">
-
-                Nothing currently needs your attention.
-
-            </div>
-
-        `;
-
-        if (count) {
-
-            count.textContent =
-                "0 items";
-
-        }
-
-        return;
-
-    }
-
-
-    /* =====================================================
-       DISPLAY LIMIT
-    ===================================================== */
-
-    const visibleItems =
-        attentionQueueExpanded
-            ? attentionItems
-            : attentionItems.slice(0, 3);
-
-
-    /* =====================================================
-       RENDER ITEMS
-    ===================================================== */
-
-    queue.innerHTML =
-        visibleItems
-            .map(
-                function (item) {
-
-                    return `
-
-                        <div
-                            class="inbox-item"
-                            data-attention-type="${escapeAssessmentText(
-                                item.type
-                            )}"
-                            data-attention-id="${escapeAssessmentText(
-                                item.id
-                            )}"
-                        >
-
-                            <div
-                                class="priority ${escapeAssessmentText(
-                                    item.priority
-                                )}"
-                            ></div>
-
-
-                            <div class="inbox-content">
-
-                                <strong>
-                                    ${escapeAssessmentText(
-                                        item.name
-                                    )}
-                                </strong>
-
-
-                                <p>
-                                    ${escapeAssessmentText(
-                                        item.description
-                                    )}
-                                </p>
-
-                            </div>
-
-
-                            <span class="item-action">
-
-                                ${escapeAssessmentText(
-                                    item.action
-                                )}
-
-                            </span>
-
-                        </div>
-
-                    `;
-
-                }
-            )
-            .join("");
-
-
-    /* =====================================================
-       VIEW ALL / SHOW LESS
-    ===================================================== */
-
-    if (attentionItems.length > 3) {
-
-    queue.innerHTML += `
-
-        <div
-            class="attention-queue-toggle"
-        >
-
-            <button
-                type="button"
-                id="attentionQueueToggle"
-                class="attention-toggle-button"
-            >
-
-                ${
-                    attentionQueueExpanded
-                        ? "SHOW LESS"
-                        : "VIEW ALL"
-                }
-
-            </button>
-
-        </div>
-
-    `;
-
-
-    const toggleButton =
-        document.getElementById(
-            "attentionQueueToggle"
-        );
-
-
-    if (toggleButton) {
-
-        toggleButton.addEventListener(
-            "click",
-            function () {
-
-                attentionQueueExpanded =
-                    !attentionQueueExpanded;
-
-
-                renderAttentionQueue(
-                    opportunitiesData,
-                    assessmentsData
-                );
-
-            }
-        );
-
-    }
-
-}
-
-
-    /* =====================================================
-       COUNT
-    ===================================================== */
-
-    if (count) {
-
-        count.textContent =
-            `${attentionItems.length} item${
-                attentionItems.length === 1
-                    ? ""
-                    : "s"
-            }`;
-
-    }
-
-}
-
 
 /* MOBILE NAVIGATION */
 

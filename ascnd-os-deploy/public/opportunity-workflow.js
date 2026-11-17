@@ -44,7 +44,7 @@
                 const retry = document.createElement("button"); retry.type = "button"; retry.className = "text-button"; retry.textContent = "Try again";
                 retry.addEventListener("click", () => { opportunityLoadState = "loading"; renderList(); loadOpportunities(); }); list.append(retry);
             }
-            todayPanel.innerHTML = `<h3>${opportunityLoadState === "error" ? "Follow-ups unavailable" : "Loading follow-ups…"}</h3><p>Follow-ups appear after your opportunity records are loaded.</p>`;
+
             ["overviewActiveOpportunities", "overviewFollowUps", "overviewProposals", "overviewPipelineValue", "opportunityPipelineValue"].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = "—"; });
             document.querySelectorAll("[data-ow-stat]").forEach(el => { el.textContent = "—"; });
             return;
@@ -63,49 +63,51 @@
             row.addEventListener("click", () => openOpportunityDetail(item));
             list.append(row);
         }
-        renderToday();
+
         updateMetrics();
         renderOverviewBriefing();
-    }
-    const todayPanel = document.createElement("div"); todayPanel.className = "panel ow-today";
-    const overview = document.getElementById("overview");
-    overview.querySelector(".section-heading")?.after(todayPanel);
-    if (!todayPanel.isConnected) overview.prepend(todayPanel);
-    function renderToday() {
-        const items = opportunities.filter(due).sort((a, b) => workflow(a).follow_up_date.localeCompare(workflow(b).follow_up_date));
-        todayPanel.innerHTML = `<span class="eyebrow">YOUR NEXT MOVES</span><h3>${items.length ? `${items.length} follow-up${items.length === 1 ? "" : "s"} due` : "No follow-ups due"}</h3><p>${items.length ? "Overdue actions appear first. Open a business to review and update it." : "Set a next action and follow-up date inside each active opportunity."}</p><div class="ow-today-list"></div>`;
-        for (const item of items.slice(0, 5)) {
-            const button = document.createElement("button"); button.type = "button";
-            button.innerHTML = `<strong>${esc(item.business_name)}</strong><span>${esc(workflow(item).next_action || "Follow up")} · ${esc(dateLabel(workflow(item).follow_up_date))}</span>`;
-            button.addEventListener("click", () => openOpportunityDetail(item)); todayPanel.querySelector(".ow-today-list").append(button);
-        }
-        if (items.length > 5) {
-            const all = document.createElement("button"); all.type = "button"; all.className = "text-button"; all.textContent = "View all due follow-ups";
-            all.addEventListener("click", () => { state.filter = "due"; toolbar.querySelector("#ow-filter").value = "due"; state.search = ""; toolbar.querySelector("#ow-search").value = ""; renderList(); showView("opportunities"); }); todayPanel.append(all);
-        }
+        loadGuidance();
     }
     function updateMetrics() {
-        renderStageSummary();
+        renderPipeline();
         const active = opportunities.filter(item => !closed(item));
-        const value = active.reduce((total, item) => total + (Number(item.value) || 0), 0);
+        const value = active.reduce((total, item) => total + window.ASCNDSolutions.price(item.solutions || item.opportunity), 0);
         for (const [id, text] of Object.entries({ overviewActiveOpportunities: active.length, overviewFollowUps: opportunities.filter(due).length, overviewPipelineValue: `$${value.toLocaleString()}`, opportunityPipelineValue: `$${value.toLocaleString()}` })) {
             const el = document.getElementById(id); if (el) el.textContent = text;
         }
     }
-    function renderStageSummary() {
-        const node = document.getElementById("ow-stage-summary");
-        if (!node) return;
+    function renderPipeline() {
+        const data = window.ASCNDBusinessAnalysis.compute(opportunities, assessmentRecords);
+        const money = value => `$${Math.round(value).toLocaleString()}`;
+        const set = (id,text) => { const el=document.getElementById(id);if(el)el.textContent=text; };
+        set('goalMonth',new Date().toLocaleDateString(undefined,{month:'long',year:'numeric'})+' · MONTHLY GOAL');
+        set('goalPotential',money(data.openValue));set('goalWon',money(data.wonValue));set('goalRemaining',money(data.remaining));set('goalGap',money(data.coverageGap));set('goalDaily',money(data.dailyRequired)+'/day');
+        set('goalCoverage',`${Math.round(data.coveragePercent)}% potential coverage from open opportunities and this month's recorded wins. Opportunities must still close to count as won.`);
+        set('goalPace',`At the current recorded-wins pace, this month projects to ${money(data.projection)}. ${data.days-data.elapsed+1} calendar days remain including today. Won opportunity values are not proof of payment.`);
+        const fill=document.getElementById('goalProgressFill');if(fill){fill.style.width=data.coveragePercent+'%';fill.parentElement.setAttribute('aria-valuenow',Math.round(data.coveragePercent));}
+
+        const refresh=document.getElementById('refreshBusinessGuidance');
+        if(refresh && !refresh.dataset.bound){refresh.dataset.bound='true';refresh.addEventListener('click',()=>loadGuidance(true));}
+    }
+    let guidanceSignature='', guidanceRequest=0;
+    function renderGuidance(suggestions,source) {
+        const node=document.getElementById('businessGuidance');if(!node)return;
+        const status=document.getElementById('guidanceSource');if(status)status.textContent=source;
         node.replaceChildren();
-        const money = items => `$${items.reduce((sum, item) => sum + (Number(item.value) || 0), 0).toLocaleString()}`;
-        const values = { "open-value": money(opportunities.filter(item => !closed(item))), "proposal-value": money(opportunities.filter(item => item.stage === "PROPOSAL")), "won-value": money(opportunities.filter(item => item.stage === "WON")), due: opportunities.filter(due).length };
-        for (const [key, value] of Object.entries(values)) document.querySelectorAll(`[data-ow-stat="${key}"]`).forEach(el => { el.textContent = value; });
-        for (const stage of stages) {
-            const items = opportunities.filter(item => (item.stage || "NEW") === stage);
-            const button = document.createElement("button"); button.type = "button";
-            button.innerHTML = `<strong>${esc(stage)}</strong><span>${items.length} opportunit${items.length === 1 ? "y" : "ies"} · ${esc(money(items))}</span>`;
-            button.addEventListener("click", () => { state.filter = stage; state.search = ""; toolbar.querySelector("#ow-filter").value = stage; toolbar.querySelector("#ow-search").value = ""; renderList(); showView("opportunities"); });
-            node.append(button);
-        }
+        suggestions.forEach(s=>{const article=document.createElement('article');article.className='guidance-item';const title=document.createElement('h4');title.textContent=s.title;const text=document.createElement('p');text.textContent=s.detail;article.append(title,text);node.append(article);});
+    }
+    async function loadGuidance(force=false) {
+        const signature=JSON.stringify({date:new Date().toDateString(),opportunities:opportunities.map(o=>[o.id,o.stage,o.solutions,o.workflow,o.updated_at]),assessments:assessmentRecords.map(a=>[a.id,a.status,a.opportunity_id])});
+        if(!force && signature===guidanceSignature)return;
+        guidanceSignature=signature;const request=++guidanceRequest;
+        renderGuidance(window.ASCNDBusinessAnalysis.compute(opportunities,assessmentRecords).suggestions,'Live pipeline analysis');
+        const button=document.getElementById('refreshBusinessGuidance');if(button)button.disabled=true;
+        try {
+            const result=await api('/api/business-guidance');if(request!==guidanceRequest)return;
+            if(!Array.isArray(result.suggestions))return;
+            renderGuidance(result.suggestions,result.source==='ai'?'AI analysis · based on live pipeline data':result.aiConnected?'Live pipeline analysis · AI temporarily unavailable':'Live pipeline analysis · AI generation is not connected');
+        } catch { const status=document.getElementById('guidanceSource');if(status)status.textContent='Live pipeline analysis · live AI guidance could not be loaded'; }
+        finally{if(request===guidanceRequest && button)button.disabled=false;}
     }
     function field(name, label, value, type = "text", attributes = "") {
         return `<label>${label}<input name="${name}" type="${type}" value="${esc(value ?? "")}" ${attributes}></label>`;
@@ -113,7 +115,7 @@
     function solutionPicker(value) {
         const catalog = window.ASCNDSolutions;
         const selected = catalog.selection(value);
-        const option = item => `<label class="solution-option"><input type="checkbox" name="owSolution" value="${item.id}"${selected.includes(item.id) ? " checked" : ""}><div><strong>${esc(item.name)}</strong><span>${esc(item.description)}</span></div></label>`;
+        const option = item => `<label class="solution-option"><input type="checkbox" name="owSolution" value="${item.id}"${selected.includes(item.id) ? " checked" : ""}><div><strong>${esc(item.name)}</strong><span>${esc(item.description)}</span></div><b>${item.value ? '$'+item.value.toLocaleString() : 'CUSTOM'}</b></label>`;
         const addons = `<fieldset class="intelligence-options" id="ow-intelligence-options"><legend>Optional AI capabilities</legend><p>Intelligence works without AI. Add only what this business needs.</p>${catalog.addons.map(option).join("")}</fieldset>`;
         const choices = catalog.offers.map(item => option(item) + (item.id === "intelligence" ? addons : "")).join("");
         const extra = selected.filter(id => !catalog.byId[id]).join(", ");
@@ -134,13 +136,15 @@
         <form id="ow-form" class="ow-form">
           <div class="panel"><h3>Next move</h3><div class="ow-grid"><label>Stage<select name="stage">${stages.map(s => `<option${s === (item.stage || "NEW") ? " selected" : ""}>${s}</option>`).join("")}</select></label><label>Priority<select name="priority"><option value="normal">Normal</option><option value="high"${w.priority === "high" ? " selected" : ""}>High</option></select></label>${field("next_action", "Next action", w.next_action, "text", 'maxlength="1000" placeholder="e.g. Call David to review the demo"')}${field("follow_up_date", "Follow-up date", w.follow_up_date, "date")}</div><p>Closing an opportunity removes it from active follow-ups. Its details stay available under All opportunities.</p></div>
           <div class="panel"><h3>Business & contact</h3><p>These details belong to this opportunity. Manage the shared company and contact records in their sections.</p><div class="ow-grid">${field("business_name", "Business name", item.business_name, "text", 'required maxlength="300"')}${field("contact_name", "Contact name", item.contact_name, "text", 'maxlength="200"')}${field("phone", "Phone(s)", item.phone, "text", 'maxlength="500"')}${field("email", "Email", item.email, "text", 'maxlength="320"')}${field("website", "Website", item.website, "text", 'maxlength="2000"')}${field("location", "Location", item.location, "text", 'maxlength="500"')}</div></div>
-          <div class="panel"><h3>Scope & notes</h3><div class="ow-grid">${solutionPicker(item.solutions || item.opportunity)}${field("value", "Estimated value ($)", item.value || 0, "number", 'min="0" step="0.01" required')}</div><label>Conversation notes<textarea name="notes" rows="6" maxlength="20000" placeholder="What did you discuss? What is the business waiting on?">${esc(item.notes || "")}</textarea></label></div>
+          <div class="panel"><h3>Scope & notes</h3><div class="ow-grid">${solutionPicker(item.solutions || item.opportunity)}${field("value", "Estimated value ($)", window.ASCNDSolutions.price(item.solutions || item.opportunity), "number", 'readonly aria-label="Calculated value from selected services"')}</div><label>Conversation notes<textarea name="notes" rows="6" maxlength="20000" placeholder="What did you discuss? What is the business waiting on?">${esc(item.notes || "")}</textarea></label></div>
           <div class="ow-actions"><button type="submit" class="primary-button" id="ow-save">Save changes</button><button type="button" class="text-button" id="ow-cancel">Cancel changes</button><button type="button" class="ow-delete" id="ow-delete">Delete opportunity</button><p id="ow-message" role="status" aria-live="polite"></p></div>
         </form>`;
         const form = detail.querySelector("form"); let dirty = false;
+        const updatePrice = () => { const selected=Array.from(form.querySelectorAll('[name="owSolution"]:checked')).filter(input=>!input.disabled).map(input=>input.value).join(', '); form.elements.value.value=window.ASCNDSolutions.price(selected); };
         syncEditorIntelligence(form);
+        updatePrice();
         form.addEventListener("input", () => { dirty = true; state.dirty = true; });
-        form.addEventListener("change", () => { syncEditorIntelligence(form); dirty = true; state.dirty = true; });
+        form.addEventListener("change", () => { syncEditorIntelligence(form); updatePrice(); dirty = true; state.dirty = true; });
         detail.querySelector("#ow-back").onclick = () => { if (!state.busy && (!dirty || window.confirm("Leave without saving these changes?"))) { state.dirty = false; showView("opportunities"); } };
         detail.querySelector("#ow-cancel").onclick = () => { if (!state.busy && (!dirty || window.confirm("Discard your unsaved changes?"))) renderDetail(item); };
         form.onsubmit = async e => {
@@ -163,11 +167,13 @@
             finally { setBusy(false); }
         };
         detail.querySelector("#ow-delete").onclick = async () => {
-            if (state.busy || !window.confirm(`Permanently delete the opportunity for “${item.business_name}”? This cannot be undone. The company and contact will remain.`)) return;
+            if (state.busy || !window.confirm(`Delete the opportunity for “${item.business_name}” and its unshared company/contact records? Shared records and assessments will be kept. This cannot be undone.`)) return;
             setBusy(true);
             try {
                 await api(`/api/opportunities/${encodeURIComponent(item.id)}`, { method: "DELETE" });
                 opportunities = opportunities.filter(record => record.id !== item.id); state.selected = null; dirty = false; state.dirty = false;
+                await Promise.all([loadCompanies(),loadContacts(),loadAssessments(),loadContactCompanies()]);
+                window.dispatchEvent(new Event('ascnd-records-changed'));
                 refresh(); showView("opportunities");
             } catch (error) { detail.querySelector("#ow-message").textContent = error.message; }
             finally { setBusy(false); }

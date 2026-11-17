@@ -36,6 +36,7 @@ function validateUpdate(body) {
         if (date !== null && (typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Date.parse(date)) || new Date(date).toISOString().slice(0, 10) !== date)) throw new Error("Choose a valid follow-up date.");
         update.workflow = { next_action: w.next_action.trim(), follow_up_date: date, priority: w.priority };
     }
+    if (own(update, "solutions")) update.value = require("./public/solutions-catalog").price(update.solutions);
     if (!Object.keys(update).length) throw new Error("No editable fields supplied.");
     return update;
 }
@@ -60,14 +61,13 @@ function registerOpportunityRoutes(app, supabase) {
     });
     app.delete("/api/opportunities/:id", authorize, async (req, res) => {
         try {
-            // Delete only this opportunity. Never delete its company or contact.
-            const { data, error } = await supabase.from("opportunities").delete().eq("id", req.params.id).select("id").maybeSingle();
+            const { data, error } = await supabase.rpc("ascnd_delete_opportunity", { p_id: req.params.id });
             if (error) {
-                console.error("Opportunity delete failed:", error.code);
-                return res.status(error.code === "23503" ? 409 : 500).json({ error: error.code === "23503" ? "This opportunity is linked to another record. Remove that link before deleting it." : "Unable to delete this opportunity. Try again." });
+                console.error("Opportunity cleanup failed:", error.code);
+                return res.status(error.code === "23503" ? 409 : 500).json({ error: error.code === "23503" ? "Another record still depends on this business. Nothing was deleted." : "Unable to delete this opportunity. Nothing was deleted; try again." });
             }
-            if (!data) return res.status(404).json({ error: "This opportunity no longer exists. Refresh the list." });
-            res.json({ success: true, id: data.id });
+            if (!data?.success) return res.status(404).json({ error: "This opportunity no longer exists. Refresh the list." });
+            res.json(data);
         } catch (error) { res.status(500).json({ error: "Unable to delete this opportunity. Try again." }); }
     });
 }
