@@ -144,3 +144,46 @@ button:disabled { opacity: .55; cursor: wait; }
 .ow-solution-picker .solution-options { display: grid; grid-template-columns: 1fr; }
 .ow-solution-picker .solution-option { display: flex; flex-direction: row; align-items: flex-start; }
 .ow-solution-picker input[type=checkbox] { min-height: 0; width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; }
+/* Consistent content insets, flexible text, and goal-focused pipeline. */
+#radar .panel { padding: 24px; }
+#radar .panel-header { padding: 0 0 18px; gap: 20px; }
+#radar .briefing-content { padding: 0; }
+.radar-result-card { padding: 22px; min-width: 0; }
+.radar-intelligence-grid { gap: 24px; }
+.radar-intelligence-column { min-width: 0; padding: 12px 0; }
+.radar-column-content, .radar-item, .radar-business-info, .radar-business-meta { overflow-wrap: anywhere; line-height: 1.65; min-width: 0; }
+.panel > p:not(.ow-empty), .goal-panel, .guidance-panel { line-height: 1.7; }
+.attention-record { display:flex; align-items:center; justify-content:space-between; gap:24px; width:100%; text-align:left; background:transparent; color:var(--text); border:0; border-top:1px solid var(--border); padding:20px 24px; cursor:pointer; }
+.attention-record > span:first-child { display:flex; flex-direction:column; gap:8px; min-width:0; }
+.attention-record strong { font-size:14px; overflow-wrap:anywhere; }
+.attention-record span span { font-size:12px; color:var(--muted); line-height:1.65; }
+.attention-record-meta { font-size:10px; color:var(--accent); white-space:nowrap; }
+.attention-record:hover { background:var(--accent-soft); }
+.inbox-filters { display:flex; flex-wrap:wrap; gap:8px; padding:0 24px 20px; }
+.inbox-filters button { border:1px solid var(--border); border-radius:20px; padding:9px 14px; background:transparent; color:var(--muted); cursor:pointer; }
+.inbox-filters button[aria-pressed=true] { background:var(--accent-soft); border-color:var(--accent); color:var(--text); }
+.briefing-panel > p { margin:16px 0; color:var(--muted); font-size:14px; line-height:1.75; }
+.briefing-panel .briefing-focus { margin:20px 0 0; padding:20px 0 0; border-top:1px solid var(--border); }
+.goal-panel { padding:32px; margin-bottom:24px; }
+.goal-heading { display:flex; justify-content:space-between; gap:28px; flex-wrap:wrap; align-items:flex-end; }
+.goal-heading h3 { font-size:30px; letter-spacing:-.04em; }
+#goalPotential { display:block; font-size:44px; font-weight:600; letter-spacing:-.05em; font-variant-numeric:tabular-nums; }
+.goal-heading small { display:block; color:var(--muted); font-size:12px; margin-top:8px; }
+.goal-progress { height:10px; overflow:hidden; border-radius:20px; background:rgba(161,209,246,.1); margin:28px 0 16px; }
+#goalProgressFill { height:100%; border-radius:20px; background:linear-gradient(90deg,#57a6e6,#a4e2ff); width:0; }
+#goalCoverage,.goal-explanation { font-size:13px; color:var(--muted); line-height:1.8; }
+.goal-details { display:flex; flex-wrap:wrap; gap:24px 40px; border-block:1px solid var(--border); padding:24px 0; margin:24px 0; }
+.goal-details div { flex:1; min-width:150px; }
+.goal-details dt { color:var(--muted); font-size:12px; margin-bottom:8px; }
+.goal-details dd { color:var(--text); font-size:21px; font-variant-numeric:tabular-nums; }
+.guidance-panel { padding:24px; }
+.guidance-panel .panel-header { padding:0 0 12px; gap:20px; }
+#guidanceSource { margin-bottom:18px; color:var(--muted); font-size:12px; }
+.guidance-item { padding:20px 0; border-top:1px solid var(--border); }
+.guidance-item h4 { font-size:15px; margin-bottom:10px; }
+.guidance-item p { color:var(--muted); font-size:13px; line-height:1.8; max-width:90ch; }
+#companies .section-heading p { max-width:65ch; }
+.ow-grid:has(.ow-solution-picker) { grid-template-columns:1fr; }
+@media(prefers-reduced-motion:no-preference){#goalProgressFill{transition:width .5s ease}.attention-record{transition:background-color .18s ease}}
+@media(max-width:700px){#radar .panel,.radar-result-card,.goal-panel,.guidance-panel{padding:20px} .radar-intelligence-grid{grid-template-columns:1fr}.radar-intelligence-column + .radar-intelligence-column{border-left:0;border-top:1px solid var(--border);padding-top:18px}.attention-record{padding:18px;gap:12px;align-items:flex-start;flex-direction:column}.goal-heading{align-items:flex-start}#goalPotential{font-size:36px}.goal-details{gap:22px}.goal-details div{flex-basis:40%;min-width:100px}.inbox-filters{padding-inline:18px}}
+@media(min-width:701px){.radar-intelligence-column + .radar-intelligence-column{padding-left:24px}}

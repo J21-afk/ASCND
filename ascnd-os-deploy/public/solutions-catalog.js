@@ -7,15 +7,15 @@
     "use strict";
     const offers = [
         { id: "start-brand", name: "ASCND Start", description: "Brand Identity", value: 500 },
-        { id: "connect-digital", name: "ASCND Connect", description: "Website & Digital Foundation", value: 1500 },
+        { id: "connect-digital", name: "ASCND Connect", description: "Website & Digital Foundation", value: 799 },
         { id: "intelligence", name: "ASCND Intelligence", description: "Lead & Customer Management", value: 1500 },
-        { id: "coordinate", name: "ASCND Coordinate", description: "Estimates / Quotes / Scheduling", value: 0 },
-        { id: "custom", name: "Custom Solution", description: "Additional or specialized scope", value: 0 }
+        { id: "coordinate", name: "ASCND Coordinate", description: "Estimates / Quotes / Scheduling", value: 750 },
+        { id: "ai-receptionist", name: "AI Receptionist", description: "Call Answering & Inquiry Capture", value: 2250 },
+        { id: "custom", name: "Custom Solution", description: "Additional or specialized scope", value: 750 }
     ];
     const addons = [
         { id: "ai-analysis", name: "AI Analysis", description: "Summarize inquiries and suggest next actions", value: 0 },
-        { id: "ai-automation", name: "AI Automation", description: "Assist approved follow-ups and routine workflows", value: 0 },
-        { id: "ai-receptionist", name: "AI Receptionist", description: "Answer calls and capture customer inquiries", value: 0 }
+        { id: "ai-automation", name: "AI Automation", description: "Assist approved follow-ups and routine workflows", value: 0 }
     ];
     const entries = [...offers, ...addons];
     const byId = Object.fromEntries(entries.map(item => [item.id, item]));
@@ -53,5 +53,7 @@
     function labels(value) {
         return selection(value).map(id => byId[id] ? `${byId[id].name} — ${byId[id].description}` : id);
     }
-    return { offers, addons, entries, byId, selection, normalize, labels };
+    function price(value) { return selection(value).reduce((sum, id) => sum + (byId[id]?.value || 0), 0); }
+    function hasCustomPricing(value) { return selection(value).some(id => !byId[id] || ["ai-analysis", "ai-automation"].includes(id)); }
+    return { offers, addons, entries, byId, selection, normalize, labels, price, hasCustomPricing };
 });
