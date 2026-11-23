@@ -1,4 +1,5 @@
 const { packages, holiday, holidayIsActive, money } = require("./catalog");
+const { serviceExample } = require("./examples");
 
 const siteName = "ASCND Systems";
 const email = "contact@ascndsystems.com";
@@ -34,9 +35,14 @@ function offerStrip() {
 function offerPoster() {
     return `<dialog class="offer-poster" id="offer-poster" aria-label="ASCND Connect holiday offer" data-expires="${holiday.endsAt}">
         <form method="dialog"><button class="poster-close" aria-label="Close holiday offer" autofocus>×</button></form>
-        <img src="/holiday-connect-poster.webp" width="720" height="900" alt="ASCND Systems holiday offer. 50% off ASCND Connect, website and digital foundation. Code HOLIDAY.">
+        <div class="poster-head">
+            <p class="eyebrow">Holiday offer · Website &amp; digital foundation</p>
+            <h2>50% off<br>ASCND Connect.</h2>
+            <p>Give customers a clear place to see your services and request a quote.</p>
+            <p>Use code <strong>${holiday.code}</strong>.</p>
+        </div>
         <div class="poster-action">
-            ${button(`Request Connect for ${salePrice}`, saleLink, "button-primary")}
+            ${button(`Request the Connect offer`, saleLink, "button-primary")}
             <a href="/investments#holiday-offer">See offer details</a>
         </div>
     </dialog>`;
@@ -54,7 +60,7 @@ function layout(page, content, current, sale) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${page.title} | ${siteName}</title>
     <meta name="description" content="${page.description}">
-    <meta name="theme-color" content="#071b25">
+    <meta name="theme-color" content="#f6f5f2">
     <link rel="icon" href="/ascnd-shark-transparent.png">
     <link rel="stylesheet" href="/ascnd-site.css">
     <script defer src="/ascnd-site.js"></script>
@@ -98,7 +104,7 @@ function layout(page, content, current, sale) {
 
 function serviceRows() {
     return `<ul class="service-rows">${packages.map((item) => `<li><a href="${serviceLink(item)}">
-        <span class="row-name">${item.name}</span><span class="row-category">${item.category}</span><span class="row-action">Explore<span class="sr-only"> ${item.name}</span></span>
+        <span class="row-name">${item.headline}</span><span class="row-category">${item.name} · ${item.category}</span><span class="row-action">Explore<span class="sr-only"> ${item.name}</span></span>
     </a></li>`).join("")}</ul>`;
 }
 
@@ -108,48 +114,42 @@ function pageHead(label, headline, description) {
 }
 
 function home() {
-    return `<section class="hero">
-        <div class="wrap hero-inner">
-            <p class="eyebrow">ASCND Systems · San Antonio, TX</p>
-            <h1>A stronger<br>presence.<br><em>Less busywork.</em></h1>
-            <p class="lead">We build websites, brands, and customer systems for service businesses that want to win work and stay on top of it.</p>
-            <div class="actions">${button("Explore services", "/services", "button-primary")}${button("Assess your business", assessment)}</div>
+    return `<section class="hero"><div class="wrap hero-inner">
+        <div class="hero-message">
+            <p class="eyebrow">Websites &amp; systems for service businesses</p>
+            <h1>Make it easier to get picked.<br><em>And stay on top of the work.</em></h1>
+            <p class="lead">Help customers see what you do, request a quote, and hear back. Give your team a clear way to keep those requests moving.</p>
+            <div class="actions">${button("Find the right service", "#solutions", "button-primary")}${button("Tell us what you need", assessment)}</div>
         </div>
-    </section>
+        <img class="hero-photo" src="/ascnd-service-owner.webp" width="1100" height="825" alt="A service business owner checking his tablet in a workshop" fetchpriority="high">
+    </div></section>
     <section class="section section-light" id="solutions"><div class="wrap">
-        <div class="split-heading"><h2>What could work better?</h2>
-        <p>Give customers a clear next step, then make the work behind it easier to manage.</p></div>
-        ${serviceRows()}
+        <div class="split-heading"><h2>What’s slowing you down?</h2>
+        <p>Start with the part of your business that could work better.</p></div>
+        <div class="solution-grid">${["connect", "intelligence", "coordinate", "ai-receptionist"].map((slug) => {
+            const item = packages.find((entry) => entry.slug === slug);
+            return `<article class="solution-card"><p class="eyebrow">${item.category}</p><h3>${item.headline}</h3>
+                ${serviceExample(item)}<a class="text-link" href="${serviceLink(item)}">Explore ${item.name}</a></article>`;
+        }).join("")}</div>
+        <div class="secondary-solutions">
+            <a href="/services/start">Need a recognizable brand? <strong>Explore ASCND Start</strong></a>
+            <a href="/services/custom">Have a workflow that needs a custom build? <strong>Explore ASCND Custom</strong></a>
+        </div>
     </div></section>
-    <section class="section ocean-story" id="about"><div class="wrap story-grid">
-        <div><p class="eyebrow">Behind the work</p><h2>Built around how<br>you do business.</h2>
-        <p>From a plumber taking quote requests to an installer juggling bookings, we start with what customers need and how your team handles the work.</p>
-        ${button("About ASCND", "/about")}</div>
-        <img src="/about-shark.jpg" alt="A great white shark rising through deep blue water" loading="lazy">
-    </div></section>
-    <section class="section section-light" id="investment"><div class="wrap split-heading">
-        <h2>Find the right starting point.</h2><div><p>See package prices, what goes into your proposal, and how milestone payments work.</p>${button("See investments", "/investments", "button-dark")}</div>
-    </div></section>
-    <section class="section bottom-call" id="how"><div class="wrap split-heading">
-        <h2>See how a system works.</h2><div><p>Walk through sample workflows for customer requests, quoting, onboarding, and follow-up.</p>${button("Explore workflow examples", "/services#systems-demo")}</div>
+    <section class="section bottom-call" id="investment"><div class="wrap split-heading">
+        <h2>Know what you’re investing in.</h2><div><p>Compare what each package covers, how projects are scoped, and how milestone payments work.</p>${button("See investments", "/investments", "button-primary")}</div>
     </div></section>`;
 }
 
 function about() {
-    return `${pageHead("About ASCND", "The work beneath the surface.", "ASCND Systems is a San Antonio studio building brands, websites, and customer workflows for service businesses.")}
-    <section class="section ocean-story"><div class="wrap story-grid">
-        <div><h2>Why the shark?</h2>
-        <p>A great white’s breach is the moment you see. The positioning and work that made it possible happened beneath the surface. We bring that same attention to your business, from how customers find you to what happens after they reach out.</p>
-        <p>We start by learning how you operate today, then build around where your team and customers could use a clearer next step.</p>
-        ${button("Start an assessment", assessment, "button-primary")}</div>
-        <img src="/about-shark.jpg" alt="A great white shark rising through deep blue water">
-    </div></section>
+    return `${pageHead("About", "Built around how you work.", "We’re a San Antonio studio helping service businesses present themselves clearly and make everyday customer work easier.")}
     <section class="section section-light"><div class="wrap"><h2>How we work</h2>
         <div class="process-grid">
             <article><h3>Understand the business</h3><p>Tell us what you do, how inquiries arrive, and where the day gets held up.</p></article>
             <article><h3>Agree on the scope</h3><p>We define the package, deliverables, timeline, and any ongoing costs in a proposal.</p></article>
             <article><h3>Build and hand over</h3><p>We build around the agreed scope and walk you through how to use what we delivered.</p></article>
         </div>
+        <div class="actions">${button("Tell us about your business", assessment, "button-primary")}</div>
     </div></section>`;
 }
 
@@ -170,23 +170,25 @@ function service(item, sale) {
     <section class="section section-light"><div class="wrap detail-grid">
         <div><h2>What’s included</h2>
         <ul class="feature-list">${item.includes.map((feature) => `<li>${feature}</li>`).join("")}</ul>
-        <a class="text-link" href="/services">Compare services</a></div>
-        <aside class="price-card"><p class="eyebrow">Package investment</p>
-            ${connectOffer ? `<p class="amount"><s>${price(item)}</s> ${salePrice}</p><p>Use code <strong>${holiday.code}</strong> through ${holiday.deadline}.</p>` : `<p class="amount">${price(item)}</p>`}
-            <p>We confirm deliverables and any ongoing costs in your proposal.</p>
-            ${button(`Request ${item.name}`, connectOffer ? saleLink : `/assessment?package=${item.slug}`, "button-dark")}
-        </aside>
+        <div class="actions">
+            ${button(`Discuss ${item.name}`, connectOffer ? saleLink : `/assessment?package=${item.slug}`, "button-primary")}
+            ${button("See investment details", `/investments#investment-${item.slug}`)}
+        </div></div>
+        ${serviceExample(item)}
     </div></section>`;
 }
 
 function investments(sale) {
-    return `${pageHead("Investments", "See what it costs to get started.", "Compare package prices, then tell us what you need so we can confirm your scope in writing.")}
+    return `${pageHead("Investments", "Know what your project covers.", "Compare package pricing and deliverables. Your proposal confirms the scope, timeline, and any ongoing costs before work begins.")}
     <section class="section section-light"><div class="wrap">
         ${sale ? `<aside class="sale-card" id="holiday-offer"><div><p class="eyebrow">Holiday offer · ASCND Connect</p><h2><s>${money(holiday.package.price)}</s> ${salePrice}</h2>
             <p>Use code <strong>${holiday.code}</strong> when requesting the standard ASCND Connect build by ${holiday.deadline}. Add-ons and recurring costs are quoted separately.</p></div>
             ${button("Request the holiday offer", saleLink, "button-primary")}</aside>` : ""}
-        <dl class="investment-list">${packages.map((item) => `<div><dt><a href="${serviceLink(item)}">${item.name}</a><span>${item.category}</span></dt>
-            <dd>${sale && item.slug === "connect" ? `<s>${price(item)}</s> <strong>${salePrice}</strong>` : price(item)}</dd></div>`).join("")}</dl>
+        <div class="investment-grid">${packages.map((item) => `<article class="investment-card" id="investment-${item.slug}">
+            <p class="eyebrow">${item.category}</p><h2><a href="${serviceLink(item)}">${item.name}</a></h2>
+            <p class="investment-amount">${sale && item.slug === "connect" ? `<s>${price(item)}</s> <strong>${salePrice}</strong>` : price(item)}</p>
+            <p>${item.description}</p><ul>${item.includes.map((feature) => `<li>${feature}</li>`).join("")}</ul>
+        </article>`).join("")}</div>
     </div></section>
     <section class="section bottom-call"><div class="wrap split-heading"><h2>How payments work.</h2>
         <div><p>Your proposal lists deliverables, milestones, and any hosting, maintenance, or third-party costs. Eligible projects can be split into milestone payments. Invoices can be paid by card through Stripe.</p>${button("Discuss your project", assessment)}</div>
@@ -204,7 +206,7 @@ function contact() {
 function registerWebsite(app) {
     const pages = [
         ["/", "home", "Websites, brands & customer systems", "Websites, brands, and customer systems for service businesses in San Antonio, Texas.", home],
-        ["/about", "about", "About", "Learn how ASCND Systems works and why the great white shark is part of our identity.", about],
+        ["/about", "about", "About", "Learn how ASCND Systems scopes and builds practical digital tools for service businesses.", about],
         ["/services", "services", "Services", "Explore ASCND Systems packages for websites, branding, customer workflows, scheduling, and AI receptionists.", services],
         ["/investments", "investments", "Investments", "Compare ASCND Systems package prices, proposal details, and payment options.", investments],
         ["/contact", "contact", "Contact", "Start a business assessment or contact ASCND Systems in San Antonio, Texas.", contact]
