@@ -28,7 +28,7 @@ function brand() {
 
 function offerStrip() {
     return `<div class="offer-strip"><a href="/investments#holiday-offer">
-        <span>Holiday offer</span><strong>50% off ASCND Connect</strong><span class="strip-link">View offer</span>
+        <span>Holiday offer</span><strong>50% off ASCND Connect</strong><span>Code: <b>${holiday.code}</b></span><span class="strip-link">View offer</span>
     </a></div>`;
 }
 
