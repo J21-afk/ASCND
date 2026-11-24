@@ -24,15 +24,15 @@ navigation.addEventListener("keydown", (event) => {
     }
 });
 
-function openLinkedService(hash) {
-    if (!/^#service-[a-z-]+$/.test(hash)) return;
+function openLinkedDetails(hash) {
+    if (!/^#(?:service|price)-[a-z-]+$/.test(hash)) return;
     const service = document.getElementById(hash.slice(1));
     if (service) service.open = true;
 }
 
-openLinkedService(location.hash);
-window.addEventListener("hashchange", () => openLinkedService(location.hash));
+openLinkedDetails(location.hash);
+window.addEventListener("hashchange", () => openLinkedDetails(location.hash));
 document.addEventListener("click", (event) => {
-    const anchor = event.target.closest('a[href^="#service-"]');
-    if (anchor) openLinkedService(anchor.hash);
+    const anchor = event.target.closest('a[href^="#service-"], a[href^="#price-"]');
+    if (anchor) openLinkedDetails(anchor.hash);
 });

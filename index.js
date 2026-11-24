@@ -10,7 +10,7 @@ const cors = require("cors");
 
 const path = require("path");
 const { assessmentDetails, packages } = require("./website/catalog");
-const { renderHome } = require("./website/live-home");
+const { renderHome, paths } = require("./website/live-home");
 
 const {
     createClient
@@ -50,8 +50,9 @@ app.use(
    HOME ROUTE
    ========================================================= */
 
-app.get(["/", "/home-new.html"], (_req, res) => {
-    res.set("Cache-Control", "no-cache").send(renderHome());
+app.get([...Object.keys(paths), "/home-new.html"], (req, res) => {
+    const pathname = req.path.toLowerCase().replace(/\/$/, "") || "/";
+    res.set("Cache-Control", "no-cache").send(renderHome(Date.now(), pathname === "/home-new.html" ? "/" : pathname));
 });
 
 /* =========================================================
