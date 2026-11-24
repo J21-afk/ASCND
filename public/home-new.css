@@ -245,3 +245,76 @@ footer { background: #edf5fa; color: #35566c; border-top: 1px solid #d8e5ed; }
 @media (min-width: 691px) {
     .package-card header { min-block-size: 7.25rem; }
 }
+
+:root { --ascnd-blue: #145d82; --ascnd-lime: #d5f36b; --ascnd-mist: #e4f4fb; --ascnd-warm: #fff4d9; }
+.primary, .primary:hover, .header nav .nav-cta { background: var(--ascnd-lime); color: #153226; border-color: #8eaa34; }
+.primary:hover, .header nav .nav-cta:hover { background: #c3e849; }
+.primary:focus-visible { outline-color: var(--ascnd-blue); }
+.business-hero { background: linear-gradient(125deg, #eef6fb 30%, #dbedf8); }
+.business-hero em { color: var(--ascnd-blue); }
+.business-hero .hero-belief { color: #24566e; }
+.black-friday-strip { background: var(--ascnd-lime); color: #153226; }
+.recommendation { background: #edf7cd; }
+.cards { gap: 1rem; border: 0; }
+.cards article { border: 1px solid #c9dce7; border-radius: .85rem; background: var(--ascnd-mist); min-height: 0; }
+.cards article:nth-child(2) { background: #edf6d6; border-color: #d7e5b3; }
+.cards article:nth-child(3) { background: #ebedff; border-color: #d8ddf1; }
+.cards article:nth-child(4) { background: var(--ascnd-warm); border-color: #ecdfbd; }
+.cards .card-icon { margin-block: 1.4rem 1rem; }
+.cards .system-learn { margin-top: auto; padding-top: 1.15rem; }
+.about-redesign, .service-page { background: #fff; }
+.about-lead, .about-purpose, .service-page-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: clamp(1.5rem, 5vw, 5rem); }
+.about-lead h1, .service-page h1 { margin-bottom: 1rem; }
+.about-lead p:not(.eyebrow), .about-purpose p, .about-values p, .service-page p, .service-explanation li { color: #35566c; line-height: 1.7; }
+.about-lead p:not(.eyebrow) { font-size: 1.14rem; max-width: 40rem; }
+.about-lead img { display: block; width: 100%; height: auto; border-radius: 1rem; }
+.about-purpose { align-items: start; margin: clamp(2.25rem, 6vw, 5rem) 0 2rem; padding: clamp(1.35rem, 3.5vw, 3rem); background: var(--ascnd-mist); border-radius: 1rem; }
+.about-purpose h2 { font-size: clamp(2rem, 4vw, 3.6rem); }
+.about-purpose p:last-child, .about-values p { margin-bottom: 0; }
+.about-values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.about-values article { border-radius: .8rem; background: #edf6d6; padding: clamp(1rem, 2.5vw, 1.75rem); }
+.about-values article:nth-child(2) { background: #ebedff; }
+.about-values article:nth-child(3) { background: var(--ascnd-warm); }
+.about-values h3 { margin-bottom: .5rem; }
+.about-mark-note { margin-top: 2rem; }
+.about-mark-note p { margin: 0; padding: 0 .5rem 1rem; max-width: 46rem; line-height: 1.65; }
+.service-back { display: inline-block; margin-bottom: 1.5rem; color: var(--ascnd-blue); text-decoration: underline; text-underline-offset: .2em; }
+.service-page .service-lead { font-size: clamp(1.15rem, 2.3vw, 1.55rem); font-weight: 700; }
+.service-page-grid { align-items: start; }
+.service-explanation { margin-top: clamp(2rem, 6vw, 5rem); display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+.service-explanation article { background: var(--ascnd-mist); border-radius: .8rem; padding: clamp(1.1rem, 3vw, 2rem); }
+.service-explanation article:nth-child(2) { background: #edf6d6; }
+.service-explanation h2 { font-size: clamp(1.65rem, 3.1vw, 2.65rem); margin-bottom: .7rem; }
+.service-explanation h3 { margin: 1.1rem 0 .5rem; }
+.service-explanation ul { margin: 0; padding-left: 1.2rem; }
+.service-explanation p:last-child { margin-bottom: 0; }
+.service-example { margin: 0; padding: clamp(1rem, 3vw, 2rem); border-radius: .9rem; background: var(--ascnd-mist); }
+.service-example figcaption { display: grid; gap: .35rem; margin-top: .85rem; line-height: 1.55; }
+.service-example figcaption span { color: #35566c; }
+.sample-window, .sample-brand { overflow: hidden; border-radius: .7rem; border: 1px solid #bdcfda; background: #fff; }
+.sample-toolbar { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding: .75rem; border-bottom: 1px solid #d5e5ef; color: #204459; font-weight: 700; }
+.sample-website { padding: 1rem; color: #fff; background: #183b4f; }
+.sample-website img { width: 100%; height: auto; aspect-ratio: 2.1; object-fit: cover; border-radius: .4rem; margin-bottom: .7rem; }
+.sample-website strong { font-size: 1.25rem; }
+.service-page .sample-website p { color: #e1eef7; margin: .4rem 0 .7rem; }
+.sample-pill, .sample-tag { display: inline-block; flex-shrink: 0; padding: .25rem .65rem; border-radius: 1rem; background: var(--ascnd-lime); color: #17382a; font-size: .875rem; font-weight: 700; }
+.sample-tag { background: #dceef7; color: #17405a; }
+.sample-records, .sample-call { list-style: none; margin: 0; padding: .2rem .8rem; }
+.sample-records li, .sample-call > div { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: start; gap: .45rem 1rem; padding: .65rem 0; border-bottom: 1px solid #d7e5ef; }
+.sample-records li:last-child, .sample-call > div:last-child { border-bottom: 0; }
+.sample-records small, .sample-call dt { display: block; color: #35566c; font-size: .9rem; }
+.sample-steps li { justify-content: flex-start; align-items: baseline; }
+.sample-steps li::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: #2e84b1; }
+.sample-call > div { display: grid; grid-template-columns: minmax(5rem, .8fr) 1.2fr; }
+.sample-call dd { margin: 0; }
+.sample-brand { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+.brand-board { grid-column: 1 / -1; background: #263e3c; color: #f5f4e9; padding: 2rem .6rem; }
+.brand-board span { display: block; font-weight: 700; letter-spacing: .15em; }
+.brand-swatch { padding: .7rem .2rem; font-size: .875rem; }
+.swatch-moss { background: #c2cd9f; }
+.swatch-stone { background: #dfdbce; }
+.swatch-clay { background: #d7a587; }
+@media (min-width: 801px) and (max-width: 1100px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) {
+    .about-lead, .about-purpose, .about-values, .service-page-grid, .service-explanation { grid-template-columns: 1fr; }
+}

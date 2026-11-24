@@ -50,6 +50,8 @@ app.use(
    HOME ROUTE
    ========================================================= */
 
+app.get("/solutions", (_req, res) => res.redirect(301, "/#solutions"));
+
 app.get([...Object.keys(paths), "/home-new.html"], (req, res) => {
     const pathname = req.path.toLowerCase().replace(/\/$/, "") || "/";
     res.set("Cache-Control", "no-cache").send(renderHome(Date.now(), pathname === "/home-new.html" ? "/" : pathname));

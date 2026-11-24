@@ -3,14 +3,15 @@ const { join } = require("node:path");
 const { packages, holiday, holidayIsActive, money } = require("./catalog");
 
 const { faq } = require("./faq");
+const { serviceExample } = require("./examples");
 
 const template = readFileSync(join(__dirname, "../public/home-new.html"), "utf8");
 const paths = {
     "/": ["home", "ASCND Systems"],
-    "/solutions": ["solutions", "Solutions | ASCND Systems"],
     "/about": ["about", "About Us | ASCND Systems"],
     "/plans": ["plans", "Plans & Pricing | ASCND Systems"],
-    "/contact": ["contact", "Contact | ASCND Systems"]
+    "/contact": ["contact", "Contact | ASCND Systems"],
+    ...Object.fromEntries(packages.map(item => [`/services/${item.slug}`, ["service", `${item.name} | ASCND Systems`]]))
 };
 const pageSections = new Map([...template.matchAll(/<!-- PAGE: (\w+) -->([\s\S]*?)(?=<!-- PAGE:|<!-- END PAGES -->)/g)].map(([,page,html]) => [page, html.trim()]));
 const services = {
@@ -48,14 +49,14 @@ function renderPricing(sale) {
                 const amount = price === null ? "Quoted by scope" : (sale
                     ? `<s aria-label="Regular price ${money(price)}">${money(price)}</s> <strong>${money(price * (1 - holiday.percent / 100))}</strong>`
                     : `<strong>${money(price)}</strong>`);
-                const note = price === null ? (sale ? "50% off the agreed service fee with HOLIDAY" : "Project fee confirmed in your proposal")
-                    : (sale ? "Project fee with HOLIDAY" : "Project fee");
+                const note = price === null ? (sale ? "50% off your quoted one-time setup fee with HOLIDAY" : "One-time setup fee confirmed in your proposal")
+                    : (sale ? "One-time setup fee with HOLIDAY" : "One-time setup fee");
                 return `<article class="package-card" id="price-${slug}">
     <header><p class="package-category">${category.replaceAll("&", "&amp;")}</p><h3>${name}</h3><p>${headline}</p></header>
     <div class="package-cost"><p class="package-amount">${amount}</p><p>${note}</p></div>
     <a class="button primary package-cta" href="${requestLink(slug, sale)}">Discuss ${name}</a>
     <div class="package-includes"><h4>What’s included</h4><ul>${includes.map(feature => `<li>${feature}</li>`).join("")}</ul></div>
-    <a class="package-service-link" href="/solutions#service-${slug}">See how it works</a>
+    <a class="package-service-link" href="/services/${slug}">See how it works</a>
 </article>`;
             }).join("")}</div>
         </section>`).join("")}
@@ -66,29 +67,36 @@ function renderHome(now = Date.now(), pathname = "/") {
     const sale = holidayIsActive(now);
     const [page, title] = paths[pathname];
     const menu = `<div><p>What we offer</p>${packages.map(({slug, name}) =>
-        `<a href="/solutions#service-${slug}">${name}</a>`).join("")}</div>
+        `<a href="/services/${slug}">${name}</a>`).join("")}</div>
 <div><p>By business need</p>
-    <a href="/solutions#service-coordinate">Manage your team</a>
-    <a href="/solutions#service-connect">Attract customers</a>
-    <a href="/solutions#service-intelligence">Engage customers &amp; follow up</a>
-    <a href="/solutions#service-ai-receptionist">Call flows &amp; intake</a>
-    <a href="/solutions#service-custom">Connect your tools</a>
+    <a href="/services/coordinate">Manage your team</a>
+    <a href="/services/connect">Attract customers</a>
+    <a href="/services/intelligence">Engage customers &amp; follow up</a>
+    <a href="/services/ai-receptionist">Call flows &amp; intake</a>
+    <a href="/services/custom">Connect your tools</a>
 </div>`;
-    const details = packages.map(({slug, name, includes}) => {
-        const [category, workflow, example, benefit] = services[slug];
-        return `<details class="offer-service" id="service-${slug}">
-    <summary><span><small>${category}</small><strong>${name}</strong></span><span class="service-expand" aria-hidden="true"></span></summary>
-    <div class="offer-service-body">
-        <div><h3>How it works</h3><p>${workflow}</p><ul>${includes.map(feature => `<li>${feature}</li>`).join("")}</ul></div>
-        <div><h3>Example in your operation</h3><p>${example}</p><h3>What it helps you do</h3><p>${benefit}</p></div>
-        <div class="service-actions"><a class="button primary" href="${requestLink(slug, sale)}">Discuss this service</a><a class="button text" href="/plans#price-${slug}">See pricing</a></div>
-    </div>
-</details>`;
-    }).join("");
+    const item = page === "service" ? packages.find(({slug}) => pathname === `/services/${slug}`) : null;
+    let servicePage = "";
+    if (item) {
+        const [category, workflow, example, benefit] = services[item.slug];
+        servicePage = `<section class="section service-page">
+            <a class="service-back" href="/#solutions">Back to what we build</a>
+            <div class="service-page-grid">
+                <div><p class="eyebrow">${category.replaceAll("&", "&amp;")}</p><h1>${item.name}</h1><p class="service-lead">${item.headline}</p><p>${item.description}</p>
+                    <div class="actions"><a class="button primary" href="${requestLink(item.slug, sale)}">Discuss this service</a><a class="button text" href="/plans#price-${item.slug}">See setup fee</a></div>
+                </div>
+                ${serviceExample(item)}
+            </div>
+            <div class="service-explanation">
+                <article><h2>How it works</h2><p>${workflow}</p><h3>What’s included</h3><ul>${item.includes.map(feature => `<li>${feature}</li>`).join("")}</ul></article>
+                <article><h2>In your operation</h2><p>${example}</p><h3>What it helps you do</h3><p>${benefit}</p></article>
+            </div>
+        </section>`;
+    }
     const pricing = renderPricing(sale);
     const banner = sale ? `<aside class="black-friday-strip"><a href="/plans#black-friday-offer"><strong>Black Friday · 50% off any service</strong><span>Code <b>${holiday.code}</b></span><span class="promo-strip-link">View offer</span></a></aside>` : "";
     const offer = sale ? `<aside id="black-friday-offer" class="black-friday-offer">
-    <div><h3>50% off any ASCND service</h3><p>Enter <strong>${holiday.code}</strong> when you submit your business assessment by ${holiday.deadline}. The discount applies to the agreed service fee, including custom projects. Ongoing hosting, usage, and third-party costs are quoted separately.</p></div>
+    <div><h3>50% off any ASCND service</h3><p>Enter <strong>${holiday.code}</strong> when you submit your business assessment by ${holiday.deadline}. The discount applies to the agreed one-time setup fee, including custom projects. Ongoing hosting, usage, and third-party costs are quoted separately.</p></div>
     <a class="button primary" href="${requestLink(null, true)}">Request the offer</a>
 </aside>` : "";
     const recommendation = `<section class="section recommendation" id="recommendation">
@@ -110,7 +118,7 @@ function renderHome(now = Date.now(), pathname = "/") {
         .replace("<!-- COMMON_FAQS -->", `${common}<script id="ascnd-faq-data" type="application/json">${faqData}</script>`)
         .replace("<!-- BLACK_FRIDAY_BANNER -->", banner)
         .replace("<!-- SERVICE_MENU -->", menu)
-        .replace("<!-- SERVICE_DETAILS -->", details)
+        .replace("<!-- SERVICE_PAGE -->", servicePage)
         .replace("<!-- BLACK_FRIDAY_OFFER -->", offer)
         .replace("<!-- SERVICE_PRICING -->", pricing);
 }

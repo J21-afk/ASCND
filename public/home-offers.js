@@ -23,16 +23,3 @@ navigation.addEventListener("keydown", (event) => {
         servicesSummary.focus();
     }
 });
-
-function openLinkedDetails(hash) {
-    if (!/^#service-[a-z-]+$/.test(hash)) return;
-    const service = document.getElementById(hash.slice(1));
-    if (service) service.open = true;
-}
-
-openLinkedDetails(location.hash);
-window.addEventListener("hashchange", () => openLinkedDetails(location.hash));
-document.addEventListener("click", (event) => {
-    const anchor = event.target.closest('a[href^="#service-"]');
-    if (anchor) openLinkedDetails(anchor.hash);
-});
