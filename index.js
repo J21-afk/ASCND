@@ -9,6 +9,8 @@ const express = require("express");
 const cors = require("cors");
 
 const path = require("path");
+const { assessmentDetails, packages } = require("./website/catalog");
+const { renderHome } = require("./website/live-home");
 
 const {
     createClient
@@ -48,21 +50,9 @@ app.use(
    HOME ROUTE
    ========================================================= */
 
-app.get(
-    "/",
-    function (req, res) {
-
-        res.sendFile(
-            path.join(
-                __dirname,
-                "public",
-                "home-new.html"
-            )
-        );
-
-    }
-);
-
+app.get(["/", "/home-new.html"], (_req, res) => {
+    res.set("Cache-Control", "no-cache").send(renderHome());
+});
 
 /* =========================================================
    STATIC WEBSITE
@@ -202,8 +192,18 @@ app.post(
                 submission.business || {};
 
 
-            const assessment =
-                submission.assessment || {};
+            const assessment = assessmentDetails(
+                submission.assessment,
+                submission.promoCode,
+                submission.requestedPackage
+            );
+            if (typeof submission.promoCode === "string" && submission.promoCode.trim() && !assessment.promoCode) {
+                return res.status(400).json({
+                    success: false,
+                    code: "invalid_promo",
+                    message: "This promo code is unavailable for your request. Check the code or remove it to continue."
+                });
+            }
 
 
             const results =
@@ -1055,6 +1055,12 @@ app.get(
                                     assessment.team_size,
 
 
+                                requested_package:
+                                    packages.find((item) => item.slug === assessmentData.requestedPackage)?.name || null,
+
+                                promo_code:
+                                    assessmentData.promoCode || null,
+
                                 primary_opportunity:
                                     primaryOpportunity,
 
@@ -1258,25 +1264,6 @@ app.patch(
             });
 
         }
-
-    }
-);
-
-/* =========================================================
-   HOME ROUTE
-   ========================================================= */
-
-app.get(
-    "/",
-    function (req, res) {
-
-        res.sendFile(
-            path.join(
-                __dirname,
-                "public",
-                "home-new.html"
-            )
-        );
 
     }
 );

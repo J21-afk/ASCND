@@ -1884,6 +1884,17 @@ await loadAssessments();
                         <div class="info-list">
 
 
+                            ${assessment.requested_package || assessment.promo_code ? `
+                                <div class="info-row">
+                                    <div class="info-row-label">REQUESTED PACKAGE</div>
+                                    <div class="info-row-value">${escapeHtml(assessment.requested_package || "—")}</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-row-label">PROMO CODE</div>
+                                    <div class="info-row-value">${escapeHtml(assessment.promo_code || "—")}</div>
+                                </div>
+                            ` : ""}
+
                             <div class="info-row">
 
                                 <div class="info-row-label">
