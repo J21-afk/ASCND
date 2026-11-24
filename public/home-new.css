@@ -276,3 +276,14 @@
 @media (max-width: 720px) {
     .about-lead, .about-purpose, .about-values, .service-page-grid, .service-explanation { grid-template-columns: 1fr; }
 }
+
+.contact-page { background: radial-gradient(ellipse at 88% 12%, #123e4f 0%, #071e2c 51%, #04121d 100%); }
+.contact-intro { max-width: 49rem; margin-bottom: clamp(2rem, 5vw, 3.8rem); }
+.contact-intro p { color: #c3d9df; max-width: 43rem; margin: 1rem 0 0; font-size: 1.125rem; line-height: 1.65; }
+.contact-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 67rem; }
+.contact-options article { display: flex; flex-direction: column; align-items: flex-start; padding: clamp(1.25rem, 3vw, 2.25rem); background: #0d2a39; border: 1px solid #87b2bf52; }
+.contact-options h2 { font-size: clamp(1.5rem, 3vw, 2.35rem); }
+.contact-options p { color: #bbd1d8; margin: .7rem 0 1.25rem; line-height: 1.6; }
+.contact-options .button { margin-top: auto; }
+.contact-options .contact-address { font-size: .9375rem; margin: .6rem 0 0; }
+@media (max-width: 690px) { .contact-options { grid-template-columns: 1fr; } }
