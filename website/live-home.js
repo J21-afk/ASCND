@@ -29,6 +29,39 @@ function requestLink(slug, sale) {
     return params.size ? `/assessment?${params.toString().replaceAll("&", "&amp;")}` : "/assessment";
 }
 
+const packageGroups = [
+    { id: "attract", label: "Attract customers", packages: ["start", "connect"], example: ["Find your business", "See examples of your work", "Request a consultation"] },
+    { id: "manage", label: "Manage leads & jobs", packages: ["intelligence", "coordinate"], example: ["Receive a project inquiry", "Assign the next step", "Schedule a site visit"] },
+    { id: "automate", label: "Handle calls & connect tools", packages: ["ai-receptionist", "custom"], example: ["Capture the caller’s details", "Send them to the right person", "Create a follow-up task"] }
+];
+
+function renderPricing(sale) {
+    return `<div class="pricing-browser" id="pricing-browser">
+        <nav class="pricing-filters" aria-label="Package categories">${packageGroups.map(({id,label}) =>
+            `<a href="#plans-${id}">${label}</a>`).join("")}</nav>
+        ${packageGroups.map(({id,label,packages: slugs,example}) => `<section class="pricing-group" id="plans-${id}">
+            <div class="pricing-group-head"><h2>${label}</h2>
+                <div class="pricing-flow"><p>Example workflow</p><ol>${example.map(step => `<li>${step}</li>`).join("")}</ol></div>
+            </div>
+            <div class="package-grid">${slugs.map(slug => {
+                const {name, price, category, headline, includes} = packages.find(item => item.slug === slug);
+                const amount = price === null ? "Quoted by scope" : (sale
+                    ? `<s aria-label="Regular price ${money(price)}">${money(price)}</s> <strong>${money(price * (1 - holiday.percent / 100))}</strong>`
+                    : `<strong>${money(price)}</strong>`);
+                const note = price === null ? (sale ? "50% off the agreed service fee with HOLIDAY" : "Project fee confirmed in your proposal")
+                    : (sale ? "Project fee with HOLIDAY" : "Project fee");
+                return `<article class="package-card" id="price-${slug}">
+    <header><p class="package-category">${category.replaceAll("&", "&amp;")}</p><h3>${name}</h3><p>${headline}</p></header>
+    <div class="package-cost"><p class="package-amount">${amount}</p><p>${note}</p></div>
+    <a class="button primary package-cta" href="${requestLink(slug, sale)}">Discuss ${name}</a>
+    <div class="package-includes"><h4>What’s included</h4><ul>${includes.map(feature => `<li>${feature}</li>`).join("")}</ul></div>
+    <a class="package-service-link" href="/solutions#service-${slug}">See how it works</a>
+</article>`;
+            }).join("")}</div>
+        </section>`).join("")}
+    </div>`;
+}
+
 function renderHome(now = Date.now(), pathname = "/") {
     const sale = holidayIsActive(now);
     const [page, title] = paths[pathname];
@@ -52,17 +85,7 @@ function renderHome(now = Date.now(), pathname = "/") {
     </div>
 </details>`;
     }).join("");
-    const pricing = packages.map(({slug, name, price, category, includes}) => {
-        const amount = price === null ? (sale ? "50% off your project quote" : "Quoted by scope") :
-            (sale ? `<s>${money(price)}</s> <strong>${money(price * (1 - holiday.percent / 100))}</strong>` : money(price));
-        return `<details class="offer-service package-detail" id="price-${slug}">
-    <summary><span><small>${category.replaceAll("&", "&amp;")}</small><strong>${name}</strong></span><span class="service-expand" aria-hidden="true"></span></summary>
-    <div class="offer-service-body">
-        <div><h3>What’s included</h3><ul>${includes.map(feature => `<li>${feature}</li>`).join("")}</ul></div>
-        <div><h3>Package pricing</h3><p class="package-amount">${amount}</p><a href="/solutions#service-${slug}">See how this package works</a></div>
-    </div>
-</details>`;
-    }).join("");
+    const pricing = renderPricing(sale);
     const banner = sale ? `<aside class="black-friday-strip"><a href="/plans#black-friday-offer"><strong>Black Friday · 50% off any service</strong><span>Code <b>${holiday.code}</b></span><span class="promo-strip-link">View offer</span></a></aside>` : "";
     const offer = sale ? `<aside id="black-friday-offer" class="black-friday-offer">
     <div><h3>50% off any ASCND service</h3><p>Enter <strong>${holiday.code}</strong> when you submit your business assessment by ${holiday.deadline}. The discount applies to the agreed service fee, including custom projects. Ongoing hosting, usage, and third-party costs are quoted separately.</p></div>
