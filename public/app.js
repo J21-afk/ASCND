@@ -19,6 +19,15 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("start-assessment");
 
 
+    const intakeParams = new URLSearchParams(window.location.search);
+    const promoInput = document.getElementById("promo-code");
+    const promoError = document.getElementById("promo-error");
+    if (promoInput) promoInput.value = (intakeParams.get("promo") || "").slice(0, promoInput.maxLength);
+    promoInput?.addEventListener("input", () => {
+        promoError.hidden = true;
+        promoInput.removeAttribute("aria-invalid");
+    });
+
     /* =========================================================
        ASSESSMENT ELEMENTS
        ========================================================= */
@@ -2768,6 +2777,9 @@ if (startAscndButton) {
 
             const submission = {
 
+                promoCode: promoInput?.value.trim(),
+                requestedPackage: intakeParams.get("package"),
+
                 contact:
                     contactData,
 
@@ -2887,6 +2899,16 @@ if (startAscndButton) {
                 const result =
                     await response.json();
 
+
+                if (result.code === "invalid_promo" && promoInput && promoError) {
+                    promoError.textContent = result.message;
+                    promoError.hidden = false;
+                    promoInput.setAttribute("aria-invalid", "true");
+                    promoInput.focus();
+                    startAscndButton.disabled = false;
+                    startAscndButton.innerHTML = 'START WITH ASCND <span>→</span>';
+                    return;
+                }
 
                 /* =================================================
                    SUCCESS
