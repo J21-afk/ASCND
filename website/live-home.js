@@ -111,6 +111,7 @@ function renderHome(now = Date.now(), pathname = "/") {
     </details>`).join("");
     const faqData = JSON.stringify(entries).replaceAll("<", "\\u003c");
     return template
+        .replace("<body>", `<body class="page-${page}">`)
         .replace(/<title>[\s\S]*?<\/title>/, `<title>${title.replaceAll("&", "&amp;")}</title>`)
         .replace(/<!-- PAGE: home -->[\s\S]*?<!-- END PAGES -->/, () => pageSections.get(page))
         .replace(`<a href="${pathname}">`, `<a href="${pathname}" aria-current="page">`)
