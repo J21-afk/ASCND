@@ -23,3 +23,17 @@ navigation.addEventListener("keydown", (event) => {
         servicesSummary.focus();
     }
 });
+
+const blackFridayPopup = document.getElementById("black-friday-popup");
+if (blackFridayPopup && typeof blackFridayPopup.showModal === "function" &&
+    Date.now() < Number(blackFridayPopup.dataset.endsAt) && location.hash !== "#black-friday-offer") {
+    const seenKey = `ascnd-black-friday-${blackFridayPopup.dataset.endsAt}`;
+    try {
+        if (!sessionStorage.getItem(seenKey)) {
+            blackFridayPopup.showModal();
+            sessionStorage.setItem(seenKey, "1");
+        }
+    } catch {
+        // The offer remains available in the top banner if session storage is unavailable.
+    }
+}

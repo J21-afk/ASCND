@@ -339,3 +339,35 @@
 .page-about .recommendation .primary:hover { background: #21536b; }
 .page-about .recommendation .text { border-color: #8caab9; }
 .page-about .recommendation a:focus-visible { outline-color: #145d82; }
+
+.black-friday-popup {
+    position: fixed;
+    inset: 0;
+    width: min(34rem, calc(100% - 2rem));
+    max-height: calc(100dvh - 2rem);
+    padding: clamp(1.4rem, 5vw, 3rem);
+    color: #e9f4f6;
+    background: radial-gradient(ellipse at 100% 0, #194c5e, #071e2b 70%);
+    border: 1px solid #70aab8;
+    border-radius: .8rem;
+    box-shadow: 0 1rem 4rem #04121dcc;
+}
+.black-friday-popup::backdrop { background: #020d17bb; }
+.black-friday-popup .eyebrow { margin: 0 2rem .9rem 0; }
+.black-friday-popup h2 { font-size: clamp(2.1rem, 6vw, 3.6rem); line-height: 1.05; }
+.black-friday-popup h2 em { display: block; }
+.black-friday-popup p:not(.eyebrow) { margin: 1rem 0 1.4rem; color: #c5dbe2; line-height: 1.6; }
+.black-friday-close {
+    position: absolute;
+    top: .6rem;
+    right: .6rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid #70aab8;
+    border-radius: 50%;
+    background: #071e2b;
+    color: #e9f4f6;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.black-friday-close:hover { background: #194c5e; }
