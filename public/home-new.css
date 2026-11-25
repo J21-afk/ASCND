@@ -233,8 +233,6 @@
 .about-values article:nth-child(2) { background: #dbeff1; }
 .about-values article:nth-child(3) { background: #e3eaf0; }
 .about-values h3 { margin-bottom: .5rem; }
-.about-mark-note { margin-top: 2rem; }
-.about-mark-note p { margin: 0; padding: 0 .5rem 1rem; max-width: 46rem; line-height: 1.65; }
 .service-page .button.text { border-color: #49697775; }
 .service-back { display: inline-block; margin-bottom: 1.5rem; color: var(--ascnd-blue); text-decoration: underline; text-underline-offset: .2em; }
 .service-page .service-lead { font-size: clamp(1.15rem, 2.3vw, 1.55rem); font-weight: 700; }
@@ -287,3 +285,57 @@
 .contact-options .button { margin-top: auto; }
 .contact-options .contact-address { font-size: .9375rem; margin: .6rem 0 0; }
 @media (max-width: 690px) { .contact-options { grid-template-columns: 1fr; } }
+
+.about-philosophy { background: #092635; color: #e9f4f6; }
+.about-philosophy-story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(1.5rem, 5vw, 4rem); }
+.about-philosophy-story img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; border-radius: .85rem; }
+.about-philosophy-story .eyebrow { margin-bottom: .8rem; }
+.about-philosophy h2 { font-size: clamp(2rem, 4.5vw, 4rem); margin-bottom: 1rem; }
+.about-philosophy p:not(.eyebrow) { color: #c5dbe2; line-height: 1.7; }
+.about-principles { margin-top: clamp(3rem, 7vw, 6rem); }
+.about-principles > p { max-width: 48rem; }
+.about-principles-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.6rem; }
+.about-principles-grid > div { padding: 1.15rem; border: 1px solid #88bdce40; background: #0d2f40; border-radius: .65rem; }
+.about-principles-grid h3 { color: #b6e3e1; margin: 0 0 .35rem; font-size: 1.2rem; }
+.about-principles-grid p { margin: 0; }
+.about-philosophy-signoff { margin: 1.65rem 0 0; letter-spacing: .09em; }
+@media (max-width: 850px) { .about-principles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 650px) { .about-philosophy-story { grid-template-columns: 1fr; } }
+@media (max-width: 430px) { .about-principles-grid { grid-template-columns: 1fr; } }
+
+.about-values article, .about-principles-grid > div {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+.about-values article { border: 1px solid #abc9d2; }
+.about-values article::before, .about-principles-grid > div::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(125deg, #91e6e54d, transparent 65%);
+    opacity: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+    .about-values article:hover, .about-principles-grid > div:hover {
+        border-color: #6bb7bd;
+        box-shadow: 0 .65rem 1.7rem #09263530, inset 0 2px #9de9e9;
+    }
+    .about-values article:hover::before, .about-principles-grid > div:hover::before { opacity: 1; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .about-values article, .about-principles-grid > div {
+        transition: transform .28s cubic-bezier(.2, .65, .25, 1), border-color .28s ease, box-shadow .28s ease;
+    }
+    .about-values article::before, .about-principles-grid > div::before { transition: opacity .28s ease; }
+    .about-values article:hover, .about-principles-grid > div:hover { transform: translateY(-5px); }
+}
+
+.page-about .recommendation { background: #fff; color: #102b37; }
+.page-about .recommendation p { color: #35566c; }
+.page-about .recommendation .primary { background: #123b50; color: #fff; }
+.page-about .recommendation .primary:hover { background: #21536b; }
+.page-about .recommendation .text { border-color: #8caab9; }
+.page-about .recommendation a:focus-visible { outline-color: #145d82; }
