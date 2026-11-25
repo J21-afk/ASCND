@@ -95,6 +95,13 @@ function renderHome(now = Date.now(), pathname = "/") {
     }
     const pricing = renderPricing(sale);
     const banner = sale ? `<aside class="black-friday-strip"><a href="/plans#black-friday-offer"><strong>Black Friday · 50% off any service</strong><span>Code <b>${holiday.code}</b></span><span class="promo-strip-link">View offer</span></a></aside>` : "";
+    const popup = sale ? `<dialog class="black-friday-popup" id="black-friday-popup" aria-labelledby="black-friday-title" aria-describedby="black-friday-description" data-ends-at="${holiday.endsAt}">
+    <form method="dialog"><button class="black-friday-close" type="submit" aria-label="Close Black Friday offer" autofocus>×</button></form>
+    <p class="eyebrow">ASCND Systems · Black Friday</p>
+    <h2 id="black-friday-title">${holiday.percent}% off <em>any service</em></h2>
+    <p id="black-friday-description">Use code <strong>${holiday.code}</strong> for your one-time setup fee. Offer ends ${holiday.deadline}.</p>
+    <a class="button primary" href="/plans#black-friday-offer">View the offer</a>
+</dialog>` : "";
     const offer = sale ? `<aside id="black-friday-offer" class="black-friday-offer">
     <div><h3>50% off any ASCND service</h3><p>Enter <strong>${holiday.code}</strong> when you submit your business assessment by ${holiday.deadline}. The discount applies to the agreed one-time setup fee, including custom projects. Ongoing hosting, usage, and third-party costs are quoted separately.</p></div>
     <a class="button primary" href="${requestLink(null, true)}">Request the offer</a>
@@ -119,6 +126,7 @@ function renderHome(now = Date.now(), pathname = "/") {
         .replace("<!-- CONTACT_ASSESSMENT -->", requestLink(null, sale))
         .replace("<!-- COMMON_FAQS -->", `${common}<script id="ascnd-faq-data" type="application/json">${faqData}</script>`)
         .replace("<!-- BLACK_FRIDAY_BANNER -->", banner)
+        .replace("<!-- BLACK_FRIDAY_POPUP -->", popup)
         .replace("<!-- SERVICE_MENU -->", menu)
         .replace("<!-- SERVICE_PAGE -->", servicePage)
         .replace("<!-- BLACK_FRIDAY_OFFER -->", offer)
